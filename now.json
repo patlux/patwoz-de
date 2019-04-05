@@ -1,8 +1,9 @@
 {
   "version": 2,
   "name": "patwoz-de",
-  "alias": "patwoz.de",
+  "alias": ["patwoz.de", "www.patwoz.de"],
   "scope": "patwoz",
+  "regions": ["bru1", "cdg1"],
   "builds": [
     {
       "src": "package.json",
