@@ -1,9 +1,8 @@
 import React from 'react';
-import { Link } from 'gatsby';
 
 import Layout from '../components/layout';
-import Image from '../components/image';
 import SEO from '../components/seo';
+import LinkExternal from '../components/LinkExternal';
 import pkg from '../../package.json';
 
 const IndexPage = () => (
@@ -12,41 +11,22 @@ const IndexPage = () => (
     <h1>Hi, I'm Patrick Wozniak</h1>
     <p>
       I live in Nuremberg with my lovely girlfriend. I build amazing stuff at{' '}
-      <a rel="noopener noreferrer" target="_blank" href="https://www.cegeka.com/">
-        Cegeka Deutschland GmbH
-      </a>
-      . When it comes to building things, I like to move rapidly. I utilize technologies such as
-      <a rel="noopener noreferrer" target="_blank" href="https://reactjs.org/">
-        React
-      </a>{' '}
-      (
-      <a rel="noopener noreferrer" target="_blank" href="https://facebook.github.io/react-native/">
-        Native
-      </a>
-      ),{' '}
-      <a rel="noopener noreferrer" target="_blank" href="https://expo.io/snacks/@patwoz">
-        Expo
-      </a>
-      ,{' '}
-      <a rel="noopener noreferrer" target="_blank" href="https://zeit.co/now">
-        Now
-      </a>
-      .
+      <LinkExternal href="https://www.cegeka.com/">Cegeka Deutschland GmbH</LinkExternal>. When it
+      comes to building things, I like to move rapidly. I utilize technologies such as{' '}
+      <LinkExternal href="https://reactjs.org/">React</LinkExternal> (
+      <LinkExternal href="https://facebook.github.io/react-native/">Native</LinkExternal>
+      ), <LinkExternal href="https://expo.io/snacks/@patwoz">Expo</LinkExternal>,{' '}
+      <LinkExternal href="https://zeit.co/now">Now</LinkExternal>.
     </p>
     <p>You can find me on the internet at:</p>
     <ul>
       <li>
-        <a rel="noopener noreferrer" target="_blank" href="mailto:email@patwoz.de">
-          email@patwoz.de
-        </a>
+        <LinkExternal href="mailto:email@patwoz.de">email@patwoz.de</LinkExternal>
       </li>
       <li>
-        <a rel="noopener noreferrer" target="_blank" href="https://twitter.com/de_patwoz">
-          @de_patwoz
-        </a>
+        <LinkExternal href="https://twitter.com/de_patwoz">@de_patwoz</LinkExternal>
       </li>
     </ul>
-    <Link to="/page-2/">Go to page 2</Link>
   </Layout>
 );
 
