@@ -24,7 +24,7 @@ const IndexPage = () => (
         Native
       </a>
       ),{' '}
-      <a rel="noopener noreferrer" target="_blank" href="https://expo.io/">
+      <a rel="noopener noreferrer" target="_blank" href="https://expo.io/snacks/@patwoz">
         Expo
       </a>
       ,{' '}
