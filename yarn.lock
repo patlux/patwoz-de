@@ -4499,7 +4499,7 @@ gatsby-cli@^2.5.4:
     yargs "^12.0.5"
     yurnalist "^1.0.2"
 
-gatsby-image@^2.0.37:
+gatsby-image@2.0.37:
   version "2.0.37"
   resolved "https://registry.yarnpkg.com/gatsby-image/-/gatsby-image-2.0.37.tgz#9c28c3d8c2a249f6f5eff929be67a761658762df"
   integrity sha512-KdD5LefTmigun2NmvYqoBVXRZ0W0y3Rr9j+yOX6hxU+RJQb9u3gF3vG/dC0Aljwgo2T4zKBqG8wolJ7F2fWj5w==
@@ -4517,7 +4517,7 @@ gatsby-link@^2.0.16:
     "@types/reach__router" "^1.0.0"
     prop-types "^15.6.1"
 
-gatsby-plugin-manifest@^2.0.26:
+gatsby-plugin-manifest@2.0.26:
   version "2.0.26"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-manifest/-/gatsby-plugin-manifest-2.0.26.tgz#a439dca68311dff2ed16379f366e380ac3ad4daf"
   integrity sha512-Ybufb0QqNJHuh9qWeAoGIo9qGk49PzWBfCDde6+IrNrCJdGZ1IMfYRMMkMW/zLWlCArIbRNBbfgehCcuSXoRkw==
@@ -4526,7 +4526,7 @@ gatsby-plugin-manifest@^2.0.26:
     bluebird "^3.5.0"
     sharp "^0.21.3"
 
-gatsby-plugin-offline@^2.0.25:
+gatsby-plugin-offline@2.0.25:
   version "2.0.25"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-offline/-/gatsby-plugin-offline-2.0.25.tgz#44839cd3ddb90c7478445c3a3c38fc8467b510a2"
   integrity sha512-+4g4UTGVZmqy7ZBT2k7QZbTO6hCrujzJ+d0WYGz8OSMLIwckHXacnVKzCWTorrZMJHURxcEIopqz+S3OIdtCFg==
@@ -4552,14 +4552,14 @@ gatsby-plugin-page-creator@^2.0.12:
     parse-filepath "^1.0.1"
     slash "^1.0.0"
 
-gatsby-plugin-react-helmet@^3.0.11:
+gatsby-plugin-react-helmet@3.0.11:
   version "3.0.11"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-react-helmet/-/gatsby-plugin-react-helmet-3.0.11.tgz#0e8aa39d89b06be613177835e1300590be67b499"
   integrity sha512-VBCO7qlQMBfFQadpNauvZO1CYKVF5aE52jiNEXMiYNuchJWLBEy3FXN/FHdCGo37KipKlkh0iDXCRLSGY00TqQ==
   dependencies:
     "@babel/runtime" "^7.0.0"
 
-gatsby-plugin-sharp@^2.0.32:
+gatsby-plugin-sharp@2.0.32:
   version "2.0.32"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-sharp/-/gatsby-plugin-sharp-2.0.32.tgz#47ebf2e44ece58560fa8bc604e7904ff9dca1386"
   integrity sha512-5cLD2VUcKBtIm7QJbSj4fIAv/eqD6KhraHODHjpGwqvwSOdLQB7YcmzSCPnRwxEv+0f2wNrjZYpsd8SmIWfhDw==
@@ -4589,7 +4589,7 @@ gatsby-react-router-scroll@^2.0.7:
     scroll-behavior "^0.9.9"
     warning "^3.0.0"
 
-gatsby-source-filesystem@^2.0.28:
+gatsby-source-filesystem@2.0.28:
   version "2.0.28"
   resolved "https://registry.yarnpkg.com/gatsby-source-filesystem/-/gatsby-source-filesystem-2.0.28.tgz#5fc91ce6f72b642a27838e421c05eb4b5ee44d63"
   integrity sha512-eOj91auqUHgH46h6hkkqAa4W5g0X6q4b0EDzTF2/aLpIx2gB8g/70MSQG3i00IRv/tekXjKEWHZNW8AJDkommQ==
@@ -4629,7 +4629,7 @@ gatsby-telemetry@^1.0.4:
     stack-utils "1.0.2"
     uuid "3.3.2"
 
-gatsby-transformer-sharp@^2.1.17:
+gatsby-transformer-sharp@2.1.17:
   version "2.1.17"
   resolved "https://registry.yarnpkg.com/gatsby-transformer-sharp/-/gatsby-transformer-sharp-2.1.17.tgz#d7f2261cb0cd9943bada42e82e89179cfa9554fc"
   integrity sha512-htbkxy2VNInxS5oxZForbKenYP56U/tI6cV630TBO8UkaOFj/8M2vZ6vugcTJHMCwRJNLT1WJ+Y9RAEwPBFnuA==
@@ -4641,7 +4641,7 @@ gatsby-transformer-sharp@^2.1.17:
     probe-image-size "^4.0.0"
     sharp "^0.21.3"
 
-gatsby@^2.3.5:
+gatsby@2.3.5:
   version "2.3.5"
   resolved "https://registry.yarnpkg.com/gatsby/-/gatsby-2.3.5.tgz#22bddd5c0fbe930344f7b830b2548e4ee949503d"
   integrity sha512-9p10OOs2gU84Ch270tJEL/tKZAuHWxhAuRskUfRLjhWWp7Iks0BJNU7JhiI22B1sCQGpmeoJdFArVjnm+OThQg==
@@ -8291,7 +8291,7 @@ prepend-http@^2.0.0:
   resolved "https://registry.yarnpkg.com/prepend-http/-/prepend-http-2.0.0.tgz#e92434bfa5ea8c19f41cdfd401d741a3c819d897"
   integrity sha1-6SQ0v6XqjBn0HN/UAddBo8gZ2Jc=
 
-prettier@^1.16.0, prettier@^1.16.4:
+prettier@1.16.4, prettier@^1.16.0:
   version "1.16.4"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.16.4.tgz#73e37e73e018ad2db9c76742e2647e21790c9717"
   integrity sha512-ZzWuos7TI5CKUeQAtFd6Zhm2s6EpAD/ZLApIhsF9pRvRtM1RFo61dM/4MSRUA0SuLugA/zgrZD8m0BaY46Og7g==
@@ -8363,7 +8363,7 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@^15.5.4, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@15.7.2, prop-types@^15.5.4, prop-types@^15.6.1, prop-types@^15.6.2:
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
@@ -8563,7 +8563,7 @@ react-dev-utils@^4.2.1:
     strip-ansi "3.0.1"
     text-table "0.2.0"
 
-react-dom@^16.8.6:
+react-dom@16.8.6:
   version "16.8.6"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.8.6.tgz#71d6303f631e8b0097f56165ef608f051ff6e10f"
   integrity sha512-1nL7PIq9LTL3fthPqwkvr2zY7phIPjYrT0jp4HjyEQrEROnw4dG41VVwi/wfoCneoleqrNX7iAD+pXebJZwrwA==
@@ -8578,7 +8578,7 @@ react-error-overlay@^3.0.0:
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-3.0.0.tgz#c2bc8f4d91f1375b3dad6d75265d51cd5eeaf655"
   integrity sha512-XzgvowFrwDo6TWcpJ/WTiarb9UI6lhA4PMzS7n1joK3sHfBBBOQHUc0U4u57D6DWO9vHv6lVSWx2Q/Ymfyv4hw==
 
-react-helmet@^5.2.0:
+react-helmet@5.2.0:
   version "5.2.0"
   resolved "https://registry.yarnpkg.com/react-helmet/-/react-helmet-5.2.0.tgz#a81811df21313a6d55c5f058c4aeba5d6f3d97a7"
   integrity sha1-qBgR3yExOm1VxfBYxK66XW89l6c=
@@ -8603,6 +8603,11 @@ react-hot-loader@^4.6.2:
     shallowequal "^1.0.2"
     source-map "^0.7.3"
 
+react-icons@^3.5.0:
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-3.5.0.tgz#a6135480e3bcbc63f5dd045193ef2a814263d8d1"
+  integrity sha512-LuKUcavgPWjPrRkIdNbsGw8LqcnhfNN0AGCtU4Td1UkOenJSIWbYppSJrD6zi/TDZOHtTs9opu6ZKB/NFWk21g==
+
 react-is@^16.7.0, react-is@^16.8.1:
   version "16.8.3"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.8.3.tgz#4ad8b029c2a718fc0cfc746c8d4e1b7221e5387d"
@@ -8621,7 +8626,7 @@ react-side-effect@^1.1.0:
     exenv "^1.2.1"
     shallowequal "^1.0.1"
 
-react@^16.8.6:
+react@16.8.6:
   version "16.8.6"
   resolved "https://registry.yarnpkg.com/react/-/react-16.8.6.tgz#ad6c3a9614fd3a4e9ef51117f54d888da01f2bbe"
   integrity sha512-pC0uMkhLaHm11ZSJULfOBqV4tIZkx87ZLvbbQYunNixAAvjnC+snJCg0XQXn9VIsttVsbZP/H/ewzgsd5fxKXw==
