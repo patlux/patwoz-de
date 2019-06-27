@@ -1,16 +1,16 @@
 {
   "version": 2,
   "name": "patwoz-de",
-  "alias": ["patwoz.de", "www.patwoz.de"],
+  "alias": ["patwoz.de"],
   "scope": "patwoz",
   "regions": ["bru1", "cdg1"],
   "builds": [
-    {
-      "src": "package.json",
-      "use": "@now/static-build",
-      "config": {
-        "distDir": "public"
-      }
-    }
+    { "src": "/static/*", "use": "@now/static" },
+    { "src": "package.json", "use": "@now/next" }
+  ],
+  "routes": [
+    { "src": "/favicon.ico", "dest": "/static/favicon.ico" },
+    { "src": "/static/(.*)", "dest": "/static/$1" },
+    { "src": "/(.*)", "dest": "/$1" }
   ]
 }

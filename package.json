@@ -2,25 +2,18 @@
   "name": "patwoz-de",
   "private": true,
   "description": "Personal website of Patrick Wozniak",
-  "version": "0.1.0",
+  "version": "2.0.0",
   "author": "Patrick Wozniak <email@patwoz.de>",
   "dependencies": {
-    "gatsby": "2.3.5",
-    "gatsby-image": "2.0.37",
-    "gatsby-plugin-manifest": "2.0.26",
-    "gatsby-plugin-offline": "2.0.25",
-    "gatsby-plugin-react-helmet": "3.0.11",
-    "gatsby-plugin-sharp": "2.0.32",
-    "gatsby-source-filesystem": "2.0.28",
-    "gatsby-transformer-sharp": "2.1.17",
+    "next": "8.1.0",
     "prop-types": "15.7.2",
     "react": "16.8.6",
-    "react-dom": "16.8.6",
-    "react-helmet": "5.2.0",
-    "react-icons": "^3.5.0"
+    "react-dom": "16.8.6"
   },
   "devDependencies": {
-    "prettier": "1.16.4"
+    "husky": "2.7.0",
+    "lint-staged": "8.2.1",
+    "prettier": "1.18.2"
   },
   "keywords": [
     "personal",
@@ -30,13 +23,10 @@
   ],
   "license": "MIT",
   "scripts": {
-    "build": "gatsby build",
-    "develop": "gatsby develop",
-    "format": "prettier --write src/**/*.{js,jsx}",
-    "start": "npm run develop",
-    "serve": "gatsby serve",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\"",
-    "now-build": "npm run build"
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "now-build": "yarn run build"
   },
   "repository": {
     "type": "git",
@@ -44,5 +34,8 @@
   },
   "bugs": {
     "url": "https://github.com/patlux/patwoz-de/issues"
+  },
+  "engines": {
+    "node": "10.x"
   }
 }
