@@ -1,0 +1,8 @@
+*
+!pages
+!pages/**
+!static
+!static/**
+!now.json
+!next.config.json
+!package.json
