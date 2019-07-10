@@ -2,14 +2,10 @@ import React from 'react';
 import { NextPage } from 'next';
 
 import '../styles/index.css';
-
-export interface Contact {
-  link: string;
-  description: string;
-}
+import { Contact } from '../types';
 
 export interface Props {
-  listOfAddresses: Contact[];
+  listOfAddresses?: Contact[];
 }
 
 const INITIAL_LIST_OF_ADDRESSES: Contact[] = [
@@ -36,7 +32,21 @@ const IndexPage: NextPage<Props> = ({
 }) => (
   <main>
     <span>Hi, I'm</span>
-    <h1>Patrick Wozniak</h1>
+    <h1>
+      Patrick Wozniak{' '}
+      <a
+        className="link-inherit"
+        href="static/beauty-512.jpg"
+        title="Open image of Patrick Wozniak"
+      >
+        <img
+          src="static/beauty-34.jpg"
+          alt="Face photo of Patrick Wozniak"
+          width="34"
+          height="34"
+        ></img>
+      </a>
+    </h1>
     <h3>Software Engineer in Nuremberg</h3>
     <ul className="contact-list">
       {listOfAddresses.map(Address => (
