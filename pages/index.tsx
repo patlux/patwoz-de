@@ -1,6 +1,37 @@
 import React from 'react';
+import { NextPage } from 'next';
 
-const IndexPage = ({ listOfAddresses }) => (
+export interface Contact {
+  link: string;
+  description: string;
+}
+
+export interface Props {
+  listOfAddresses: Contact[];
+}
+
+const INITIAL_LIST_OF_ADDRESSES: Contact[] = [
+  {
+    link: 'mailto:email@patwoz.de',
+    description: 'email@patwoz.de',
+  },
+  {
+    link: 'https://twitter.com/de_patwoz',
+    description: 'Twitter: @de_patwoz',
+  },
+  {
+    link: 'https://github.com/patlux',
+    description: 'Github: patlux',
+  },
+  {
+    link: 'https://stackoverflow.com/users/6300994/patrick-wozniak',
+    description: ' Stack Overflow',
+  },
+];
+
+const IndexPage: NextPage<Props> = ({
+  listOfAddresses = INITIAL_LIST_OF_ADDRESSES,
+}) => (
   <>
     <h1>Hi, I'm Patrick Wozniak</h1>
     <p>
@@ -26,26 +57,5 @@ const IndexPage = ({ listOfAddresses }) => (
     </ul>
   </>
 );
-
-IndexPage.defaultProps = {
-  listOfAddresses: [
-    {
-      link: 'mailto:email@patwoz.de',
-      description: 'email@patwoz.de',
-    },
-    {
-      link: 'https://twitter.com/de_patwoz',
-      description: 'Twitter: @de_patwoz',
-    },
-    {
-      link: 'https://github.com/patlux',
-      description: 'Github: patlux',
-    },
-    {
-      link: 'https://stackoverflow.com/users/6300994/patrick-wozniak',
-      description: ' Stack Overflow',
-    },
-  ],
-};
 
 export default IndexPage;
