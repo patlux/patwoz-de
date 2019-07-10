@@ -32,7 +32,7 @@ const INITIAL_LIST_OF_ADDRESSES: Contact[] = [
 const IndexPage: NextPage<Props> = ({
   listOfAddresses = INITIAL_LIST_OF_ADDRESSES,
 }) => (
-  <>
+  <div className="container">
     <Meta />
     <Head>
       <title>Patrick Wozniak</title>
@@ -78,7 +78,7 @@ const IndexPage: NextPage<Props> = ({
         </a>
         ),{' '}
         <a href="https://nextjs.org/" target="_blank">
-          Nextjs
+          Next.js
         </a>
         ,{' '}
         <a href="https://zeit.co/now" target="_blank">
@@ -98,7 +98,13 @@ const IndexPage: NextPage<Props> = ({
         .
       </p>
     </main>
-  </>
+    <footer>
+      Page built with{' '}
+      <a href="https://nextjs.org" target="_blank">
+        Next.js
+      </a>
+    </footer>
+  </div>
 );
 
 export default IndexPage;

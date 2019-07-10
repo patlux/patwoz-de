@@ -31,7 +31,7 @@ a.link-inherit {
   box-shadow: none;
 }
 
-main {
+.container {
   margin: 0 auto;
   max-width: 600px;
 }
@@ -57,6 +57,11 @@ ul.contact-list {
 .contact-list > li {
   display: inline;
   padding-right: 1em;
+}
+
+footer {
+  font-size: 0.7em;
+  opacity: 0.8;
 }
 
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
