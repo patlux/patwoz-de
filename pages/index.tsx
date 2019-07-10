@@ -1,6 +1,8 @@
 import React from 'react';
 import { NextPage } from 'next';
 
+import '../styles/index.css';
+
 export interface Contact {
   link: string;
   description: string;
@@ -13,49 +15,72 @@ export interface Props {
 const INITIAL_LIST_OF_ADDRESSES: Contact[] = [
   {
     link: 'mailto:email@patwoz.de',
-    description: 'email@patwoz.de',
-  },
-  {
-    link: 'https://twitter.com/de_patwoz',
-    description: 'Twitter: @de_patwoz',
+    description: 'mail',
   },
   {
     link: 'https://github.com/patlux',
-    description: 'Github: patlux',
+    description: 'github',
   },
   {
     link: 'https://stackoverflow.com/users/6300994/patrick-wozniak',
-    description: ' Stack Overflow',
+    description: 'stackoverflow',
+  },
+  {
+    link: 'https://twitter.com/de_patwoz',
+    description: 'twitter',
   },
 ];
 
 const IndexPage: NextPage<Props> = ({
   listOfAddresses = INITIAL_LIST_OF_ADDRESSES,
 }) => (
-  <>
-    <h1>Hi, I'm Patrick Wozniak</h1>
-    <p>
-      I live in Nuremberg with my lovely girlfriend. I build amazing stuff at{' '}
-      <a href="https://www.cegeka.com/">Cegeka Deutschland GmbH</a>. When it
-      comes to building things, I like to move rapidly. I utilize technologies
-      such as <a href="https://reactjs.org/">React</a> (
-      <a href="https://facebook.github.io/react-native/">Native</a>
-      ), <a href="https://expo.io/snacks/@patwoz">Expo</a>,{' '}
-      <a href="https://zeit.co/now">Now</a>,{' '}
-      <a href="https://about.gitlab.com/product/continuous-integration/">
-        Gitlab Ci
-      </a>
-      .
-    </p>
-    <p>You can find me on the internet at:</p>
-    <ul>
+  <main>
+    <span>Hi, I'm</span>
+    <h1>Patrick Wozniak</h1>
+    <h3>Software Engineer in Nuremberg</h3>
+    <ul className="contact-list">
       {listOfAddresses.map(Address => (
         <li key={Address.link}>
           <a href={Address.link}>{Address.description}</a>
         </li>
       ))}
     </ul>
-  </>
+    <p>
+      I live in Nuremberg with my lovely girlfriend. I build amazing stuff at{' '}
+      <a href="https://www.cegeka.com/" target="_blank">
+        Cegeka Deutschland GmbH
+      </a>
+      . When it comes to building things, I like to move rapidly. I utilize
+      technologies such as{' '}
+      <a href="https://reactjs.org/" target="_blank">
+        React
+      </a>{' '}
+      (
+      <a href="https://facebook.github.io/react-native/" target="_blank">
+        Native
+      </a>
+      ),{' '}
+      <a href="https://nextjs.org/" target="_blank">
+        Nextjs
+      </a>
+      ,{' '}
+      <a href="https://zeit.co/now" target="_blank">
+        Now
+      </a>
+      ,{' '}
+      <a href="https://expo.io/snacks/@patwoz" target="_blank">
+        Expo
+      </a>
+      ,{' '}
+      <a
+        href="https://about.gitlab.com/product/continuous-integration/"
+        target="_blank"
+      >
+        Gitlab Ci
+      </a>
+      .
+    </p>
+  </main>
 );
 
 export default IndexPage;
