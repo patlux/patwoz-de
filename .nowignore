@@ -1,10 +1,14 @@
 *
+!components
+!components/**
 !pages
 !pages/**
 !static
 !static/**
 !styles
 !styles/**
+!types
+!types/**
 !next-env.d.ts
 !next.config.js
 !now.json
