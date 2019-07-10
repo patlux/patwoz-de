@@ -20,11 +20,11 @@ body {
 a {
   text-decoration: none;
   color: white;
-  box-shadow: inset 0 0px 0 black, inset 0 -0.5px 0 #ffffffbb;
+  box-shadow: inset 0 0px 0 black, inset 0 -1px 0 #ffffffbb;
 }
 
 a:hover {
-  box-shadow: inset 0 0px 0 black, inset 0 -0.5px 0 #ffffffff;
+  box-shadow: inset 0 0px 0 black, inset 0 -1px 0 #ffffffff;
 }
 
 main {
