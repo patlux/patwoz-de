@@ -3,6 +3,10 @@
 !pages/**
 !static
 !static/**
-!now.json
+!styles
+!styles/**
+!next-env.d.ts
 !next.config.json
+!now.json
 !package.json
+!tsconfig.json
