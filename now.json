@@ -12,5 +12,8 @@
     { "src": "/favicon.ico", "dest": "/static/favicon.ico" },
     { "src": "/static/(.*)", "dest": "/static/$1" },
     { "src": "/(.*)", "dest": "/$1" }
-  ]
+  ],
+  "env": {
+    "GA_TRACKING_ID": "ga-tracking-id"
+  }
 }

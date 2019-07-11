@@ -9,6 +9,7 @@
 !styles/**
 !types
 !types/**
+!env.ts
 !next-env.d.ts
 !next.config.js
 !now.json
