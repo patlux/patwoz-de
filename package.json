@@ -2,7 +2,7 @@
   "name": "patwoz-de",
   "private": true,
   "description": "Personal website of Patrick Wozniak",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "author": "Patrick Wozniak <email@patwoz.de>",
   "dependencies": {
     "next": "9.0.0",
