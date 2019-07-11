@@ -1,0 +1,17 @@
+*
+!components
+!components/**
+!pages
+!pages/**
+!static
+!static/**
+!styles
+!styles/**
+!types
+!types/**
+!env.ts
+!next-env.d.ts
+!next.config.js
+!now.json
+!package.json
+!tsconfig.json

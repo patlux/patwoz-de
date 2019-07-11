@@ -1,3 +1,5 @@
+.next
+
 # Logs
 logs
 *.log
@@ -53,6 +55,7 @@ typings/
 
 # dotenv environment variables file
 .env
+.env.build
 
 # gatsby files
 .cache/
