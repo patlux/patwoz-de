@@ -3,7 +3,6 @@
   "name": "patwoz-de",
   "alias": ["patwoz.de"],
   "scope": "patwoz",
-  "regions": ["bru1", "cdg1"],
   "builds": [
     { "src": "/static/*", "use": "@now/static" },
     { "src": "package.json", "use": "@now/next" }
