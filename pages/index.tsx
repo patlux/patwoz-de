@@ -64,8 +64,8 @@ const IndexPage: NextPage<Props> = ({
       </ul>
       <p>
         I live in Nuremberg with my lovely girlfriend. I build amazing stuff at{' '}
-        <a href="https://www.cegeka.com/" target="_blank">
-          Cegeka Deutschland GmbH
+        <a href="https://finanzguru.de/" target="_blank">
+          Finanzguru
         </a>
         . When it comes to building things, I like to move rapidly. I utilize
         technologies such as{' '}
