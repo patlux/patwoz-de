@@ -5,7 +5,7 @@
   "version": "3.0.0",
   "author": "Patrick Wozniak <email@patwoz.de>",
   "dependencies": {
-    "next": "9.0.0",
+    "next": "9.3.2",
     "prop-types": "15.7.2",
     "react": "16.8.6",
     "react-dom": "16.8.6"
