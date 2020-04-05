@@ -37,8 +37,5 @@
   },
   "bugs": {
     "url": "https://github.com/patlux/patwoz-de/issues"
-  },
-  "engines": {
-    "node": "10.x"
   }
 }
