@@ -11,11 +11,12 @@
     "react-dom": "16.8.6"
   },
   "devDependencies": {
+    "@patwoz/prettier-config": "1.1.0",
     "@types/react": "16.8.23",
     "@zeit/next-css": "1.0.1",
     "husky": "3.0.0",
     "lint-staged": "9.1.0",
-    "prettier": "1.18.2",
+    "prettier": "2.0.2",
     "typescript": "3.5.3"
   },
   "keywords": [
@@ -29,7 +30,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "now-build": "yarn run build"
+    "now-build": "yarn run build",
+    "prettier": "prettier --ignore-path .gitignore \"**/*.+(js|json|ts|tsx)\"",
+    "format": "npm run prettier -- --write",
+    "check-format": "npm run prettier -- --list-different"
   },
   "repository": {
     "type": "git",
@@ -37,5 +41,6 @@
   },
   "bugs": {
     "url": "https://github.com/patlux/patwoz-de/issues"
-  }
+  },
+  "prettier": "@patwoz/prettier-config"
 }
