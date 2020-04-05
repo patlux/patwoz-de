@@ -3,15 +3,6 @@
   "name": "patwoz-de",
   "alias": ["patwoz.de"],
   "scope": "patwoz",
-  "builds": [
-    { "src": "/static/*", "use": "@now/static" },
-    { "src": "package.json", "use": "@now/next" }
-  ],
-  "routes": [
-    { "src": "/favicon.ico", "dest": "/static/favicon.ico" },
-    { "src": "/static/(.*)", "dest": "/static/$1" },
-    { "src": "/(.*)", "dest": "/$1" }
-  ],
   "build": {
     "env": {
       "GA_TRACKING_ID": "@ga-tracking-id"

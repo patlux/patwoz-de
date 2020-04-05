@@ -2,12 +2,15 @@ import React from 'react';
 import { NextPage } from 'next';
 import Head from 'next/head';
 
-import '../styles/index.css';
-import { Contact } from '../types';
 import Meta from '../components/Meta';
 
 export interface Props {
   listOfAddresses?: Contact[];
+}
+
+export interface Contact {
+  link: string;
+  description: string;
 }
 
 const INITIAL_LIST_OF_ADDRESSES: Contact[] = [
@@ -29,9 +32,7 @@ const INITIAL_LIST_OF_ADDRESSES: Contact[] = [
   },
 ];
 
-const IndexPage: NextPage<Props> = ({
-  listOfAddresses = INITIAL_LIST_OF_ADDRESSES,
-}) => (
+const IndexPage: NextPage<Props> = ({ listOfAddresses = INITIAL_LIST_OF_ADDRESSES }) => (
   <div className="container">
     <Meta />
     <Head>
@@ -43,11 +44,11 @@ const IndexPage: NextPage<Props> = ({
         Patrick Wozniak{' '}
         <a
           className="link-inherit"
-          href="static/beauty-512.jpg"
+          href="/beauty-512.png"
           title="Open image of Patrick Wozniak"
         >
           <img
-            src="static/beauty-34.jpg"
+            src="/beauty-34.png"
             alt="Face photo of Patrick Wozniak"
             width="34"
             height="34"
@@ -56,7 +57,7 @@ const IndexPage: NextPage<Props> = ({
       </h1>
       <h3>Software Engineer in Nuremberg</h3>
       <ul className="contact-list">
-        {listOfAddresses.map(Address => (
+        {listOfAddresses.map((Address) => (
           <li key={Address.link}>
             <a href={Address.link}>{Address.description}</a>
           </li>
@@ -64,46 +65,36 @@ const IndexPage: NextPage<Props> = ({
       </ul>
       <p>
         I live in Nuremberg with my lovely girlfriend. I build amazing stuff at{' '}
-        <a href="https://finanzguru.de/" target="_blank">
+        <a rel="noreferrer noopener" href="https://finanzguru.de/" target="_blank">
           Finanzguru
         </a>
-        . When it comes to building things, I like to move rapidly. I utilize
-        technologies such as{' '}
-        <a href="https://reactjs.org/" target="_blank">
+        . When it comes to building things, I like to move rapidly. I utilize technologies such as{' '}
+        <a rel="noreferrer noopener" href="https://reactjs.org/" target="_blank">
           React
         </a>{' '}
         (
-        <a href="https://facebook.github.io/react-native/" target="_blank">
+        <a rel="noreferrer noopener" href="https://facebook.github.io/react-native/" target="_blank">
           Native
         </a>
         ),{' '}
-        <a href="https://nextjs.org/" target="_blank">
+        <a rel="noreferrer noopener" href="https://nextjs.org/" target="_blank">
           Next.js
         </a>
         ,{' '}
-        <a href="https://zeit.co/now" target="_blank">
+        <a rel="noreferrer noopener" href="https://zeit.co/now" target="_blank">
           Now
         </a>
         ,{' '}
-        <a href="https://expo.io/snacks/@patwoz" target="_blank">
+        <a rel="noreferrer noopener" href="https://expo.io/snacks/@patwoz" target="_blank">
           Expo
         </a>
         ,{' '}
-        <a
-          href="https://about.gitlab.com/product/continuous-integration/"
-          target="_blank"
-        >
+        <a rel="noreferrer noopener" href="https://about.gitlab.com/product/continuous-integration/" target="_blank">
           Gitlab Ci
         </a>
         .
       </p>
     </main>
-    <footer>
-      Page built with{' '}
-      <a href="https://nextjs.org" target="_blank">
-        Next.js
-      </a>
-    </footer>
   </div>
 );
 

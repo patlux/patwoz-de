@@ -5,19 +5,19 @@
   "version": "3.0.0",
   "author": "Patrick Wozniak <email@patwoz.de>",
   "dependencies": {
-    "next": "9.3.2",
+    "next": "9.3.4",
     "prop-types": "15.7.2",
-    "react": "16.8.6",
-    "react-dom": "16.8.6"
+    "react": "16.13.1",
+    "react-dom": "16.13.1"
   },
   "devDependencies": {
     "@patwoz/prettier-config": "1.1.0",
-    "@types/react": "16.8.23",
-    "@zeit/next-css": "1.0.1",
-    "husky": "3.0.0",
-    "lint-staged": "9.1.0",
+    "@types/node": "13.11.0",
+    "@types/react": "16.9.32",
+    "husky": "4.2.3",
+    "lint-staged": "10.1.2",
     "prettier": "2.0.2",
-    "typescript": "3.5.3"
+    "typescript": "3.8.3"
   },
   "keywords": [
     "personal",
@@ -30,7 +30,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "now-build": "yarn run build",
+    "check-types": "tsc",
     "prettier": "prettier --ignore-path .gitignore \"**/*.+(js|json|ts|tsx)\"",
     "format": "npm run prettier -- --write",
     "check-format": "npm run prettier -- --list-different"

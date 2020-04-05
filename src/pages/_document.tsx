@@ -10,10 +10,7 @@ export default class extends Document {
         <Head>
           {/* Global Site Tag (gtag.js) - Google Analytics */}
           {GA_TRACKING_ID && (
-            <script
-              async
-              src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
-            />
+            <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`} />
           )}
           {GA_TRACKING_ID && (
             <script
