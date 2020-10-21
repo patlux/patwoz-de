@@ -42,11 +42,7 @@ const IndexPage: NextPage<Props> = ({ listOfAddresses = INITIAL_LIST_OF_ADDRESSE
       <span>Hi, I'm</span>
       <h1>
         Patrick Wozniak{' '}
-        <a
-          className="link-inherit"
-          href="/beauty-512.png"
-          title="Open image of Patrick Wozniak"
-        >
+        <a className="link-inherit" href="/beauty-512.png" title="Open image of Patrick Wozniak">
           <img
             src="/beauty-34.png"
             alt="Face photo of Patrick Wozniak"
@@ -73,7 +69,11 @@ const IndexPage: NextPage<Props> = ({ listOfAddresses = INITIAL_LIST_OF_ADDRESSE
           React
         </a>{' '}
         (
-        <a rel="noreferrer noopener" href="https://facebook.github.io/react-native/" target="_blank">
+        <a
+          rel="noreferrer noopener"
+          href="https://facebook.github.io/react-native/"
+          target="_blank"
+        >
           Native
         </a>
         ),{' '}
@@ -81,15 +81,19 @@ const IndexPage: NextPage<Props> = ({ listOfAddresses = INITIAL_LIST_OF_ADDRESSE
           Next.js
         </a>
         ,{' '}
-        <a rel="noreferrer noopener" href="https://zeit.co/now" target="_blank">
-          Now
+        <a rel="noreferrer noopener" href="https://vercel.com/" target="_blank">
+          Vercel
         </a>
         ,{' '}
         <a rel="noreferrer noopener" href="https://expo.io/snacks/@patwoz" target="_blank">
           Expo
         </a>
         ,{' '}
-        <a rel="noreferrer noopener" href="https://about.gitlab.com/product/continuous-integration/" target="_blank">
+        <a
+          rel="noreferrer noopener"
+          href="https://about.gitlab.com/product/continuous-integration/"
+          target="_blank"
+        >
           Gitlab Ci
         </a>
         .

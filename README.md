@@ -6,7 +6,7 @@
 
 My personal website.
 
-Built with [Next.js](https://nextjs.org/). Hosted on [Now](https://zeit.co/).
+Built with [Next.js](https://nextjs.org/). Hosted on [Vercel](https://vercel.com/).
 
 ## Contact
 

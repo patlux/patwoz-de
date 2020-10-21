@@ -5,6 +5,6 @@
 !public/**
 !next-env.d.ts
 !next.config.js
-!now.json
+!vercel.json
 !package.json
 !tsconfig.json
