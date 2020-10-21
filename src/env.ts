@@ -5,4 +5,4 @@ export function stringify(str?: string) {
   return str;
 }
 
-export const GA_TRACKING_ID = stringify(process.env.GA_TRACKING_ID);
+export const TRACKING_ID = stringify(process.env.TRACKING_ID);

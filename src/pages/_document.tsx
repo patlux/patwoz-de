@@ -1,28 +1,20 @@
 import React from 'react';
 import Document, { Head, Main, NextScript } from 'next/document';
 
-import { GA_TRACKING_ID } from '../env';
+import { TRACKING_ID } from '../env';
 
 export default class extends Document {
   render() {
     return (
       <html>
         <Head>
-          {/* Global Site Tag (gtag.js) - Google Analytics */}
-          {GA_TRACKING_ID && (
-            <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`} />
-          )}
-          {GA_TRACKING_ID && (
+          {TRACKING_ID && (
             <script
-              dangerouslySetInnerHTML={{
-                __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '${GA_TRACKING_ID}');
-          `,
-              }}
-            />
+              async
+              defer
+              data-website-id={TRACKING_ID}
+              src="https://aly.patwoz.de/umami.js"
+            ></script>
           )}
         </Head>
         <body>

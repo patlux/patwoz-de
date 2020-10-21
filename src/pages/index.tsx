@@ -42,7 +42,11 @@ const IndexPage: NextPage<Props> = ({ listOfAddresses = INITIAL_LIST_OF_ADDRESSE
       <span>Hi, I'm</span>
       <h1>
         Patrick Wozniak{' '}
-        <a className="link-inherit" href="/beauty-512.png" title="Open image of Patrick Wozniak">
+        <a
+          className="link-inherit umami--click-profile-avatar"
+          href="/beauty-512.png"
+          title="Open image of Patrick Wozniak"
+        >
           <img
             src="/beauty-34.png"
             alt="Face photo of Patrick Wozniak"
@@ -55,13 +59,20 @@ const IndexPage: NextPage<Props> = ({ listOfAddresses = INITIAL_LIST_OF_ADDRESSE
       <ul className="contact-list">
         {listOfAddresses.map((Address) => (
           <li key={Address.link}>
-            <a href={Address.link}>{Address.description}</a>
+            <a href={Address.link} className={`umami--click--link-${Address.description}`}>
+              {Address.description}
+            </a>
           </li>
         ))}
       </ul>
       <p>
         I live in Nuremberg with my lovely girlfriend. I build amazing stuff at{' '}
-        <a rel="noreferrer noopener" href="https://finanzguru.de/" target="_blank">
+        <a
+          rel="noreferrer noopener"
+          href="https://finanzguru.de/"
+          target="_blank"
+          className="umami--click--link-financeguru"
+        >
           Finanzguru
         </a>
         . When it comes to building things, I like to move rapidly. I utilize technologies such as{' '}
@@ -73,19 +84,35 @@ const IndexPage: NextPage<Props> = ({ listOfAddresses = INITIAL_LIST_OF_ADDRESSE
           rel="noreferrer noopener"
           href="https://facebook.github.io/react-native/"
           target="_blank"
+          className="umami--click--link-react-native"
         >
           Native
         </a>
         ),{' '}
-        <a rel="noreferrer noopener" href="https://nextjs.org/" target="_blank">
+        <a
+          rel="noreferrer noopener"
+          href="https://nextjs.org/"
+          target="_blank"
+          className="umami--click--link-nextjs"
+        >
           Next.js
         </a>
         ,{' '}
-        <a rel="noreferrer noopener" href="https://vercel.com/" target="_blank">
+        <a
+          rel="noreferrer noopener"
+          href="https://vercel.com/"
+          target="_blank"
+          className="umami--click--link-vercel"
+        >
           Vercel
         </a>
         ,{' '}
-        <a rel="noreferrer noopener" href="https://expo.io/snacks/@patwoz" target="_blank">
+        <a
+          rel="noreferrer noopener"
+          href="https://expo.io/snacks/@patwoz"
+          target="_blank"
+          className="umami--click--link-expo"
+        >
           Expo
         </a>
         ,{' '}
@@ -93,6 +120,7 @@ const IndexPage: NextPage<Props> = ({ listOfAddresses = INITIAL_LIST_OF_ADDRESSE
           rel="noreferrer noopener"
           href="https://about.gitlab.com/product/continuous-integration/"
           target="_blank"
+          className="umami--click--link-gitlabci"
         >
           Gitlab Ci
         </a>
