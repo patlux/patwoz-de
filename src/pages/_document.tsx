@@ -1,12 +1,12 @@
 import React from 'react';
-import Document, { Head, Main, NextScript } from 'next/document';
+import Document, { Html, Head, Main, NextScript } from 'next/document';
 
 import { TRACKING_ID } from '../env';
 
 export default class extends Document {
   render() {
     return (
-      <html>
+      <Html>
         <Head>
           {TRACKING_ID && (
             <script
@@ -21,7 +21,7 @@ export default class extends Document {
           <Main />
           <NextScript />
         </body>
-      </html>
+      </Html>
     );
   }
 }

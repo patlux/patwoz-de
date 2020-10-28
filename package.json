@@ -5,15 +5,15 @@
   "version": "3.0.0",
   "author": "Patrick Wozniak <email@patwoz.de>",
   "dependencies": {
-    "next": "9.3.4",
+    "next": "10.0.0",
     "prop-types": "15.7.2",
-    "react": "16.13.1",
-    "react-dom": "16.13.1"
+    "react": "17.0.1",
+    "react-dom": "17.0.1"
   },
   "devDependencies": {
     "@patwoz/prettier-config": "1.1.0",
     "@types/node": "13.11.0",
-    "@types/react": "16.9.32",
+    "@types/react": "16.9.55",
     "husky": "4.2.3",
     "lint-staged": "10.1.2",
     "prettier": "2.0.2",
