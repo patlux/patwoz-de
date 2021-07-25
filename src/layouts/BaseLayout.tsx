@@ -16,7 +16,13 @@ function BaseLayout({ title, children }: Props) {
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="stylesheet" href="/style/global.css" />
       </head>
-      <body class="px-4 md:px-12 md:container md:mx-auto pt-12">{children}</body>
+      <body class="pt-12 pb-24 px-4 md:px-12 md:container md:mx-auto">
+        {children}
+
+        <footer className="text-sm text-gray-500 mt-20">
+          <br />© 2021 Patrick Wozniak. All rights reserved.
+        </footer>
+      </body>
     </html>
   );
 }
