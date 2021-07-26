@@ -1,40 +1,18 @@
-# Welcome to [Astro](https://astro.build)
+# [patwoz.de](https://patwoz.de)
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+![GitHub repo size](https://img.shields.io/github/repo-size/patlux/patwoz-de)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+![Twitter Follow](https://img.shields.io/twitter/follow/de_patwoz?style=social)
 
-## 🚀 Project Structure
+My personal website.
 
-Inside of your Astro project, you'll see the following folders and files:
+Built with [astro](https://astro.build)
 
-```
-/
-├── public/
-│   ├── robots.txt
-│   └── favicon.ico
-├── src/
-│   ├── components/
-│   │   └── Tour.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+## Contact
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+If you want to contact me you can reach me at <email@patwoz.de>.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## License
 
-Any static assets, like images, can be placed in the `public/` directory.
+MIT
 
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command         | Action                                      |
-|:----------------|:--------------------------------------------|
-| `npm install`   | Installs dependencies                       |
-| `npm start`     | Starts local dev server at `localhost:3000` |
-| `npm run build` | Build your production site to `./dist/`     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://github.com/snowpackjs/astro) or jump into our [Discord server](https://astro.build/chat).
