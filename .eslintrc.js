@@ -4,15 +4,20 @@ module.exports = {
   parserOptions: {
     sourceType: 'module',
     tsconfigRootDir: __dirname,
-    project: './tsconfig.json',
     ecmaFeatures: {
       jsx: true,
     },
   },
   settings: {
     react: {
-      pragma: 'h',
+      pragma: 'React',
+      version: 'detect',
     },
+    linkComponents: [
+      // Components used as alternatives to <a> for linking, eg. <Link to={ url } />
+      'Hyperlink',
+      { name: 'Link', linkAttribute: 'to' },
+    ],
   },
   env: {
     browser: true,
@@ -24,16 +29,16 @@ module.exports = {
     'eslint:recommended',
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
-    'prettier',
     'plugin:react/recommended',
   ],
   rules: {
-    '@typescript-eslint/no-use-before-define': ['error', { variables: false }],
-    '@typescript-eslint/explicit-function-return-type': 'off',
-    '@typescript-eslint/explicit-module-boundary-types': 'off',
     'no-unused-vars': 'off',
     '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
     'no-use-before-define': 'off',
-    '@typescript-eslint/no-use-before-define': ['off'],
+    '@typescript-eslint/no-use-before-define': 'off',
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+    'react/jsx-uses-react': 'off',
+    'react/react-in-jsx-scope': 'off',
   },
 };
