@@ -6,5 +6,4 @@ export default {
   devOptions: {
     tailwindConfig: './tailwind.config.js',
   },
-  renderers: ['@astrojs/renderer-preact'],
 };
