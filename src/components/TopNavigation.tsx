@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react';
+
 interface Props {
   url: string;
 }
@@ -19,7 +21,7 @@ function TopNavigation({ url }: Props) {
 interface LinkProps {
   to: string;
   active?: boolean;
-  children: string;
+  children: ReactNode;
 }
 
 function Link({ to, active, children }: LinkProps) {

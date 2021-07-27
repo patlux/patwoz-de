@@ -1,9 +1,10 @@
+import type { ReactNode } from 'react';
 import TopNavigation from '../components/TopNavigation';
 
 interface Props {
   title: string;
   url: string;
-  children: unknown;
+  children: ReactNode;
 }
 
 function BaseLayout({ title, url, children }: Props) {
