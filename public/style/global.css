@@ -12,11 +12,6 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  @apply bg-gray-50;
-  @apply font-mono;
-}
-
 .prose a {
   @apply text-green-900 underline;
 }

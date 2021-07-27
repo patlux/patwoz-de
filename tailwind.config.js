@@ -9,9 +9,9 @@ module.exports = {
   theme: {
     fontFamily: {
       mono: [
+        'Menlo',
         'ui-monospace',
         'SFMono-Regular',
-        'Menlo',
         'Monaco',
         'Consolas',
         'Liberation Mono',

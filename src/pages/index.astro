@@ -1,9 +1,10 @@
 ---
 import { Markdown } from 'astro/components';
-import BaseLayout from '../layouts/BaseLayout';
+import BaseLayout from '../layouts/BaseLayout.tsx';
+import Test from '../components/Test.tsx';
 import picMe from '../../public/assets/me.jpg';
 ---
-<BaseLayout title="Patrick Wozniak">
+<BaseLayout title="Patrick Wozniak" url="/">
   <article class="prose">
     <Markdown>
       <img class="md:float-left mr-4 rounded-sm" src={picMe} width="128" height="128" />
@@ -20,13 +21,11 @@ import picMe from '../../public/assets/me.jpg';
 
       ## links
 
-      - [stack overflow](https://stackoverflow.com/users/6300994/patrick-wozniak?tab=profile)
-      - [twitter](https://stackoverflow.com/users/6300994/patrick-wozniak)
-      - [linkedin](https://de.linkedin.com/in/patrick-wozniak-696453123)
-      - [xing](https://www.xing.com/profile/Patrick_Wozniak5)
-      - [thingiverse](https://www.thingiverse.com/patwoz)
-      - [mail](mailto:hi@patwoz.de)
-      - [cv](https://stackoverflow.com/users/story/6300994?view=Cv)
+      [stack overflow](https://stackoverflow.com/users/6300994/patrick-wozniak?tab=profile) ·
+      [twitter](https://stackoverflow.com/users/6300994/patrick-wozniak) ·
+      [linkedin](https://de.linkedin.com/in/patrick-wozniak-696453123) ·
+      [xing](https://www.xing.com/profile/Patrick_Wozniak5) ·
+      [thingiverse](https://www.thingiverse.com/patwoz)
 
       ## built
 
