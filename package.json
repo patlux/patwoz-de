@@ -5,14 +5,14 @@
     "react-dom": "^17.0.2"
   },
   "devDependencies": {
-    "@astrojs/renderer-react": "^0.1.5",
+    "@astrojs/renderer-react": "^0.2.0",
     "@patwoz/prettier-config": "^1.1.0",
     "@tailwindcss/typography": "^0.4.1",
     "@types/react": "^17.0.15",
     "@types/react-dom": "^17.0.9",
     "@typescript-eslint/eslint-plugin": "^4.28.4",
     "@typescript-eslint/parser": "^4.28.4",
-    "astro": "^0.17.3",
+    "astro": "^0.18.4",
     "eslint": "^7.31.0",
     "eslint-plugin-react": "^7.24.0",
     "husky": "^7.0.1",
