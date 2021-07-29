@@ -1,4 +1,5 @@
 ---
+import Head from '../layouts/Head.tsx';
 import BaseLayout from '../layouts/BaseLayout.tsx';
 import TodayILearnedPostsList from '../components/TodayILearnedPostsList.tsx';
 
@@ -18,8 +19,14 @@ export async function createCollection() {
 
 const {posts} = Astro.props;
 ---
-<BaseLayout title="Today I Learned" url="/today-i-learned">
-  <article class="prose">
-    <TodayILearnedPostsList posts={posts} /> 
-  </article>
-</BaseLayout>
+<html lang="en">
+  <Head>
+    <title>Today I Learned</title>
+  </Head>
+  <BaseLayout>
+    <article class="prose">
+      <TodayILearnedPostsList posts={posts} /> 
+    </article>
+  </BaseLayout>
+</html>
+

@@ -3,6 +3,11 @@ import { Markdown } from 'astro/components';
 import Head from '../layouts/Head.tsx';
 import BaseLayout from '../layouts/BaseLayout.tsx';
 import picMe from '../../public/assets/me.jpg';
+import TodayILearnedPostsList from '../components/TodayILearnedPostsList.tsx';
+
+const allPosts = Astro.fetchContent('./today-i-learned/*.md')
+  .sort((a, b) => a.published_at.localeCompare(b.published_at));
+const recentPosts = [...allPosts].slice(0, 10);
 ---
 <html lang="en">
   <Head>
@@ -45,6 +50,12 @@ import picMe from '../../public/assets/me.jpg';
   
         - [mailinabox](https://mailinabox.email): Running a self hosted **mail server** on a [5€ vps](https://www.ovhcloud.com/de/vps/)
         - [miniflux](https://miniflux.app): Running a self hosted **rss server** on a [3€ vps](https://vserver.site/de/vserver_kvm_frankfurt.html)
+  
+        ## Today I Learned
+      </Markdown>
+      <TodayILearnedPostsList posts={recentPosts} />
+      <Markdown>
+        [Read More](/today-i-learned)
       </Markdown>
     </article>
   </BaseLayout>

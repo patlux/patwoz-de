@@ -19,7 +19,9 @@ function TodayILearnedPostsList({ posts }: Props) {
       {posts.map((til) => {
         return (
           <li key={til.url}>
-            {formatDate(parseDate(til.published_at), 'yyyy-MM-dd')} ―{' '}
+            <time dateTime={til.published_at}>
+              {formatDate(parseDate(til.published_at), 'yyyy-MM-dd')} ―{' '}
+            </time>
             <a href={til.url}>{til.title}</a>
           </li>
         );
