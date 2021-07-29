@@ -1,47 +1,52 @@
 ---
 import { Markdown } from 'astro/components';
+import Head from '../layouts/Head.tsx';
 import BaseLayout from '../layouts/BaseLayout.tsx';
 import picMe from '../../public/assets/me.jpg';
 ---
-<BaseLayout title="Patrick Wozniak" url="/">
-  <article class="prose">
-    <Markdown>
-      <img class="md:float-left mr-4 rounded-sm" src={picMe} width="128" height="128" />
-
-      Hi, I'm
-
-      ### Patrick Wozniak
-
-      Software Engineer
-
-      <br />
-
-      Passionate software developer since the age of 16. Experienced frontend engineer with deep knowledge in JavaScript/TypeScript and React (Native).
-
-      ## links
-
-      [stack overflow](https://stackoverflow.com/users/6300994/patrick-wozniak?tab=profile) ·
-      [twitter](https://stackoverflow.com/users/6300994/patrick-wozniak) ·
-      [linkedin](https://de.linkedin.com/in/patrick-wozniak-696453123) ·
-      [xing](https://www.xing.com/profile/Patrick_Wozniak5) ·
-      [thingiverse](https://www.thingiverse.com/patwoz)
-
-      ## built
-
-      - [expo-cli-docker-images](https://github.com/patlux/expo-cli-docker-images): 🐳 Docker images for expo-cli
-      - [react-native-bluetooth-state-manager](https://github.com/patlux/react-native-bluetooth-state-manager): Manage the bluetooth state of your device
-      - [react-native-app-state](https://github.com/patlux/react-native-app-state): A declarative way to use react-native's AppState 
-      - [node-cec](https://github.com/patlux/node-cec): cec-client wrapper in nodejs 
-      - [dotfiles](https://github.com/patlux/dotfiles): 👨🏻‍💻 dotfiles for my personal macos setup 
-      - [react-supercluster](https://github.com/patlux/react-supercluster): 🗺 react hook for mapbox's supercluster library 
-      - [patwoz-de](https://github.com/patlux/patwoz-de): 👨🏻‍💻 my personal website
-
-      ## uses
-
-      - [mailinabox](https://mailinabox.email): Running a self hosted **mail server** on a [5€ vps](https://www.ovhcloud.com/de/vps/)
-      - [miniflux](https://miniflux.app): Running a self hosted **rss server** on a [3€ vps](https://vserver.site/de/vserver_kvm_frankfurt.html)
-
-    </Markdown>
-  </article>
-</BaseLayout>
+<html lang="en">
+  <Head>
+    <title>Patrick Wozniak: Software Engineer</title>
+  </Head>
+  <BaseLayout>
+    <article class="prose">
+      <Markdown>
+        <img class="md:float-left mr-4 rounded-sm" src={picMe} width="128" height="128" alt="Face picture of Patrick Wozniak" />
+  
+        Hi, I'm
+  
+        ### Patrick Wozniak
+  
+        Software Engineer
+  
+        <br />
+  
+        Passionate software developer since the age of 16. Experienced frontend engineer with deep knowledge in JavaScript/TypeScript and React (Native).
+  
+        ## links
+  
+        [stack overflow](https://stackoverflow.com/users/6300994/patrick-wozniak?tab=profile) ·
+        [twitter](https://stackoverflow.com/users/6300994/patrick-wozniak) ·
+        [linkedin](https://de.linkedin.com/in/patrick-wozniak-696453123) ·
+        [xing](https://www.xing.com/profile/Patrick_Wozniak5) ·
+        [thingiverse](https://www.thingiverse.com/patwoz)
+  
+        ## built
+  
+        - [expo-cli-docker-images](https://github.com/patlux/expo-cli-docker-images): 🐳 Docker images for expo-cli
+        - [react-native-bluetooth-state-manager](https://github.com/patlux/react-native-bluetooth-state-manager): Manage the bluetooth state of your device
+        - [react-native-app-state](https://github.com/patlux/react-native-app-state): A declarative way to use react-native's AppState 
+        - [node-cec](https://github.com/patlux/node-cec): cec-client wrapper in nodejs 
+        - [dotfiles](https://github.com/patlux/dotfiles): 👨🏻‍💻 dotfiles for my personal macos setup 
+        - [react-supercluster](https://github.com/patlux/react-supercluster): 🗺 react hook for mapbox's supercluster library 
+        - [patwoz-de](https://github.com/patlux/patwoz-de): 👨🏻‍💻 my personal website
+  
+        ## uses
+  
+        - [mailinabox](https://mailinabox.email): Running a self hosted **mail server** on a [5€ vps](https://www.ovhcloud.com/de/vps/)
+        - [miniflux](https://miniflux.app): Running a self hosted **rss server** on a [3€ vps](https://vserver.site/de/vserver_kvm_frankfurt.html)
+      </Markdown>
+    </article>
+  </BaseLayout>
+</html>
 
