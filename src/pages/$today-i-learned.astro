@@ -5,7 +5,7 @@ import TodayILearnedPostsList from '../components/TodayILearnedPostsList.tsx';
 
 export async function createCollection() {
   const allPosts = Astro.fetchContent('./today-i-learned/*.md')
-    .sort((a, b) => a.published_at.localeCompare(b.published_at));
+    .sort((a, b) => b.published_at.localeCompare(a.published_at));
   return {
     paginate: false,
     route: '/today-i-learned',

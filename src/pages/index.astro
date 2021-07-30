@@ -6,7 +6,7 @@ import picMe from '../../public/assets/me.jpg';
 import TodayILearnedPostsList from '../components/TodayILearnedPostsList.tsx';
 
 const allPosts = Astro.fetchContent('./today-i-learned/*.md')
-  .sort((a, b) => a.published_at.localeCompare(b.published_at));
+  .sort((a, b) => b.published_at.localeCompare(a.published_at));
 const recentPosts = [...allPosts].slice(0, 10);
 ---
 <html lang="en">
