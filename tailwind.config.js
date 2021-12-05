@@ -1,11 +1,7 @@
 module.exports = {
   mode: 'jit',
-  purge: ['./public/**/*.html', './src/**/*.{astro,js,jsx,ts,tsx,vue,svelte}'],
-  variants: {
-    extend: {
-      transform: ['hover', 'focus'],
-    },
-  },
+  purge: ['./app/**/*.{ts,tsx}'],
+  darkMode: 'media',
   theme: {
     fontFamily: {
       mono: [

@@ -17,3 +17,9 @@ yarn-error.log*
 # macOS-specific files
 .DS_Store
 .eslintcache
+
+/app/styles
+/.mf
+/.cache
+/build
+/public/build

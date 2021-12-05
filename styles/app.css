@@ -1,0 +1,12 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+body {
+  @apply bg-gray-50 font-mono pt-12 pb-24 px-4 md:px-12 md:container md:mx-auto antialiased;
+}
+
+button {
+  @apply rounded-xl bg-white shadow-xl;
+  @apply px-2 py-1;
+}

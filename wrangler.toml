@@ -1,0 +1,18 @@
+name = "patwoz-de"
+type = "javascript"
+
+zone_id = "d11021e07e0ef654fc338ccfb7e91e70"
+account_id = "7bdba1aca3b17ad758a3a03a5ae7f823"
+route = "patwoz.dev/*"
+workers_dev = false
+
+[site]
+bucket = "./public"
+entry-point = "."
+
+[build]
+command = "npm run build:worker"
+watch_dir = "build/index.js"
+
+[build.upload]
+format="service-worker"
