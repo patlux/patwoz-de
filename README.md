@@ -6,7 +6,27 @@
 
 My personal website.
 
-Built with [astro](https://astro.build)
+Built with [remix](https://remix.run)
+
+## Development
+
+Install dependencies:
+
+```bash
+pnpm install
+```
+
+### Start dev server
+
+```bash
+pnpm dev
+```
+
+### Deploy to production
+
+```bash
+pnpm deploy
+```
 
 ## Contact
 
