@@ -11,46 +11,64 @@ function Index() {
   return (
     <>
       <nav className="flex flex-col md:flex-row items-center space-x-4 mb-12">
-        <a className="no-underline font-bold text-black" href="/">
-          Patrick Wozniak
+        <a className="no-underline font-bold text-black text-center" href="/">
+          <img src="/patwoz-logo-transparent-800px.png" alt="Logo of patwoz.de" width="125px" />
+          <span className="sr-only">Patrick Wozniak</span>
         </a>
-        <div className="flex space-x-4">
-          <span className="text-gray-400">(</span>
-          <a className="no-underline " href="/l/cv">
-            cv
+        <div className="flex flex-1 md:justify-end mt-2 md:mt-0">
+          <a className="button font-black" href="/l/cv">
+            📄 <span className="underline">cv</span>
           </a>
-          <span className="text-gray-400">//</span>
-          <a className="no-underline " href="/l/mailto">
-            mail
+          <a className="button font-black ml-2" href="/l/mailto">
+            📨 <span className="underline">mail</span>
           </a>
-          <span className="text-gray-400">)</span>
         </div>
       </nav>
       <main>
-        <article className="prose">
+        <p className="flow-root">
           <img
-            className="md:float-left mr-4 rounded-sm"
+            className="float-left mr-4 rounded-full shadow-xl"
             src="/me.jpg"
             width="128"
             height="128"
             alt="Face picture of Patrick Wozniak"
           />
-          <p>Hi, I’m</p>
-          <h3 id="patrick-wozniak">Patrick Wozniak</h3>
+          <p className="mb-2">Hi, I’m</p>
+          <h3 className="font-black mb-2 text-lg">Patrick Wozniak</h3>
           <p>Software Engineer</p>
-          <br />
+        </p>
+
+        <article className="prose mt-12">
           <p>
             Passionate software developer since the age of 16. Experienced frontend engineer with
             deep knowledge in JavaScript/TypeScript and React (Native).
           </p>
-          <h2 id="links">links</h2>
+
+          <h2 id="stack">🏆 tech-stack</h2>
+
+          <div className="flex space-x-4">
+            <span className="inline-block px-4 py-2 bg-blue-900 text-white shadow-md rounded">
+              typescript
+            </span>
+            <span className="inline-block px-4 py-2 bg-blue-200 text-blue-700 shadow-md rounded">
+              reactjs
+            </span>
+            <span className="inline-block px-4 py-2 bg-green-800 text-green-100 shadow-md rounded">
+              nodejs
+            </span>
+            <span className="inline-block px-4 py-2 bg-yellow-300 text-yellow-900 shadow-md rounded">
+              aws
+            </span>
+          </div>
+
+          <h2 id="links">🔗 links</h2>
 
           <p>
             <a href="/l/stackoverflow">stack overflow</a> · <a href="/l/twitter">twitter</a> ·{' '}
             <a href="/l/linkedin">linkedin</a> · <a href="/l/xing">xing</a> ·{' '}
             <a href="/l/thingiverse">thingiverse</a>
           </p>
-          <h2 id="built">built</h2>
+          <h2 id="built">👨‍🏭️ built</h2>
           <ul>
             <li>
               <a href="https://github.com/patlux/expo-cli-docker-images">expo-cli-docker-images</a>:
@@ -86,7 +104,7 @@ function Index() {
               Prettier config
             </li>
           </ul>
-          <h2 id="uses">uses</h2>
+          <h2 id="uses">👏 uses</h2>
           <ul>
             <li>
               <a href="https://mailinabox.email">mailinabox</a>: Running a self hosted{' '}
@@ -115,8 +133,9 @@ function Index() {
           </ul>
         </article>
       </main>
-      <footer className="text-sm text-gray-500 mt-20">
-        <br />© {new Date().getFullYear()} Patrick Wozniak. All rights reserved.
+      <div role="separator" className="mt-12 mb-6 w-full h-px bg-gray-200" />
+      <footer className="text-sm text-gray-500">
+        © {new Date().getFullYear()} Patrick Wozniak. All rights reserved.
       </footer>
     </>
   );

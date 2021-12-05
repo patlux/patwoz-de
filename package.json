@@ -12,9 +12,9 @@
     "dev:mf": "miniflare --build-command \"npm run dev:worker\" --watch",
     "deploy": "npm run build && wrangler publish",
     "compile:css": "postcss styles --base styles --dir app/styles",
-    "dev:css": "pnpm compile:css -w",
-    "build:css": "pnpm compile:css --env production",
-    "dev": "concurrently -c green,cyan,organe npm:dev:remix npm:dev:mf npm:dev:css",
+    "dev:css": "pnpm compile:css -- -w",
+    "build:css": "pnpm compile:css -- --env production",
+    "dev": "concurrently -c green,cyan,yellow npm:dev:remix npm:dev:mf npm:dev:css",
     "validate": "concurrently npm:build:*"
   },
   "dependencies": {
