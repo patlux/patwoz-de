@@ -4,7 +4,7 @@
   "description": "https://patwoz.de",
   "license": "MIT",
   "scripts": {
-    "build": "remix build",
+    "build:remix": "remix build",
     "dev:remix": "remix watch",
     "postinstall": "remix setup cloudflare-workers",
     "build:worker": "esbuild --define:process.env.NODE_ENV='\"production\"' --minify --bundle --sourcemap --outdir=dist ./worker",
@@ -15,10 +15,11 @@
     "dev:css": "pnpm compile:css -- -w",
     "build:css": "pnpm compile:css -- --env production",
     "dev": "concurrently -c green,cyan,yellow npm:dev:remix npm:dev:mf npm:dev:css",
-    "validate": "concurrently npm:build:* npm:check-format",
+    "build": "NODE_ENV=production concurrently -m 1 npm:build:css npm:build:remix npm:build:worker",
+    "validate": "concurrently npm:build npm:check-format",
     "prettier": "prettier --ignore-path .gitignore \"**/*.{ts,tsx,json,md,css}\"",
-    "format": "npm run prettier -- --write",
-    "check-format": "npm run prettier -- --check"
+    "format": "pnpm prettier -- --write",
+    "check-format": "pnpm prettier -- --check"
   },
   "dependencies": {
     "@remix-run/cloudflare-workers": "^1.0.6",
