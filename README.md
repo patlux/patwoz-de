@@ -35,4 +35,3 @@ If you want to contact me you can reach me at <email@patwoz.de>.
 ## License
 
 MIT
-

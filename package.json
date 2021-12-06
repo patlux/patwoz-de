@@ -15,7 +15,10 @@
     "dev:css": "pnpm compile:css -- -w",
     "build:css": "pnpm compile:css -- --env production",
     "dev": "concurrently -c green,cyan,yellow npm:dev:remix npm:dev:mf npm:dev:css",
-    "validate": "concurrently npm:build:*"
+    "validate": "concurrently npm:build:* npm:check-format",
+    "prettier": "prettier --ignore-path .gitignore \"**/*.{ts,tsx,json,md,css}\"",
+    "format": "npm run prettier -- --write",
+    "check-format": "npm run prettier -- --check"
   },
   "dependencies": {
     "@remix-run/cloudflare-workers": "^1.0.6",
