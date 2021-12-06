@@ -10,7 +10,7 @@ export const meta: MetaFunction = () => {
 function Index() {
   return (
     <>
-      <nav className="flex flex-col md:flex-row items-center space-x-4 mb-12">
+      <nav className="flex flex-col md:flex-row items-center mb-12">
         <a className="no-underline font-bold text-black text-center" href="/">
           <img src="/patwoz-logo-transparent-800px.png" alt="Logo of patwoz.de" width="125px" />
           <span className="sr-only">Patrick Wozniak</span>
@@ -46,19 +46,24 @@ function Index() {
 
           <h2 id="stack">🏆 tech-stack</h2>
 
-          <div className="flex space-x-4">
-            <span className="inline-block px-4 py-2 bg-blue-900 text-white shadow-md rounded">
-              typescript
-            </span>
-            <span className="inline-block px-4 py-2 bg-blue-200 text-blue-700 shadow-md rounded">
-              reactjs
-            </span>
-            <span className="inline-block px-4 py-2 bg-green-800 text-green-100 shadow-md rounded">
-              nodejs
-            </span>
-            <span className="inline-block px-4 py-2 bg-yellow-300 text-yellow-900 shadow-md rounded">
-              aws
-            </span>
+          <div className="flow-root">
+            <div className="-m-2">
+              <span className="inline-block px-4 py-2 bg-blue-900 text-white shadow-md rounded m-2">
+                typescript
+              </span>
+              <span className="inline-block px-4 py-2 bg-blue-200 text-blue-700 shadow-md rounded m-2">
+                reactjs
+              </span>
+              <span className="inline-block px-4 py-2 bg-blue-200 text-blue-700 shadow-md rounded m-2">
+                react-native
+              </span>
+              <span className="inline-block px-4 py-2 bg-green-800 text-green-100 shadow-md rounded m-2">
+                nodejs
+              </span>
+              <span className="inline-block px-4 py-2 bg-yellow-300 text-yellow-900 shadow-md rounded m-2">
+                aws
+              </span>
+            </div>
           </div>
 
           <h2 id="links">🔗 links</h2>
@@ -135,7 +140,7 @@ function Index() {
       </main>
       <div role="separator" className="mt-12 mb-6 w-full h-px bg-gray-200" />
       <footer className="text-sm text-gray-500">
-        © {new Date().getFullYear()} Patrick Wozniak. All rights reserved.
+        © {new Date().getFullYear()} Patrick Wozniak
       </footer>
     </>
   );
