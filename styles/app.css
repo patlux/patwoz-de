@@ -20,3 +20,7 @@ a.button {
   @apply hover:shadow-xl;
   @apply border border-gray-200;
 }
+
+h1 {
+  @apply text-xl font-bold;
+}

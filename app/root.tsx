@@ -1,10 +1,27 @@
-import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration, useCatch } from 'remix';
-import type { LinksFunction } from 'remix';
+import type { LinksFunction, MetaFunction } from 'remix';
+import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration, useCatch, Link } from 'remix';
 
 import appCssUrl from './styles/app.css';
 
 export let links: LinksFunction = () => {
   return [{ rel: 'stylesheet', href: appCssUrl }];
+};
+
+export const meta: MetaFunction = () => {
+  return {
+    title: 'Patrick Wozniak: Software Engineer',
+    description: 'Patrick Wozniak is a self-taught Software Engineer from Erlangen, Germany.',
+    'og:url': 'https://patwoz.dev/',
+    'og:title': 'Patrick Wozniak: Software Engineer',
+    'og:description': 'Patrick Wozniak is a self-taught Software Engineer from Erlangen, Germany.',
+    'og:image': 'https://patwoz.dev/me.jpg',
+    'og:image:width': '512',
+    'og:image:height': '512',
+    'og:type': 'profile',
+    'profile:first_name': 'Patrick',
+    'profile:last_name': 'Wozniak',
+    'profile:username': 'patwoz',
+  };
 };
 
 export default function App() {
@@ -64,7 +81,7 @@ export function CatchBoundary() {
 function Document({ children, title }: { children: React.ReactNode; title?: string }) {
   return (
     <html lang="en">
-      <head>
+      <head prefix="og: https://ogp.me/ns#">
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -85,5 +102,32 @@ function Document({ children, title }: { children: React.ReactNode; title?: stri
 }
 
 function Layout({ children }: { children: React.ReactNode }) {
-  return <div className="remix-app">{children}</div>;
+  return (
+    <>
+      <nav className="flex flex-col md:flex-row items-center mb-12">
+        <a className="no-underline font-bold text-black text-center" href="/">
+          <img src="/patwoz-logo-transparent-800px.png" alt="Logo of patwoz.de" width="125px" />
+          <span className="sr-only">Patrick Wozniak</span>
+        </a>
+        <div className="flex flex-1 md:justify-end mt-2 md:mt-0">
+          <a className="button font-black" href="/l/cv">
+            📄 <span className="underline">cv</span>
+          </a>
+          <a className="button font-black ml-2" href="/l/mailto">
+            📨 <span className="underline">mail</span>
+          </a>
+        </div>
+      </nav>
+      {children}
+      <div role="separator" className="mt-12 mb-6 w-full h-px bg-gray-200" />
+      <footer className="flex flex-1 flex-row text-sm text-gray-500">
+        © {new Date().getFullYear()} Patrick Wozniak
+        <div className="flex flex-1 justify-end">
+          <Link to="/imprint" className="underline">
+            Imprint
+          </Link>
+        </div>
+      </footer>
+    </>
+  );
 }
