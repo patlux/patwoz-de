@@ -21,6 +21,9 @@ let prodRequestHandler: RequestHandler;
 async function handler(request: Request): Promise<Response> {
   let requestHandler: RequestHandler;
 
+  const file = tryServeStaticFile('public', request);
+  if (file) return file;
+
   if (mode === 'production') {
     if (!prodRequestHandler) {
       const build = await getBuild();
@@ -31,9 +34,6 @@ async function handler(request: Request): Promise<Response> {
     const build = await getBuild();
     requestHandler = createRequestHandler(build, mode);
   }
-
-  const file = tryServeStaticFile('public', request);
-  if (file) return file;
 
   return requestHandler(request);
 }
