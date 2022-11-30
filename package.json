@@ -25,7 +25,8 @@
     "check-types": "tsc --noEmit --skipLibCheck",
     "check-tests": "bun run test",
     "validate": "run-p check-*",
-    "docker:build": "docker build -t patwoz-de ."
+    "docker:build": "docker build -t patwoz-de .",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "@remix-run/node": "^1.7.6",
@@ -36,6 +37,7 @@
   },
   "devDependencies": {
     "@patwoz/prettier-config": "^1.1.0",
+    "@playwright/test": "^1.28.1",
     "@remix-run/dev": "^1.7.6",
     "@remix-run/eslint-config": "^1.7.6",
     "@tailwindcss/typography": "^0.5.8",

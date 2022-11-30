@@ -31,6 +31,7 @@ async function handler(request: Request): Promise<Response> {
     }
     requestHandler = prodRequestHandler;
   } else {
+    console.log(`${request.method.toUpperCase()} ${request.url}`);
     const build = await getBuild();
     requestHandler = createRequestHandler(build, mode);
   }
