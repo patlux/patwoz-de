@@ -10,7 +10,10 @@ export const BaseLayout = ({ children }: PropsWithChildren<unknown>) => {
           <span className="sr-only">Patrick Wozniak</span>
         </a>
         <div className="flex flex-1 md:justify-end mt-2 md:mt-0">
-          <a className="button font-black" href="/l/cv">
+          <a
+            className="button font-black"
+            href="https://www.freelance.de/Freiberufler/215868-Senior-TypeScript-Developer-ReactJS-React-Native/highlight=react"
+          >
             📄 <span className="underline">cv</span>
           </a>
           <a className="button font-black ml-2" href="mailto:hi@patwoz.de">

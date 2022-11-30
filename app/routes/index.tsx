@@ -46,22 +46,24 @@ function Index() {
 
         <ul>
           <li>
-            <a href="/l/github">github</a>
+            <a href="https://github.com/patlux">github</a>
           </li>
           <li>
-            <a href="/l/stackoverflow">stack overflow</a>
+            <a href="https://stackoverflow.com/users/6300994/patrick-wozniak?tab=profile">
+              stack overflow
+            </a>
           </li>
           <li>
-            <a href="/l/twitter">twitter</a>
+            <a href="https://twitter.com/de_patwoz">twitter</a>
           </li>
           <li>
-            <a href="/l/linkedin">linkedin</a>
+            <a href="https://de.linkedin.com/in/patrick-wozniak-696453123">linkedin</a>
           </li>
           <li>
-            <a href="/l/xing">xing</a>
+            <a href="https://www.xing.com/profile/Patrick_Wozniak5">xing</a>
           </li>
           <li>
-            <a href="/l/thingiverse">thingiverse</a>
+            <a href="https://www.thingiverse.com/patwoz">thingiverse</a>
           </li>
           <li>
             <a href="https://www.freelance.de/Freiberufler/215868-Senior-TypeScript-Developer-ReactJS-React-Native/highlight=react">
