@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /imprint
 
-Sitemap: http://patwoz.dev/sitemap.xml
+Sitemap: https://patwoz.dev/sitemap.xml
