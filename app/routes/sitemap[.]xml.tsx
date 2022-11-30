@@ -17,7 +17,6 @@ const content = `
     </urlset>
     `.trim();
 
-
 export const loader = () => {
   return new Response(content, {
     status: 200,
