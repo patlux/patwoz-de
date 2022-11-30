@@ -26,5 +26,5 @@ jobs:
       - name: Check types
         run: bun run check-types
 
-      - name: Check tets
+      - name: Check tests
         run: bun run check-tests
