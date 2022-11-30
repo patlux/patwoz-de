@@ -5,8 +5,8 @@
   "license": "MIT",
   "sideEffects": false,
   "main": "./server.ts",
-  "prettier": "@patwoz/prettier-config",
   "scripts": {
+    "prepare": "husky install",
     "build-start": "bun run build && bun run start",
     "start": "NODE_ENV=production bun run ./server.ts",
     "build": "bun run build:css && bun run build:remix",
@@ -41,6 +41,8 @@
     "@types/react-dom": "^18.0.9",
     "bun-types": "^0.2.2",
     "eslint": "^8.28.0",
+    "husky": "^8.0.2",
+    "lint-staged": "^13.0.4",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.8.0",
     "tailwindcss": "^3.2.4",
