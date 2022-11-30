@@ -1,28 +1,35 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import type { RequestHandler } from '@remix-run/node';
-
+import type { ServerBuild } from '@remix-run/server-runtime';
 import { createRequestHandler } from '@remix-run/server-runtime';
-import * as build from './build';
 
-const mode = process.env.NODE_ENV === 'development' ? 'development' : 'production';
-
-const prodRequestHandler = createRequestHandler(build, 'production');
-
-const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
+const mode = process.env.NODE_ENV === 'production' ? 'production' : 'development';
 
 setInterval(() => {
   Bun.gc(true);
 }, 9000);
 
+const getBuild = async (): Promise<ServerBuild> => {
+  const build = (await import('./build')) as any;
+  const serverBuild = build as ServerBuild;
+  return serverBuild;
+};
+
+let prodRequestHandler: RequestHandler;
+
 async function handler(request: Request): Promise<Response> {
   let requestHandler: RequestHandler;
 
-  if (mode === 'development') {
-    let newBuild = await import('./build');
-    requestHandler = createRequestHandler(newBuild, mode);
-  } else {
+  if (mode === 'production') {
+    if (!prodRequestHandler) {
+      const build = await getBuild();
+      prodRequestHandler = createRequestHandler(build, mode);
+    }
     requestHandler = prodRequestHandler;
+  } else {
+    const build = await getBuild();
+    requestHandler = createRequestHandler(build, mode);
   }
 
   const file = tryServeStaticFile('public', request);
@@ -32,7 +39,7 @@ async function handler(request: Request): Promise<Response> {
 }
 
 const server = Bun.serve({
-  port: PORT,
+  port: process.env.PORT ? parseInt(process.env.PORT, 10) : 3000,
   fetch: mode === 'development' ? liveReload(handler) : handler,
 });
 
