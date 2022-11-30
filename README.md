@@ -1,6 +1,6 @@
 # [patwoz.de](https://patwoz.de)
 
-[![nodejs](https://github.com/patlux/patwoz-de/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/patlux/patwoz-de/actions/workflows/main.yml) ![GitHub repo size](https://img.shields.io/github/repo-size/patlux/patwoz-de)
+[![validate](https://github.com/patlux/patwoz-de/actions/workflows/validate.yml/badge.svg?branch=main)](https://github.com/patlux/patwoz-de/actions/workflows/validate.yml) [![deploy](https://github.com/patlux/patwoz-de/actions/workflows/deploy.yml/badge.svg?branch=main)](https://github.com/patlux/patwoz-de/actions/workflows/deploy.yml) ![GitHub repo size](https://img.shields.io/github/repo-size/patlux/patwoz-de)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 ![Twitter Follow](https://img.shields.io/twitter/follow/de_patwoz?style=social)
 
