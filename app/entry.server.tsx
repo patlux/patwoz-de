@@ -1,14 +1,16 @@
+import type * as RemixServer from '@remix-run/server-runtime';
+import * as RemixReact from '@remix-run/react';
 import { renderToString } from 'react-dom/server';
-import { RemixServer } from 'remix';
-import type { EntryContext } from 'remix';
 
-export default function handleRequest(
+export default async function handleRequest(
   request: Request,
   responseStatusCode: number,
   responseHeaders: Headers,
-  remixContext: EntryContext
+  remixContext: RemixServer.EntryContext
 ) {
-  let markup = renderToString(<RemixServer context={remixContext} url={request.url} />);
+  const markup = renderToString(
+    <RemixReact.RemixServer context={remixContext} url={request.url} />
+  );
 
   responseHeaders.set('Content-Type', 'text/html');
 
