@@ -18,10 +18,12 @@
     "dev": "bun run build:remix && run-p dev:*",
     "prettier": "prettier --ignore-path .gitignore '**/*.{ts,tsx,json,md,css}'",
     "format": "bun run prettier --write",
+    "test": "bun wiptest",
     "check-format": "bun run prettier -- --check",
     "check-build": "bun run build",
     "check-lint": "eslint --cache --ext .tsx,.ts,.js .",
     "check-types": "tsc --noEmit --skipLibCheck",
+    "check-tests": "bun run test",
     "validate": "run-p check-*",
     "docker:build": "docker build -t patwoz-de ."
   },

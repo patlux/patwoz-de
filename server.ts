@@ -38,12 +38,16 @@ async function handler(request: Request): Promise<Response> {
   return requestHandler(request);
 }
 
+const port = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
+
 const server = Bun.serve({
-  port: process.env.PORT ? parseInt(process.env.PORT, 10) : 3000,
+  port,
   fetch: mode === 'development' ? liveReload(handler) : handler,
 });
 
-console.log(`Server started at ${server.hostname}`);
+export { server };
+
+console.log(`Server started at ${server.hostname}:${server.port}`);
 
 function tryServeStaticFile(staticDir: string, request: Request): Response | undefined {
   const url = new URL(request.url);
