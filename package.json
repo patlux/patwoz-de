@@ -3,54 +3,43 @@
   "name": "patwoz-de",
   "description": "https://patwoz.de",
   "license": "MIT",
-  "scripts": {
-    "build:remix": "remix build",
-    "dev:remix": "remix watch",
-    "postinstall": "remix setup cloudflare-workers",
-    "build:worker": "esbuild --define:process.env.NODE_ENV='\"production\"' --minify --bundle --sourcemap --outdir=dist ./worker",
-    "dev:worker": "esbuild --define:process.env.NODE_ENV='\"development\"' --bundle --sourcemap --outdir=dist ./worker",
-    "dev:mf": "miniflare --build-command \"npm run dev:worker\" --watch",
-    "deploy": "npm run build && wrangler publish",
-    "compile:css": "postcss styles --base styles --dir app/styles",
-    "dev:css": "pnpm compile:css -- -w",
-    "build:css": "pnpm compile:css -- --env production",
-    "dev": "concurrently -c green,cyan,yellow npm:dev:remix npm:dev:mf npm:dev:css",
-    "build": "NODE_ENV=production concurrently -m 1 npm:build:css npm:build:remix npm:build:worker",
-    "validate": "concurrently npm:build npm:check-format",
-    "prettier": "prettier --ignore-path .gitignore \"**/*.{ts,tsx,json,md,css}\"",
-    "format": "pnpm prettier -- --write",
-    "check-format": "pnpm prettier -- --check"
-  },
-  "dependencies": {
-    "@remix-run/cloudflare-workers": "^1.0.6",
-    "@remix-run/react": "^1.0.6",
-    "@tailwindcss/typography": "^0.4.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-markdown": "^7.1.1",
-    "remix": "^1.0.6"
-  },
-  "devDependencies": {
-    "@cloudflare/workers-types": "^2.2.2",
-    "@patwoz/prettier-config": "^1.1.0",
-    "@remix-run/dev": "^1.0.6",
-    "@types/react": "^17.0.24",
-    "@types/react-dom": "^17.0.9",
-    "autoprefixer": "^10.4.0",
-    "concurrently": "^6.4.0",
-    "esbuild": "0.13.14",
-    "miniflare": "2.0.0-next.3",
-    "postcss": "^8.4.4",
-    "postcss-cli": "^9.0.2",
-    "postcss-import": "^14.0.2",
-    "prettier": "^2.5.0",
-    "tailwindcss": "^2.2.19",
-    "typescript": "^4.1.2"
-  },
-  "engines": {
-    "node": ">=14"
-  },
   "sideEffects": false,
   "main": "dist/worker.js",
-  "prettier": "@patwoz/prettier-config"
+  "prettier": "@patwoz/prettier-config",
+  "scripts": {
+    "start": "bun run ./server.ts",
+    "build": "bun run build:css && bun run build:remix",
+    "build:remix": "bun run node_modules/@remix-run/dev/dist/cli.js build",
+    "build:css": "tailwindcss -m -i ./styles/app.css -o app/styles/app.css",
+    "dev:remix": "bun run node_modules/@remix-run/dev/dist/cli.js watch",
+    "dev:server": "bun run ./server.ts dev",
+    "dev:css": "tailwindcss -w -i ./styles/app.css -o app/styles/app.css",
+    "dev": "bun run build:remix && run-p dev:*",
+    "prettier": "prettier --ignore-path .gitignore '**/*.{ts,tsx,json,md,css}'",
+    "format": "bun run prettier --write",
+    "check-format": "bun run prettier -- --check",
+    "check-build": "bun run build",
+    "validate": "run-p check-*"
+  },
+  "dependencies": {
+    "@remix-run/cloudflare-workers": "^1.7.6",
+    "@remix-run/node": "^1.7.6",
+    "@remix-run/react": "^1.7.6",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-markdown": "^7.1.1"
+  },
+  "devDependencies": {
+    "@patwoz/prettier-config": "^1.1.0",
+    "@remix-run/dev": "^1.7.6",
+    "@remix-run/eslint-config": "^1.7.6",
+    "@tailwindcss/typography": "^0.5.8",
+    "@types/react": "^18.0.25",
+    "@types/react-dom": "^18.0.9",
+    "bun-types": "^0.2.2",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.8.0",
+    "tailwindcss": "^3.2.4",
+    "typescript": "^4.8.4"
+  }
 }
