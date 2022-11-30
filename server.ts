@@ -9,7 +9,7 @@ const mode = process.env.NODE_ENV === 'development' ? 'development' : 'productio
 
 const prodRequestHandler = createRequestHandler(build, 'production');
 
-const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000
+const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
 
 setInterval(() => {
   Bun.gc(true);
