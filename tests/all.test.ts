@@ -31,6 +31,10 @@ const redirects = [
       'https://www.freelance.de/Freiberufler/215868-Senior-TypeScript-Developer-ReactJS-React-Native/highlight=react',
   },
   {
+    route: '/l/github',
+    target: 'https://github.com/patlux',
+  },
+  {
     route: '/l/mailto',
     target: 'mailto:hi@patwoz.de',
   },

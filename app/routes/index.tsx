@@ -46,6 +46,9 @@ function Index() {
 
         <ul>
           <li>
+            <a href="/l/github">github</a>
+          </li>
+          <li>
             <a href="/l/stackoverflow">stack overflow</a>
           </li>
           <li>
