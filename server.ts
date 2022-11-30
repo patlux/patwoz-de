@@ -9,6 +9,8 @@ const mode = process.env.NODE_ENV === 'development' ? 'development' : 'productio
 
 const prodRequestHandler = createRequestHandler(build, 'production');
 
+const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000
+
 setInterval(() => {
   Bun.gc(true);
 }, 9000);
@@ -30,7 +32,7 @@ async function handler(request: Request): Promise<Response> {
 }
 
 const server = Bun.serve({
-  port: 3000,
+  port: PORT,
   fetch: mode === 'development' ? liveReload(handler) : handler,
 });
 
