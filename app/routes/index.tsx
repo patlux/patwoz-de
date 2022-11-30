@@ -7,7 +7,7 @@ function Index() {
           src="/me.jpg"
           width="128"
           height="128"
-          alt="Face picture of Patrick Wozniak"
+          alt="Face of Patrick Wozniak"
         />
         <p className="mb-2">Hi, I’m</p>
         <h3 className="font-black mb-2 text-lg">Patrick Wozniak</h3>
