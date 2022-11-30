@@ -42,13 +42,35 @@ function Index() {
           </div>
         </div>
 
-        <h2 id="links">🔗 links</h2>
+        <h2 id="profiles">🔗 profiles</h2>
 
-        <p>
-          <a href="/l/stackoverflow">stack overflow</a> · <a href="/l/twitter">twitter</a> ·{' '}
-          <a href="/l/linkedin">linkedin</a> · <a href="/l/xing">xing</a> ·{' '}
-          <a href="/l/thingiverse">thingiverse</a>
-        </p>
+        <ul>
+          <li>
+            <a href="/l/stackoverflow">stack overflow</a>
+          </li>
+          <li>
+            <a href="/l/twitter">twitter</a>
+          </li>
+          <li>
+            <a href="/l/linkedin">linkedin</a>
+          </li>
+          <li>
+            <a href="/l/xing">xing</a>
+          </li>
+          <li>
+            <a href="/l/thingiverse">thingiverse</a>
+          </li>
+          <li>
+            <a href="https://www.freelance.de/Freiberufler/215868-Senior-TypeScript-Developer-ReactJS-React-Native/highlight=react">
+              freelance.de
+            </a>
+          </li>
+          <li>
+            <a href="https://www.freelancermap.de/freelancer-verzeichnis/profile/entwicklung/381396-profil-patrick-wozniak-senior-typescript-developer-reactjs-react-native-aus-schwaig.html">
+              freelancermap.de
+            </a>
+          </li>
+        </ul>
         <h2 id="built">👨‍🏭️ built</h2>
         <ul>
           <li>
