@@ -1,0 +1,19 @@
+name: validate
+
+on: [push, pull_request]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Bun Runtime
+        uses: antongolub/action-setup-bun@v1
+      
+      - name: Install dependencies
+        run: bun install
+
+      - name: Build
+        run: bun run check-build
+
