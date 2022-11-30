@@ -23,3 +23,6 @@ jobs:
       - name: Check lint
         run: bun run check-lint
 
+      - name: Check types
+        run: bun run check-types
+

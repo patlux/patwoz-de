@@ -4,7 +4,7 @@
   "description": "https://patwoz.de",
   "license": "MIT",
   "sideEffects": false,
-  "main": "dist/worker.js",
+  "main": "./server.ts",
   "prettier": "@patwoz/prettier-config",
   "scripts": {
     "start": "bun run ./server.ts",
@@ -20,6 +20,7 @@
     "check-format": "bun run prettier -- --check",
     "check-build": "bun run build",
     "check-lint": "eslint --cache --ext .tsx,.ts,.js .",
+    "check-types": "tsc --noEmit --skipLibCheck",
     "validate": "run-p check-*",
     "docker:build": "docker build -t patwoz-de ."
   },
