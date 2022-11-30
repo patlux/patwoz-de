@@ -6,26 +6,46 @@
 
 My personal website.
 
-Built with [remix](https://remix.run)
+Technologies used:
+
+- [bun](https://bun.sh/): Bundler/Transpiler & Package manager
+- [remix](https://remix.run): full stack web framework
+- [tailwindcss](https://tailwindcss.com/): styling
+- [playwright](https://playwright.dev/): End-To-End Tests
+- [prettier](https://prettier.io/): Formatting code ([My config](https://github.com/patlux/prettier-config))
+- [eslint](https://eslint.org/): Lint code
+- [sqlite](https://github.com/oven-sh/bun#bunsqlite-sqlite3-module): sql database
 
 ## Development
 
 Install dependencies:
 
-```bash
-pnpm install
+```sh
+$ bun install
 ```
 
 ### Start dev server
 
-```bash
-pnpm dev
+```sh
+$ bun run dev
 ```
 
 ### Deploy to production
 
-```bash
-pnpm deploy
+```sh
+$ fly deploy
+```
+
+### Run tests
+
+```sh
+$ bun run test
+```
+
+### Run End-To-End Tests
+
+```sh
+$ bun run test:e2e
 ```
 
 ## Contact

@@ -1,7 +1,9 @@
 import { Link } from '@remix-run/react';
 import type { PropsWithChildren } from 'react';
+import { useRootLoaderData } from './useRootLoaderData';
 
 export const BaseLayout = ({ children }: PropsWithChildren<unknown>) => {
+  const rootData = useRootLoaderData();
   return (
     <>
       <nav className="flex flex-col md:flex-row items-center mb-12">
@@ -23,8 +25,9 @@ export const BaseLayout = ({ children }: PropsWithChildren<unknown>) => {
       </nav>
       {children}
       <div role="separator" className="mt-12 mb-6 w-full h-px bg-gray-200" />
-      <footer className="flex flex-1 flex-row text-sm text-gray-500">
-        © {new Date().getFullYear()} Patrick Wozniak
+      <footer className="flex flex-1 flex-row justify-between text-sm text-gray-500">
+        <span className="flex-1">© {new Date().getFullYear()} Patrick Wozniak</span>
+        {rootData?.count && <span className="flex-1 text-center">Views: {rootData.count}</span>}
         <div className="flex flex-1 justify-end">
           <Link to="/imprint" className="underline">
             Imprint

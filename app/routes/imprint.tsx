@@ -1,8 +1,16 @@
+import type { MetaFunction } from '@remix-run/node';
 import { Link } from '@remix-run/react';
+import { BaseLayout } from '~/components/BaseLayout';
+
+export const meta: MetaFunction = () => {
+  return {
+    title: 'Imprint',
+  };
+};
 
 function Imprint() {
   return (
-    <>
+    <BaseLayout>
       <Link to="/">« Back to my website</Link>
       <br />
       <br />
@@ -21,7 +29,7 @@ function Imprint() {
         36037 Fulda
         <br />
       </p>
-    </>
+    </BaseLayout>
   );
 }
 
