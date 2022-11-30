@@ -1,5 +1,5 @@
-import { Link } from "@remix-run/react";
-import { PropsWithChildren } from "react";
+import { Link } from '@remix-run/react';
+import { PropsWithChildren } from 'react';
 
 export const BaseLayout = ({ children }: PropsWithChildren<unknown>) => {
   return (
@@ -30,4 +30,4 @@ export const BaseLayout = ({ children }: PropsWithChildren<unknown>) => {
       </footer>
     </>
   );
-}
+};
