@@ -6,7 +6,7 @@
   "sideEffects": false,
   "main": "./server.ts",
   "scripts": {
-    "prepare": "husky install",
+    "prepare": "bun run husky install",
     "build-start": "bun run build && bun run start",
     "start": "NODE_ENV=production bun run ./server.ts",
     "build": "bun run build:css && bun run build:remix",
