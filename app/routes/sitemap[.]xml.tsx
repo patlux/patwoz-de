@@ -1,6 +1,6 @@
 const URLS = [
   'https://patwoz.dev/',
-  'https://patwoz.dev/imprint'
+  'https://patwoz.dev/imprint',
 ]
 
 export const loader = () => {
