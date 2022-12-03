@@ -3,7 +3,7 @@ RUN mkdir /application/
 WORKDIR /application/
 
 ADD package.json bun.lockb ./
-RUN bun install --ignore-scripts
+RUN bun install --ignore-scripts --verbose
 
 FROM node:18-bullseye-slim as remix
 RUN mkdir /application/

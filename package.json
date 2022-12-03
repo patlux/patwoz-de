@@ -13,7 +13,7 @@
     "build:remix": "bun run node_modules/@remix-run/dev/dist/cli.js build",
     "build:css": "tailwindcss -m -i ./styles/app.css -o app/styles/app.css",
     "dev:remix": "bun run node_modules/@remix-run/dev/dist/cli.js watch",
-    "dev:server": "NODE_ENV=development bun run ./server.ts dev",
+    "dev:server": "NODE_ENV=development bun --hot ./server.ts",
     "dev:css": "tailwindcss -w -i ./styles/app.css -o app/styles/app.css",
     "dev": "bun run build:remix && bun run build:css && run-p dev:*",
     "prettier": "prettier --ignore-path .gitignore '**/*.{ts,tsx,json,md,css}'",

@@ -1,5 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
+import type { ServeOptions } from 'bun';
 import type { RequestHandler } from '@remix-run/node';
 import type { ServerBuild } from '@remix-run/server-runtime';
 import { createRequestHandler } from '@remix-run/server-runtime';
@@ -10,45 +11,33 @@ setInterval(() => {
   Bun.gc(true);
 }, 9000);
 
-const getBuild = async (): Promise<ServerBuild> => {
-  const build = (await import('./build')) as any;
-  const serverBuild = build as ServerBuild;
-  return serverBuild;
-};
+const getBuild = async (): Promise<ServerBuild> => import('./build') as any as ServerBuild;
 
 let prodRequestHandler: RequestHandler;
 
 async function handler(request: Request): Promise<Response> {
   let requestHandler: RequestHandler;
 
-  const file = tryServeStaticFile('public', request);
-  if (file) return file;
-
   if (mode === 'production') {
     if (!prodRequestHandler) {
-      const build = await getBuild();
-      prodRequestHandler = createRequestHandler(build, mode);
+      prodRequestHandler = createRequestHandler(await getBuild(), mode);
     }
     requestHandler = prodRequestHandler;
   } else {
-    console.log(`${request.method.toUpperCase()} ${request.url}`);
-    const build = await getBuild();
-    requestHandler = createRequestHandler(build, mode);
+    const url = new URL(request.url);
+    console.log(`${request.method.toUpperCase()} ${url.pathname}${url.search}`);
+    requestHandler = createRequestHandler(await getBuild(), mode);
   }
 
   return requestHandler(request);
 }
 
-const port = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
-
-const server = Bun.serve({
-  port,
-  fetch: mode === 'development' ? liveReload(handler) : handler,
-});
-
-export { server };
-
-console.log(`Server started at ${server.hostname}:${server.port}`);
+const withStaticDir =
+  (staticDir: string) => (requestHandler: RequestHandler) => (request: Request) => {
+    const file = tryServeStaticFile(staticDir, request);
+    if (file) return file;
+    return requestHandler(request);
+  };
 
 function tryServeStaticFile(staticDir: string, request: Request): Response | undefined {
   const url = new URL(request.url);
@@ -70,20 +59,11 @@ function tryServeStaticFile(staticDir: string, request: Request): Response | und
   return undefined;
 }
 
-function liveReload<TFunc extends Function>(callback: TFunc) {
-  const registry = new Map([...Loader.registry.entries()]);
-  function reload() {
-    if (Loader.registry.size !== registry.size) {
-      for (const key of Loader.registry.keys()) {
-        if (!registry.has(key)) {
-          Loader.registry.delete(key);
-        }
-      }
-    }
-  }
+const port = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
 
-  return async (...args: unknown[]) => {
-    reload();
-    return callback(...args);
-  };
-}
+const bunServeOptions: ServeOptions = {
+  port,
+  fetch: withStaticDir('public')(handler),
+};
+
+export default bunServeOptions;
