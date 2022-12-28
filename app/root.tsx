@@ -1,4 +1,4 @@
-import type { LinksFunction, LoaderArgs, MetaFunction } from '@remix-run/node';
+import type { LinksFunction, MetaFunction } from '@remix-run/node';
 import {
   Links,
   LiveReload,
@@ -8,10 +8,8 @@ import {
   ScrollRestoration,
   useCatch,
 } from '@remix-run/react';
-import type { SQLQueryBindings } from 'bun:sqlite';
 
 import { BaseLayout } from './components/BaseLayout';
-import { db } from '~/utils/db.server';
 import appCssUrl from './styles/app.css';
 
 export let links: LinksFunction = () => {
@@ -35,25 +33,6 @@ export const meta: MetaFunction = () => {
   };
 };
 
-export const loader = async ({ request }: LoaderArgs) => {
-  const pathname = new URL(request.url).pathname;
-
-  db.run(
-    `INSERT INTO page_views(path) VALUES(?) ON CONFLICT(path) DO UPDATE SET count=count+1;`,
-    pathname
-  );
-
-  const result = db
-    .query<SQLQueryBindings, { count: number }>(
-      `SELECT count FROM page_views WHERE path = ? LIMIT 1`
-    )
-    .get(pathname);
-
-  return { count: result?.count };
-};
-
-export type RootLoaderData = Awaited<ReturnType<typeof loader>>;
-
 export default function App() {
   return (
     <Document>
@@ -66,12 +45,10 @@ export function ErrorBoundary({ error }: { error: Error }) {
   console.error(error);
   return (
     <Document title="Error!">
-      <BaseLayout>
+      <BaseLayout enabledPageViews={false}>
         <div>
           <h1>There was an error</h1>
           <p>{error.message}</p>
-          <hr />
-          <p>Hey, developer, you should replace this with what you want your users to see.</p>
         </div>
       </BaseLayout>
     </Document>

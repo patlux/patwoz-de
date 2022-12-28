@@ -1,4 +1,15 @@
+import type { LoaderArgs } from '@remix-run/node';
 import { BaseLayout } from '~/components/BaseLayout';
+import { getPageViewsForPath, increasePageViewsForPath } from '~/utils/pageViews.server';
+
+export const loader = ({ request }: LoaderArgs) => {
+  const pathname = new URL(request.url).pathname;
+
+  increasePageViewsForPath(pathname);
+  const count = getPageViewsForPath(pathname);
+
+  return { count };
+};
 
 function Index() {
   return (

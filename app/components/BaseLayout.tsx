@@ -1,9 +1,15 @@
-import { Link } from '@remix-run/react';
 import type { PropsWithChildren } from 'react';
-import { useRootLoaderData } from './useRootLoaderData';
+import { Link } from '@remix-run/react';
+import { PageViewCounter } from './PageViewCounter';
 
-export const BaseLayout = ({ children }: PropsWithChildren<unknown>) => {
-  const rootData = useRootLoaderData();
+export type BaseLayoutProps = {
+  enabledPageViews?: boolean;
+};
+
+export const BaseLayout = ({
+  children,
+  enabledPageViews = true,
+}: PropsWithChildren<BaseLayoutProps>) => {
   return (
     <>
       <nav className="flex flex-col md:flex-row items-center mb-12">
@@ -27,7 +33,7 @@ export const BaseLayout = ({ children }: PropsWithChildren<unknown>) => {
       <div role="separator" className="mt-12 mb-6 w-full h-px bg-gray-200" />
       <footer className="flex flex-1 flex-row justify-between text-sm text-gray-500">
         <span className="flex-1">© {new Date().getFullYear()} Patrick Wozniak</span>
-        {rootData?.count && <span className="flex-1 text-center">Views: {rootData.count}</span>}
+        {enabledPageViews && <PageViewCounter />}
         <div className="flex flex-1 justify-end">
           <Link to="/imprint" className="underline">
             Imprint

@@ -1,11 +1,21 @@
-import type { MetaFunction } from '@remix-run/node';
+import type { LoaderArgs, MetaFunction } from '@remix-run/node';
 import { Link } from '@remix-run/react';
 import { BaseLayout } from '~/components/BaseLayout';
+import { getPageViewsForPath, increasePageViewsForPath } from '~/utils/pageViews.server';
 
 export const meta: MetaFunction = () => {
   return {
     title: 'Imprint',
   };
+};
+
+export const loader = ({ request }: LoaderArgs) => {
+  const pathname = new URL(request.url).pathname;
+
+  increasePageViewsForPath(pathname);
+  const count = getPageViewsForPath(pathname);
+
+  return { count };
 };
 
 function Imprint() {
