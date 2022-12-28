@@ -3,7 +3,7 @@ name: validate
 on: [push, pull_request]
 
 jobs:
-  validate:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -20,14 +20,70 @@ jobs:
       - name: Check build
         run: bun run check-build
 
+  formatting:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Bun Runtime
+        uses: xhyrom/setup-bun@v0.1.8
+        with:
+          bun-version: latest
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install dependencies
+        run: bun install
+
       - name: Check formatting
         run: bun run check-format
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Bun Runtime
+        uses: xhyrom/setup-bun@v0.1.8
+        with:
+          bun-version: latest
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install dependencies
+        run: bun install
 
       - name: Check lint
         run: bun run check-lint
 
+  types:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Bun Runtime
+        uses: xhyrom/setup-bun@v0.1.8
+        with:
+          bun-version: latest
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install dependencies
+        run: bun install
+
       - name: Check types
         run: bun run check-types
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Bun Runtime
+        uses: xhyrom/setup-bun@v0.1.8
+        with:
+          bun-version: latest
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install dependencies
+        run: bun install
 
       - name: Check tests
         run: bun run check-tests
