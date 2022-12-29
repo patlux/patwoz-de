@@ -1,8 +1,15 @@
 import type { ServeOptions } from 'bun';
 import { createRequestHandler } from 'remix-bun';
-import { withStaticDir } from './server-utils';
+import { withStaticDir } from './server/server-utils';
+import { migrate } from './server/migrate';
+import { db } from './app/utils/db.server';
+import { migrations } from 'server/migrations';
 
 setInterval(() => Bun.gc(true), 9000);
+
+console.log(`-- MIGRATIONS START --`);
+migrate(db, migrations);
+console.log('-- MIGRATIONS DONE --');
 
 const bunServeOptions: ServeOptions = {
   port: parseInt(process.env.PORT ?? '3000', 10),

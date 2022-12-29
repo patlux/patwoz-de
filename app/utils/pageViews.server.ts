@@ -1,9 +1,6 @@
-import type { SQLQueryBindings } from 'bun:sqlite';
-import { db } from '~/utils/db.server';
+import type { SQLQueryBindings, Database } from 'bun:sqlite';
 
-db.run('CREATE TABLE IF NOT EXISTS page_views (path TEXT PRIMARY KEY, count INT DEFAULT 1)');
-
-export const increasePageViewsForPath = (pathname: string) => {
+export const increasePageViewsForPath = (db: Database, pathname: string) => {
   db.run(
     `
     INSERT INTO
@@ -18,7 +15,7 @@ export const increasePageViewsForPath = (pathname: string) => {
   );
 };
 
-export const getPageViewsForPath = (pathname: string) => {
+export const getPageViewsForPath = (db: Database, pathname: string) => {
   const result = db
     .query<SQLQueryBindings, { count: number }>(
       `

@@ -1,7 +1,9 @@
 import type { LoaderArgs, MetaFunction } from '@remix-run/node';
 import { Link } from '@remix-run/react';
 import { BaseLayout } from '~/components/BaseLayout';
+import { db } from '~/utils/db.server';
 import { getPageViewsForPath, increasePageViewsForPath } from '~/utils/pageViews.server';
+import { addingPageViewHistory } from '~/utils/pageViewsHistory.server';
 
 export const meta: MetaFunction = () => {
   return {
@@ -12,8 +14,10 @@ export const meta: MetaFunction = () => {
 export const loader = ({ request }: LoaderArgs) => {
   const pathname = new URL(request.url).pathname;
 
-  increasePageViewsForPath(pathname);
-  const count = getPageViewsForPath(pathname);
+  increasePageViewsForPath(db, pathname);
+  const count = getPageViewsForPath(db, pathname);
+
+  addingPageViewHistory(db, pathname, request.headers.get('User-Agent') ?? `NO_USERAGENT`);
 
   return { count };
 };
