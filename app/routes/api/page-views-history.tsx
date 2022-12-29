@@ -1,4 +1,5 @@
-import { json, LoaderFunction } from '@remix-run/node';
+import type { LoaderFunction } from '@remix-run/node';
+import { json } from '@remix-run/node';
 import { db } from '~/utils/db.server';
 import { getAllPageViewHistory } from '~/utils/pageViewsHistory.server';
 
