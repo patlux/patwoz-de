@@ -17,7 +17,11 @@ export const loader = ({ request }: LoaderArgs) => {
   increasePageViewsForPath(db, pathname);
   const count = getPageViewsForPath(db, pathname);
 
-  addingPageViewHistory(db, pathname, request.headers.get('User-Agent') ?? `NO_USERAGENT`);
+  addingPageViewHistory(db, {
+    path: pathname,
+    useragent: request.headers.get('User-Agent') ?? `NO_USERAGENT`,
+    referrer: request.headers.get('Referer') ?? null,
+  });
 
   return { count };
 };
