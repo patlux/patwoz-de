@@ -31,6 +31,7 @@ COPY --from=remix /application/public /application/public
 ADD app ./app
 ADD server.ts ./
 ADD server ./server
+ADD tsconfig.json ./
 
 EXPOSE 3000
 CMD ["bun", "run", "start"]
