@@ -3,7 +3,7 @@ import { createRequestHandler } from 'remix-bun';
 import { withStaticDir } from './server/server-utils';
 import { migrate } from './server/migrate';
 import { db } from './app/utils/db.server';
-import { migrations } from 'server/migrations';
+import { migrations } from './server/migrations';
 
 setInterval(() => Bun.gc(true), 9000);
 

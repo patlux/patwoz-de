@@ -1,4 +1,4 @@
-import { Database } from 'bun:sqlite';
+import type { Database } from 'bun:sqlite';
 
 export function assert(condition: any, message?: string | number): asserts condition {
   if (!condition) {
