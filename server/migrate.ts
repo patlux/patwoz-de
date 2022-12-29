@@ -6,15 +6,15 @@ export function assert(condition: any, message?: string | number): asserts condi
   }
 }
 
-export interface IMigration {
+export type Migration = {
   version: number;
   up: string | ((db: Database) => void);
   down: string | ((db: Database) => void);
-}
+};
 
 export const migrate = (
   db: Database,
-  migrations: IMigration[],
+  migrations: Migration[],
   targetVersion: number = getMaximumVersion(migrations)
 ): void => {
   const maxVersion = getMaximumVersion(migrations);
@@ -83,7 +83,7 @@ export const migrate = (
   }
 };
 
-export const getMaximumVersion = (migrations: IMigration[]): number => {
+export const getMaximumVersion = (migrations: Migration[]): number => {
   return migrations.reduce((max, cur) => Math.max(cur.version, max), 0);
 };
 

@@ -3,7 +3,7 @@ import { migrations } from '../server/migrations';
 import { migrate, getDatabaseVersion } from '../server/migrate';
 import { Database } from 'bun:sqlite';
 import { getPageViewsForPath, increasePageViewsForPath } from '~/utils/pageViews.server';
-import { addingPageViewHistory } from '~/utils/pageViewsHistory.server';
+import { addingPageViewHistory, getAllPageViewHistory } from '~/utils/pageViewsHistory.server';
 
 test('Should run migrations', () => {
   const db = new Database(':memory:', { create: true });
@@ -21,12 +21,14 @@ test('Should run migrations', () => {
   const pageViewsNext = getPageViewsForPath(db, '/');
   expect(pageViewsNext).toBe(1);
 
-  addingPageViewHistory(
-    db,
-    '/',
-    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.2 Safari/605.1.15'
-  );
+  const useragent =
+    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.2 Safari/605.1.15';
+  addingPageViewHistory(db, '/', useragent);
 
-  const result = db.query('SELECT * FROM page_views_history;').all();
+  const result = getAllPageViewHistory(db);
   expect(result.length).toBe(1);
+
+  const firstPageView = result[0];
+  expect(firstPageView.path).toBe('/');
+  expect(firstPageView.useragent).toBe(useragent);
 });

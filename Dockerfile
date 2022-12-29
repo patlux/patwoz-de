@@ -27,7 +27,10 @@ COPY --from=deps /application/bun.lockb /application/bun.lockb
 COPY --from=remix /application/build /application/build
 COPY --from=remix /application/public /application/public
 
-ADD server.ts server/ ./
+# server.ts and files in server/ are accessing app/
+ADD app ./app
+ADD server.ts ./
+ADD server ./server
 
 EXPOSE 3000
 CMD ["bun", "run", "start"]

@@ -1,6 +1,8 @@
-import type { IMigration } from './migrate';
+import type { Migration } from './migrate';
 
-export const migrations: IMigration[] = [
+// TODO: move this into files under migrations/*.sql
+
+export const migrations: Migration[] = [
   {
     up: `CREATE TABLE IF NOT EXISTS page_views (path TEXT PRIMARY KEY, count INT DEFAULT 1)`,
     down: `DROP TABLE page_views;`,
