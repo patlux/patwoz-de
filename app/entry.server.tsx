@@ -1,21 +1,39 @@
-import type * as RemixServer from '@remix-run/server-runtime';
-import * as RemixReact from '@remix-run/react';
-import { renderToString } from 'react-dom/server';
+import type { EntryContext } from '@remix-run/node';
+import { Response } from '@remix-run/node';
+import { RemixServer } from '@remix-run/react';
+import { renderToReadableStream } from 'react-dom/server';
 
-export default async function handleRequest(
+export default function handleRequest(
   request: Request,
   responseStatusCode: number,
   responseHeaders: Headers,
-  remixContext: RemixServer.EntryContext
+  remixContext: EntryContext
 ) {
-  const markup = renderToString(
-    <RemixReact.RemixServer context={remixContext} url={request.url} />
-  );
+  return handleBrowserRequest(request, responseStatusCode, responseHeaders, remixContext);
+}
 
-  responseHeaders.set('Content-Type', 'text/html');
+function handleBrowserRequest(
+  request: Request,
+  responseStatusCode: number,
+  responseHeaders: Headers,
+  remixContext: EntryContext
+) {
+  return new Promise(async (resolve, reject) => {
+    const stream = await renderToReadableStream(
+      <RemixServer context={remixContext} url={request.url} />,
+      {
+        onError(error) {
+          console.error(error);
+          reject(error);
+        },
+      }
+    );
 
-  return new Response('<!DOCTYPE html>' + markup, {
-    status: responseStatusCode,
-    headers: responseHeaders,
+    resolve(
+      new Response(stream, {
+        status: responseStatusCode,
+        headers: responseHeaders,
+      })
+    );
   });
 }
