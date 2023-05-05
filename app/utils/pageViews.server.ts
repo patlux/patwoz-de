@@ -1,4 +1,4 @@
-import type { SQLQueryBindings, Database } from 'bun:sqlite';
+import type { SQLQueryBindings, Database } from 'bun:sqlite'
 
 export const increasePageViewsForPath = (db: Database, pathname: string) => {
   db.run(
@@ -12,8 +12,8 @@ export const increasePageViewsForPath = (db: Database, pathname: string) => {
       count=count+1;
   `,
     pathname
-  );
-};
+  )
+}
 
 export const getPageViewsForPath = (db: Database, pathname: string) => {
   const result = db
@@ -28,7 +28,7 @@ export const getPageViewsForPath = (db: Database, pathname: string) => {
       LIMIT 1;
     `
     )
-    .get(pathname);
+    .get(pathname)
 
-  return result?.count ?? null;
-};
+  return result?.count ?? null
+}

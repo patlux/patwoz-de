@@ -1,8 +1,8 @@
-import type { PlaywrightTestConfig } from '@playwright/test';
+import type { PlaywrightTestConfig } from '@playwright/test'
 
-const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
-const baseURL = `http://localhost:${PORT}/`;
-const headless = true;
+const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000
+const baseURL = `http://localhost:${PORT}/`
+const headless = true
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -43,6 +43,6 @@ const config: PlaywrightTestConfig = {
       },
     },
   ],
-};
+}
 
-export default config;
+export default config

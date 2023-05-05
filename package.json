@@ -33,11 +33,9 @@
     "@remix-run/react": "^1.11.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "remix-bun": "^1.0.1",
     "zod": "^3.20.2"
   },
   "devDependencies": {
-    "@patwoz/prettier-config": "^1.1.0",
     "@playwright/test": "^1.28.1",
     "@remix-run/dev": "^1.11.0",
     "@remix-run/eslint-config": "^1.11.0",

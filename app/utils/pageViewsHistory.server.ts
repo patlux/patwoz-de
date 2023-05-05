@@ -1,17 +1,17 @@
-import type { Database, SQLQueryBindings } from 'bun:sqlite';
+import type { Database, SQLQueryBindings } from 'bun:sqlite'
 
 export type PageViewHistoryMeta = {
-  id: number;
-  timestamp: string;
-};
+  id: number
+  timestamp: string
+}
 
 export type PageViewHistoryValues = {
-  path: string;
-  useragent: string;
-  referrer: string | null;
-};
+  path: string
+  useragent: string
+  referrer: string | null
+}
 
-export type PageViewHistory = PageViewHistoryMeta & PageViewHistoryValues;
+export type PageViewHistory = PageViewHistoryMeta & PageViewHistoryValues
 
 export const addingPageViewHistory = (db: Database, values: PageViewHistoryValues) => {
   db.run(
@@ -19,9 +19,9 @@ export const addingPageViewHistory = (db: Database, values: PageViewHistoryValue
     values.path,
     values.useragent,
     values.referrer
-  );
-};
+  )
+}
 
 export const getAllPageViewHistory = (db: Database) => {
-  return db.query<SQLQueryBindings, PageViewHistory>('SELECT * FROM page_views_history;').all();
-};
+  return db.query<SQLQueryBindings, PageViewHistory>('SELECT * FROM page_views_history;').all()
+}

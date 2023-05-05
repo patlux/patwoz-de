@@ -1,10 +1,10 @@
-import type { PropsWithChildren } from 'react';
-import { Link } from '@remix-run/react';
-import { PageViewCounter } from './PageViewCounter';
+import type { PropsWithChildren } from 'react'
+import { Link } from '@remix-run/react'
+import { PageViewCounter } from './PageViewCounter'
 
 export type BaseLayoutProps = {
-  enabledPageViews?: boolean;
-};
+  enabledPageViews?: boolean
+}
 
 export const BaseLayout = ({
   children,
@@ -41,5 +41,5 @@ export const BaseLayout = ({
         </div>
       </footer>
     </>
-  );
-};
+  )
+}

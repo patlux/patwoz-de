@@ -1,4 +1,4 @@
-import type { LinksFunction, MetaFunction } from '@remix-run/node';
+import type { LinksFunction, MetaFunction } from '@remix-run/node'
 import {
   Links,
   LiveReload,
@@ -7,14 +7,14 @@ import {
   Scripts,
   ScrollRestoration,
   useCatch,
-} from '@remix-run/react';
+} from '@remix-run/react'
 
-import { BaseLayout } from './components/BaseLayout';
-import appCssUrl from './styles/app.css';
+import { BaseLayout } from './components/BaseLayout'
+import appCssUrl from './styles/app.css'
 
 export let links: LinksFunction = () => {
-  return [{ rel: 'stylesheet', href: appCssUrl }];
-};
+  return [{ rel: 'stylesheet', href: appCssUrl }]
+}
 
 export const meta: MetaFunction = () => {
   return {
@@ -30,19 +30,19 @@ export const meta: MetaFunction = () => {
     'profile:first_name': 'Patrick',
     'profile:last_name': 'Wozniak',
     'profile:username': 'patwoz',
-  };
-};
+  }
+}
 
 export default function App() {
   return (
     <Document>
       <Outlet />
     </Document>
-  );
+  )
 }
 
 export function ErrorBoundary({ error }: { error: Error }) {
-  console.error(error);
+  console.error(error)
   return (
     <Document title="Error!">
       <BaseLayout enabledPageViews={false}>
@@ -52,23 +52,23 @@ export function ErrorBoundary({ error }: { error: Error }) {
         </div>
       </BaseLayout>
     </Document>
-  );
+  )
 }
 
 export function CatchBoundary() {
-  let caught = useCatch();
+  let caught = useCatch()
 
-  let message;
+  let message
   switch (caught.status) {
     case 401:
-      message = <p>Oops! Looks like you tried to visit a page that you do not have access to.</p>;
-      break;
+      message = <p>Oops! Looks like you tried to visit a page that you do not have access to.</p>
+      break
     case 404:
-      message = <p>Oops! Looks like you tried to visit a page that does not exist.</p>;
-      break;
+      message = <p>Oops! Looks like you tried to visit a page that does not exist.</p>
+      break
 
     default:
-      throw new Error(caught.data || caught.statusText);
+      throw new Error(caught.data || caught.statusText)
   }
 
   return (
@@ -80,7 +80,7 @@ export function CatchBoundary() {
         {message}
       </BaseLayout>
     </Document>
-  );
+  )
 }
 
 function Document({ children, title }: { children: React.ReactNode; title?: string }) {
@@ -103,5 +103,5 @@ function Document({ children, title }: { children: React.ReactNode; title?: stri
         {process.env.NODE_ENV === 'development' && <LiveReload port={8004} />}
       </body>
     </html>
-  );
+  )
 }

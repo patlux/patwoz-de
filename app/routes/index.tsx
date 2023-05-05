@@ -1,23 +1,23 @@
-import type { LoaderArgs } from '@remix-run/node';
-import { BaseLayout } from '~/components/BaseLayout';
-import { db } from '~/utils/db.server';
-import { getPageViewsForPath, increasePageViewsForPath } from '~/utils/pageViews.server';
-import { addingPageViewHistory } from '~/utils/pageViewsHistory.server';
+import type { LoaderArgs } from '@remix-run/node'
+import { BaseLayout } from '~/components/BaseLayout'
+import { db } from '~/utils/db.server'
+import { getPageViewsForPath, increasePageViewsForPath } from '~/utils/pageViews.server'
+import { addingPageViewHistory } from '~/utils/pageViewsHistory.server'
 
 export const loader = ({ request }: LoaderArgs) => {
-  const pathname = new URL(request.url).pathname;
+  const pathname = new URL(request.url).pathname
 
-  increasePageViewsForPath(db, pathname);
-  const count = getPageViewsForPath(db, pathname);
+  increasePageViewsForPath(db, pathname)
+  const count = getPageViewsForPath(db, pathname)
 
   addingPageViewHistory(db, {
     path: pathname,
     useragent: request.headers.get('User-Agent') ?? `NO_USERAGENT`,
     referrer: request.headers.get('Referer') ?? null,
-  });
+  })
 
-  return { count };
-};
+  return { count }
+}
 
 function Index() {
   return (
@@ -164,7 +164,7 @@ function Index() {
         </article>
       </main>
     </BaseLayout>
-  );
+  )
 }
 
-export default Index;
+export default Index

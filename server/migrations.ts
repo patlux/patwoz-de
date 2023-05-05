@@ -1,4 +1,4 @@
-import type { Migration } from './migrate';
+import type { Migration } from './migrate'
 
 // TODO: move this into files under migrations/*.sql
 
@@ -25,4 +25,4 @@ export const migrations: Migration[] = [
     `,
     version: 3,
   },
-];
+]

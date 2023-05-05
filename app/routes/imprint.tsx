@@ -1,30 +1,30 @@
-import type { LoaderArgs, MetaFunction } from '@remix-run/node';
-import { Link } from '@remix-run/react';
-import { BaseLayout } from '~/components/BaseLayout';
-import { db } from '~/utils/db.server';
-import { getPageViewsForPath, increasePageViewsForPath } from '~/utils/pageViews.server';
-import { addingPageViewHistory } from '~/utils/pageViewsHistory.server';
+import type { LoaderArgs, MetaFunction } from '@remix-run/node'
+import { Link } from '@remix-run/react'
+import { BaseLayout } from '~/components/BaseLayout'
+import { db } from '~/utils/db.server'
+import { getPageViewsForPath, increasePageViewsForPath } from '~/utils/pageViews.server'
+import { addingPageViewHistory } from '~/utils/pageViewsHistory.server'
 
 export const meta: MetaFunction = () => {
   return {
     title: 'Imprint',
-  };
-};
+  }
+}
 
 export const loader = ({ request }: LoaderArgs) => {
-  const pathname = new URL(request.url).pathname;
+  const pathname = new URL(request.url).pathname
 
-  increasePageViewsForPath(db, pathname);
-  const count = getPageViewsForPath(db, pathname);
+  increasePageViewsForPath(db, pathname)
+  const count = getPageViewsForPath(db, pathname)
 
   addingPageViewHistory(db, {
     path: pathname,
     useragent: request.headers.get('User-Agent') ?? `NO_USERAGENT`,
     referrer: request.headers.get('Referer') ?? null,
-  });
+  })
 
-  return { count };
-};
+  return { count }
+}
 
 function Imprint() {
   return (
@@ -48,7 +48,7 @@ function Imprint() {
         <br />
       </p>
     </BaseLayout>
-  );
+  )
 }
 
-export default Imprint;
+export default Imprint
