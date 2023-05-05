@@ -11,10 +11,10 @@ import {
 } from '@remix-run/react'
 
 import { BaseLayout } from './components/BaseLayout'
-import appCssUrl from './styles/app.css'
+import tailwindCssUrl from './tailwind.css'
 
 export let links: LinksFunction = () => {
-  return [{ rel: 'stylesheet', href: appCssUrl }]
+  return [{ rel: 'stylesheet', href: tailwindCssUrl }]
 }
 
 export const meta: V2_MetaFunction = () => {
