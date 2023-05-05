@@ -28,3 +28,9 @@ export const tryServeStaticFile = (staticDir: string, request: Request): Respons
 
   return undefined
 }
+
+export const withLogging = () => (requestHandler: RequestHandler) => (request: Request) => {
+  const url = new URL(request.url)
+  console.log(`[${request.method}] ${request.url.substring(url.origin.length)}`)
+  return requestHandler(request)
+}

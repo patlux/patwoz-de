@@ -1,6 +1,7 @@
-import type { SQLQueryBindings, Database } from 'bun:sqlite'
+import type { SQLQueryBindings } from 'bun:sqlite'
+import { db } from './db.server'
 
-export const increasePageViewsForPath = (db: Database, pathname: string) => {
+export const increasePageViewsForPath = (pathname: string) => {
   db.run(
     `
     INSERT INTO
@@ -15,7 +16,7 @@ export const increasePageViewsForPath = (db: Database, pathname: string) => {
   )
 }
 
-export const getPageViewsForPath = (db: Database, pathname: string) => {
+export const getPageViewsForPath = (pathname: string) => {
   const result = db
     .query<SQLQueryBindings, { count: number }>(
       `

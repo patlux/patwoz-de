@@ -1,4 +1,5 @@
 import type { Database, SQLQueryBindings } from 'bun:sqlite'
+import { db } from './db.server'
 
 export type PageViewHistoryMeta = {
   id: number
@@ -13,7 +14,7 @@ export type PageViewHistoryValues = {
 
 export type PageViewHistory = PageViewHistoryMeta & PageViewHistoryValues
 
-export const addingPageViewHistory = (db: Database, values: PageViewHistoryValues) => {
+export const addingPageViewHistory = (values: PageViewHistoryValues) => {
   db.run(
     `INSERT INTO page_views_history(path, useragent, referrer) VALUES (?, ?, ?);`,
     values.path,
@@ -22,6 +23,6 @@ export const addingPageViewHistory = (db: Database, values: PageViewHistoryValue
   )
 }
 
-export const getAllPageViewHistory = (db: Database) => {
+export const getAllPageViewHistory = () => {
   return db.query<SQLQueryBindings, PageViewHistory>('SELECT * FROM page_views_history;').all()
 }

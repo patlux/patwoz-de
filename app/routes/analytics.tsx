@@ -5,7 +5,7 @@ import { getAllPageViewHistory } from '~/utils/pageViewsHistory.server'
 import { subtractDays } from '~/utils/query-helpers'
 
 export const loader = () => {
-  const pageViews = getAllPageViewHistory(db)
+  const pageViews = getAllPageViewHistory()
 
   const now7daysStr = formatDateLikeDb(subtractDays(7))
   const now30daysStr = formatDateLikeDb(subtractDays(30))

@@ -1,7 +1,7 @@
 import type { LoaderArgs } from '@remix-run/node'
 import { json } from '@remix-run/node'
 import { z } from 'zod'
-import { db, formatDateLikeDb } from '~/utils/db.server'
+import { formatDateLikeDb } from '~/utils/db.server'
 import { getAllPageViewHistory } from '~/utils/pageViewsHistory.server'
 import { subtractDays } from '~/utils/query-helpers'
 import { getParams } from '~/utils/search-params-helper'
@@ -23,7 +23,7 @@ export const SearchParamsSchema = z.object({
 })
 
 export const loader = ({ request }: LoaderArgs) => {
-  const pageViewHistory = getAllPageViewHistory(db)
+  const pageViewHistory = getAllPageViewHistory()
 
   const url = new URL(request.url)
   const resultSearchParams = getParams(url.searchParams, SearchParamsSchema)

@@ -2,7 +2,6 @@ import { beforeAll, expect, test } from 'bun:test'
 import bun from 'bun'
 
 beforeAll(() => {
-  process.env.DB_PATH = ':memory:'
   process.env.PORT = '3005'
 })
 
@@ -14,17 +13,18 @@ const createServer = async () => {
 
 test('Should open /', async () => {
   const server = await createServer()
+  expect(`http://${server.hostname}:${server.port}/`).toBe('http://0.0.0.0:3005/')
   const req = new Request(`http://${server.hostname}:${server.port}/`)
 
   const res = await server.fetch(req)
   expect(res.status).toBe(200)
 
   const html = await res.text()
-  expect(html).toContain('Views: <!-- -->1')
+  expect(html).toContain('Views: <!-- -->2')
 
   const res2 = await server.fetch(req)
   const html2 = await res2.text()
-  expect(html2).toContain('Views: <!-- -->2')
+  expect(html2).toContain('Views: <!-- -->3')
 })
 
 test('Should open /imprint', async () => {
