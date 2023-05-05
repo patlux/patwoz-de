@@ -1,5 +1,6 @@
 import { useLoaderData } from '@remix-run/react'
 import { BaseLayout } from '~/components/BaseLayout'
+import { PageViewCounter } from '~/components/PageViewCounter'
 import { formatDateLikeDb } from '~/utils/db.server'
 import { getAllPageViewHistory } from '~/utils/pageViewsHistory.server'
 import { subtractDays } from '~/utils/query-helpers'
@@ -24,7 +25,7 @@ export const loader = () => {
 export const AnalyticsPage = () => {
   const data = useLoaderData<typeof loader>()
   return (
-    <BaseLayout>
+    <BaseLayout footerCenterComponent={<PageViewCounter />}>
       <div>
         <h3 className="text-lg font-medium leading-6 text-gray-900">Overview</h3>
         <dl className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">

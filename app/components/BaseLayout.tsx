@@ -1,14 +1,13 @@
 import type { PropsWithChildren } from 'react'
 import { Link } from '@remix-run/react'
-import { PageViewCounter } from './PageViewCounter'
 
 export type BaseLayoutProps = {
-  enabledPageViews?: boolean
+  footerCenterComponent?: React.ReactNode
 }
 
 export const BaseLayout = ({
   children,
-  enabledPageViews = true,
+  footerCenterComponent,
 }: PropsWithChildren<BaseLayoutProps>) => {
   return (
     <>
@@ -33,7 +32,7 @@ export const BaseLayout = ({
       <div role="separator" className="mt-12 mb-6 w-full h-px bg-gray-200" />
       <footer className="flex flex-1 flex-row justify-between text-sm text-gray-500">
         <span className="flex-1">© {new Date().getFullYear()} Patrick Wozniak</span>
-        {enabledPageViews && <PageViewCounter />}
+        {footerCenterComponent}
         <div className="flex flex-1 justify-end">
           <Link to="/imprint" className="underline">
             Imprint

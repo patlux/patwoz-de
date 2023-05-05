@@ -1,5 +1,6 @@
 import type { LoaderArgs } from '@remix-run/node'
 import { BaseLayout } from '~/components/BaseLayout'
+import { PageViewCounter } from '~/components/PageViewCounter'
 import { getPageViewsForPath, increasePageViewsForPath } from '~/utils/pageViews.server'
 import { addingPageViewHistory } from '~/utils/pageViewsHistory.server'
 
@@ -20,7 +21,7 @@ export const loader = ({ request }: LoaderArgs) => {
 
 function Index() {
   return (
-    <BaseLayout>
+    <BaseLayout footerCenterComponent={<PageViewCounter />}>
       <main>
         <div className="flow-root">
           <img

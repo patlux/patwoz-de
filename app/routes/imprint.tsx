@@ -1,13 +1,16 @@
-import type { LoaderArgs, MetaFunction } from '@remix-run/node'
+import type { LoaderArgs, V2_MetaFunction } from '@remix-run/node'
 import { Link } from '@remix-run/react'
 import { BaseLayout } from '~/components/BaseLayout'
+import { PageViewCounter } from '~/components/PageViewCounter'
 import { getPageViewsForPath, increasePageViewsForPath } from '~/utils/pageViews.server'
 import { addingPageViewHistory } from '~/utils/pageViewsHistory.server'
 
-export const meta: MetaFunction = () => {
-  return {
-    title: 'Imprint',
-  }
+export const meta: V2_MetaFunction = () => {
+  return [
+    {
+      title: 'Imprint',
+    },
+  ]
 }
 
 export const loader = ({ request }: LoaderArgs) => {
@@ -27,7 +30,7 @@ export const loader = ({ request }: LoaderArgs) => {
 
 function Imprint() {
   return (
-    <BaseLayout>
+    <BaseLayout footerCenterComponent={<PageViewCounter />}>
       <Link to="/">« Back to my website</Link>
       <br />
       <br />
