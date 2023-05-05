@@ -2,7 +2,7 @@ import type { SQLQueryBindings } from 'bun:sqlite'
 import { db } from './db.server'
 
 export const increasePageViewsForPath = (pathname: string) => {
-  db.run(
+  db.query(
     `
     INSERT INTO
       page_views(path)
@@ -11,14 +11,13 @@ export const increasePageViewsForPath = (pathname: string) => {
     DO UPDATE
     SET
       count=count+1;
-  `,
-    pathname
-  )
+  `
+  ).run(pathname)
 }
 
 export const getPageViewsForPath = (pathname: string) => {
   const result = db
-    .query<SQLQueryBindings, { count: number }>(
+    .query<{ count: number }, string>(
       `
       SELECT
         count

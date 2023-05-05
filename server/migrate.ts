@@ -1,4 +1,5 @@
 import type { Database } from 'bun:sqlite'
+import { z } from 'zod'
 
 export function assert(condition: any, message?: string | number): asserts condition {
   if (!condition) {
@@ -88,8 +89,8 @@ export const getMaximumVersion = (migrations: Migration[]): number => {
 }
 
 export const getDatabaseVersion = (db: Database): number => {
-  const result = db.prepare('PRAGMA user_version;').get()
-  return result['user_version']
+  const result = db.query('PRAGMA user_version;').get()
+  return z.object({ user_version: z.number() }).parse(result).user_version
 }
 
 export const setDatabaseVersion = (db: Database, version: number): void => {

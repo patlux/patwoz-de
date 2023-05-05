@@ -1,4 +1,3 @@
-import type { Database, SQLQueryBindings } from 'bun:sqlite'
 import { db } from './db.server'
 
 export type PageViewHistoryMeta = {
@@ -15,14 +14,15 @@ export type PageViewHistoryValues = {
 export type PageViewHistory = PageViewHistoryMeta & PageViewHistoryValues
 
 export const addingPageViewHistory = (values: PageViewHistoryValues) => {
-  db.run(
-    `INSERT INTO page_views_history(path, useragent, referrer) VALUES (?, ?, ?);`,
-    values.path,
-    values.useragent,
-    values.referrer
-  )
+  db.query(
+    `INSERT INTO page_views_history(path, useragent, referrer) VALUES (:path, :useragent, :referrer);`
+  ).run({
+    ':path': values.path,
+    ':useragent': values.useragent,
+    ':referrer': values.referrer,
+  })
 }
 
 export const getAllPageViewHistory = () => {
-  return db.query<SQLQueryBindings, PageViewHistory>('SELECT * FROM page_views_history;').all()
+  return db.query<PageViewHistory, never>('SELECT * FROM page_views_history;').all()
 }

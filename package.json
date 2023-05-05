@@ -9,11 +9,12 @@
     "prepare": "bun run husky install",
     "build-start": "bun run build && bun run start",
     "start": "NODE_ENV=production bun run ./server.ts",
+    "bun:build": "NODE_ENV=production bun build ./server.ts --minify --outfile index.js --target bun --external ./build",
     "build": "NODE_ENV=production bun run build:css && NODE_ENV=production bun run build:remix",
-    "build:remix": "bun run node_modules/@remix-run/dev/dist/cli.js build",
+    "build:remix": "bun run remix build",
     "build:css": "tailwindcss -m -i ./styles/app.css -o app/styles/app.css",
-    "dev:remix": "bun run node_modules/@remix-run/dev/dist/cli.js watch",
-    "dev:server": "NODE_ENV=development bun --hot ./server.ts",
+    "dev:remix": "bun run remix watch",
+    "dev:server": "NODE_ENV=development bun run --hot ./server.ts",
     "dev:css": "tailwindcss -w -i ./styles/app.css -o app/styles/app.css",
     "dev": "bun run build:remix && bun run build:css && run-p dev:*",
     "prettier": "prettier --ignore-path .gitignore '**/*.{ts,tsx,json,md,css}'",
@@ -29,26 +30,26 @@
     "test:e2e": "playwright test"
   },
   "dependencies": {
-    "@remix-run/node": "^1.11.0",
-    "@remix-run/react": "^1.11.0",
+    "@remix-run/node": "^1.16.0",
+    "@remix-run/react": "^1.16.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "zod": "^3.20.2"
+    "zod": "^3.21.4"
   },
   "devDependencies": {
-    "@playwright/test": "^1.28.1",
-    "@remix-run/dev": "^1.11.0",
-    "@remix-run/eslint-config": "^1.11.0",
-    "@tailwindcss/typography": "^0.5.8",
-    "@types/react": "^18.0.27",
-    "@types/react-dom": "^18.0.10",
-    "bun-types": "^0.5.0",
-    "eslint": "^8.28.0",
+    "@playwright/test": "^1.33.0",
+    "@remix-run/dev": "^1.16.0",
+    "@remix-run/eslint-config": "^1.16.0",
+    "@tailwindcss/typography": "^0.5.9",
+    "@types/react": "^18.2.5",
+    "@types/react-dom": "^18.2.4",
+    "bun-types": "^0.5.8",
+    "eslint": "^8.40.0",
     "husky": "^8.0.2",
     "lint-staged": "^13.0.4",
     "npm-run-all": "^4.1.5",
-    "prettier": "^2.8.0",
-    "tailwindcss": "^3.2.4",
-    "typescript": "^4.8.4"
+    "prettier": "^2.8.8",
+    "tailwindcss": "^3.3.2",
+    "typescript": "^5.0.4"
   }
 }
