@@ -1,4 +1,3 @@
-import type { SQLQueryBindings } from 'bun:sqlite'
 import { db } from './db.server'
 
 export const increasePageViewsForPath = (pathname: string) => {
