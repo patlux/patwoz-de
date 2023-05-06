@@ -11,10 +11,25 @@ const createServer = async () => {
   return server
 }
 
+test('Should build remix server', () => {
+  const response = bun.spawnSync(['bun', 'run', 'build:remix'])
+  expect(response.exitCode).toBe(0)
+})
+
+let server: bun.Server
+let baseUrl: string
+
+test('Should run server', async () => {
+  server = await createServer()
+  baseUrl = `http://${server.hostname}:${server.port}`
+  expect(baseUrl).toBe('http://0.0.0.0:3005')
+
+  const healthResponse = await server.fetch(new Request(`${baseUrl}/health`))
+  expect(await healthResponse.text()).toBe('"OK"')
+})
+
 test('Should open /', async () => {
-  const server = await createServer()
-  expect(`http://${server.hostname}:${server.port}/`).toBe('http://0.0.0.0:3005/')
-  const req = new Request(`http://${server.hostname}:${server.port}/`)
+  const req = new Request(baseUrl)
 
   const res = await server.fetch(req)
   expect(res.status).toBe(200)
@@ -29,7 +44,7 @@ test('Should open /', async () => {
 
 test('Should open /imprint', async () => {
   const server = await createServer()
-  const req = new Request(`http://${server.hostname}:${server.port}/imprint`)
+  const req = new Request(`${baseUrl}/imprint`)
   const res = await server.fetch(req)
   expect(res.status).toBe(200)
 })

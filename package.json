@@ -16,7 +16,7 @@
     "dev": "bun run build:remix && run-p dev:*",
     "prettier": "prettier --ignore-path .gitignore '**/*.{ts,tsx,json,md,css}'",
     "format": "bun run prettier --write",
-    "test": "bun wiptest",
+    "test": "bun test",
     "check-format": "bun run prettier -- --check",
     "check-build": "bun run build",
     "check-lint": "eslint --cache --ext .tsx,.ts,.js .",
