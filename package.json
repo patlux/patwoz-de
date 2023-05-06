@@ -7,7 +7,7 @@
   "main": "./server.ts",
   "scripts": {
     "build-start": "bun run build && bun run start",
-    "start": "NODE_ENV=production bun run ./index.js",
+    "start": "NODE_ENV=production bun run ./server.js",
     "build": "NODE_ENV=production bun run build:remix && NODE_ENV=production bun run build:server",
     "build:remix": "bun run remix build",
     "build:server": "NODE_ENV=production bun build ./server.ts --minify --outfile server.js --target bun --external ./build",
