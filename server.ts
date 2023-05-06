@@ -18,6 +18,8 @@ const port = z
   .transform((v) => parseInt(v, 10))
   .parse(process.env.PORT)
 
+// Otherwise the CI will fail because we don't create a build
+// @ts-ignore
 const getBuild = (): Promise<ServerBuild> => import('./build') as any
 
 /**
