@@ -2,14 +2,7 @@ import * as fs from 'fs'
 import * as path from 'path'
 import type { RequestHandler } from './remix-bun'
 
-export const withStaticDir =
-  (staticDir: string) => (requestHandler: RequestHandler) => (request: Request) => {
-    const file = tryServeStaticFile(staticDir, request)
-    if (file) return file
-    return requestHandler(request)
-  }
-
-export const tryServeStaticFile = (staticDir: string, request: Request): Response | undefined => {
+const tryServeStaticFile = (staticDir: string, request: Request): Response | undefined => {
   const url = new URL(request.url)
 
   if (url.pathname.length < 2) return undefined
@@ -27,6 +20,14 @@ export const tryServeStaticFile = (staticDir: string, request: Request): Respons
   }
 
   return undefined
+}
+
+export const withStaticDir = (staticDir: string) => {
+  return (requestHandler: RequestHandler) => (request: Request) => {
+    const file = tryServeStaticFile(staticDir, request)
+    if (file) return Promise.resolve(file)
+    return requestHandler(request)
+  }
 }
 
 export const withLogging = () => (requestHandler: RequestHandler) => (request: Request) => {

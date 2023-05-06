@@ -7,10 +7,10 @@
   "main": "./server.ts",
   "scripts": {
     "build-start": "bun run build && bun run start",
-    "start": "NODE_ENV=production bun run ./server.ts",
-    "bun:build": "NODE_ENV=production bun build ./server.ts --minify --outfile index.js --target bun --external ./build",
-    "build": "NODE_ENV=production bun run build:remix",
+    "start": "NODE_ENV=production bun run ./index.js",
+    "build": "NODE_ENV=production bun run build:server && NODE_ENV=production bun run build:remix",
     "build:remix": "bun run remix build",
+    "build:server": "NODE_ENV=production bun build ./server.ts --minify --outfile server.js --target bun --external ./build",
     "dev:remix": "bun run remix watch",
     "dev:server": "NODE_ENV=development bun run --hot ./server.ts",
     "dev": "bun run build:remix && run-p dev:*",
@@ -23,7 +23,10 @@
     "check-types": "tsc --noEmit --skipLibCheck",
     "check-tests": "bun run test",
     "validate": "run-p check-*",
-    "docker:build": "docker build -t patwoz-de .",
+    "docker:build": "docker build -t patwoz-de:latest .",
+    "docker:run": " docker run --rm -p 3000:3000 --name patwoz-de patwoz-de:latest",
+    "docker:kill": "docker kill patwoz-de",
+    "dive": "dive build -t patwoz-de:latest .",
     "test:e2e": "playwright test"
   },
   "dependencies": {
