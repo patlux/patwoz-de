@@ -31,7 +31,6 @@ export const loader = ({ request }: LoaderArgs) => {
 function Imprint() {
   return (
     <BaseLayout footerCenterComponent={<PageViewCounter />}>
-      <Link to="/">« Back to my website</Link>
       <br />
       <br />
       <br />

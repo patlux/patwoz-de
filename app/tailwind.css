@@ -2,18 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  @apply font-body antialiased;
-  @apply bg-white;
-  @apply pt-12 pb-24 px-4 md:px-12;
-  @apply md:container md:mx-auto;
-}
-
-button {
-  @apply rounded-xl bg-white shadow-xl;
-  @apply px-2 py-1;
-}
-
 a.button {
   @apply inline-block bg-white rounded-xl shadow-md px-6 py-2;
   @apply transition-shadow;
