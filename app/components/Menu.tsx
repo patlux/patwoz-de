@@ -1,7 +1,9 @@
-import HomeIcon from '@heroicons/react/24/outline/HomeIcon'
+import { type ComponentProps, useState } from 'react'
+import { NavLink, type NavLinkProps } from '@remix-run/react'
+
 import ArrowTopRightOnSquareIcon from '@heroicons/react/24/outline/ArrowTopRightOnSquareIcon'
+import HomeIcon from '@heroicons/react/24/outline/HomeIcon'
 import Bars3Icon from '@heroicons/react/24/outline/Bars3Icon'
-import { NavLink, NavLinkProps } from '@remix-run/react'
 
 import { GithubIcon } from '~/icons/GithubIcon'
 import { LinkedInIcon } from '~/icons/LinkedInIcon'
@@ -9,7 +11,6 @@ import { StackOverflowIcon } from '~/icons/StackOverflowIcon'
 import { TwitterIcon } from '~/icons/TwitterIcon'
 import { XingIcon } from '~/icons/XingIcon'
 import { classNames } from '~/utils/classNames'
-import { ComponentProps, useState } from 'react'
 
 const MenuLinkTextIcon = ({ initial, className }: { initial: string; className?: string }) => {
   return (
@@ -26,6 +27,7 @@ const MenuLinkTextIcon = ({ initial, className }: { initial: string; className?:
 
 const MenuLink = ({ className, ...navLinkProps }: NavLinkProps) => {
   return (
+    // eslint-disable-next-line jsx-a11y/anchor-has-content
     <NavLink
       {...navLinkProps}
       className={({ isActive }) =>
@@ -98,9 +100,9 @@ export const HeaderBar = ({ toggleMenu, className, ...divProps }: HeaderBarProps
 export const Navigation = ({ className, ...navProps }: ComponentProps<'nav'>) => {
   return (
     <nav {...navProps} className={classNames('flex flex-col', className)}>
-      <ul role="list" className="flex flex-1 flex-col gap-y-7">
+      <ul className="flex flex-1 flex-col gap-y-7">
         <li>
-          <ul role="list" className="-mx-2 space-y-1">
+          <ul className="-mx-2 space-y-1">
             <MenuLink to="/" className="py-2">
               <HomeIcon className="w-4" />
               Home
@@ -109,7 +111,7 @@ export const Navigation = ({ className, ...navProps }: ComponentProps<'nav'>) =>
         </li>
         <li>
           <div className="text-xs font-semibold leading-6 text-gray-400 uppercase">Social</div>
-          <ul role="list" className="-mx-2 mt-2 space-y-1">
+          <ul className="-mx-2 mt-2 space-y-1">
             <MenuLink to="https://github.com/patlux">
               <GithubIcon className="w-5" />
               Github
@@ -134,7 +136,7 @@ export const Navigation = ({ className, ...navProps }: ComponentProps<'nav'>) =>
         </li>
         <li>
           <div className="text-xs font-semibold leading-6 text-gray-400 uppercase">Business</div>
-          <ul role="list" className="-mx-2 mt-2 space-y-1">
+          <ul className="-mx-2 mt-2 space-y-1">
             <MenuLink
               to="mailto:hi@patwoz.de"
               className={classNames(

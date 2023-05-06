@@ -1,5 +1,4 @@
 import type { LoaderArgs } from '@remix-run/node'
-import { Link } from '@remix-run/react'
 import { BaseLayout } from '~/components/BaseLayout'
 import { Footer } from '~/components/Footer'
 import { PageViewCounter } from '~/components/PageViewCounter'
