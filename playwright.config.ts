@@ -1,7 +1,9 @@
 import type { PlaywrightTestConfig } from '@playwright/test'
+import { env } from './e2e/env'
 
-const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000
-const baseURL = `http://localhost:${PORT}/`
+// @ts-expect-error
+process.env = { ...process.env, ...env }
+
 const headless = true
 
 /**
@@ -16,15 +18,17 @@ const config: PlaywrightTestConfig = {
     trace: 'on-first-retry',
     channel: 'chrome',
     headless,
-    baseURL,
+    baseURL: env.BASE_URL,
     screenshot: 'only-on-failure',
     video: 'on-first-retry',
   },
   reporter: [['list'], ['html', { open: 'never' }]],
   outputDir: 'test-results/',
   webServer: {
-    command: process.env.TEST_ENV ? `PORT=${PORT} bun run build-start` : `PORT=${PORT} bun run dev`,
-    url: baseURL,
+    command: process.env.TEST_ENV
+      ? `PORT=${env.PORT} bun run build-start`
+      : `PORT=${env.PORT} bun run dev`,
+    url: env.BASE_URL,
     reuseExistingServer: !(process.env.TEST_ENV && process.env.CI),
   },
   fullyParallel: headless,
