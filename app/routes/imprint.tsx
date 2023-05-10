@@ -1,8 +1,7 @@
 import type { LoaderArgs, V2_MetaFunction } from '@remix-run/node'
 import { BaseLayout } from '~/components/BaseLayout'
 import { PageViewCounter } from '~/components/PageViewCounter'
-import { getPageViewsForPath, increasePageViewsForPath } from '~/utils/pageViews.server'
-import { addingPageViewHistory } from '~/utils/pageViewsHistory.server'
+import { trackPage } from '~/utils/trackPage.server'
 
 export const meta: V2_MetaFunction = () => {
   return [
@@ -13,18 +12,7 @@ export const meta: V2_MetaFunction = () => {
 }
 
 export const loader = ({ request }: LoaderArgs) => {
-  const pathname = new URL(request.url).pathname
-
-  increasePageViewsForPath(pathname)
-  const count = getPageViewsForPath(pathname)
-
-  addingPageViewHistory({
-    path: pathname,
-    useragent: request.headers.get('User-Agent') ?? `NO_USERAGENT`,
-    referrer: request.headers.get('Referer') ?? null,
-  })
-
-  return { count }
+  return trackPage(request)
 }
 
 function Imprint() {

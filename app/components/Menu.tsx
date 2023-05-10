@@ -3,6 +3,8 @@ import { NavLink, type NavLinkProps } from '@remix-run/react'
 
 import ArrowTopRightOnSquareIcon from '@heroicons/react/24/outline/ArrowTopRightOnSquareIcon'
 import HomeIcon from '@heroicons/react/24/outline/HomeIcon'
+import BriefcaseIcon from '@heroicons/react/24/outline/BriefcaseIcon'
+import RocketLaunchIcon from '@heroicons/react/24/outline/RocketLaunchIcon'
 import Bars3Icon from '@heroicons/react/24/outline/Bars3Icon'
 
 import { GithubIcon } from '~/icons/GithubIcon'
@@ -105,7 +107,15 @@ export const Navigation = ({ className, ...navProps }: ComponentProps<'nav'>) =>
           <ul className="-mx-2 space-y-1">
             <MenuLink to="/" className="py-2">
               <HomeIcon className="w-4" />
-              Home
+              Introduction
+            </MenuLink>
+            <MenuLink to="/what-i-built" className="py-2">
+              <BriefcaseIcon className="w-4" />
+              What I Built
+            </MenuLink>
+            <MenuLink to="/what-i-use" className="py-2">
+              <RocketLaunchIcon className="w-4" />
+              What I Use
             </MenuLink>
           </ul>
         </li>
