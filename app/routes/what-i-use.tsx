@@ -1,21 +1,21 @@
-import type { LoaderArgs, V2_MetaFunction } from '@remix-run/node'
-import { BaseLayout } from '~/components/BaseLayout'
-import { Footer } from '~/components/Footer'
-import { Introduction } from '~/components/Introduction'
-import { PageViewCounter } from '~/components/PageViewCounter'
-import { trackPage } from '~/utils/trackPage.server'
+import type { LoaderArgs, V2_MetaFunction } from '@remix-run/node';
+import { BaseLayout } from '~/components/BaseLayout';
+import { Footer } from '~/components/Footer';
+import { Introduction } from '~/components/Introduction';
+import { PageViewCounter } from '~/components/PageViewCounter';
+import { trackPage } from '~/utils/trackPage.server';
 
 export const meta: V2_MetaFunction = () => {
   return [
     {
       title: 'What I Use | Patrick Wozniak',
     },
-  ]
-}
+  ];
+};
 
 export const loader = ({ request }: LoaderArgs) => {
-  return trackPage(request)
-}
+  return trackPage(request);
+};
 
 const WhatIUseRoute = () => {
   return (
@@ -26,21 +26,28 @@ const WhatIUseRoute = () => {
         <h1>👏 What I Use</h1>
         <ul>
           <li>
-            <a href="https://mailinabox.email">mailinabox</a>: Running a self hosted{' '}
-            <strong>mail server</strong> on a <a href="https://www.ovhcloud.com/de/vps/">5€ vps</a>
+            <a href="https://mailinabox.email">mailinabox</a>: Running a self
+            hosted <strong>mail server</strong> on a{' '}
+            <a href="https://www.ovhcloud.com/de/vps/">5€ vps</a>
           </li>
           <li>
             <a href="https://miniflux.app">miniflux</a>: Running a self hosted{' '}
             <strong>rss server</strong> on a{' '}
-            <a href="https://vserver.site/de/vserver_kvm_frankfurt.html">3€ vps</a>
+            <a href="https://vserver.site/de/vserver_kvm_frankfurt.html">
+              3€ vps
+            </a>
           </li>
           <li>
-            <a href="https://docs.hyperion-project.org">hyperion</a>: DIY version of “Philips Hue”
-            on my tv (<a href="https://www.youtube.com/watch?v=W870SRqGd_o">📹 See my video</a>)
+            <a href="https://docs.hyperion-project.org">hyperion</a>: DIY
+            version of “Philips Hue” on my tv (
+            <a href="https://www.youtube.com/watch?v=W870SRqGd_o">
+              📹 See my video
+            </a>
+            )
           </li>
           <li>
-            <a href="https://www.home-assistant.io">Home Assistant</a>: Home Automation Tool to
-            control my smart home devices in my home
+            <a href="https://www.home-assistant.io">Home Assistant</a>: Home
+            Automation Tool to control my smart home devices in my home
           </li>
           <li>
             <a href="https://www.anycubic.com/products/anycubic-i3-mega-s">
@@ -55,7 +62,7 @@ const WhatIUseRoute = () => {
         <PageViewCounter />
       </Footer>
     </BaseLayout>
-  )
-}
+  );
+};
 
-export default WhatIUseRoute
+export default WhatIUseRoute;

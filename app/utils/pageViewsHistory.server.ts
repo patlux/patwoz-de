@@ -1,17 +1,17 @@
-import { db } from './db.server'
+import { db } from './db.server';
 
 export type PageViewHistoryMeta = {
-  id: number
-  timestamp: string
-}
+  id: number;
+  timestamp: string;
+};
 
 export type PageViewHistoryValues = {
-  path: string
-  useragent: string
-  referrer: string | null
-}
+  path: string;
+  useragent: string;
+  referrer: string | null;
+};
 
-export type PageViewHistory = PageViewHistoryMeta & PageViewHistoryValues
+export type PageViewHistory = PageViewHistoryMeta & PageViewHistoryValues;
 
 export const addingPageViewHistory = (values: PageViewHistoryValues) => {
   db.query(
@@ -20,9 +20,11 @@ export const addingPageViewHistory = (values: PageViewHistoryValues) => {
     ':path': values.path,
     ':useragent': values.useragent,
     ':referrer': values.referrer,
-  })
-}
+  });
+};
 
 export const getAllPageViewHistory = () => {
-  return db.query<PageViewHistory, never>('SELECT * FROM page_views_history;').all()
-}
+  return db
+    .query<PageViewHistory, never>('SELECT * FROM page_views_history;')
+    .all();
+};

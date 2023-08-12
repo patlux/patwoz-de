@@ -1,6 +1,6 @@
-import { type LoaderFunction } from '@remix-run/node'
-import { z } from 'zod'
-import { db } from '~/utils/db.server'
+import { type LoaderFunction } from '@remix-run/node';
+import { z } from 'zod';
+import { db } from '~/utils/db.server';
 
 export const loader: LoaderFunction = () => {
   z.object({
@@ -9,8 +9,10 @@ export const loader: LoaderFunction = () => {
     .array()
     .parse(
       db
-        .query(`SELECT name FROM sqlite_schema WHERE type ='table' AND name NOT LIKE 'sqlite_%';`)
+        .query(
+          `SELECT name FROM sqlite_schema WHERE type ='table' AND name NOT LIKE 'sqlite_%';`
+        )
         .all()
-    )
-  return 'OK'
-}
+    );
+  return 'OK';
+};

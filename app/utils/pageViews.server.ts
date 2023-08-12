@@ -1,4 +1,4 @@
-import { db } from './db.server'
+import { db } from './db.server';
 
 export const increasePageViewsForPath = (pathname: string) => {
   db.query(
@@ -11,8 +11,8 @@ export const increasePageViewsForPath = (pathname: string) => {
     SET
       count=count+1;
   `
-  ).run(pathname)
-}
+  ).run(pathname);
+};
 
 export const getPageViewsForPath = (pathname: string) => {
   const result = db
@@ -27,7 +27,7 @@ export const getPageViewsForPath = (pathname: string) => {
       LIMIT 1;
     `
     )
-    .get(pathname)
+    .get(pathname);
 
-  return result?.count ?? null
-}
+  return result?.count ?? null;
+};

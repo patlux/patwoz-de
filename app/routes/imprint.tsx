@@ -1,19 +1,19 @@
-import type { LoaderArgs, V2_MetaFunction } from '@remix-run/node'
-import { BaseLayout } from '~/components/BaseLayout'
-import { PageViewCounter } from '~/components/PageViewCounter'
-import { trackPage } from '~/utils/trackPage.server'
+import type { LoaderArgs, V2_MetaFunction } from '@remix-run/node';
+import { BaseLayout } from '~/components/BaseLayout';
+import { PageViewCounter } from '~/components/PageViewCounter';
+import { trackPage } from '~/utils/trackPage.server';
 
 export const meta: V2_MetaFunction = () => {
   return [
     {
       title: 'Imprint',
     },
-  ]
-}
+  ];
+};
 
 export const loader = ({ request }: LoaderArgs) => {
-  return trackPage(request)
-}
+  return trackPage(request);
+};
 
 function Imprint() {
   return (
@@ -36,7 +36,7 @@ function Imprint() {
         <br />
       </p>
     </BaseLayout>
-  )
+  );
 }
 
-export default Imprint
+export default Imprint;

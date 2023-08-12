@@ -2,12 +2,13 @@
 module.exports = {
   ignoredRouteFiles: ['**/.*'],
   serverModuleFormat: 'esm',
-  devServerPort: 8004,
+  serverMinify: true,
   tailwind: true,
   future: {
     v2_errorBoundary: true,
     v2_normalizeFormMethod: true,
     v2_meta: true,
     v2_routeConvention: true,
+    v2_dev: false,
   },
-}
+};

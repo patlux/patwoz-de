@@ -1,4 +1,4 @@
-import { defineConfig } from 'checkly'
+import { defineConfig } from 'checkly';
 
 export default defineConfig({
   projectName: 'Personal Website Monitoring',
@@ -24,4 +24,4 @@ export default defineConfig({
   cli: {
     runLocation: 'eu-central-1',
   },
-})
+});

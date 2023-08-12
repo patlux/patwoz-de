@@ -1,4 +1,4 @@
-import { z } from 'zod'
+import { z } from 'zod';
 
 export const EnvSchema = z.object({
   BASE_URL: z.string().default('http://localhost:3000'),
@@ -6,6 +6,6 @@ export const EnvSchema = z.object({
     .string()
     .transform((v) => parseInt(v, 10))
     .default('3000'),
-})
+});
 
-export const env = EnvSchema.parse(process.env)
+export const env = EnvSchema.parse(process.env);

@@ -1,4 +1,4 @@
-import type { LinksFunction, V2_MetaFunction } from '@remix-run/node'
+import type { LinksFunction, V2_MetaFunction } from '@remix-run/node';
 import {
   isRouteErrorResponse,
   Links,
@@ -8,14 +8,14 @@ import {
   Scripts,
   ScrollRestoration,
   useRouteError,
-} from '@remix-run/react'
+} from '@remix-run/react';
 
-import { BaseLayout } from './components/BaseLayout'
-import tailwindCssUrl from './tailwind.css'
+import { BaseLayout } from './components/BaseLayout';
+import tailwindCssUrl from './tailwind.css';
 
 export let links: LinksFunction = () => {
-  return [{ rel: 'stylesheet', href: tailwindCssUrl }]
-}
+  return [{ rel: 'stylesheet', href: tailwindCssUrl }];
+};
 
 export const meta: V2_MetaFunction = () => {
   return [
@@ -24,13 +24,15 @@ export const meta: V2_MetaFunction = () => {
     },
     {
       name: 'description',
-      content: 'Patrick Wozniak is a self-taught Software Engineer from Nuremberg, Germany.',
+      content:
+        'Patrick Wozniak is a self-taught Software Engineer from Nuremberg, Germany.',
     },
     { property: 'og:url', content: 'https://patwoz.dev/' },
     { property: 'og:title', content: 'Patrick Wozniak: Software Engineer' },
     {
       property: 'og:description',
-      content: 'Patrick Wozniak is a self-taught Software Engineer from Nuremberg, Germany.',
+      content:
+        'Patrick Wozniak is a self-taught Software Engineer from Nuremberg, Germany.',
     },
     { property: 'og:image', content: 'https://patwoz.dev/me.jpg' },
     { property: 'og:image:width', content: '512' },
@@ -39,32 +41,39 @@ export const meta: V2_MetaFunction = () => {
     { property: 'profile:first_name', content: 'Patrick' },
     { property: 'profile:last_name', content: 'Wozniak' },
     { property: 'profile:username', content: 'patwoz' },
-  ]
-}
+  ];
+};
 
 export default function Root() {
   return (
     <Document>
       <Outlet />
     </Document>
-  )
+  );
 }
 
 export function ErrorBoundary() {
-  const error = useRouteError()
+  const error = useRouteError();
 
   if (isRouteErrorResponse(error)) {
-    let message
+    let message;
     switch (error.status) {
       case 401:
-        message = <p>Oops! Looks like you tried to visit a page that you do not have access to.</p>
-        break
+        message = (
+          <p>
+            Oops! Looks like you tried to visit a page that you do not have
+            access to.
+          </p>
+        );
+        break;
       case 404:
-        message = <p>Oops! Looks like you tried to visit a page that does not exist.</p>
-        break
+        message = (
+          <p>Oops! Looks like you tried to visit a page that does not exist.</p>
+        );
+        break;
 
       default:
-        throw new Error(error.data || error.statusText)
+        throw new Error(error.data || error.statusText);
     }
 
     return (
@@ -76,7 +85,7 @@ export function ErrorBoundary() {
           {message}
         </BaseLayout>
       </Document>
-    )
+    );
   }
 
   return (
@@ -88,18 +97,38 @@ export function ErrorBoundary() {
         </div>
       </BaseLayout>
     </Document>
-  )
+  );
 }
 
-function Document({ children, title }: { children: React.ReactNode; title?: string }) {
+function Document({
+  children,
+  title,
+}: {
+  children: React.ReactNode;
+  title?: string;
+}) {
   return (
     <html lang="en">
       <head prefix="og: https://ogp.me/ns#">
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/apple-touch-icon.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/favicon-32x32.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/favicon-16x16.png"
+        />
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
         {title ? <title>{title}</title> : null}
         <Meta />
@@ -109,8 +138,8 @@ function Document({ children, title }: { children: React.ReactNode; title?: stri
         {children}
         <ScrollRestoration />
         <Scripts />
-        {process.env.NODE_ENV === 'development' && <LiveReload port={8004} />}
+        {process.env.NODE_ENV === 'development' && <LiveReload />}
       </body>
     </html>
-  )
+  );
 }

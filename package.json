@@ -10,10 +10,10 @@
     "start": "NODE_ENV=production bun run ./server.js",
     "build": "NODE_ENV=production bun run build:remix && NODE_ENV=production bun run build:server",
     "build:remix": "bun run remix build",
-    "build:server": "NODE_ENV=production bun build ./server.ts --minify --outfile server.js --target bun --external ./build",
+    "build:server": "bun build ./server.ts --minify --outfile server.js --target bun --external ./build",
     "dev:remix": "bun run remix watch",
-    "dev:server": "NODE_ENV=development bun run --hot ./server.ts",
-    "dev": "bun run build:remix && run-p dev:*",
+    "dev:server": "NODE_ENV=development bun run --watch ./server.ts",
+    "dev": "NODE_ENV=development bun run build:remix && run-p dev:*",
     "prettier": "prettier --ignore-path .gitignore '**/*.{ts,tsx,json,md,css}'",
     "format": "bun run prettier --write",
     "test": "bun test",
@@ -32,8 +32,9 @@
   "dependencies": {
     "@headlessui/react": "^1.7.14",
     "@heroicons/react": "^2.0.17",
-    "@remix-run/node": "^1.16.0",
-    "@remix-run/react": "^1.16.0",
+    "@remix-run/node": "^1.19.3",
+    "@remix-run/react": "^1.19.3",
+    "bun-sqlite-migrations": "^1.0.2",
     "clsx": "^1.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -42,17 +43,21 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.33.0",
-    "@remix-run/dev": "^1.16.0",
-    "@remix-run/eslint-config": "^1.16.0",
+    "@remix-run/dev": "^1.19.3",
+    "@remix-run/eslint-config": "^1.19.3",
     "@tailwindcss/typography": "^0.5.9",
     "@types/react": "^18.2.5",
     "@types/react-dom": "^18.2.4",
-    "bun-types": "^0.5.8",
+    "bun-types": "^0.7.3",
     "checkly": "^4.0.4",
     "eslint": "^8.40.0",
     "npm-run-all": "^4.1.5",
-    "prettier": "^2.8.8",
+    "prettier": "^3.0.1",
     "tailwindcss": "^3.3.2",
     "typescript": "^5.0.4"
+  },
+  "prettier": {
+    "semi": true,
+    "singleQuote": true
   }
 }

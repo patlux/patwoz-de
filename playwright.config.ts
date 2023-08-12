@@ -1,10 +1,10 @@
-import type { PlaywrightTestConfig } from '@playwright/test'
-import { env } from './e2e/env'
+import type { PlaywrightTestConfig } from '@playwright/test';
+import { env } from './e2e/env';
 
 // @ts-expect-error
-process.env = { ...process.env, ...env }
+process.env = { ...process.env, ...env };
 
-const headless = true
+const headless = true;
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -47,6 +47,6 @@ const config: PlaywrightTestConfig = {
       },
     },
   ],
-}
+};
 
-export default config
+export default config;

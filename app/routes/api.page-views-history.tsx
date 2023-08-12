@@ -1,10 +1,10 @@
-import type { LoaderArgs } from '@remix-run/node'
-import { json } from '@remix-run/node'
-import { z } from 'zod'
-import { formatDateLikeDb } from '~/utils/db.server'
-import { getAllPageViewHistory } from '~/utils/pageViewsHistory.server'
-import { subtractDays } from '~/utils/query-helpers'
-import { getParams } from '~/utils/search-params-helper'
+import type { LoaderArgs } from '@remix-run/node';
+import { json } from '@remix-run/node';
+import { z } from 'zod';
+import { formatDateLikeDb } from '~/utils/db.server';
+import { getAllPageViewHistory } from '~/utils/pageViewsHistory.server';
+import { subtractDays } from '~/utils/query-helpers';
+import { getParams } from '~/utils/search-params-helper';
 
 export const SearchParamsSchema = z.object({
   query: z.string().max(50).optional(),
@@ -20,58 +20,60 @@ export const SearchParamsSchema = z.object({
     .optional(),
   referrer: z.string().optional(),
   'user-agent': z.string().optional(),
-})
+});
 
 export const loader = ({ request }: LoaderArgs) => {
-  const pageViewHistory = getAllPageViewHistory()
+  const pageViewHistory = getAllPageViewHistory();
 
-  const url = new URL(request.url)
-  const resultSearchParams = getParams(url.searchParams, SearchParamsSchema)
+  const url = new URL(request.url);
+  const resultSearchParams = getParams(url.searchParams, SearchParamsSchema);
   if (!resultSearchParams.success) {
     throw json(
       { ok: false, errorType: 'error', errors: resultSearchParams.errors },
       { status: 400 }
-    )
+    );
   }
 
-  const searchParams = resultSearchParams.data
+  const searchParams = resultSearchParams.data;
 
   const timestamp =
-    searchParams.days != null ? formatDateLikeDb(subtractDays(searchParams.days)) : null
+    searchParams.days != null
+      ? formatDateLikeDb(subtractDays(searchParams.days))
+      : null;
 
   return json({
     data: pageViewHistory.filter((pageView) => {
       if (timestamp && pageView.timestamp < timestamp) {
-        return false
+        return false;
       }
 
       if (searchParams.before && pageView.timestamp > searchParams.before) {
-        return false
+        return false;
       }
 
       if (searchParams.after && pageView.timestamp > searchParams.after) {
-        return false
+        return false;
       }
 
       if (searchParams['has-referrer'] === true && pageView.referrer == null) {
-        return false
+        return false;
       }
 
       if (
         searchParams['user-agent'] != null &&
         !pageView.useragent.includes(searchParams['user-agent'])
       ) {
-        return false
+        return false;
       }
 
       if (
         searchParams['referrer'] != null &&
         !pageView.useragent.includes(searchParams['referrer'])
       ) {
-        return false
+        return false;
       }
 
-      return true
+      return true;
     }),
-  })
-}
+  });
+};

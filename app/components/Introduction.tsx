@@ -17,11 +17,12 @@ export const Introduction = () => {
 
       <article className="prose lg:prose-lg mt-12">
         <p>
-          I'm a software developer who discovered my passion for coding at the age of 16, and since
-          then, I've become an experienced frontend engineer with a strong focus on
-          JavaScript/TypeScript and React/React Native.
+          I'm a software developer who discovered my passion for coding at the
+          age of 16, and since then, I've become an experienced frontend
+          engineer with a strong focus on JavaScript/TypeScript and React/React
+          Native.
         </p>
       </article>
     </>
-  )
-}
+  );
+};

@@ -1,20 +1,26 @@
-import { type ComponentProps, useState } from 'react'
-import { NavLink, type NavLinkProps } from '@remix-run/react'
+import { type ComponentProps, useState } from 'react';
+import { NavLink, type NavLinkProps } from '@remix-run/react';
 
-import ArrowTopRightOnSquareIcon from '@heroicons/react/24/outline/ArrowTopRightOnSquareIcon'
-import HomeIcon from '@heroicons/react/24/outline/HomeIcon'
-import BriefcaseIcon from '@heroicons/react/24/outline/BriefcaseIcon'
-import RocketLaunchIcon from '@heroicons/react/24/outline/RocketLaunchIcon'
-import Bars3Icon from '@heroicons/react/24/outline/Bars3Icon'
+import ArrowTopRightOnSquareIcon from '@heroicons/react/24/outline/ArrowTopRightOnSquareIcon';
+import HomeIcon from '@heroicons/react/24/outline/HomeIcon';
+import BriefcaseIcon from '@heroicons/react/24/outline/BriefcaseIcon';
+import RocketLaunchIcon from '@heroicons/react/24/outline/RocketLaunchIcon';
+import Bars3Icon from '@heroicons/react/24/outline/Bars3Icon';
 
-import { GithubIcon } from '~/icons/GithubIcon'
-import { LinkedInIcon } from '~/icons/LinkedInIcon'
-import { StackOverflowIcon } from '~/icons/StackOverflowIcon'
-import { TwitterIcon } from '~/icons/TwitterIcon'
-import { XingIcon } from '~/icons/XingIcon'
-import { classNames } from '~/utils/classNames'
+import { GithubIcon } from '~/icons/GithubIcon';
+import { LinkedInIcon } from '~/icons/LinkedInIcon';
+import { StackOverflowIcon } from '~/icons/StackOverflowIcon';
+import { TwitterIcon } from '~/icons/TwitterIcon';
+import { XingIcon } from '~/icons/XingIcon';
+import { classNames } from '~/utils/classNames';
 
-const MenuLinkTextIcon = ({ initial, className }: { initial: string; className?: string }) => {
+const MenuLinkTextIcon = ({
+  initial,
+  className,
+}: {
+  initial: string;
+  className?: string;
+}) => {
   return (
     <div
       className={classNames(
@@ -24,8 +30,8 @@ const MenuLinkTextIcon = ({ initial, className }: { initial: string; className?:
     >
       {initial}
     </div>
-  )
-}
+  );
+};
 
 const MenuLink = ({ className, ...navLinkProps }: NavLinkProps) => {
   return (
@@ -43,18 +49,18 @@ const MenuLink = ({ className, ...navLinkProps }: NavLinkProps) => {
         )
       }
     />
-  )
-}
+  );
+};
 
 const ExternalLinkIcon = () => (
   <>
     <div className="flex-1" />
     <ArrowTopRightOnSquareIcon className="w-4 opacity-20" />
   </>
-)
+);
 
 export const Menu = () => {
-  const [isOpen, setOpen] = useState(false)
+  const [isOpen, setOpen] = useState(false);
   return (
     <div className="xl:fixed xl:inset-y-0 xl:z-50 xl:flex xl:w-72 xl:flex-col">
       <div
@@ -66,17 +72,26 @@ export const Menu = () => {
         )}
       >
         <HeaderBar toggleMenu={() => setOpen((prev) => !prev)} />
-        <Navigation className={classNames('h-0 xl:h-auto xl:flex-1', isOpen && 'flex-1 pb-6')} />
+        <Navigation
+          className={classNames(
+            'h-0 xl:h-auto xl:flex-1',
+            isOpen && 'flex-1 pb-6'
+          )}
+        />
       </div>
     </div>
-  )
-}
+  );
+};
 
 export type HeaderBarProps = ComponentProps<'div'> & {
-  toggleMenu: () => void
-}
+  toggleMenu: () => void;
+};
 
-export const HeaderBar = ({ toggleMenu, className, ...divProps }: HeaderBarProps) => {
+export const HeaderBar = ({
+  toggleMenu,
+  className,
+  ...divProps
+}: HeaderBarProps) => {
   return (
     <div
       {...divProps}
@@ -94,12 +109,19 @@ export const HeaderBar = ({ toggleMenu, className, ...divProps }: HeaderBarProps
         <span className="sr-only">Open sidebar</span>
         <Bars3Icon className="h-5 w-5" aria-hidden="true" />
       </button>
-      <img src="/patwoz-logo-transparent-800px.png" alt="Logo of patwoz.de" width="60px" />
+      <img
+        src="/patwoz-logo-transparent-800px.png"
+        alt="Logo of patwoz.de"
+        width="60px"
+      />
     </div>
-  )
-}
+  );
+};
 
-export const Navigation = ({ className, ...navProps }: ComponentProps<'nav'>) => {
+export const Navigation = ({
+  className,
+  ...navProps
+}: ComponentProps<'nav'>) => {
   return (
     <nav {...navProps} className={classNames('flex flex-col', className)}>
       <ul className="flex flex-1 flex-col gap-y-7">
@@ -120,7 +142,9 @@ export const Navigation = ({ className, ...navProps }: ComponentProps<'nav'>) =>
           </ul>
         </li>
         <li>
-          <div className="text-xs font-semibold leading-6 text-gray-400 uppercase">Social</div>
+          <div className="text-xs font-semibold leading-6 text-gray-400 uppercase">
+            Social
+          </div>
           <ul className="-mx-2 mt-2 space-y-1">
             <MenuLink to="https://github.com/patlux">
               <GithubIcon className="w-5" />
@@ -145,7 +169,9 @@ export const Navigation = ({ className, ...navProps }: ComponentProps<'nav'>) =>
           </ul>
         </li>
         <li>
-          <div className="text-xs font-semibold leading-6 text-gray-400 uppercase">Business</div>
+          <div className="text-xs font-semibold leading-6 text-gray-400 uppercase">
+            Business
+          </div>
           <ul className="-mx-2 mt-2 space-y-1">
             <MenuLink
               to="mailto:hi@patwoz.de"
@@ -185,5 +211,5 @@ export const Navigation = ({ className, ...navProps }: ComponentProps<'nav'>) =>
         </li>
       </ul>
     </nav>
-  )
-}
+  );
+};

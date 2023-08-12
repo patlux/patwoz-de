@@ -1,7 +1,7 @@
-import type { EntryContext } from '@remix-run/node'
-import { Response } from '@remix-run/node'
-import { RemixServer } from '@remix-run/react'
-import { renderToReadableStream } from 'react-dom/server'
+import type { EntryContext } from '@remix-run/node';
+import { Response } from '@remix-run/node';
+import { RemixServer } from '@remix-run/react';
+import { renderToReadableStream } from 'react-dom/server';
 
 export default function handleRequest(
   request: Request,
@@ -9,7 +9,12 @@ export default function handleRequest(
   responseHeaders: Headers,
   remixContext: EntryContext
 ) {
-  return handleBrowserRequest(request, responseStatusCode, responseHeaders, remixContext)
+  return handleBrowserRequest(
+    request,
+    responseStatusCode,
+    responseHeaders,
+    remixContext
+  );
 }
 
 function handleBrowserRequest(
@@ -23,17 +28,17 @@ function handleBrowserRequest(
       <RemixServer context={remixContext} url={request.url} />,
       {
         onError(error) {
-          console.error(error)
-          reject(error)
+          console.error(error);
+          reject(error);
         },
       }
-    )
+    );
 
     resolve(
       new Response(stream, {
         status: responseStatusCode,
         headers: responseHeaders,
       })
-    )
-  })
+    );
+  });
 }
