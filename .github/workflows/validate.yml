@@ -7,6 +7,7 @@ env:
 
 jobs:
   build:
+    timeout-minutes: 1
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -22,6 +23,7 @@ jobs:
         run: bun run check-build
 
   formatting:
+    timeout-minutes: 1
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -37,6 +39,7 @@ jobs:
         run: bun run check-format
 
   lint:
+    timeout-minutes: 1
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -52,6 +55,7 @@ jobs:
         run: bun run check-lint
 
   types:
+    timeout-minutes: 1
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -67,6 +71,7 @@ jobs:
         run: bun run check-types
 
   test:
+    timeout-minutes: 1
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3

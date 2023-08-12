@@ -6,16 +6,17 @@ on:
     branches: [main]
     types:
       - completed
-  
+
 env:
   FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
 
 jobs:
   deploy:
-      name: Deploy app
-      runs-on: ubuntu-latest
-      if: ${{ github.event.workflow_run.conclusion == 'success' }}
-      steps:
-        - uses: actions/checkout@v3
-        - uses: superfly/flyctl-actions/setup-flyctl@master
-        - run: flyctl deploy --remote-only
+    timeout-minutes: 5
+    name: Deploy app
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - run: flyctl deploy --remote-only

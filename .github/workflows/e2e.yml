@@ -6,7 +6,7 @@ on:
 
 jobs:
   test:
-    timeout-minutes: 60
+    timeout-minutes: 10
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -23,7 +23,7 @@ jobs:
         run: bun run playwright install ffmpeg
 
       - name: Run Playwright tests
-        run: TEST_ENV=build bun run test:e2e
+        run: bun run test:e2e
 
       - uses: actions/upload-artifact@v3
         if: always()
