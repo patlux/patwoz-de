@@ -1,16 +1,12 @@
-FROM oven/bun:0.5.9 as deps
+ARG BUN_VERSION=0.7.3
+
+FROM oven/bun:${BUN_VERSION} as deps
 
 WORKDIR /app
-
-# Upgrade to canary
-# Because "bun build" exist starting from v0.6.0
-RUN apt-get update && apt-get install unzip
-RUN bun upgrade --canary
 
 COPY package.json bun.lockb ./
 RUN echo "[install]\noptional = false\ndev = true\npeer = false" >> bunfig.toml
 RUN bun install --ignore-scripts
-
 
 FROM node:18-bullseye-slim as remix
 
@@ -30,7 +26,7 @@ ADD tsconfig.json tsconfig.json
 RUN bun run build:remix
 RUN [ -f "/app/build/index.js" ] && exit 0 || exit 1 
 
-FROM oven/bun:0.5.9 as server
+FROM oven/bun:${BUN_VERSION} as server
 
 WORKDIR /app/
 
@@ -42,14 +38,13 @@ COPY --from=remix /app/public /app/public
 COPY --from=deps /app/node_modules /app/node_modules
 
 COPY package.json bun.lockb tsconfig.json server.ts remix.config.js remix.env.d.ts tailwind.config.js ./
-COPY server server
 
 COPY . .
 
 RUN bun build server.ts --minify --outfile server.js --target bun --external ./build
 RUN [ -f "/app/server.js" ] && exit 0 || exit 1 
 
-FROM oven/bun:0.5.9 as prod
+FROM oven/bun:${BUN_VERSION} as prod
 
 WORKDIR /app
 

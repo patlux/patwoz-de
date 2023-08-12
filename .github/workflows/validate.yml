@@ -2,6 +2,9 @@ name: validate
 
 on: [push, pull_request]
 
+env:
+  BUN_VERSION: 0.7.3
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -10,7 +13,7 @@ jobs:
 
       - uses: oven-sh/setup-bun@v1
         with:
-          bun-version: canary
+          bun-version: ${{ env.BUN_VERSION }}
 
       - name: Install dependencies
         run: bun install
@@ -25,7 +28,7 @@ jobs:
 
       - uses: oven-sh/setup-bun@v1
         with:
-          bun-version: 0.5.9
+          bun-version: ${{ env.BUN_VERSION }}
 
       - name: Install dependencies
         run: bun install
@@ -40,7 +43,7 @@ jobs:
 
       - uses: oven-sh/setup-bun@v1
         with:
-          bun-version: 0.5.9
+          bun-version: ${{ env.BUN_VERSION }}
 
       - name: Install dependencies
         run: bun install
@@ -55,7 +58,7 @@ jobs:
 
       - uses: oven-sh/setup-bun@v1
         with:
-          bun-version: 0.5.9
+          bun-version: ${{ env.BUN_VERSION }}
 
       - name: Install dependencies
         run: bun install
@@ -70,7 +73,7 @@ jobs:
 
       - uses: oven-sh/setup-bun@v1
         with:
-          bun-version: canary
+          bun-version: ${{ env.BUN_VERSION }}
 
       - name: Install dependencies
         run: bun install
