@@ -129,7 +129,6 @@ function Document({
           sizes="16x16"
           href="/favicon-16x16.png"
         />
-        <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
         {title ? <title>{title}</title> : null}
         <Meta />
         <Links />
