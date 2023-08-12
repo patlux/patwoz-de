@@ -85,6 +85,11 @@ export const withLogging =
 
 const bunServeOptions: ServeOptions = {
   fetch: withStaticDir(withLogging(requestHandler)),
+  error: () => {
+    return new Response(
+      `Something went wrong. Sorry for that! Contact me by mail: hi@patwoz.de :)`
+    );
+  },
 };
 
 export default bunServeOptions;
