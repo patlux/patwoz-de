@@ -35,9 +35,6 @@ jobs:
       - name: Install dependencies
         run: bun install
 
-      - name: List different formatting
-        run: bun run prettier --list-different
-
       - name: Check formatting
         run: bun run prettier --check
 

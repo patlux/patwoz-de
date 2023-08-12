@@ -14,7 +14,7 @@
     "dev:remix": "bun run remix watch",
     "dev:server": "NODE_ENV=development bun run --watch ./server.ts",
     "dev": "NODE_ENV=development bun run build:remix && run-p dev:*",
-    "prettier": "prettier --ignore-path .gitignore '**/*.{ts,tsx,json,md,css}'",
+    "prettier": "prettier --config package.json --ignore-path .gitignore '**/*.{ts,tsx,json,md,css}'",
     "format": "bun run prettier --write",
     "test": "bun test",
     "check-format": "bun run prettier -- --check",
