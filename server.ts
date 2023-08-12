@@ -4,6 +4,7 @@ import { createRequestHandler } from '@remix-run/server-runtime';
 import { migrate } from 'bun-sqlite-migrations';
 
 import { db } from '~/utils/db.server';
+import { getGitCommitHash } from '~/utils/git.server' assert { type: 'macro' };
 
 migrate(db, [
   {
@@ -54,7 +55,10 @@ const requestHandler: RequestHandler = async (request) => {
   return new Response(response.body, {
     status: response.status,
     statusText: response.statusText,
-    headers: response.headers,
+    headers: {
+      ...response.headers,
+      'X-GIT-HASH': getGitCommitHash(),
+    },
   });
 };
 
@@ -93,8 +97,16 @@ export const withLogging =
     return requestHandler(request);
   };
 
+const withDebug = (requestHandler: RequestHandler) => (request: Request) => {
+  const url = new URL(request.url);
+  if (url.pathname === '/version') {
+    return Promise.resolve(new Response(getGitCommitHash()));
+  }
+  return requestHandler(request);
+};
+
 const bunServeOptions: ServeOptions = {
-  fetch: withStaticDir(withLogging(requestHandler)),
+  fetch: withStaticDir(withLogging(withDebug(requestHandler))),
   error: () => {
     return new Response(
       `Something went wrong. Sorry for that! Contact me by mail: hi@patwoz.de :)`
