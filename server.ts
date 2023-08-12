@@ -39,11 +39,11 @@ const requestHandler: RequestHandler = async (request) => {
   // But then `fetch` is not working fully
   // login not working because it follows the responses
 
-  // Do not remove the @ts-expect-error and @ts-ignore
+  // Do not remove the @ts-ignore (also don't replace with @ts-expect-error)
   // otherwise the pipeline will fail because `./build`
   // only exists when the server is build once
 
-  // @ts-expect-error
+  // @ts-ignore
   const build = await import('./build');
   const handler = createRequestHandler(
     // @ts-ignore
@@ -85,7 +85,11 @@ export const withStaticDir =
 export const withLogging =
   (requestHandler: RequestHandler) => (request: Request) => {
     const url = new URL(request.url);
-    console.log(`[${request.method}] ${url.pathname}`);
+    console.log(
+      `[${request.method}] ${url.pathname} (${request.headers.get(
+        'user-agent'
+      )})`
+    );
     return requestHandler(request);
   };
 
