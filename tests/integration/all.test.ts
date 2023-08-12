@@ -4,7 +4,7 @@ import bun from 'bun';
 const createServer = async () => {
   const bunServeOptions = (await import('../../server')).default;
   const server = bun.serve({
-    port: 3005,
+    port: 0, // random free port
     ...bunServeOptions,
   });
   return server;
@@ -21,7 +21,6 @@ let baseUrl: string;
 test('Should run server', async () => {
   server = await createServer();
   baseUrl = `http://${server.hostname}:${server.port}`;
-  expect(baseUrl).toBe('http://localhost:3005');
 
   const healthResponse = await server.fetch(new Request(`${baseUrl}/health`));
   expect(await healthResponse.text()).toBe('"OK"');
