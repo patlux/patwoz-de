@@ -58,7 +58,7 @@ bunx checkly deploy
 
 ## Contact
 
-If you want to contact me you can reach me at <email@patwoz.de>.
+If you want to contact me you can reach me at <hi@patwoz.de>.
 
 ## License
 
