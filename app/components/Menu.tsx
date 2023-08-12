@@ -68,7 +68,8 @@ export const Menu = () => {
           'flex grow flex-col xl:gap-y-5 overflow-y-auto',
           'bg-gray-50 px-6',
           'ring-1 ring-white/5',
-          'border-b xl:border-b-0 xl:border-r border-gray-200'
+          'border-b xl:border-b-0 xl:border-r border-gray-200',
+          isOpen ? 'overflow-y-auto' : 'overflow-y-hidden'
         )}
       >
         <HeaderBar toggleMenu={() => setOpen((prev) => !prev)} />
