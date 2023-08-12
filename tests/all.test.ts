@@ -1,13 +1,12 @@
-import { beforeAll, expect, test } from 'bun:test';
+import { expect, test } from 'bun:test';
 import bun from 'bun';
-
-beforeAll(() => {
-  process.env.PORT = '3005';
-});
 
 const createServer = async () => {
   const bunServeOptions = (await import('../server')).default;
-  const server = bun.serve(bunServeOptions);
+  const server = bun.serve({
+    port: 3005,
+    ...bunServeOptions,
+  });
   return server;
 };
 
@@ -22,7 +21,7 @@ let baseUrl: string;
 test('Should run server', async () => {
   server = await createServer();
   baseUrl = `http://${server.hostname}:${server.port}`;
-  expect(baseUrl).toBe('http://0.0.0.0:3005');
+  expect(baseUrl).toBe('http://localhost:3005');
 
   const healthResponse = await server.fetch(new Request(`${baseUrl}/health`));
   expect(await healthResponse.text()).toBe('"OK"');
@@ -35,11 +34,11 @@ test('Should open /', async () => {
   expect(res.status).toBe(200);
 
   const html = await res.text();
-  expect(html).toContain('Views: <!-- -->2');
+  expect(html).toContain('Views: <!-- -->1');
 
   const res2 = await server.fetch(req);
   const html2 = await res2.text();
-  expect(html2).toContain('Views: <!-- -->3');
+  expect(html2).toContain('Views: <!-- -->2');
 });
 
 test('Should open /imprint', async () => {
