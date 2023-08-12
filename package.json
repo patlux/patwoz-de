@@ -27,7 +27,7 @@
     "docker:run": " docker run --rm -p 3000:3000 --name patwoz-de patwoz-de:latest",
     "docker:kill": "docker kill patwoz-de",
     "dive": "dive build -t patwoz-de:latest .",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test --config ./tests/e2e/playwright.config.ts"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.14",

@@ -12,7 +12,7 @@ export default defineConfig({
     browserChecks: {
       frequency: 60 * 12,
       tags: ['website'],
-      testMatch: 'e2e/**/*.e2e.ts',
+      testMatch: './*.e2e.ts',
       environmentVariables: [
         {
           key: 'BASE_URL',

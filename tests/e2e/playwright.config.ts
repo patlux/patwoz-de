@@ -1,5 +1,5 @@
 import type { PlaywrightTestConfig } from '@playwright/test';
-import { env } from './e2e/env';
+import { env } from './env';
 
 // @ts-expect-error
 process.env = { ...process.env, ...env };
@@ -10,7 +10,7 @@ const headless = true;
  * See https://playwright.dev/docs/test-configuration.
  */
 const config: PlaywrightTestConfig = {
-  testDir: './e2e',
+  testDir: './',
   testMatch: /.*.e2e.ts/,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 1,
@@ -25,6 +25,7 @@ const config: PlaywrightTestConfig = {
   reporter: [['list'], ['html', { open: 'never' }]],
   outputDir: 'test-results/',
   webServer: {
+    cwd: '../../',
     command: process.env.TEST_ENV
       ? `PORT=${env.PORT} bun run build-start`
       : `PORT=${env.PORT} bun run dev`,

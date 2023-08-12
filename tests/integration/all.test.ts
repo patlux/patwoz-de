@@ -2,7 +2,7 @@ import { expect, test } from 'bun:test';
 import bun from 'bun';
 
 const createServer = async () => {
-  const bunServeOptions = (await import('../server')).default;
+  const bunServeOptions = (await import('../../server')).default;
   const server = bun.serve({
     port: 3005,
     ...bunServeOptions,
