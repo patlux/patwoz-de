@@ -36,7 +36,7 @@ jobs:
         run: bun install
 
       - name: Check formatting
-        run: bun run check-format
+        run: bun run prettier --list-different
 
   lint:
     timeout-minutes: 1
