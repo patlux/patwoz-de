@@ -38,9 +38,15 @@ const requestHandler: RequestHandler = async (request) => {
   // We should cache the build and the requestHandler
   // But then `fetch` is not working fully
   // login not working because it follows the responses
+
+  // Do not remove the @ts-expect-error and @ts-ignore
+  // otherwise the pipeline will fail because `./build`
+  // only exists when the server is build once
+
+  // @ts-expect-error
   const build = await import('./build');
   const handler = createRequestHandler(
-    // @ts-expect-error
+    // @ts-ignore
     build,
     process.env.NODE_ENV === 'development' ? 'development' : 'production'
   );
