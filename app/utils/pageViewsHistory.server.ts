@@ -24,7 +24,8 @@ export const addingPageViewHistory = (values: PageViewHistoryValues) => {
 };
 
 export const getAllPageViewHistory = () => {
-  return db
-    .query<PageViewHistory, never>('SELECT * FROM page_views_history;')
+  const result = db
+    .query<PageViewHistory, []>('SELECT * FROM page_views_history;')
     .all();
+  return result;
 };
