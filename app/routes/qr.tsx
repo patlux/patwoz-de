@@ -4,7 +4,6 @@ import { BaseLayout } from '~/components/BaseLayout';
 import { Introduction } from '~/components/Introduction';
 import { PageViewCounter } from '~/components/PageViewCounter';
 import qrcode from 'qrcode';
-import invariant from '~/utils/invariant';
 
 export const meta: MetaFunction = () => {
   return [
@@ -18,7 +17,9 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   const url = new URL(request.url);
   const text = url.searchParams.get('text');
 
-  invariant(text, 'Missing data');
+  if (text == null) {
+    return null;
+  }
 
   const qrCodeImageUrl = (
     await qrcode.toBuffer(text.toString(), {
