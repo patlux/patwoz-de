@@ -6,6 +6,7 @@ import HomeIcon from '@heroicons/react/24/outline/HomeIcon';
 import BriefcaseIcon from '@heroicons/react/24/outline/BriefcaseIcon';
 import RocketLaunchIcon from '@heroicons/react/24/outline/RocketLaunchIcon';
 import Bars3Icon from '@heroicons/react/24/outline/Bars3Icon';
+import QrCodeIcon from '@heroicons/react/24/outline/QrCodeIcon';
 
 import { GithubIcon } from '~/icons/GithubIcon';
 import { LinkedInIcon } from '~/icons/LinkedInIcon';
@@ -25,7 +26,7 @@ const MenuLinkTextIcon = ({
     <div
       className={classNames(
         'w-5 h-5 border border-black rounded-sm text-xs flex justify-center items-center',
-        className
+        className,
       )}
     >
       {initial}
@@ -45,7 +46,7 @@ const MenuLink = ({ className, ...navLinkProps }: NavLinkProps) => {
           'text-sm leading-6 font-semibold',
           'text-black hover:bg-zinc-200',
           isActive && 'bg-black hover:bg-black/70 text-white',
-          className
+          className,
         )
       }
     />
@@ -69,14 +70,14 @@ export const Menu = () => {
           'bg-gray-50 px-6',
           'ring-1 ring-white/5',
           'border-b xl:border-b-0 xl:border-r border-gray-200',
-          isOpen ? 'overflow-y-auto' : 'overflow-y-hidden'
+          isOpen ? 'overflow-y-auto' : 'overflow-y-hidden',
         )}
       >
         <HeaderBar toggleMenu={() => setOpen((prev) => !prev)} />
         <Navigation
           className={classNames(
             'h-0 xl:h-auto xl:flex-1',
-            isOpen && 'flex-1 pb-6'
+            isOpen && 'flex-1 pb-6',
           )}
         />
       </div>
@@ -99,7 +100,7 @@ export const HeaderBar = ({
       className={classNames(
         'flex h-16 shrink-0 items-center justify-center relative',
         'xl:justify-start',
-        className
+        className,
       )}
     >
       <button
@@ -139,6 +140,17 @@ export const Navigation = ({
             <MenuLink to="/what-i-use" className="py-2">
               <RocketLaunchIcon className="w-4" />
               What I Use
+            </MenuLink>
+          </ul>
+        </li>
+        <li>
+          <div className="text-xs font-semibold leading-6 text-gray-400 uppercase">
+            Tools
+          </div>
+          <ul className="-mx-2 mt-2 space-y-1">
+            <MenuLink to="/qr">
+              <QrCodeIcon className="w-5" />
+              QR-Code Generator
             </MenuLink>
           </ul>
         </li>
@@ -184,7 +196,7 @@ export const Navigation = ({
                 'text-white text-sm font-medium text-center',
                 'rounded-lg',
                 'py-2',
-                'mb-4'
+                'mb-4',
               )}
             >
               🔥 Hire me
