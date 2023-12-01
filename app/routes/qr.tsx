@@ -57,7 +57,9 @@ export default function QrCodeGeneratorRoute() {
                   id="codetype-qr"
                   name="codetype"
                   value="qrcode"
-                  defaultChecked={data?.codetype === 'qrcode'}
+                  defaultChecked={
+                    data?.codetype == null || data?.codetype === 'qrcode'
+                  }
                 />
                 <label htmlFor="codetype-qr" className="pl-2 pr-4">
                   QR
