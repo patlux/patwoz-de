@@ -3,7 +3,7 @@ name: validate
 on: [push, pull_request]
 
 env:
-  BUN_VERSION: 0.7.3
+  BUN_VERSION: 1.0.14
 
 jobs:
   build:

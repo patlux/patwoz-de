@@ -53,7 +53,7 @@ $ bun run test:e2e
 **deploy**
 
 ```sh
-bunx checkly deploy
+bun x checkly deploy
 ```
 
 ## Contact
