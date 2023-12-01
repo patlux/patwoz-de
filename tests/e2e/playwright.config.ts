@@ -1,6 +1,5 @@
-import type { PlaywrightTestConfig } from '@playwright/test';
+import { devices, type PlaywrightTestConfig } from '@playwright/test';
 
-// change to false for debugging
 const headless = true;
 
 process.env.BASE_URL ??= `http://localhost:3000`;
@@ -9,10 +8,11 @@ process.env.BASE_URL ??= `http://localhost:3000`;
  * See https://playwright.dev/docs/test-configuration.
  */
 const config: PlaywrightTestConfig = {
-  testDir: './',
+  timeout: 1000 * 30,
+  testDir: '.',
   testMatch: /.*.e2e.ts/,
   forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 2 : 1,
+  retries: 1,
   use: {
     trace: 'on-first-retry',
     channel: 'chrome',
@@ -23,29 +23,35 @@ const config: PlaywrightTestConfig = {
   },
   reporter: [['list'], ['html', { open: 'never' }]],
   outputDir: 'test-results/',
-  webServer: {
-    // playwright checks if this is reachable,
-    url: `${process.env.BASE_URL}/health`,
-    // if not, it will run the command
-    command: `bun run build-start`,
-    env: {
-      PORT: '3000',
-    },
-    cwd: '../../',
-    reuseExistingServer: true,
-  },
+  webServer:
+    process.env.NO_BUILD != null
+      ? undefined
+      : {
+          command:
+            process.env.BUILD != null
+              ? `PORT=${process.env.PORT} bun run build-start`
+              : `PORT=${process.env.PORT} bun run dev`,
+          url: process.env.BASE_URL,
+          reuseExistingServer: !process.env.CI,
+        },
   fullyParallel: headless,
   workers: process.env.CI ? 1 : headless ? undefined : 1,
   projects: [
     {
-      name: `dev+js`,
+      name: 'Google Chrome',
       use: {
+        ...devices['Desktop Chrome'],
+        channel: 'chrome',
+        locale: 'de-DE',
         javaScriptEnabled: true,
       },
     },
     {
-      name: `dev-js`,
+      name: 'Google Chrome Without Javascript',
       use: {
+        ...devices['Desktop Chrome'],
+        channel: 'chrome',
+        locale: 'de-DE',
         javaScriptEnabled: false,
       },
     },
