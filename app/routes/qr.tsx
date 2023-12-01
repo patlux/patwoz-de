@@ -1,10 +1,18 @@
-import type { LoaderFunctionArgs } from '@remix-run/node';
+import type { LoaderFunctionArgs, MetaFunction } from '@remix-run/node';
 import { Form, useLoaderData } from '@remix-run/react';
 import { BaseLayout } from '~/components/BaseLayout';
 import { Introduction } from '~/components/Introduction';
 import { PageViewCounter } from '~/components/PageViewCounter';
 import qrcode from 'qrcode';
 import invariant from '~/utils/invariant';
+
+export const meta: MetaFunction = () => {
+  return [
+    {
+      title: 'QR Code Generator | Patrick Wozniak',
+    },
+  ];
+};
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   const url = new URL(request.url);
