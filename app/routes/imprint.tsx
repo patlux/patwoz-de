@@ -1,9 +1,9 @@
-import type { LoaderArgs, V2_MetaFunction } from '@remix-run/node';
+import type { LoaderFunctionArgs, MetaFunction } from '@remix-run/node';
 import { BaseLayout } from '~/components/BaseLayout';
 import { PageViewCounter } from '~/components/PageViewCounter';
 import { trackPage } from '~/utils/trackPage.server';
 
-export const meta: V2_MetaFunction = () => {
+export const meta: MetaFunction = () => {
   return [
     {
       title: 'Imprint',
@@ -11,7 +11,7 @@ export const meta: V2_MetaFunction = () => {
   ];
 };
 
-export const loader = ({ request }: LoaderArgs) => {
+export const loader = ({ request }: LoaderFunctionArgs) => {
   return trackPage(request);
 };
 

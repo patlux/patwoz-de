@@ -1,4 +1,4 @@
-import type { LinksFunction, V2_MetaFunction } from '@remix-run/node';
+import type { LinksFunction, MetaFunction } from '@remix-run/node';
 import {
   isRouteErrorResponse,
   Links,
@@ -17,7 +17,7 @@ export let links: LinksFunction = () => {
   return [{ rel: 'stylesheet', href: tailwindCssUrl }];
 };
 
-export const meta: V2_MetaFunction = () => {
+export const meta: MetaFunction = () => {
   return [
     {
       title: 'Patrick Wozniak: Software Engineer',
