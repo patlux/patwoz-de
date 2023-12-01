@@ -1,4 +1,4 @@
-import { LoaderFunctionArgs } from '@remix-run/node';
+import type { LoaderFunctionArgs } from '@remix-run/node';
 import { Form, useLoaderData } from '@remix-run/react';
 import { BaseLayout } from '~/components/BaseLayout';
 import { Introduction } from '~/components/Introduction';
@@ -63,6 +63,7 @@ export default function QrCodeGeneratorRoute() {
               <div id="qrCode" className="flex justify-center">
                 <img
                   className="w-full aspect-square"
+                  alt="QR Code"
                   src={`data:image/png;base64, ${data.qrCodeImageUrl}`}
                 />
               </div>
