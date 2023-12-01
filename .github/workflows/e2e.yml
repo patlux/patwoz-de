@@ -26,7 +26,7 @@ jobs:
         run: bun run playwright install ffmpeg
 
       - name: Run Playwright tests
-        run: BUILD=1 bun run test:e2e
+        run: bun run test:e2e
 
       - uses: actions/upload-artifact@v3
         if: always()

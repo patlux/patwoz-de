@@ -9,7 +9,7 @@ process.env.BASE_URL ??= `http://localhost:3000`;
  */
 const config: PlaywrightTestConfig = {
   timeout: 1000 * 30,
-  testDir: '.',
+  testDir: './tests/e2e',
   testMatch: /.*.e2e.ts/,
   forbidOnly: !!process.env.CI,
   retries: 1,
@@ -27,10 +27,7 @@ const config: PlaywrightTestConfig = {
     process.env.NO_BUILD != null
       ? undefined
       : {
-          command:
-            process.env.BUILD != null
-              ? `PORT=${process.env.PORT} bun run build-start`
-              : `PORT=${process.env.PORT} bun run dev`,
+          command: `PORT=${process.env.PORT} bun run dev`,
           url: process.env.BASE_URL,
           reuseExistingServer: !process.env.CI,
         },
