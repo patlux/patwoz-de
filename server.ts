@@ -3,7 +3,6 @@ import { createRequestHandler, logDevReady } from '@remix-run/server-runtime';
 import { migrate } from 'bun-sqlite-migrations';
 
 import { db } from '~/utils/db.server';
-import { getGitCommitHash } from '~/utils/git.server' assert { type: 'macro' };
 
 migrate(db, [
   {
@@ -46,10 +45,6 @@ const bunServeOptions: ServeOptions = {
   fetch: async (request) => {
     const url = new URL(request.url);
 
-    if (url.pathname === '/version') {
-      return Promise.resolve(new Response(getGitCommitHash()));
-    }
-
     console.log(
       `[${request.method}] ${url.pathname} (${request.headers.get(
         'user-agent',
@@ -88,7 +83,6 @@ const bunServeOptions: ServeOptions = {
     const handler = createRequestHandler(build, process.env.NODE_ENV);
 
     const response = await handler(request);
-    response.headers.set('X-GIT-HASH', getGitCommitHash());
 
     return new Response(response.body, {
       status: response.status,
