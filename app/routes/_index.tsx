@@ -1,11 +1,11 @@
-import type { LoaderArgs } from '@remix-run/node';
+import type { LoaderFunctionArgs } from '@remix-run/node';
 import { BaseLayout } from '~/components/BaseLayout';
 import { Footer } from '~/components/Footer';
 import { Introduction } from '~/components/Introduction';
 import { PageViewCounter } from '~/components/PageViewCounter';
 import { trackPage } from '~/utils/trackPage.server';
 
-export const loader = ({ request }: LoaderArgs) => {
+export const loader = ({ request }: LoaderFunctionArgs) => {
   return trackPage(request);
 };
 

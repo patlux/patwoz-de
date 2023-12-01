@@ -1,6 +1,5 @@
 import type { ServeOptions } from 'bun';
-import type { RequestHandler } from '@remix-run/server-runtime';
-import { createRequestHandler } from '@remix-run/server-runtime';
+import { createRequestHandler, logDevReady } from '@remix-run/server-runtime';
 import { migrate } from 'bun-sqlite-migrations';
 
 import { db } from '~/utils/db.server';
@@ -35,81 +34,71 @@ migrate(db, [
   },
 ]);
 
-const requestHandler: RequestHandler = async (request) => {
-  // We should cache the build and the requestHandler
-  // But then `fetch` is not working fully
-  // login not working because it follows the responses
+// Otherwise the CI will fail because we don't create a build
+// @ts-ignore
+let build: ServerBuild = await import('./build/index.js');
 
-  // Do not remove the @ts-ignore (also don't replace with @ts-expect-error)
-  // otherwise the pipeline will fail because `./build`
-  // only exists when the server is build once
-
-  // @ts-ignore
-  const build = await import('./build');
-  const handler = createRequestHandler(
-    // @ts-ignore
-    build,
-    process.env.NODE_ENV === 'development' ? 'development' : 'production'
-  );
-  const response = await handler(request);
-  return new Response(response.body, {
-    status: response.status,
-    statusText: response.statusText,
-    headers: {
-      ...response.headers,
-      'X-GIT-HASH': getGitCommitHash(),
-    },
-  });
-};
-
-export const withStaticDir =
-  (requestHandler: RequestHandler) => async (request: Request) => {
-    const url = new URL(request.url);
-
-    if (url.pathname.length < 2) {
-      return requestHandler(request);
-    }
-
-    const filePath = `public/${url.pathname}`;
-
-    const file = Bun.file(filePath);
-    if (await file.exists()) {
-      const file = Bun.file(filePath);
-      return new Response(file, {
-        headers: {
-          'Content-Type': file.type,
-          'Cache-Control': 'public, max-age=31536000',
-        },
-      });
-    }
-
-    return requestHandler(request);
-  };
-
-export const withLogging =
-  (requestHandler: RequestHandler) => (request: Request) => {
-    const url = new URL(request.url);
-    console.log(
-      `[${request.method}] ${url.pathname} (${request.headers.get(
-        'user-agent'
-      )})`
-    );
-    return requestHandler(request);
-  };
-
-const withDebug = (requestHandler: RequestHandler) => (request: Request) => {
-  const url = new URL(request.url);
-  if (url.pathname === '/version') {
-    return Promise.resolve(new Response(getGitCommitHash()));
-  }
-  return requestHandler(request);
-};
+if (process.env.NODE_ENV === 'development') {
+  logDevReady(build);
+}
 
 const bunServeOptions: ServeOptions = {
-  fetch: withStaticDir(withLogging(withDebug(requestHandler))),
+  fetch: async (request) => {
+    const url = new URL(request.url);
+
+    if (url.pathname === '/version') {
+      return Promise.resolve(new Response(getGitCommitHash()));
+    }
+
+    console.log(
+      `[${request.method}] ${url.pathname} (${request.headers.get(
+        'user-agent',
+      )})`,
+    );
+
+    const filePath = 'public' + url.pathname;
+    try {
+      const file = Bun.file(filePath);
+      if (await file.exists()) {
+        return new Response(file, {
+          headers: {
+            'Content-Type': file.type,
+            'Cache-Control': 'public, max-age=31536000',
+          },
+        });
+      }
+    } catch (error) {
+      console.error(
+        `ERROR in serving static file "${filePath}":`,
+        { filePath, pathname: url.pathname },
+        error,
+      );
+    }
+
+    // We should cache the build and the requestHandler
+    // But then `fetch` is not working fully
+    // login not working because it follows the responses
+
+    // Do not remove the @ts-ignore (also don't replace with @ts-expect-error)
+    // otherwise the pipeline will fail because `./build`
+    // only exists when the server is build once
+
+    // @ts-ignore
+    let build: ServerBuild = await import('./build/index.js');
+    const handler = createRequestHandler(build, process.env.NODE_ENV);
+
+    const response = await handler(request);
+    response.headers.set('X-GIT-HASH', getGitCommitHash());
+
+    return new Response(response.body, {
+      status: response.status,
+      statusText: response.statusText,
+      headers: response.headers,
+    });
+  },
   error: () => {
     return new Response(
-      `Something went wrong. Sorry for that! Contact me by mail: hi@patwoz.de :)`
+      `Something went wrong. Sorry for that! Contact me by mail: hi@patwoz.de :)`,
     );
   },
 };

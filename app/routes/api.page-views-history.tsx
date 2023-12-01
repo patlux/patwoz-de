@@ -1,4 +1,4 @@
-import type { LoaderArgs } from '@remix-run/node';
+import type { LoaderFunctionArgs } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import { z } from 'zod';
 import { formatDateLikeDb } from '~/utils/db.server';
@@ -22,7 +22,7 @@ export const SearchParamsSchema = z.object({
   'user-agent': z.string().optional(),
 });
 
-export const loader = ({ request }: LoaderArgs) => {
+export const loader = ({ request }: LoaderFunctionArgs) => {
   const pageViewHistory = getAllPageViewHistory();
 
   const url = new URL(request.url);
@@ -30,7 +30,7 @@ export const loader = ({ request }: LoaderArgs) => {
   if (!resultSearchParams.success) {
     throw json(
       { ok: false, errorType: 'error', errors: resultSearchParams.errors },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
