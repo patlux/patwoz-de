@@ -12,6 +12,6 @@ test.beforeEach(async ({ page }) => {
 
 test('Should see home page', async ({ page }) => {
   await expect(
-    page.getByRole('heading', { name: 'Patrick Wozniak' })
+    page.getByRole('heading', { name: 'Patrick Wozniak' }),
   ).toBeVisible();
 });

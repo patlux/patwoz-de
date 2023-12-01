@@ -50,7 +50,7 @@ test('Should open /imprint', async () => {
 test('Should throw 404 if page was not found', async () => {
   const server = await createServer();
   const req = new Request(
-    `http://${server.hostname}:${server.port}/doesnt-exist`
+    `http://${server.hostname}:${server.port}/doesnt-exist`,
   );
   const res = await server.fetch(req);
   expect(res.status).toBe(404);

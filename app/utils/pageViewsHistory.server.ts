@@ -15,7 +15,7 @@ export type PageViewHistory = PageViewHistoryMeta & PageViewHistoryValues;
 
 export const addingPageViewHistory = (values: PageViewHistoryValues) => {
   db.query(
-    `INSERT INTO page_views_history(path, useragent, referrer) VALUES (:path, :useragent, :referrer);`
+    `INSERT INTO page_views_history(path, useragent, referrer) VALUES (:path, :useragent, :referrer);`,
   ).run({
     ':path': values.path,
     ':useragent': values.useragent,

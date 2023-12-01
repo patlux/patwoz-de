@@ -25,7 +25,7 @@ export const SearchParamsSchema = z.object({
 });
 
 function isIterable(
-  maybeIterable: unknown
+  maybeIterable: unknown,
 ): maybeIterable is Iterable<unknown> {
   return Symbol.iterator in Object(maybeIterable);
 }
@@ -38,8 +38,8 @@ function parseParams(o: any, schema: any, key: string, value: any) {
       shape instanceof ZodObject
         ? shape.shape
         : shape instanceof ZodEffects
-        ? shape._def.schema
-        : null;
+          ? shape._def.schema
+          : null;
     if (shape === null) {
       throw new Error(`Could not find shape for key ${key}`);
     }
@@ -102,7 +102,7 @@ function processDef(def: ZodTypeAny, o: any, key: string, value: string) {
 
 function getParamsInternal<T>(
   params: URLSearchParams | FormData | Record<string, string | undefined>,
-  schema: any
+  schema: any,
 ):
   | { success: true; data: T; errors: undefined }
   | { success: false; data: undefined; errors: { [key: string]: string } } {
@@ -154,7 +154,7 @@ function getParamsInternal<T>(
 
 export function getParams<T extends ZodType<any, any, any>>(
   params: URLSearchParams | FormData | Record<string, string | undefined>,
-  schema: T
+  schema: T,
 ) {
   type ParamsType = z.infer<T>;
   return getParamsInternal<ParamsType>(params, schema);

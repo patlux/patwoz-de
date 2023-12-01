@@ -10,7 +10,7 @@ export const increasePageViewsForPath = (pathname: string) => {
     DO UPDATE
     SET
       count=count+1;
-  `
+  `,
   ).run(pathname);
 };
 
@@ -25,7 +25,7 @@ export const getPageViewsForPath = (pathname: string) => {
       WHERE
         path = ?
       LIMIT 1;
-    `
+    `,
     )
     .get(pathname);
 

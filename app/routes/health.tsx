@@ -10,9 +10,9 @@ export const loader: LoaderFunction = () => {
     .parse(
       db
         .query(
-          `SELECT name FROM sqlite_schema WHERE type ='table' AND name NOT LIKE 'sqlite_%';`
+          `SELECT name FROM sqlite_schema WHERE type ='table' AND name NOT LIKE 'sqlite_%';`,
         )
-        .all()
+        .all(),
     );
   return 'OK';
 };
