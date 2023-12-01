@@ -3,7 +3,8 @@ import { Form, useLoaderData } from '@remix-run/react';
 import { BaseLayout } from '~/components/BaseLayout';
 import { Introduction } from '~/components/Introduction';
 import { PageViewCounter } from '~/components/PageViewCounter';
-import qrcode from 'qrcode';
+import bwip from 'bwip-js';
+import clsx from 'clsx';
 
 export const meta: MetaFunction = () => {
   return [
@@ -16,18 +17,23 @@ export const meta: MetaFunction = () => {
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   const url = new URL(request.url);
   const text = url.searchParams.get('text');
+  const codetype = url.searchParams.get('codetype');
 
   if (text == null) {
     return null;
   }
 
-  const qrCodeImageUrl = (
-    await qrcode.toBuffer(text.toString(), {
-      type: 'png',
+  const imageBase64 = (
+    await bwip.toBuffer({
+      bcid: codetype ?? 'qrcode',
+      text,
       scale: 8,
+      includetext: true,
+      textxalign: 'center',
     })
   ).toString('base64');
-  return { text: text.toString(), qrCodeImageUrl };
+
+  return { text: text.toString(), codetype: codetype ?? 'qr', imageBase64 };
 };
 
 export default function QrCodeGeneratorRoute() {
@@ -43,11 +49,31 @@ export default function QrCodeGeneratorRoute() {
           <div className="w-full p-4">
             <Form reloadDocument method="get" className="mb-4">
               <h1 className="font-bold text-center text-2xl mb-4">
-                QR Code Generator
+                Code Generator
               </h1>
               <div className="mb-4">
+                <input
+                  type="radio"
+                  id="codetype-qr"
+                  name="codetype"
+                  value="qrcode"
+                  defaultChecked={data?.codetype === 'qrcode'}
+                />
+                <label htmlFor="codetype-qr" className="pl-2 pr-4">
+                  QR
+                </label>
+                <input
+                  type="radio"
+                  id="codetype-code128"
+                  name="codetype"
+                  value="code128"
+                  defaultChecked={data?.codetype === 'code128'}
+                />
+                <label htmlFor="codetype-code128" className="pl-2 pr-4">
+                  Code128
+                </label>
                 <label
-                  className="block text-gray-700 text-sm font-bold mb-2"
+                  className="mt-4 block text-gray-700 text-sm font-bold mb-2"
                   htmlFor="url"
                 >
                   Enter URL or Text
@@ -68,12 +94,17 @@ export default function QrCodeGeneratorRoute() {
                 Generate
               </button>
             </Form>
-            {data?.qrCodeImageUrl && (
+            {data?.imageBase64 && (
               <div id="qrCode" className="flex justify-center">
                 <img
-                  className="w-full aspect-square"
+                  className={clsx(
+                    'w-full',
+                    data.codetype === 'code128'
+                      ? 'aspect-video'
+                      : 'aspect-square',
+                  )}
                   alt="QR Code"
-                  src={`data:image/png;base64, ${data.qrCodeImageUrl}`}
+                  src={`data:image/png;base64, ${data.imageBase64}`}
                 />
               </div>
             )}
