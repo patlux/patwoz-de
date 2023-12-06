@@ -1,5 +1,5 @@
 import { type ComponentProps, useState } from 'react';
-import { NavLink, type NavLinkProps } from '@remix-run/react';
+import { Link, NavLink, type NavLinkProps } from '@remix-run/react';
 
 import ArrowTopRightOnSquareIcon from '@heroicons/react/24/outline/ArrowTopRightOnSquareIcon';
 import HomeIcon from '@heroicons/react/24/outline/HomeIcon';
@@ -111,11 +111,13 @@ export const HeaderBar = ({
         <span className="sr-only">Open sidebar</span>
         <Bars3Icon className="h-5 w-5" aria-hidden="true" />
       </button>
-      <img
-        src="/patwoz-logo-transparent-800px.png"
-        alt="Logo of patwoz.de"
-        width="60px"
-      />
+      <Link to="/">
+        <img
+          src="/patwoz-logo-transparent-800px.png"
+          alt="Logo of patwoz.de"
+          width="60px"
+        />
+      </Link>
     </div>
   );
 };
