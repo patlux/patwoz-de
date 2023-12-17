@@ -57,6 +57,7 @@ export default function QrCodeGeneratorRoute() {
                   href="https://bun.sh"
                   className="hover:underline"
                   target="_blank"
+                  rel="noreferrer"
                 >
                   bun.sh (typescript)
                 </a>{' '}
@@ -65,6 +66,7 @@ export default function QrCodeGeneratorRoute() {
                   href="https://webassembly.org/"
                   className="hover:underline"
                   target="_blank"
+                  rel="noreferrer"
                 >
                   webassembly
                 </a>{' '}
@@ -73,6 +75,7 @@ export default function QrCodeGeneratorRoute() {
                   href="https://www.rust-lang.org/"
                   className="hover:underline"
                   target="_blank"
+                  rel="noreferrer"
                 >
                   rust
                 </a>
