@@ -1,0 +1,16 @@
+[package]
+name = "barcode"
+version = "0.1.0"
+edition = "2021"
+
+[package.metadata.wasm-pack.profile.release]
+# FIXME: enable it. fix docker build.
+# Otherwise the compiled .wasm file is 60kb larger
+wasm-opt = false
+
+[lib]
+crate-type=["rlib", "cdylib"]
+
+[dependencies]
+barcoders = {version = "1.0.2", features = ["image"]}
+wasm-bindgen = "0.2.89"

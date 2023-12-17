@@ -5,6 +5,7 @@ import { Introduction } from '~/components/Introduction';
 import { PageViewCounter } from '~/components/PageViewCounter';
 import bwip from 'bwip-js';
 import clsx from 'clsx';
+import barcode from '~/utils/barcode.server';
 
 export const meta: MetaFunction = () => {
   return [
@@ -24,13 +25,15 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   }
 
   const imageBase64 = (
-    await bwip.toBuffer({
-      bcid: codetype ?? 'qrcode',
-      text,
-      scale: 8,
-      includetext: true,
-      textxalign: 'center',
-    })
+    codetype === 'code128'
+      ? Buffer.from(barcode.to_png(20, barcode.create_code128(text)))
+      : await bwip.toBuffer({
+          bcid: codetype ?? 'qrcode',
+          text,
+          scale: 8,
+          includetext: true,
+          textxalign: 'center',
+        })
   ).toString('base64');
 
   return { text: text.toString(), codetype: codetype ?? 'qr', imageBase64 };
@@ -48,10 +51,37 @@ export default function QrCodeGeneratorRoute() {
         <div className="md:flex">
           <div className="w-full p-4">
             <Form reloadDocument method="get" className="mb-4">
-              <h1 className="font-bold text-center text-2xl mb-4">
-                Code Generator
-              </h1>
-              <div className="mb-4">
+              <h1 className="font-bold text-center text-2xl">Code Generator</h1>
+              <p className="text-zinc-600 text-center">
+                <a
+                  href="https://bun.sh"
+                  className="hover:underline"
+                  target="_blank"
+                >
+                  bun.sh (typescript)
+                </a>{' '}
+                {'↔'}{' '}
+                <a
+                  href="https://webassembly.org/"
+                  className="hover:underline"
+                  target="_blank"
+                >
+                  webassembly
+                </a>{' '}
+                {'↔'}{' '}
+                <a
+                  href="https://www.rust-lang.org/"
+                  className="hover:underline"
+                  target="_blank"
+                >
+                  rust
+                </a>
+              </p>
+              <p className="text-zinc-600 text-center mt-2">
+                This demonstrates the usage of a compiled rust library into
+                webassembly to be embedded into a node/bun server.
+              </p>
+              <div className="mt-8 mb-4">
                 <input
                   type="radio"
                   id="codetype-qr"
@@ -97,14 +127,18 @@ export default function QrCodeGeneratorRoute() {
               </button>
             </Form>
             {data?.imageBase64 && (
-              <div id="qrCode" className="flex justify-center">
+              <div
+                id="qrCode"
+                className={clsx(
+                  'flex items-center justify-center',
+                  'w-full',
+                  'border-zinc-200 border rounded-xl',
+                  data.codetype === 'code128'
+                    ? 'aspect-video'
+                    : 'aspect-square',
+                )}
+              >
                 <img
-                  className={clsx(
-                    'w-full',
-                    data.codetype === 'code128'
-                      ? 'aspect-video'
-                      : 'aspect-square',
-                  )}
                   alt="QR Code"
                   src={`data:image/png;base64, ${data.imageBase64}`}
                 />

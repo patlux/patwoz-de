@@ -12,3 +12,6 @@ server.js
 .eslintcache
 playwright-report/
 test-results/
+
+# rust
+target/
