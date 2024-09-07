@@ -1,6 +1,6 @@
 import type { LoaderFunctionArgs } from '@remix-run/node'
 import clsx from 'clsx'
-import { ComponentProps } from 'react'
+import { type ComponentProps } from 'react'
 import { BaseLayout } from '~/components/BaseLayout'
 import { Footer } from '~/components/Footer'
 import { Introduction } from '~/components/Introduction'
@@ -101,6 +101,7 @@ type CompanyProps = ComponentProps<'a'> & {}
 
 const Company = ({ className, ...aProps }: CompanyProps) => {
   return (
+    // eslint-disable-next-line jsx-a11y/anchor-has-content
     <a
       target="_blank"
       rel="noreferrer"
