@@ -28,6 +28,68 @@ function Index() {
           Contact me: <a href="mailto:hi@patwoz.de">hi@patwoz.de</a>
         </p>
 
+        <h5 className="font-semibold">I worked for</h5>
+
+        <div className="grid grid-col-2 sm:grid-cols-4 gap-4">
+          <a
+            href="https://www.sap.com/index.html"
+            target="_blank"
+            rel="noreferrer"
+            className="h-24 flex flex-1 justify-center items-center border border-transparent hover:border-zinc-200"
+          >
+            <img
+              alt="Logo of SAP"
+              src="/company/sap.svg"
+              width="80px"
+              className="my-0"
+            />
+          </a>
+          <a
+            href="https://www.porsche.com/germany/"
+            target="_blank"
+            rel="noreferrer"
+            className="h-24 flex flex-1 justify-center items-center border border-transparent hover:border-zinc-200"
+          >
+            <img
+              alt="Logo of Porsche"
+              src="/company/Porsche-Logo.wine.svg"
+              width="100px"
+              className="my-0"
+            />
+          </a>
+          <a
+            href="https://www.stroeer.de/"
+            target="_blank"
+            rel="noreferrer"
+            className="h-24 relative py-4 sm:py0 flex flex-1 flex-col justify-center items-center border border-transparent hover:border-zinc-200"
+          >
+            <img
+              className="my-0"
+              alt="Logo of Ströer"
+              src="/company/str-logo-white.svg"
+              width="120px"
+            />
+            <img
+              className="mt-2 mb-0"
+              alt="Logo of t-online"
+              src="/company/t-online-desktop.327ab976.svg"
+              width="100px"
+            />
+          </a>
+          <a
+            href="https://www.abl.de/"
+            target="_blank"
+            rel="noreferrer"
+            className="h-24 flex flex-1 justify-center items-center border border-transparent hover:border-zinc-200"
+          >
+            <img
+              alt="Logo of ABL"
+              src="/company/ABL_Logo.svg"
+              className="my-0"
+            />
+          </a>
+        </div>
+
         <h4>piparo.tech</h4>
 
         <p>
