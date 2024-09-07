@@ -1,15 +1,15 @@
 /**
  * @see {@link https://github.com/rustwasm/wasm-pack/issues/1334#issuecomment-1783654073}
  */
-import { readFile, writeFile } from 'node:fs/promises';
+import { readFile, writeFile } from 'node:fs/promises'
 
-const cargoTomlContent = await readFile('./Cargo.toml', 'utf8');
+const cargoTomlContent = await readFile('./Cargo.toml', 'utf8')
 const cargoPackageName = /\[package\]\nname = "(.*?)"/.exec(
   cargoTomlContent,
-)![1];
-const name = cargoPackageName.replace(/-/g, '_');
+)![1]
+const name = cargoPackageName.replace(/-/g, '_')
 
-const content = await readFile(`./dist/${name}.js`, 'utf8');
+const content = await readFile(`./dist/${name}.js`, 'utf8')
 
 const patched = content
   // use global TextDecoder TextEncoder
@@ -43,6 +43,6 @@ const bytes = __toBinary(${JSON.stringify(
       await readFile(`./dist/${name}_bg.wasm`, 'base64'),
     )});
 `,
-  );
+  )
 
-await writeFile(`./dist/${name}.mjs`, patched);
+await writeFile(`./dist/${name}.mjs`, patched)

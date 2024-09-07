@@ -1,26 +1,26 @@
-import { type ComponentProps, useState } from 'react';
-import { Link, NavLink, type NavLinkProps } from '@remix-run/react';
+import { type ComponentProps, useState } from 'react'
+import { Link, NavLink, type NavLinkProps } from '@remix-run/react'
 
-import ArrowTopRightOnSquareIcon from '@heroicons/react/24/outline/ArrowTopRightOnSquareIcon';
-import HomeIcon from '@heroicons/react/24/outline/HomeIcon';
-import BriefcaseIcon from '@heroicons/react/24/outline/BriefcaseIcon';
-import RocketLaunchIcon from '@heroicons/react/24/outline/RocketLaunchIcon';
-import Bars3Icon from '@heroicons/react/24/outline/Bars3Icon';
-import QrCodeIcon from '@heroicons/react/24/outline/QrCodeIcon';
+import ArrowTopRightOnSquareIcon from '@heroicons/react/24/outline/ArrowTopRightOnSquareIcon'
+import HomeIcon from '@heroicons/react/24/outline/HomeIcon'
+import BriefcaseIcon from '@heroicons/react/24/outline/BriefcaseIcon'
+import RocketLaunchIcon from '@heroicons/react/24/outline/RocketLaunchIcon'
+import Bars3Icon from '@heroicons/react/24/outline/Bars3Icon'
+import QrCodeIcon from '@heroicons/react/24/outline/QrCodeIcon'
 
-import { GithubIcon } from '~/icons/GithubIcon';
-import { LinkedInIcon } from '~/icons/LinkedInIcon';
-import { StackOverflowIcon } from '~/icons/StackOverflowIcon';
-import { TwitterIcon } from '~/icons/TwitterIcon';
-import { XingIcon } from '~/icons/XingIcon';
-import { classNames } from '~/utils/classNames';
+import { GithubIcon } from '~/icons/GithubIcon'
+import { LinkedInIcon } from '~/icons/LinkedInIcon'
+import { StackOverflowIcon } from '~/icons/StackOverflowIcon'
+import { TwitterIcon } from '~/icons/TwitterIcon'
+import { XingIcon } from '~/icons/XingIcon'
+import { classNames } from '~/utils/classNames'
 
 const MenuLinkTextIcon = ({
   initial,
   className,
 }: {
-  initial: string;
-  className?: string;
+  initial: string
+  className?: string
 }) => {
   return (
     <div
@@ -31,8 +31,8 @@ const MenuLinkTextIcon = ({
     >
       {initial}
     </div>
-  );
-};
+  )
+}
 
 const MenuLink = ({ className, ...navLinkProps }: NavLinkProps) => {
   return (
@@ -50,18 +50,18 @@ const MenuLink = ({ className, ...navLinkProps }: NavLinkProps) => {
         )
       }
     />
-  );
-};
+  )
+}
 
 const ExternalLinkIcon = () => (
   <>
     <div className="flex-1" />
     <ArrowTopRightOnSquareIcon className="w-4 opacity-20" />
   </>
-);
+)
 
 export const Menu = () => {
-  const [isOpen, setOpen] = useState(false);
+  const [isOpen, setOpen] = useState(false)
   return (
     <div className="xl:fixed xl:inset-y-0 xl:z-50 xl:flex xl:w-72 xl:flex-col">
       <div
@@ -82,12 +82,12 @@ export const Menu = () => {
         />
       </div>
     </div>
-  );
-};
+  )
+}
 
 export type HeaderBarProps = ComponentProps<'div'> & {
-  toggleMenu: () => void;
-};
+  toggleMenu: () => void
+}
 
 export const HeaderBar = ({
   toggleMenu,
@@ -119,8 +119,8 @@ export const HeaderBar = ({
         />
       </Link>
     </div>
-  );
-};
+  )
+}
 
 export const Navigation = ({
   className,
@@ -226,5 +226,5 @@ export const Navigation = ({
         </li>
       </ul>
     </nav>
-  );
-};
+  )
+}

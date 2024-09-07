@@ -1,29 +1,29 @@
-import { useLoaderData } from '@remix-run/react';
-import { BaseLayout } from '~/components/BaseLayout';
-import { PageViewCounter } from '~/components/PageViewCounter';
-import { formatDateLikeDb } from '~/utils/db.server';
-import { getAllPageViewHistory } from '~/utils/pageViewsHistory.server';
-import { subtractDays } from '~/utils/query-helpers';
+import { useLoaderData } from '@remix-run/react'
+import { BaseLayout } from '~/components/BaseLayout'
+import { PageViewCounter } from '~/components/PageViewCounter'
+import { formatDateLikeDb } from '~/utils/db.server'
+import { getAllPageViewHistory } from '~/utils/pageViewsHistory.server'
+import { subtractDays } from '~/utils/query-helpers'
 
 export const loader = () => {
-  const pageViews = getAllPageViewHistory();
+  const pageViews = getAllPageViewHistory()
 
-  const now7daysStr = formatDateLikeDb(subtractDays(7));
-  const now30daysStr = formatDateLikeDb(subtractDays(30));
+  const now7daysStr = formatDateLikeDb(subtractDays(7))
+  const now30daysStr = formatDateLikeDb(subtractDays(30))
 
   return {
     pageViews,
     pageViews7Days: pageViews.filter((pageView) => {
-      return pageView.timestamp > now7daysStr;
+      return pageView.timestamp > now7daysStr
     }),
     pageViews30Days: pageViews.filter((pageView) => {
-      return pageView.timestamp > now30daysStr;
+      return pageView.timestamp > now30daysStr
     }),
-  };
-};
+  }
+}
 
 export const AnalyticsPage = () => {
-  const data = useLoaderData<typeof loader>();
+  const data = useLoaderData<typeof loader>()
   return (
     <BaseLayout footerCenterComponent={<PageViewCounter />}>
       <div>
@@ -58,7 +58,7 @@ export const AnalyticsPage = () => {
         </dl>
       </div>
     </BaseLayout>
-  );
-};
+  )
+}
 
-export default AnalyticsPage;
+export default AnalyticsPage

@@ -1,2 +1,2 @@
-import * as barcode from '@patwoz.dev/barcode';
-export default barcode;
+import * as barcode from '@patwoz.dev/barcode'
+export default barcode

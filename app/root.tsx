@@ -1,4 +1,4 @@
-import type { MetaFunction } from '@remix-run/node';
+import type { MetaFunction } from '@remix-run/node'
 import {
   isRouteErrorResponse,
   Links,
@@ -8,10 +8,10 @@ import {
   Scripts,
   ScrollRestoration,
   useRouteError,
-} from '@remix-run/react';
+} from '@remix-run/react'
 
-import { BaseLayout } from './components/BaseLayout';
-import './tailwind.css';
+import { BaseLayout } from './components/BaseLayout'
+import './tailwind.css'
 
 export const meta: MetaFunction = () => {
   return [
@@ -37,22 +37,22 @@ export const meta: MetaFunction = () => {
     { property: 'profile:first_name', content: 'Patrick' },
     { property: 'profile:last_name', content: 'Wozniak' },
     { property: 'profile:username', content: 'patwoz' },
-  ];
-};
+  ]
+}
 
 export default function Root() {
   return (
     <Document>
       <Outlet />
     </Document>
-  );
+  )
 }
 
 export function ErrorBoundary() {
-  const error = useRouteError();
+  const error = useRouteError()
 
   if (isRouteErrorResponse(error)) {
-    let message;
+    let message
     switch (error.status) {
       case 401:
         message = (
@@ -60,16 +60,16 @@ export function ErrorBoundary() {
             Oops! Looks like you tried to visit a page that you do not have
             access to.
           </p>
-        );
-        break;
+        )
+        break
       case 404:
         message = (
           <p>Oops! Looks like you tried to visit a page that does not exist.</p>
-        );
-        break;
+        )
+        break
 
       default:
-        throw new Error(error.data || error.statusText);
+        throw new Error(error.data || error.statusText)
     }
 
     return (
@@ -81,7 +81,7 @@ export function ErrorBoundary() {
           {message}
         </BaseLayout>
       </Document>
-    );
+    )
   }
 
   return (
@@ -93,15 +93,15 @@ export function ErrorBoundary() {
         </div>
       </BaseLayout>
     </Document>
-  );
+  )
 }
 
 function Document({
   children,
   title,
 }: {
-  children: React.ReactNode;
-  title?: string;
+  children: React.ReactNode
+  title?: string
 }) {
   return (
     <html lang="en">
@@ -136,5 +136,5 @@ function Document({
         {process.env.NODE_ENV === 'development' && <LiveReload />}
       </body>
     </html>
-  );
+  )
 }

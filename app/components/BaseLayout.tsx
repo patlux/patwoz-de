@@ -1,9 +1,9 @@
-import { type PropsWithChildren } from 'react';
-import { Menu } from './Menu';
+import { type PropsWithChildren } from 'react'
+import { Menu } from './Menu'
 
 export type BaseLayoutProps = PropsWithChildren<{
-  footerCenterComponent?: React.ReactNode;
-}>;
+  footerCenterComponent?: React.ReactNode
+}>
 
 export const BaseLayout = ({ children }: BaseLayoutProps) => {
   return (
@@ -16,5 +16,5 @@ export const BaseLayout = ({ children }: BaseLayoutProps) => {
         </div>
       </main>
     </>
-  );
-};
+  )
+}

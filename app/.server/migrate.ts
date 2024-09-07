@@ -1,5 +1,5 @@
-import { migrate } from 'bun-sqlite-migrations';
-import { db } from '~/utils/db.server';
+import { migrate } from 'bun-sqlite-migrations'
+import { db } from '~/utils/db.server'
 
 migrate(db, [
   {
@@ -28,4 +28,4 @@ migrate(db, [
     `,
     version: 3,
   },
-]);
+])

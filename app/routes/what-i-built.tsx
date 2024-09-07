@@ -1,21 +1,21 @@
-import type { LoaderFunctionArgs, MetaFunction } from '@remix-run/node';
-import { BaseLayout } from '~/components/BaseLayout';
-import { Footer } from '~/components/Footer';
-import { Introduction } from '~/components/Introduction';
-import { PageViewCounter } from '~/components/PageViewCounter';
-import { trackPage } from '~/utils/trackPage.server';
+import type { LoaderFunctionArgs, MetaFunction } from '@remix-run/node'
+import { BaseLayout } from '~/components/BaseLayout'
+import { Footer } from '~/components/Footer'
+import { Introduction } from '~/components/Introduction'
+import { PageViewCounter } from '~/components/PageViewCounter'
+import { trackPage } from '~/utils/trackPage.server'
 
 export const meta: MetaFunction = () => {
   return [
     {
       title: 'What I Built | Patrick Wozniak',
     },
-  ];
-};
+  ]
+}
 
 export const loader = ({ request }: LoaderFunctionArgs) => {
-  return trackPage(request);
-};
+  return trackPage(request)
+}
 
 const WhatIBuildRoute = () => {
   return (
@@ -74,7 +74,7 @@ const WhatIBuildRoute = () => {
         <PageViewCounter />
       </Footer>
     </BaseLayout>
-  );
-};
+  )
+}
 
-export default WhatIBuildRoute;
+export default WhatIBuildRoute

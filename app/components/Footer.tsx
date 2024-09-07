@@ -1,5 +1,5 @@
-import { Link } from '@remix-run/react';
-import { type PropsWithChildren } from 'react';
+import { Link } from '@remix-run/react'
+import { type PropsWithChildren } from 'react'
 
 export const Footer = ({ children }: PropsWithChildren) => {
   return (
@@ -17,5 +17,5 @@ export const Footer = ({ children }: PropsWithChildren) => {
         </div>
       </footer>
     </>
-  );
-};
+  )
+}

@@ -24,5 +24,5 @@ export const Introduction = () => {
         </p>
       </article>
     </>
-  );
-};
+  )
+}

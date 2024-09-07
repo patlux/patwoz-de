@@ -1,8 +1,8 @@
-import { devices, type PlaywrightTestConfig } from '@playwright/test';
+import { devices, type PlaywrightTestConfig } from '@playwright/test'
 
-const headless = true;
+const headless = true
 
-process.env.BASE_URL ??= `http://localhost:3000`;
+process.env.BASE_URL ??= `http://localhost:3000`
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -53,6 +53,6 @@ const config: PlaywrightTestConfig = {
       },
     },
   ],
-};
+}
 
-export default config;
+export default config

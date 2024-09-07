@@ -1,27 +1,27 @@
-import type { LoaderFunctionArgs, MetaFunction } from '@remix-run/node';
-import { Form, useLoaderData } from '@remix-run/react';
-import { BaseLayout } from '~/components/BaseLayout';
-import { Introduction } from '~/components/Introduction';
-import { PageViewCounter } from '~/components/PageViewCounter';
-import bwip from 'bwip-js';
-import clsx from 'clsx';
-import barcode from '~/.server/barcode';
+import type { LoaderFunctionArgs, MetaFunction } from '@remix-run/node'
+import { Form, useLoaderData } from '@remix-run/react'
+import { BaseLayout } from '~/components/BaseLayout'
+import { Introduction } from '~/components/Introduction'
+import { PageViewCounter } from '~/components/PageViewCounter'
+import bwip from 'bwip-js'
+import clsx from 'clsx'
+import barcode from '~/.server/barcode'
 
 export const meta: MetaFunction = () => {
   return [
     {
       title: 'QR Code Generator | Patrick Wozniak',
     },
-  ];
-};
+  ]
+}
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
-  const url = new URL(request.url);
-  const text = url.searchParams.get('text');
-  const codetype = url.searchParams.get('codetype');
+  const url = new URL(request.url)
+  const text = url.searchParams.get('text')
+  const codetype = url.searchParams.get('codetype')
 
   if (text == null) {
-    return null;
+    return null
   }
 
   const imageBase64 = (
@@ -34,13 +34,13 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
           includetext: true,
           textxalign: 'center',
         })
-  ).toString('base64');
+  ).toString('base64')
 
-  return { text: text.toString(), codetype: codetype ?? 'qr', imageBase64 };
-};
+  return { text: text.toString(), codetype: codetype ?? 'qr', imageBase64 }
+}
 
 export default function QrCodeGeneratorRoute() {
-  const data = useLoaderData<typeof loader>();
+  const data = useLoaderData<typeof loader>()
 
   return (
     <BaseLayout footerCenterComponent={<PageViewCounter />}>
@@ -151,5 +151,5 @@ export default function QrCodeGeneratorRoute() {
         </div>
       </div>
     </BaseLayout>
-  );
+  )
 }
