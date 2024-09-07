@@ -20,6 +20,7 @@ export const startServer = async () => {
 
   const waitUntilServerStarted = async () => {
     const td = new TextDecoder()
+    // @ts-expect-error
     for await (const line of proc.stdout) {
       const lineStr = td.decode(line)
       if (lineStr.includes('Local')) {
