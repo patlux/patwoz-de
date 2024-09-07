@@ -21,7 +21,8 @@
     "docker:run": " docker run --rm -p 3000:3000 --name patwoz-de patwoz-de:latest",
     "docker:kill": "docker kill patwoz-de",
     "dive": "dive build -t patwoz-de:latest .",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "build:deps": "bun run --filter '*' build"
   },
   "workspaces": [
     "./packages/barcode"
