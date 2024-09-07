@@ -28,11 +28,9 @@ function Imprint() {
         <br />
         Patrick Wozniak
         <br />
-        c/o AutorenServices.de
+        Nürnberger Str. 4
         <br />
-        Birkenallee 24
-        <br />
-        36037 Fulda
+        90571 Schwaig
         <br />
       </p>
     </BaseLayout>
