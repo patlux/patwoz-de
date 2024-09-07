@@ -7,6 +7,7 @@ import BriefcaseIcon from '@heroicons/react/24/outline/BriefcaseIcon'
 import RocketLaunchIcon from '@heroicons/react/24/outline/RocketLaunchIcon'
 import Bars3Icon from '@heroicons/react/24/outline/Bars3Icon'
 import QrCodeIcon from '@heroicons/react/24/outline/QrCodeIcon'
+import PencilIcon from '@heroicons/react/24/outline/PencilIcon'
 
 import { GithubIcon } from '~/icons/GithubIcon'
 import { LinkedInIcon } from '~/icons/LinkedInIcon'
@@ -134,6 +135,10 @@ export const Navigation = ({
             <MenuLink to="/" className="py-2">
               <HomeIcon className="w-4" />
               Introduction
+            </MenuLink>
+            <MenuLink to="/blog" className="py-2">
+              <PencilIcon className="w-4" />
+              Blog
             </MenuLink>
             <MenuLink to="/what-i-built" className="py-2">
               <BriefcaseIcon className="w-4" />
