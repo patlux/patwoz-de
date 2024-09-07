@@ -1,4 +1,4 @@
-import type { LinksFunction, MetaFunction } from '@remix-run/node';
+import type { MetaFunction } from '@remix-run/node';
 import {
   isRouteErrorResponse,
   Links,
@@ -11,11 +11,7 @@ import {
 } from '@remix-run/react';
 
 import { BaseLayout } from './components/BaseLayout';
-import tailwindCssUrl from './tailwind.css';
-
-export let links: LinksFunction = () => {
-  return [{ rel: 'stylesheet', href: tailwindCssUrl }];
-};
+import './tailwind.css';
 
 export const meta: MetaFunction = () => {
   return [

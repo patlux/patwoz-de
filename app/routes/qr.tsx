@@ -3,9 +3,9 @@ import { Form, useLoaderData } from '@remix-run/react';
 import { BaseLayout } from '~/components/BaseLayout';
 import { Introduction } from '~/components/Introduction';
 import { PageViewCounter } from '~/components/PageViewCounter';
-import bwip from 'bwip-js';
+// import bwip from 'bwip-js';
 import clsx from 'clsx';
-import barcode from '~/utils/barcode.server';
+// import barcode from '~/utils/barcode.server';
 
 export const meta: MetaFunction = () => {
   return [
@@ -24,17 +24,19 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
     return null;
   }
 
-  const imageBase64 = (
-    codetype === 'code128'
-      ? Buffer.from(barcode.to_png(20, barcode.create_code128(text)))
-      : await bwip.toBuffer({
-          bcid: codetype ?? 'qrcode',
-          text,
-          scale: 8,
-          includetext: true,
-          textxalign: 'center',
-        })
-  ).toString('base64');
+  const imageBase64 = '';
+
+  // const imageBase64 = (
+  //   codetype === 'code128'
+  //     ? Buffer.from(barcode.to_png(20, barcode.create_code128(text)))
+  //     : await bwip.toBuffer({
+  //         bcid: codetype ?? 'qrcode',
+  //         text,
+  //         scale: 8,
+  //         includetext: true,
+  //         textxalign: 'center',
+  //       })
+  // ).toString('base64');
 
   return { text: text.toString(), codetype: codetype ?? 'qr', imageBase64 };
 };
