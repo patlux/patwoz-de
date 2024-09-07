@@ -1,4 +1,4 @@
-ARG BUN_VERSION=1.0.14
+ARG BUN_VERSION=1.1.26
 
 FROM rust:latest as rsbuilder
 

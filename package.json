@@ -23,6 +23,9 @@
     "dive": "dive build -t patwoz-de:latest .",
     "test:e2e": "playwright test"
   },
+  "workspaces": [
+    "./packages/barcode"
+  ],
   "dependencies": {
     "@heroicons/react": "^2.0.17",
     "@remix-run/node": "^2.11.1",
@@ -35,7 +38,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "tailwind-merge": "^1.12.0",
-    "zod": "^3.21.4"
+    "zod": "^3.21.4",
+    "@patwoz.dev/barcode": "workspace:*"
   },
   "devDependencies": {
     "@playwright/test": "^1.33.0",
@@ -59,7 +63,7 @@
     "semi": true,
     "singleQuote": true
   },
-  "workspaces": [
-    "./packages/barcode/dist"
+  "trustedDependencies": [
+    "esbuild"
   ]
 }
