@@ -1,11 +1,7 @@
 name: Fly Deploy
 
 on:
-  workflow_run:
-    workflows: [validate]
-    branches: [main]
-    types:
-      - completed
+  workflow_dispatch:
 
 env:
   FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
