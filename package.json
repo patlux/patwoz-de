@@ -47,6 +47,7 @@
     "@remix-run/dev": "^2.11.1",
     "@remix-run/eslint-config": "^2.11.2",
     "@tailwindcss/typography": "^0.5.9",
+    "@types/bwip-js": "^3.2.3",
     "@types/react": "^18.2.5",
     "@types/react-dom": "^18.2.4",
     "bun-types": "^1.0.14",
