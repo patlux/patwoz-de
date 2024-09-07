@@ -1,17 +1,18 @@
-.git/
-.github/
-node_modules/
-*.log
-.DS_Store
-.env
-.cache/
-public/build/
-build/
-server.js
-*.db
-.eslintcache
-playwright-report/
-test-results/
+.git
+.github
 
-# rust
-target/
+*.log
+
+**/.DS_Store
+.env
+.cache
+
+*.db
+playwright-report
+test-results
+tests
+
+**/node_modules
+**/build
+**/dist
+**/target
