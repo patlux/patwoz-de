@@ -3,6 +3,7 @@ import { Link, useLoaderData } from '@remix-run/react'
 
 import { getPosts } from '~/.server/posts'
 import { BaseLayout } from '~/components/BaseLayout'
+import { Introduction } from '~/components/Introduction'
 
 export const loader = async () => json(await getPosts())
 
@@ -11,6 +12,8 @@ export default function Component() {
 
   return (
     <BaseLayout>
+      <Introduction />
+      <hr className="mt-8" />
       <ul className="space-y-8">
         {posts.map((post) => (
           <li key={post.slug}>
