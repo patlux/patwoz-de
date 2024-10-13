@@ -36,6 +36,7 @@ Now we need to adjust `build.zig` to import the library to our executable:
 // ...
 const cjsonDep = b.dependency("cjson", .{});
 exe.addIncludePath(cjsonDep.path(""));
+exe.linkLibC();
 exe.addCSourceFiles(.{
     .root = .{
         .dependency = .{
