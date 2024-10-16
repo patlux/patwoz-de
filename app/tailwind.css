@@ -40,3 +40,15 @@ code[data-line-numbers-max-digits='3'] > [data-line]::before {
 code[data-line-numbers-max-digits='4'] > [data-line]::before {
   width: 2.25rem;
 }
+
+.prose p code {
+  @apply text-black bg-yellow-50 border border-black/10 rounded-md px-1 font-medium;
+}
+
+.prose p code:before {
+  display: none;
+}
+
+.prose p code:after {
+  display: none;
+}
