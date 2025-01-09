@@ -29,6 +29,7 @@
   ],
   "dependencies": {
     "@heroicons/react": "^2.0.17",
+    "@patwoz.dev/barcode": "workspace:*",
     "@remix-run/node": "^2.11.1",
     "@remix-run/react": "^2.11.1",
     "@remix-run/serve": "^2.11.1",
@@ -38,9 +39,9 @@
     "isbot": "^4.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "remix-utils": "^8.0.0",
     "tailwind-merge": "^1.12.0",
-    "zod": "^3.21.4",
-    "@patwoz.dev/barcode": "workspace:*"
+    "zod": "^3.21.4"
   },
   "devDependencies": {
     "@mdx-js/rollup": "^3.0.1",

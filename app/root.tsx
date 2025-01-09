@@ -2,7 +2,6 @@ import type { MetaFunction } from '@remix-run/node'
 import {
   isRouteErrorResponse,
   Links,
-  LiveReload,
   Meta,
   Outlet,
   Scripts,
@@ -12,6 +11,7 @@ import {
 
 import { BaseLayout } from './components/BaseLayout'
 import './tailwind.css'
+import { ClientOnly } from 'remix-utils/client-only'
 
 export const meta: MetaFunction = () => {
   return [
@@ -133,8 +133,32 @@ function Document({
         {children}
         <ScrollRestoration />
         <Scripts />
-        {process.env.NODE_ENV === 'development' && <LiveReload />}
+        {process.env.NODE_ENV === 'production' && <PlausibleAnalytics />}
+        {process.env.NODE_ENV === 'development' && <PlausibleAnalytics />}
       </body>
     </html>
+  )
+}
+
+const PlausibleAnalytics = () => {
+  return (
+    <>
+      <script
+        defer
+        data-domain="patwoz.dev"
+        src="https://notgoogle.piparo.tech/js/script.hash.outbound-links.tagged-events.js"
+      ></script>
+      <ClientOnly>
+        {() => (
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+                `,
+            }}
+          />
+        )}
+      </ClientOnly>
+    </>
   )
 }
