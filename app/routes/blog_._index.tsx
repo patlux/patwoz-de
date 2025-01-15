@@ -1,11 +1,10 @@
-import { json } from '@remix-run/node'
 import { Link, useLoaderData } from '@remix-run/react'
 
 import { getPosts } from '~/.server/posts'
 import { BaseLayout } from '~/components/BaseLayout'
 import { Introduction } from '~/components/Introduction'
 
-export const loader = async () => json(await getPosts())
+export const loader = async () => await getPosts()
 
 export default function Component() {
   const posts = useLoaderData<typeof loader>()

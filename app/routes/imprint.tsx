@@ -1,7 +1,5 @@
-import type { LoaderFunctionArgs, MetaFunction } from '@remix-run/node'
+import type { MetaFunction } from '@remix-run/react'
 import { BaseLayout } from '~/components/BaseLayout'
-import { PageViewCounter } from '~/components/PageViewCounter'
-import { trackPage } from '~/utils/trackPage.server'
 
 export const meta: MetaFunction = () => {
   return [
@@ -11,13 +9,9 @@ export const meta: MetaFunction = () => {
   ]
 }
 
-export const loader = ({ request }: LoaderFunctionArgs) => {
-  return trackPage(request)
-}
-
 function Imprint() {
   return (
-    <BaseLayout footerCenterComponent={<PageViewCounter />}>
+    <BaseLayout>
       <br />
       <br />
       <br />

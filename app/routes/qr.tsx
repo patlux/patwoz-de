@@ -1,11 +1,10 @@
-import type { LoaderFunctionArgs, MetaFunction } from '@remix-run/node'
+import type { LoaderFunctionArgs, MetaFunction } from '@remix-run/cloudflare'
 import { Form, useLoaderData } from '@remix-run/react'
 import { BaseLayout } from '~/components/BaseLayout'
 import { Introduction } from '~/components/Introduction'
-import { PageViewCounter } from '~/components/PageViewCounter'
 import bwip from 'bwip-js'
 import clsx from 'clsx'
-import barcode from '~/.server/barcode'
+// import barcode from '~/.server/barcode'
 
 export const meta: MetaFunction = () => {
   return [
@@ -43,7 +42,7 @@ export default function QrCodeGeneratorRoute() {
   const data = useLoaderData<typeof loader>()
 
   return (
-    <BaseLayout footerCenterComponent={<PageViewCounter />}>
+    <BaseLayout>
       <Introduction />
       <hr className="mt-8 mb-4" />
 

@@ -6,7 +6,7 @@ import HomeIcon from '@heroicons/react/24/outline/HomeIcon'
 import BriefcaseIcon from '@heroicons/react/24/outline/BriefcaseIcon'
 import RocketLaunchIcon from '@heroicons/react/24/outline/RocketLaunchIcon'
 import Bars3Icon from '@heroicons/react/24/outline/Bars3Icon'
-import QrCodeIcon from '@heroicons/react/24/outline/QrCodeIcon'
+// import QrCodeIcon from '@heroicons/react/24/outline/QrCodeIcon'
 import PencilIcon from '@heroicons/react/24/outline/PencilIcon'
 
 import { GithubIcon } from '~/icons/GithubIcon'
@@ -150,17 +150,17 @@ export const Navigation = ({
             </MenuLink>
           </ul>
         </li>
-        <li>
-          <div className="text-xs font-semibold leading-6 text-gray-400 uppercase">
-            Tools
-          </div>
-          <ul className="-mx-2 mt-2 space-y-1">
-            <MenuLink to="/qr">
-              <QrCodeIcon className="w-5" />
-              QR-Code Generator
-            </MenuLink>
-          </ul>
-        </li>
+        {/* <li> */}
+        {/*   <div className="text-xs font-semibold leading-6 text-gray-400 uppercase"> */}
+        {/*     Tools */}
+        {/*   </div> */}
+        {/*   <ul className="-mx-2 mt-2 space-y-1"> */}
+        {/*     <MenuLink to="/qr"> */}
+        {/*       <QrCodeIcon className="w-5" /> */}
+        {/*       QR-Code Generator */}
+        {/*     </MenuLink> */}
+        {/*   </ul> */}
+        {/* </li> */}
         <li>
           <div className="text-xs font-semibold leading-6 text-gray-400 uppercase">
             Social

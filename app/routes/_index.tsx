@@ -1,19 +1,12 @@
-import type { LoaderFunctionArgs } from '@remix-run/node'
 import clsx from 'clsx'
 import { type ComponentProps } from 'react'
 import { BaseLayout } from '~/components/BaseLayout'
 import { Footer } from '~/components/Footer'
 import { Introduction } from '~/components/Introduction'
-import { PageViewCounter } from '~/components/PageViewCounter'
-import { trackPage } from '~/utils/trackPage.server'
-
-export const loader = ({ request }: LoaderFunctionArgs) => {
-  return trackPage(request)
-}
 
 function Index() {
   return (
-    <BaseLayout footerCenterComponent={<PageViewCounter />}>
+    <BaseLayout>
       <Introduction />
 
       <article className="prose lg:prose-lg mt-12">
@@ -90,9 +83,7 @@ function Index() {
         </p>
       </article>
 
-      <Footer>
-        <PageViewCounter />
-      </Footer>
+      <Footer />
     </BaseLayout>
   )
 }

@@ -1,9 +1,7 @@
-import type { LoaderFunctionArgs, MetaFunction } from '@remix-run/node'
+import type { MetaFunction } from '@remix-run/react'
 import { BaseLayout } from '~/components/BaseLayout'
 import { Footer } from '~/components/Footer'
 import { Introduction } from '~/components/Introduction'
-import { PageViewCounter } from '~/components/PageViewCounter'
-import { trackPage } from '~/utils/trackPage.server'
 
 export const meta: MetaFunction = () => {
   return [
@@ -13,13 +11,9 @@ export const meta: MetaFunction = () => {
   ]
 }
 
-export const loader = ({ request }: LoaderFunctionArgs) => {
-  return trackPage(request)
-}
-
 const WhatIBuildRoute = () => {
   return (
-    <BaseLayout footerCenterComponent={<PageViewCounter />}>
+    <BaseLayout>
       <Introduction />
 
       <article className="prose lg:prose-lg mt-12 prose-h1:text-3xl">
@@ -70,9 +64,7 @@ const WhatIBuildRoute = () => {
         </ul>
       </article>
 
-      <Footer>
-        <PageViewCounter />
-      </Footer>
+      <Footer />
     </BaseLayout>
   )
 }
