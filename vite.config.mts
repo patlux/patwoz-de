@@ -16,6 +16,9 @@ declare module '@remix-run/cloudflare' {
 }
 
 export default defineConfig({
+  server: {
+    port: process.env.PORT ? parseInt(process.env.PORT, 10) : undefined,
+  },
   plugins: [
     remixCloudflareDevProxy(),
     mdx({

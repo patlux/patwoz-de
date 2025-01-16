@@ -12,8 +12,9 @@ export const startServer = async () => {
 
   // Do not run "bun run dev" otherwise the server will not be killed
   // because we get the pid of the parent process and not from the sub process
-  const proc = spawn(['bun', '--bun', 'remix', 'vite:dev'], {
+  const proc = spawn(['bun', 'run', 'remix', 'vite:dev'], {
     env: {
+      PATH: process.env.PATH,
       PORT: `${port}`,
     },
   })
