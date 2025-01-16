@@ -10,9 +10,7 @@ meta:
       Setup Redash in Coolify
 ---
 
-export const meta = [
-	...frontmatter.meta,
-]
+export const meta = [...frontmatter.meta]
 
 # {frontmatter.title}
 
@@ -110,7 +108,7 @@ Filling the Variables:
 
 - `REDASH_COOKIE_SECRET` and `REDASH_SECRET_KEY`: These should be securely generated random strings. You can generate them with pwgen -1s 32.
 - `POSTGRES_PASSWORD`: Set a password for your PostgreSQL database.
-- `REDASH_DATABASE_URL`: Replace __POSTGRES_PASSWORD__ with your chosen PostgreSQL password from the previous step.
+- `REDASH_DATABASE_URL`: Replace **POSTGRES_PASSWORD** with your chosen PostgreSQL password from the previous step.
 
 Make sure to update these values in your Coolify environment settings.
 
@@ -136,9 +134,7 @@ Now, let’s finalize the server configuration:
 2. Under Services, select Server.
 3. In the Settings tab, find the Domains field and enter a domain name for your Redash instance. This will be the public URL where your Redash instance will be accessible.
 
-
 ## Done!
 
 That’s it! You have successfully deployed Redash using Coolify. You can now access Redash via the domain you configured, start connecting databases, and run your queries. If you run into any issues or need additional configurations, check the Redash documentation for further guidance.
 Done
-

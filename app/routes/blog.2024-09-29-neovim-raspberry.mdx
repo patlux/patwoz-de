@@ -10,9 +10,7 @@ meta:
       How to Build and Install the Latest Neovim on a Raspberry Pi
 ---
 
-export const meta = [
-	...frontmatter.meta,
-]
+export const meta = [...frontmatter.meta]
 
 # {frontmatter.title}
 
@@ -40,7 +38,7 @@ cpack -G DEB
 # Either
 sudo dpkg -i nvim-linux64.deb
 
-# or if you have neovim installed already 
+# or if you have neovim installed already
 sudo apt remove neovim
 sudo dpkg -i --force-overwrite nvim-linux64.deb
 ```
@@ -56,7 +54,6 @@ Run "nvim -V1 -v" for more info
 ```
 
 You are done!
-
 
 ## Additional
 
