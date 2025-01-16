@@ -64,7 +64,7 @@ const ExternalLinkIcon = () => (
 export const Menu = () => {
   const [isOpen, setOpen] = useState(false)
   return (
-    <div className="xl:fixed xl:inset-y-0 xl:z-50 xl:flex xl:w-72 xl:flex-col">
+    <div className="sticky top-0 xl:fixed xl:inset-y-0 xl:z-50 xl:flex xl:w-72 xl:flex-col">
       <div
         className={classNames(
           'flex grow flex-col xl:gap-y-5 overflow-y-auto',
