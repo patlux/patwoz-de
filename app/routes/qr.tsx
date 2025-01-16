@@ -1,10 +1,10 @@
-import type { LoaderFunctionArgs, MetaFunction } from '@remix-run/cloudflare'
-import { Form, useLoaderData } from '@remix-run/react'
+import type { MetaFunction } from '@remix-run/cloudflare'
+import { Form, useSearchParams } from '@remix-run/react'
 import { BaseLayout } from '~/components/BaseLayout'
 import { Introduction } from '~/components/Introduction'
 import bwip from 'bwip-js'
 import clsx from 'clsx'
-// import barcode from '~/.server/barcode'
+import { useEffect } from 'react'
 
 export const meta: MetaFunction = () => {
   return [
@@ -14,32 +14,43 @@ export const meta: MetaFunction = () => {
   ]
 }
 
-export const loader = async ({ request }: LoaderFunctionArgs) => {
-  const url = new URL(request.url)
-  const text = url.searchParams.get('text')
-  const codetype = url.searchParams.get('codetype')
+type CodeType = 'qrcode' | 'code128'
 
-  if (text == null) {
-    return null
-  }
-
-  const imageBase64 = (
-    codetype === 'code128'
-      ? Buffer.from(barcode.to_png(20, barcode.create_code128(text)))
-      : await bwip.toBuffer({
-          bcid: codetype ?? 'qrcode',
-          text,
-          scale: 8,
-          includetext: true,
-          textxalign: 'center',
-        })
-  ).toString('base64')
-
-  return { text: text.toString(), codetype: codetype ?? 'qr', imageBase64 }
-}
+const CANVAS_ID = 'my-canvas'
 
 export default function QrCodeGeneratorRoute() {
-  const data = useLoaderData<typeof loader>()
+  const [searchParams] = useSearchParams()
+  const text = searchParams.get('text')
+  const codetype = searchParams.get('codetype') ?? ('qrcode' as CodeType)
+
+  useEffect(() => {
+    if (text == null || text.trim().length === 0) {
+      return
+    }
+
+    bwip.toCanvas(CANVAS_ID, {
+      bcid: codetype,
+      text: text,
+      scale: 8,
+      includetext: true,
+      textxalign: 'center',
+    })
+
+    const canvas = document.getElementById(CANVAS_ID)
+    if (canvas) {
+      canvas.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    }
+  }, [text, codetype])
+
+  useEffect(() => {
+    // if the user submits again without changing anything
+    if (text) {
+      const canvas = document.getElementById(CANVAS_ID)
+      if (canvas) {
+        canvas.scrollIntoView({ behavior: 'smooth', block: 'center' })
+      }
+    }
+  })
 
   return (
     <BaseLayout>
@@ -49,7 +60,7 @@ export default function QrCodeGeneratorRoute() {
       <div className="max-w-md mx-auto bg-white rounded-lg overflow-hidden">
         <div className="md:flex">
           <div className="w-full p-4">
-            <Form reloadDocument method="get" className="mb-4">
+            <Form method="GET" className="mb-4">
               <h1 className="font-bold text-center text-2xl">Code Generator</h1>
               <p className="text-zinc-600 text-center">
                 <a
@@ -89,9 +100,7 @@ export default function QrCodeGeneratorRoute() {
                   id="codetype-qr"
                   name="codetype"
                   value="qrcode"
-                  defaultChecked={
-                    data?.codetype == null || data?.codetype === 'qrcode'
-                  }
+                  defaultChecked={codetype == null || codetype === 'qrcode'}
                 />
                 <label htmlFor="codetype-qr" className="pl-2 pr-4">
                   QR
@@ -101,7 +110,7 @@ export default function QrCodeGeneratorRoute() {
                   id="codetype-code128"
                   name="codetype"
                   value="code128"
-                  defaultChecked={data?.codetype === 'code128'}
+                  defaultChecked={codetype === 'code128'}
                 />
                 <label htmlFor="codetype-code128" className="pl-2 pr-4">
                   Code128
@@ -118,7 +127,7 @@ export default function QrCodeGeneratorRoute() {
                   id="url"
                   type="text"
                   placeholder="https://example.com"
-                  defaultValue={data?.text ?? ''}
+                  defaultValue={text ?? ''}
                 />
               </div>
               <button
@@ -128,24 +137,15 @@ export default function QrCodeGeneratorRoute() {
                 Generate
               </button>
             </Form>
-            {data?.imageBase64 && (
-              <div
-                id="qrCode"
+            <div className="w-full flex flex-nowrap justify-center">
+              <canvas
+                id={CANVAS_ID}
                 className={clsx(
-                  'flex items-center justify-center',
-                  'w-full',
-                  'border-zinc-200 border rounded-xl',
-                  data.codetype === 'code128'
-                    ? 'aspect-video'
-                    : 'aspect-square',
+                  codetype === 'qrcode' && 'w-full aspect-square',
+                  codetype === 'code128' && 'w-40 h-32',
                 )}
-              >
-                <img
-                  alt="QR Code"
-                  src={`data:image/png;base64, ${data.imageBase64}`}
-                />
-              </div>
-            )}
+              />
+            </div>
           </div>
         </div>
       </div>

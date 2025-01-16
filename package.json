@@ -25,7 +25,7 @@
     "test:e2e": "playwright test",
     "build:deps": "bun run --filter '*' build",
     "typegen": "wrangler types",
-    "preview": "pnpm run build && wrangler pages dev",
+    "preview": "bun run build && wrangler pages dev",
     "cf-typegen": "wrangler types"
   },
   "workspaces": [
