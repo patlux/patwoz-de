@@ -2,7 +2,8 @@ import { devices, type PlaywrightTestConfig } from '@playwright/test'
 
 const headless = true
 
-process.env.BASE_URL ??= `http://localhost:3000`
+process.env.PORT ??= '5174'
+process.env.BASE_URL ??= `http://localhost:${process.env.PORT}`
 
 /**
  * See https://playwright.dev/docs/test-configuration.
