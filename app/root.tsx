@@ -133,8 +133,8 @@ function Document({
         {children}
         <ScrollRestoration />
         <Scripts />
-        {process.env.NODE_ENV === 'production' && <PlausibleAnalytics />}
-        {process.env.NODE_ENV === 'development' && <PlausibleAnalytics />}
+        {process.env.NODE_ENV !== 'development' && <PlausibleAnalytics />}
+        {process.env.NODE_ENV !== 'development' && <CloudflareAnalytics />}
       </body>
     </html>
   )
@@ -160,5 +160,15 @@ const PlausibleAnalytics = () => {
         )}
       </ClientOnly>
     </>
+  )
+}
+
+const CloudflareAnalytics = () => {
+  return (
+    <script
+      defer
+      src="https://static.cloudflareinsights.com/beacon.min.js"
+      data-cf-beacon='{"token": "26f6b9d7393b40399c349bb90e1142ec"}'
+    ></script>
   )
 }

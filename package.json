@@ -6,7 +6,7 @@
   "sideEffects": false,
   "scripts": {
     "dev": "remix vite:dev",
-    "build": "remix vite:build",
+    "build": "NODE_ENV=production remix vite:build",
     "start": "wrangler pages dev ./build/client",
     "build-start": "bun run build && bun run start",
     "deploy": "bun run build && wrangler pages deploy",
