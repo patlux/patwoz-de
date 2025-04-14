@@ -9,6 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/setup
+      - name: Build deps
         run: bun run build:deps
       - name: Check build
         run: bun run check-build
