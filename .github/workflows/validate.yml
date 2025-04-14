@@ -11,8 +11,6 @@ jobs:
       - uses: ./.github/setup
       - name: Build deps
         run: bun run build:deps
-      - name: Check build
-        run: bun run check-build
 
   formatting:
     timeout-minutes: 1
@@ -40,6 +38,8 @@ jobs:
       - uses: ./.github/setup
       - name: Build deps
         run: bun run build:deps
+      - name: build
+        run: bun run build
       - name: Check types
         run: bun run check-types
 
