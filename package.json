@@ -9,7 +9,7 @@
     "build": "NODE_ENV=production remix vite:build",
     "start": "wrangler pages dev ./build/client",
     "build-start": "bun run build && bun run start",
-    "deploy": "bun run build && wrangler pages deploy",
+    "deploy": "bun run build && wrangler pages deploy && bun run clear:cdn",
     "format": "prettier --ignore-path .gitignore --write .",
     "check-format": "prettier --ignore-path .gitignore --check .",
     "test": "bun test",
@@ -26,7 +26,8 @@
     "build:deps": "bun run --filter '*' build",
     "typegen": "wrangler types",
     "preview": "bun run build && wrangler pages dev",
-    "cf-typegen": "wrangler types"
+    "cf-typegen": "wrangler types",
+    "clear:cdn": "sh -c \"curl -v -X POST 'https://api.bunny.net/purge?url=https://patwoz.dev' -H 'AccessKey: $BUNNY_CDN_API_KEY'\""
   },
   "workspaces": [
     "./packages/barcode"
