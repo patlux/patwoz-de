@@ -1,7 +1,7 @@
 ---
 title: |
   AWS EKS: IAM Principal no access on this cluster
-description: Fix the missing permission
+description: How to fix AWS EKS access errors when your IAM principal lacks permissions on the cluster by adding the correct access entry and policies.
 published: 2025-04-14
 featured: true
 tags: [aws, eks, kubernetes, cluster, kubectl, helm]
@@ -12,6 +12,8 @@ export const meta = buildMeta(frontmatter)
 export const headers = frontmatter.headers
 
 # {frontmatter.title}
+
+> {frontmatter.description}
 
 When working with Amazon EKS, you might encounter access errors even if you're using the correct IAM user and have successfully created the cluster. These errors can appear across the CLI (`kubectl`), CloudWatch, and the AWS Console. Common messages include:
 

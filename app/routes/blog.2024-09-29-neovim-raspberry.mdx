@@ -1,6 +1,6 @@
 ---
 title: Latest neovim on raspberry pi
-description: How to Build and Install the Latest Neovim on a Raspberry Pi
+description: A comprehensive guide on building and installing the latest version of Neovim from source on a Raspberry Pi, overcoming outdated versions found in default repositories.
 published: 2024-09-29
 featured: true
 ---
@@ -10,6 +10,8 @@ export const meta = buildMeta(frontmatter)
 export const headers = frontmatter.headers
 
 # {frontmatter.title}
+
+> {frontmatter.description}
 
 Installing `neovim` on a Raspberry Pi using `apt` typically results in an outdated version like `0.7.2`. However, many modern setups like `lazyvim` require `neovim >=0.9`, making it essential to update.
 

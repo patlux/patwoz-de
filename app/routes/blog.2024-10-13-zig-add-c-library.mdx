@@ -1,7 +1,8 @@
 ---
 title: >
   zig: use a c library from a dependency
-description: How to import a c library which was installed by zig fetch
+description: >
+  Learn how to seamlessly integrate C libraries, specifically focusing on cJSON, into your Zig projects by leveraging zig fetch and modifying your build.zig file.
 published: 2024-10-13
 featured: true
 ---
@@ -11,6 +12,8 @@ export const meta = buildMeta(frontmatter)
 export const headers = frontmatter.headers
 
 # {frontmatter.title}
+
+> {frontmatter.description}
 
 The [zig](https://ziglang.org/) community is large, but the number of native zig libraries is still growing. However, you can easily import any C library into your zig project.
 

@@ -1,6 +1,6 @@
 ---
 title: Object.keys() in zig
-description: How to access field values by keys like in javascript
+description: Learn how to iterate through struct fields and access their values dynamically in Zig, similar to using Object.keys() in JavaScript, and discover the performance benefits of compile-time iteration.
 published: 2024-10-05
 featured: true
 ---
@@ -10,6 +10,8 @@ export const meta = buildMeta(frontmatter)
 export const headers = frontmatter.headers
 
 # {frontmatter.title}
+
+> {frontmatter.description}
 
 As a Javascript developer, it is quite easy to iterate through the keys of an object and access the values of the object via the key:
 

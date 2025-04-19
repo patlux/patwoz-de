@@ -7,7 +7,7 @@ export default function Component() {
   return (
     <BaseLayout>
       <LinkToAllBlogPosts />
-      <article className="my-12 prose font-article max-w-full text-lg text-black leading-8 prose-h1:text-2xl">
+      <article className="my-12 prose font-article max-w-full text-lg text-black leading-8">
         <Outlet />
       </article>
       <LinkToAllBlogPosts />
