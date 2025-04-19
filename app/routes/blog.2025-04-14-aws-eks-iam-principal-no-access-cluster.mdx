@@ -1,18 +1,17 @@
 ---
-title: >
+title: |
   AWS EKS: IAM Principal no access on this cluster
 description: Fix the missing permission
 published: 2025-04-14
 featured: true
 tags: [aws, eks, kubernetes, cluster, kubectl, helm]
-meta:
-  - title: >
-      AWS EKS: IAM Principal no access on this cluster
-  - name: description
-    content: Fix the missing permission
 ---
 
-export const meta = [...frontmatter.meta]
+export const meta = [
+  { title: frontmatter.title },
+  { name: 'description', content: frontmatter.description },
+]
+export const headers = frontmatter.headers;
 
 # {frontmatter.title}
 

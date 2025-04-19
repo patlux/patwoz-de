@@ -4,15 +4,13 @@ title: >
 description: How to import a c library which was installed by zig fetch
 published: 2024-10-13
 featured: true
-meta:
-  - title: >
-      zig: add a c library from a dependency
-  - name: description
-    content: >
-      How to import a c library which was installed by zig fetch
 ---
 
-export const meta = [...frontmatter.meta]
+export const meta = [
+  { title: frontmatter.title },
+  { name: 'description', content: frontmatter.description },
+]
+export const headers = frontmatter.headers;
 
 # {frontmatter.title}
 

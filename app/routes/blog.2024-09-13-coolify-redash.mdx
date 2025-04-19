@@ -3,14 +3,13 @@ title: Redash with Coolify
 description: Setup Redash in Coolify
 published: 2024-09-13
 featured: true
-meta:
-  - title: Redash with Coolify
-  - name: description
-    content: >
-      Setup Redash in Coolify
 ---
 
-export const meta = [...frontmatter.meta]
+export const meta = [
+  { title: frontmatter.title },
+  { name: 'description', content: frontmatter.description },
+]
+export const headers = frontmatter.headers;
 
 # {frontmatter.title}
 

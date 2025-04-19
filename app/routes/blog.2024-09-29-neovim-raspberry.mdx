@@ -3,14 +3,13 @@ title: Latest neovim on raspberry pi
 description: How to Build and Install the Latest Neovim on a Raspberry Pi
 published: 2024-09-29
 featured: true
-meta:
-  - title: Latest neovim on raspberry pi
-  - name: description
-    content: >
-      How to Build and Install the Latest Neovim on a Raspberry Pi
 ---
 
-export const meta = [...frontmatter.meta]
+export const meta = [
+  { title: frontmatter.title },
+  { name: 'description', content: frontmatter.description },
+]
+export const headers = frontmatter.headers;
 
 # {frontmatter.title}
 

@@ -4,14 +4,13 @@ title: >
 description: You might not need react-native-svg
 published: 2024-10-28
 featured: true
-meta:
-  - title: >
-      react-native-svg: You might not need it
-  - name: description
-    content: You might not need react-native-svg
 ---
 
-export const meta = [...frontmatter.meta]
+export const meta = [
+  { title: frontmatter.title },
+  { name: 'description', content: frontmatter.description },
+]
+export const headers = frontmatter.headers;
 
 # {frontmatter.title}
 
