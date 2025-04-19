@@ -8,10 +8,9 @@ featured: true
 import { buildMeta } from '../blog/meta'
 export const meta = buildMeta(frontmatter)
 export const headers = frontmatter.headers
+import { BlogLayout } from '../blog/BlogLayout'
 
-# {frontmatter.title}
-
-> {frontmatter.description}
+<BlogLayout {...frontmatter}>
 
 In this guide, we’ll walk through setting up Redash using Coolify, a platform that simplifies the deployment of containerized applications. Redash is a powerful tool for querying databases and visualizing data, making it great for analytics. Coolify will help you run Redash in a containerized environment using Docker Compose.
 
@@ -137,3 +136,5 @@ Now, let’s finalize the server configuration:
 
 That’s it! You have successfully deployed Redash using Coolify. You can now access Redash via the domain you configured, start connecting databases, and run your queries. If you run into any issues or need additional configurations, check the Redash documentation for further guidance.
 Done
+
+</BlogLayout>

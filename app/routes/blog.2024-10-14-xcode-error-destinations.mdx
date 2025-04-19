@@ -9,8 +9,9 @@ featured: true
 import { buildMeta } from '../blog/meta'
 export const meta = buildMeta(frontmatter)
 export const headers = frontmatter.headers
+import { BlogLayout } from '../blog/BlogLayout'
 
-# {frontmatter.title}
+<BlogLayout {...frontmatter}>
 
 If you're getting the following error message from `xcodebuild`:
 
@@ -24,3 +25,5 @@ error: --- xcodebuild: WARNING: Using the first of multiple matching destination
 Just delete all xcode instances from you macOS and reinstall XCode. That was the only way to fix it for me. For me it also fixed weird build issues within Xcode.
 
 Good luck ;)
+
+</BlogLayout>

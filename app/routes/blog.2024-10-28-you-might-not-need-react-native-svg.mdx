@@ -10,10 +10,9 @@ featured: true
 import { buildMeta } from '../blog/meta'
 export const meta = buildMeta(frontmatter)
 export const headers = frontmatter.headers
+import { BlogLayout } from '../blog/BlogLayout'
 
-# {frontmatter.title}
-
-> {frontmatter.description}
+<BlogLayout {...frontmatter}>
 
 When joining a new project I mostly see the usage of `react-native-svg` and in all of them there was no need to use it at all.
 
@@ -59,3 +58,5 @@ But if you have icons and images which are completly colored by just one color, 
 ```
 
 That's it! Thanks for reading!
+
+</BlogLayout>

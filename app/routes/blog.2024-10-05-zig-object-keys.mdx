@@ -8,10 +8,9 @@ featured: true
 import { buildMeta } from '../blog/meta'
 export const meta = buildMeta(frontmatter)
 export const headers = frontmatter.headers
+import { BlogLayout } from '../blog/BlogLayout'
 
-# {frontmatter.title}
-
-> {frontmatter.description}
+<BlogLayout {...frontmatter}>
 
 As a Javascript developer, it is quite easy to iterate through the keys of an object and access the values of the object via the key:
 
@@ -88,3 +87,5 @@ Quite nice, if you ask me :)
 ## @typeInfo and @field
 
 `@typeInfo` gives detailed type information about a structure (or other types), and using `Struct.fields`, we can access the fields of a struct in Zig. `@field` is then used to access the field values dynamically by passing the object and field name.
+
+</BlogLayout>

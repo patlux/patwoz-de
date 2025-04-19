@@ -10,10 +10,9 @@ featured: true
 import { buildMeta } from '../blog/meta'
 export const meta = buildMeta(frontmatter)
 export const headers = frontmatter.headers
+import { BlogLayout } from '../blog/BlogLayout'
 
-# {frontmatter.title}
-
-> {frontmatter.description}
+<BlogLayout {...frontmatter}>
 
 The [zig](https://ziglang.org/) community is large, but the number of native zig libraries is still growing. However, you can easily import any C library into your zig project.
 
@@ -88,3 +87,6 @@ name = Patrick, len = 7
 With this approach, you can easily extend your Zig applications using the vast ecosystem of C libraries, like cJSON. This flexibility allows you to bridge the gap between Zig and C seamlessly.
 
 [Source Code](https://github.com/patlux/zig-cjson)
+
+
+</BlogLayout>

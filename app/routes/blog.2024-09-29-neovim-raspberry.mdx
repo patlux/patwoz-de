@@ -8,10 +8,9 @@ featured: true
 import { buildMeta } from '../blog/meta'
 export const meta = buildMeta(frontmatter)
 export const headers = frontmatter.headers
+import { BlogLayout } from '../blog/BlogLayout'
 
-# {frontmatter.title}
-
-> {frontmatter.description}
+<BlogLayout {...frontmatter}>
 
 Installing `neovim` on a Raspberry Pi using `apt` typically results in an outdated version like `0.7.2`. However, many modern setups like `lazyvim` require `neovim >=0.9`, making it essential to update.
 
@@ -61,3 +60,5 @@ Make sure you also have the following tools installed:
 ```ssh
 sudo apt install fd-find ripgrep python3-pip
 ```
+
+</BlogLayout>
