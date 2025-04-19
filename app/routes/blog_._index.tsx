@@ -23,15 +23,15 @@ export default function Component() {
             <article className="prose lg:prose-lg prose-a:no-underline prose-headings:my-0">
               <Link
                 to={`/blog/${post.slug}`}
-                className="flex flex-col-reverse sm:flex-row gap-x-8 sm:items-center"
+                className="flex flex-col-reverse sm:flex-row gap-x-6 sm:items-center group"
               >
                 <time
-                  className="block text-sm text-cyan-700 no-underline w-32"
+                  className="block text-base font-mono text-cyan-700 no-underline w-36 whitespace-nowrap"
                   dateTime={post.frontmatter.published}
                 >
                   {dateFormatter.format(new Date(post.frontmatter.published))}
                 </time>
-                <h3 className="text-xl font-bold prose:mt-0 m:mb-0 w-full">
+                <h3 className="text-base font-bold prose:mt-0 m:mb-0 w-full group-hover:underline">
                   {post.frontmatter.title}
                 </h3>
               </Link>
