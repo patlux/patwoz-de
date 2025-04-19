@@ -43,23 +43,26 @@ function Index() {
             />
           </Company>
           <Company
+            href="https://www.ibm.com/"
+            aria-label="Go to website of IBM"
+          >
+            <img alt="Logo of IBM" src="/company/IBM_logo.svg" width="100px" />
+          </Company>
+          <Company
             href="https://www.stroeer.de/"
             aria-label="Go to website of stroeer"
           >
             <img
               alt="Logo of Ströer"
               src="/company/str-logo-white.svg"
-              width="120px"
+              width="100px"
             />
             <img
               className="mt-2"
               alt="Logo of t-online, a part of Ströer"
               src="/company/t-online-desktop.327ab976.svg"
-              width="100px"
+              width="80px"
             />
-          </Company>
-          <Company href="https://www.abl.de/" aria-label="Go to website of abl">
-            <img alt="Logo of ABL" src="/company/ABL_Logo.svg" />
           </Company>
         </div>
 
