@@ -9,5 +9,9 @@ export function buildMeta({ title, description, published }: BuildMetaProps) {
     { title },
     { name: 'description', content: description },
     { name: 'date', content: published },
+    {
+      name: 'article:published_time',
+      content: new Date(published).toISOString(),
+    },
   ]
 }
