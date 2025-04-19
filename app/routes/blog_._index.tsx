@@ -6,6 +6,10 @@ import { Introduction } from '~/components/Introduction'
 
 export const loader = async () => await getPosts()
 
+const dateFormatter = new Intl.DateTimeFormat('en-GB', {
+  dateStyle: 'medium',
+})
+
 export default function Component() {
   const posts = useLoaderData<typeof loader>()
 
@@ -13,20 +17,24 @@ export default function Component() {
     <BaseLayout>
       <Introduction />
       <hr className="mt-8" />
-      <ul className="space-y-8">
+      <ul className="space-y-8 mt-8">
         {posts.map((post) => (
           <li key={post.slug}>
-            <article className="prose lg:prose-lg space-y-2">
-              <Link to={`/blog/${post.slug}`}>
-                <h3 className="text-3xl font-bold">{post.frontmatter.title}</h3>
-              </Link>
-              <p className="text-gray-600">{post.frontmatter.description}</p>
-              <time
-                className="block text-sm text-cyan-700"
-                dateTime={post.frontmatter.published}
+            <article className="prose lg:prose-lg prose-a:no-underline prose-headings:my-0">
+              <Link
+                to={`/blog/${post.slug}`}
+                className="flex flex-col-reverse sm:flex-row gap-x-8 sm:items-center"
               >
-                {post.frontmatter.published.replace(/-/g, '/')}
-              </time>
+                <time
+                  className="block text-sm text-cyan-700 no-underline w-32"
+                  dateTime={post.frontmatter.published}
+                >
+                  {dateFormatter.format(new Date(post.frontmatter.published))}
+                </time>
+                <h3 className="text-xl font-bold prose:mt-0 m:mb-0 w-full">
+                  {post.frontmatter.title}
+                </h3>
+              </Link>
             </article>
           </li>
         ))}
