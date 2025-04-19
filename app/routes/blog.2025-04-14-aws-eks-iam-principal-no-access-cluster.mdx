@@ -7,11 +7,9 @@ featured: true
 tags: [aws, eks, kubernetes, cluster, kubectl, helm]
 ---
 
-export const meta = [
-  { title: frontmatter.title },
-  { name: 'description', content: frontmatter.description },
-]
-export const headers = frontmatter.headers;
+import { buildMeta } from '../blog/meta'
+export const meta = buildMeta(frontmatter)
+export const headers = frontmatter.headers
 
 # {frontmatter.title}
 
