@@ -64,7 +64,7 @@ const ExternalLinkIcon = () => (
 export const Menu = () => {
   const [isOpen, setOpen] = useState(false)
   return (
-    <div className="sticky top-0 xl:fixed xl:inset-y-0 xl:z-50 xl:flex xl:w-72 xl:flex-col">
+    <div className="xl:fixed xl:inset-y-0 xl:z-50 xl:flex xl:w-72 xl:flex-col">
       <div
         className={classNames(
           'flex grow flex-col xl:gap-y-5 overflow-y-auto',
@@ -76,6 +76,7 @@ export const Menu = () => {
       >
         <HeaderBar toggleMenu={() => setOpen((prev) => !prev)} />
         <Navigation
+          onClose={() => setOpen(false)}
           className={classNames(
             'h-0 xl:h-auto xl:flex-1',
             isOpen && 'flex-1 pb-6',
@@ -123,15 +124,20 @@ export const HeaderBar = ({
   )
 }
 
+type NavigationProps = ComponentProps<'nav'> & {
+  onClose: () => void
+}
+
 export const Navigation = ({
   className,
+  onClose,
   ...navProps
-}: ComponentProps<'nav'>) => {
+}: NavigationProps) => {
   return (
-    <nav {...navProps} className={classNames('flex flex-col', className)}>
-      <ul className="flex flex-1 flex-col gap-y-7">
-        <li>
-          <ul className="-mx-2 space-y-1">
+    <nav {...navProps} className={classNames('flex flex-col')}>
+      <ul className="flex flex-1 flex-col xl:gap-y-7">
+        <li className={classNames(className, 'sm:h-auto sm:flex-1')}>
+          <ul className="space-y-1 flex flex-col sm:flex-row sm:pb-4 xl:pb-0 xl:flex-col sm:justify-center w-full sm:items-center xl:justify-start xl:items-stretch">
             <MenuLink to="/" className="py-2">
               <HomeIcon className="w-4" />
               Introduction
@@ -150,22 +156,22 @@ export const Navigation = ({
             </MenuLink>
           </ul>
         </li>
-        <li>
+        <li className={className}>
           <div className="text-xs font-semibold leading-6 text-gray-400 uppercase">
             Tools
           </div>
-          <ul className="-mx-2 mt-2 space-y-1">
+          <ul className="mt-2 space-y-1">
             <MenuLink to="/qr">
               <QrCodeIcon className="w-5" />
               QR-Code Generator
             </MenuLink>
           </ul>
         </li>
-        <li>
+        <li className={className}>
           <div className="text-xs font-semibold leading-6 text-gray-400 uppercase">
             Social
           </div>
-          <ul className="-mx-2 mt-2 space-y-1">
+          <ul className="mt-2 space-y-1">
             <MenuLink to="https://github.com/patlux">
               <GithubIcon className="w-5" />
               Github
@@ -188,11 +194,11 @@ export const Navigation = ({
             </MenuLink>
           </ul>
         </li>
-        <li>
+        <li className={className}>
           <div className="text-xs font-semibold leading-6 text-gray-400 uppercase">
             Business
           </div>
-          <ul className="-mx-2 mt-2 space-y-1">
+          <ul className="mt-2 space-y-1">
             <MenuLink
               to="mailto:hi@patwoz.de"
               className={classNames(
@@ -230,6 +236,9 @@ export const Navigation = ({
           </ul>
         </li>
       </ul>
+      <button type="button" onClick={onClose} className={className}>
+        Close
+      </button>
     </nav>
   )
 }
