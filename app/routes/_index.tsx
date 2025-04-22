@@ -10,17 +10,16 @@ function Index() {
       <Introduction />
 
       <article className="prose lg:prose-lg mt-12">
-        <h4>Freelancer</h4>
+        <h4>Freelance Work</h4>
         <p>
-          As a freelancer, I am open to new opportunities and projects and would
-          be delighted to discuss how I can assist you, whether you are a
-          startup aiming to develop a new product, an established business
-          seeking to modernize your systems, or a non-profit organization facing
-          a specific technology challenge.
+          As a freelancer, I’m open to new opportunities and projects. Whether
+          you're a startup launching your first product, an established business
+          modernizing your systems, or a non-profit tackling a tech challenge,
+          I’d be happy to help bring your vision to life.
         </p>
 
         <p>
-          Contact me: <a href="mailto:hi@patwoz.de">hi@patwoz.de</a>
+          Get in touch: <a href="mailto:hi@patwoz.de">hi@patwoz.de</a> 📬
         </p>
 
         <h5 className="font-semibold">I worked for</h5>
@@ -69,20 +68,15 @@ function Index() {
         <h4>piparo.tech</h4>
 
         <p>
-          Besides my freelancing, I'm working with two colleagues to build an IT
-          service company (<a href="https://piparo.tech">piparo.tech</a>) where
-          we bring our collective skills and experience to offer our clients
-          tailored solutions that meet their needs and requirements.
+          Alongside two colleagues, I'm also growing{' '}
+          <a href="https://piparo.tech">piparo.tech</a>, an IT service company
+          dedicated to providing tailored solutions to our clients' specific
+          technology needs. We combine our extensive industry experience to not
+          only offer exceptional services but also develop innovative products
+          designed to solve real-world problems.
         </p>
         <p>
-          In addition to providing IT services to our clients, our company is
-          also striving to develop our own products to bring to market. As a
-          team of experienced developers, we are constantly exploring new ideas
-          and identifying opportunities to create products that meet the needs
-          of businesses and consumers alike.
-        </p>
-        <p>
-          Contact us: <a href="mailto:info@piparo.tech">info@piparo.tech</a>
+          Contact us: <a href="mailto:info@piparo.tech">info@piparo.tech</a> 📬
         </p>
       </article>
 
