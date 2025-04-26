@@ -31,7 +31,7 @@ export const BlogLayout = ({
             {dateFormatter.format(publishedDate)}
           </time>
           <h1>{title}</h1>
-          <blockquote>{description}</blockquote>
+          <blockquote className="mb-0">{description}</blockquote>
         </div>
         {image && (
           <div>
