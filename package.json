@@ -27,7 +27,7 @@
     "typegen": "wrangler types",
     "preview": "bun run build && wrangler pages dev",
     "cf-typegen": "wrangler types",
-    "clear:cdn": "sh -c \"curl -v -X POST 'https://api.bunny.net/purge?url=https://patwoz.dev' -H 'AccessKey: $BUNNY_CDN_API_KEY'\""
+    "clear:cdn": "sh -c \"curl -v -X POST 'https://api.bunny.net/purge?url=https://patwoz.dev/*' -H 'AccessKey: $BUNNY_CDN_API_KEY'\""
   },
   "workspaces": [
     "./packages/barcode"

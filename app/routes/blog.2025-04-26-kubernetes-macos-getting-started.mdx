@@ -64,19 +64,20 @@ Create a file `example.yaml`:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: example-deployment
+  name: example-deployment # deployment name
 spec:
   selector:
     matchLabels:
-      app: example-pod
-  template:
-    metadata:
-      labels:
-        app: example-pod
+      app: example-pod # -----
+  template:              #    |
+    metadata:            #    |
+      labels:            #    |
+        app: example-pod # <--
     spec:
       containers:
         - name: example-container
           image: nginx
+          imagePullPolicy: Always
           ports:
             - containerPort: 80
 ---
@@ -86,11 +87,11 @@ metadata:
   name: example-service
 spec:
   selector:
-    app: example-pod
+    app: example-pod # selector which pod
   ports:
     - protocol: TCP
-      port: 8080
-      targetPort: 80
+      port: 8080 # exposed port
+      targetPort: 80 # container port
 ```
 
 Apply the configuration:
