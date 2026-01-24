@@ -1,6 +1,6 @@
 import { defineConfig } from 'astro/config'
 import cloudflare from '@astrojs/cloudflare'
-import tailwind from '@astrojs/tailwind'
+import tailwindcss from '@tailwindcss/vite'
 import mdx from '@astrojs/mdx'
 import sitemap from '@astrojs/sitemap'
 
@@ -16,7 +16,10 @@ export default defineConfig({
       },
     },
   },
-  integrations: [tailwind(), mdx(), sitemap()],
+  vite: {
+    plugins: [tailwindcss()],
+  },
+  integrations: [mdx(), sitemap()],
   markdown: {
     shikiConfig: {
       theme: 'github-dark',
