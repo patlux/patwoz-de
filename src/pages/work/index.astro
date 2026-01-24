@@ -1,0 +1,105 @@
+---
+import Layout from '~/layouts/Layout.astro'
+import BaseLayout from '~/components/BaseLayout.astro'
+import Footer from '~/components/Footer.astro'
+import { classNames } from '~/utils/classNames'
+---
+
+<Layout title="Work">
+  <BaseLayout>
+    <article class="prose lg:prose-lg mt-12">
+      <h1>Client Work</h1>
+      <p>
+        A selection of projects I've worked on as a freelance developer. Each
+        project showcases my expertise in building high-quality mobile and web
+        applications.
+      </p>
+
+      <div class="not-prose grid gap-6 mt-8">
+        <a
+          href="/work/stroeer"
+          class={classNames(
+            'group flex flex-col sm:flex-row gap-6 p-6',
+            'border border-gray-200 rounded-xl',
+            'hover:border-gray-300 hover:shadow-lg',
+            'transition-all duration-200',
+          )}
+        >
+          <div
+            class="flex-shrink-0 flex items-center justify-center w-full sm:w-32 h-24 bg-gray-50 rounded-lg"
+          >
+            <div class="flex flex-col items-center gap-1">
+              <img
+                src="/company/str-logo-white.svg"
+                alt="Stroeer Logo"
+                width="80"
+                height="17"
+                class="opacity-80"
+              />
+              <img
+                src="/company/t-online-desktop.327ab976.svg"
+                alt="t-online Logo"
+                width="60"
+                height="13"
+                class="opacity-80"
+              />
+            </div>
+          </div>
+          <div class="flex-1">
+            <h3
+              class="text-lg font-semibold text-gray-900 group-hover:text-black"
+            >
+              Stroeer / t-online
+            </h3>
+            <p class="text-gray-600 mt-1">
+              Built the t-online news mobile app from the ground up using React
+              Native and Expo. Implemented core features including configurable
+              navigation, search, push notifications, and ad monetization.
+            </p>
+            <div class="flex flex-wrap gap-2 mt-3">
+              <span
+                class="px-2 py-1 text-xs font-medium bg-gray-100 text-gray-700 rounded"
+              >
+                React Native
+              </span>
+              <span
+                class="px-2 py-1 text-xs font-medium bg-gray-100 text-gray-700 rounded"
+              >
+                Expo
+              </span>
+              <span
+                class="px-2 py-1 text-xs font-medium bg-gray-100 text-gray-700 rounded"
+              >
+                TypeScript
+              </span>
+              <span
+                class="px-2 py-1 text-xs font-medium bg-gray-100 text-gray-700 rounded"
+              >
+                DevOps
+              </span>
+            </div>
+          </div>
+          <div
+            class="flex-shrink-0 flex items-center text-gray-400 group-hover:text-gray-600"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-5 h-5"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="m8.25 4.5 7.5 7.5-7.5 7.5"></path>
+            </svg>
+          </div>
+        </a>
+      </div>
+    </article>
+
+    <Footer />
+  </BaseLayout>
+</Layout>
