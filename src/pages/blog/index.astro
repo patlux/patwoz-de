@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content'
 import Layout from '~/layouts/Layout.astro'
 import BaseLayout from '~/components/BaseLayout.astro'
 import Introduction from '~/components/Introduction.astro'
+import ClientMarquee from '~/components/ClientMarquee.astro'
 
 const posts = await getCollection('blog')
 type BlogPost = (typeof posts)[number]
@@ -44,5 +45,7 @@ const dateFormatter = new Intl.DateTimeFormat('en-GB', {
         ))
       }
     </ul>
+
+    <ClientMarquee />
   </BaseLayout>
 </Layout>

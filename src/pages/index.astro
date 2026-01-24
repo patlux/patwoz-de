@@ -3,7 +3,6 @@ import Layout from '~/layouts/Layout.astro'
 import BaseLayout from '~/components/BaseLayout.astro'
 import Footer from '~/components/Footer.astro'
 import Introduction from '~/components/Introduction.astro'
-import { classNames } from '~/utils/classNames'
 ---
 
 <Layout>
@@ -24,227 +23,382 @@ import { classNames } from '~/utils/classNames'
       </p>
 
       <h5 class="font-semibold">I worked for</h5>
+    </article>
 
-      <div class="not-prose grid grid-col-2 sm:grid-cols-4 gap-4 auto-rows-fr">
-        <a
-          href="https://www.sap.com/index.html"
-          aria-label="Go to website of SAP"
-          target="_blank"
-          rel="noreferrer"
-          class={classNames(
-            'min-h-24 flex flex-1 flex-col justify-center items-center',
-            'border border-gray-200 rounded-lg',
-            'hover:border-gray-300 hover:shadow-md hover:scale-[1.02]',
-            'transition-all duration-200',
-          )}
+    <div class="not-prose grid sm:grid-cols-2 gap-3">
+      <!-- SAP - External -->
+      <a
+        href="https://www.sap.com"
+        target="_blank"
+        rel="noreferrer"
+        class="flex items-center gap-4 p-4 rounded-lg hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors group"
+      >
+        <div
+          class="w-16 h-12 flex items-center justify-center bg-gray-50 dark:bg-zinc-800 rounded-lg group-hover:bg-white dark:group-hover:bg-zinc-700"
         >
-          <img
-            alt="Logo of SAP"
-            src="/company/sap.svg"
-            width="100"
-            height="50"
-          />
-        </a>
-        <a
-          href="https://www.porsche.com/germany/"
-          aria-label="Go to website of Porsche"
-          target="_blank"
-          rel="noreferrer"
-          class={classNames(
-            'min-h-24 flex flex-1 flex-col justify-center items-center',
-            'border border-gray-200 rounded-lg',
-            'hover:border-gray-300 hover:shadow-md hover:scale-[1.02]',
-            'transition-all duration-200',
-          )}
-        >
-          <img
-            alt="Logo of Porsche"
-            src="/company/Porsche-Logo.webp"
-            width="100"
-            height="58"
-          />
-        </a>
-        <a
-          href="https://www.ibm.com/"
-          aria-label="Go to website of IBM"
-          target="_blank"
-          rel="noreferrer"
-          class={classNames(
-            'min-h-24 flex flex-1 flex-col justify-center items-center',
-            'border border-gray-200 rounded-lg',
-            'hover:border-gray-300 hover:shadow-md hover:scale-[1.02]',
-            'transition-all duration-200',
-          )}
-        >
-          <img
-            alt="Logo of IBM"
-            src="/company/IBM_logo.svg"
-            width="100"
-            height="38"
-          />
-        </a>
-        <a
-          href="/work/stroeer"
-          aria-label="View my work for Stroeer"
-          class={classNames(
-            'group relative min-h-24 flex flex-1 flex-col justify-center items-center pb-4',
-            'border border-gray-200 rounded-lg',
-            'hover:border-gray-300 hover:shadow-md hover:scale-[1.02]',
-            'transition-all duration-200',
-          )}
-        >
-          <img
-            alt="Logo of Stroeer"
-            src="/company/str-logo-white.svg"
-            width="100"
-            height="21"
-          />
-          <img
-            class="mt-2"
-            alt="Logo of t-online, a part of Stroeer"
-            src="/company/t-online-desktop.327ab976.svg"
-            width="80"
-            height="17"
-          />
-          <span
-            class={classNames(
-              'absolute bottom-3 inline-flex items-center gap-1',
-              'text-xs font-medium text-gray-500',
-              'group-hover:text-gray-700 transition-colors',
-            )}
+          <img alt="SAP" src="/company/sap.svg" class="h-6 w-auto" />
+        </div>
+        <div class="flex-1">
+          <span class="font-medium text-gray-900 dark:text-gray-100">SAP</span>
+          <span class="block text-xs text-gray-500 dark:text-gray-400"
+            >Enterprise Software</span
           >
-            View project
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="2"
-              stroke="currentColor"
-              class="w-3 h-3 group-hover:translate-x-0.5 transition-transform"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"></path>
-            </svg>
-          </span>
-        </a>
-        <a
-          href="https://www.kicker.de"
-          aria-label="Go to website of Kicker"
-          target="_blank"
-          rel="noreferrer"
-          class={classNames(
-            'min-h-24 flex flex-1 flex-col justify-center items-center',
-            'border border-gray-200 rounded-lg',
-            'hover:border-gray-300 hover:shadow-md hover:scale-[1.02]',
-            'transition-all duration-200',
-          )}
+        </div>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-4 h-4 text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300"
         >
-          <img
-            alt="Logo of Kicker"
-            src="/company/kicker.svg"
-            width="100"
-            height="32"
-          />
-        </a>
-        <a
-          href="https://www.abl.de"
-          aria-label="Go to website of ABL"
-          target="_blank"
-          rel="noreferrer"
-          class={classNames(
-            'min-h-24 flex flex-1 flex-col justify-center items-center',
-            'border border-gray-200 rounded-lg',
-            'hover:border-gray-300 hover:shadow-md hover:scale-[1.02]',
-            'transition-all duration-200',
-          )}
-        >
-          <img
-            alt="Logo of ABL"
-            src="/company/abl.svg"
-            width="70"
-            height="28"
-          />
-        </a>
-        <a
-          href="https://www.enerparc.de"
-          aria-label="Go to website of Enerparc"
-          target="_blank"
-          rel="noreferrer"
-          class={classNames(
-            'min-h-24 flex flex-1 flex-col justify-center items-center',
-            'border border-gray-200 rounded-lg',
-            'hover:border-gray-300 hover:shadow-md hover:scale-[1.02]',
-            'transition-all duration-200',
-          )}
-        >
-          <img
-            alt="Logo of Enerparc"
-            src="/company/enerparc.svg"
-            width="120"
-            height="33"
-          />
-        </a>
-        <a
-          href="https://www.barmer.de"
-          aria-label="Go to website of Barmer"
-          target="_blank"
-          rel="noreferrer"
-          class={classNames(
-            'min-h-24 flex flex-1 flex-col justify-center items-center',
-            'border border-gray-200 rounded-lg',
-            'hover:border-gray-300 hover:shadow-md hover:scale-[1.02]',
-            'transition-all duration-200',
-          )}
-        >
-          <img
-            alt="Logo of Barmer"
-            src="/company/barmer.svg"
-            width="110"
-            height="33"
-          />
-        </a>
-        <a
-          href="https://www.mhp.com"
-          aria-label="Go to website of MHP"
-          target="_blank"
-          rel="noreferrer"
-          class={classNames(
-            'min-h-24 flex flex-1 flex-col justify-center items-center',
-            'border border-gray-200 rounded-lg',
-            'hover:border-gray-300 hover:shadow-md hover:scale-[1.02]',
-            'transition-all duration-200',
-          )}
-        >
-          <img
-            alt="Logo of MHP"
-            src="/company/mhp.svg"
-            width="100"
-            height="40"
-          />
-        </a>
-        <a
-          href="https://finanzguru.de"
-          aria-label="Go to website of Finanzguru"
-          target="_blank"
-          rel="noreferrer"
-          class={classNames(
-            'min-h-24 flex flex-1 flex-col justify-center items-center',
-            'border border-gray-200 rounded-lg',
-            'hover:border-gray-300 hover:shadow-md hover:scale-[1.02]',
-            'transition-all duration-200',
-          )}
-        >
-          <img
-            alt="Logo of Finanzguru"
-            src="/company/finanzguru.svg"
-            width="50"
-            height="50"
-          />
-        </a>
-      </div>
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+          ></path>
+        </svg>
+      </a>
 
+      <!-- Porsche - External -->
+      <a
+        href="https://www.porsche.com"
+        target="_blank"
+        rel="noreferrer"
+        class="flex items-center gap-4 p-4 rounded-lg hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors group"
+      >
+        <div
+          class="w-16 h-12 flex items-center justify-center bg-gray-50 dark:bg-zinc-800 rounded-lg group-hover:bg-white dark:group-hover:bg-zinc-700"
+        >
+          <img
+            alt="Porsche"
+            src="/company/Porsche-Logo.webp"
+            class="h-8 w-auto"
+          />
+        </div>
+        <div class="flex-1">
+          <span class="font-medium text-gray-900 dark:text-gray-100"
+            >Porsche</span
+          >
+          <span class="block text-xs text-gray-500 dark:text-gray-400"
+            >Automotive</span
+          >
+        </div>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-4 h-4 text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+          ></path>
+        </svg>
+      </a>
+
+      <!-- IBM - External -->
+      <a
+        href="https://www.ibm.com"
+        target="_blank"
+        rel="noreferrer"
+        class="flex items-center gap-4 p-4 rounded-lg hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors group"
+      >
+        <div
+          class="w-16 h-12 flex items-center justify-center bg-gray-50 dark:bg-zinc-800 rounded-lg group-hover:bg-white dark:group-hover:bg-zinc-700"
+        >
+          <img alt="IBM" src="/company/IBM_logo.svg" class="h-5 w-auto" />
+        </div>
+        <div class="flex-1">
+          <span class="font-medium text-gray-900 dark:text-gray-100">IBM</span>
+          <span class="block text-xs text-gray-500 dark:text-gray-400"
+            >Technology</span
+          >
+        </div>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-4 h-4 text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+          ></path>
+        </svg>
+      </a>
+
+      <!-- Stroeer - Internal project page -->
+      <a
+        href="/work/stroeer"
+        class="flex items-center gap-4 p-4 rounded-lg hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors group"
+      >
+        <div
+          class="w-16 h-12 flex flex-col items-center justify-center bg-gray-50 dark:bg-zinc-800 rounded-lg group-hover:bg-white dark:group-hover:bg-zinc-700 gap-0.5"
+        >
+          <img
+            alt="Stroeer"
+            src="/company/str-logo-white.svg"
+            class="h-3 w-auto"
+          />
+          <img
+            alt="t-online"
+            src="/company/t-online-desktop.327ab976.svg"
+            class="h-2.5 w-auto"
+          />
+        </div>
+        <div class="flex-1">
+          <span class="font-medium text-gray-900 dark:text-gray-100"
+            >Stroeer / t-online</span
+          >
+          <span class="block text-xs text-gray-500 dark:text-gray-400"
+            >Media & Publishing</span
+          >
+        </div>
+        <span
+          class="text-xs font-medium text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300 flex items-center gap-1"
+        >
+          View project
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+            class="w-3 h-3"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"></path>
+          </svg>
+        </span>
+      </a>
+
+      <!-- Kicker - External -->
+      <a
+        href="https://www.kicker.de"
+        target="_blank"
+        rel="noreferrer"
+        class="flex items-center gap-4 p-4 rounded-lg hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors group"
+      >
+        <div
+          class="w-16 h-12 flex items-center justify-center bg-gray-50 dark:bg-zinc-800 rounded-lg group-hover:bg-white dark:group-hover:bg-zinc-700"
+        >
+          <img alt="Kicker" src="/company/kicker.svg" class="h-5 w-auto" />
+        </div>
+        <div class="flex-1">
+          <span class="font-medium text-gray-900 dark:text-gray-100"
+            >Kicker</span
+          >
+          <span class="block text-xs text-gray-500 dark:text-gray-400"
+            >Sports Media</span
+          >
+        </div>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-4 h-4 text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+          ></path>
+        </svg>
+      </a>
+
+      <!-- ABL - External -->
+      <a
+        href="https://www.abl.de"
+        target="_blank"
+        rel="noreferrer"
+        class="flex items-center gap-4 p-4 rounded-lg hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors group"
+      >
+        <div
+          class="w-16 h-12 flex items-center justify-center bg-gray-50 dark:bg-zinc-800 rounded-lg group-hover:bg-white dark:group-hover:bg-zinc-700"
+        >
+          <img alt="ABL" src="/company/abl.svg" class="h-5 w-auto" />
+        </div>
+        <div class="flex-1">
+          <span class="font-medium text-gray-900 dark:text-gray-100">ABL</span>
+          <span class="block text-xs text-gray-500 dark:text-gray-400"
+            >E-Mobility</span
+          >
+        </div>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-4 h-4 text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+          ></path>
+        </svg>
+      </a>
+
+      <!-- Enerparc - External -->
+      <a
+        href="https://www.enerparc.de"
+        target="_blank"
+        rel="noreferrer"
+        class="flex items-center gap-4 p-4 rounded-lg hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors group"
+      >
+        <div
+          class="w-16 h-12 flex items-center justify-center bg-gray-50 dark:bg-zinc-800 rounded-lg group-hover:bg-white dark:group-hover:bg-zinc-700"
+        >
+          <img alt="Enerparc" src="/company/enerparc.svg" class="h-5 w-auto" />
+        </div>
+        <div class="flex-1">
+          <span class="font-medium text-gray-900 dark:text-gray-100"
+            >Enerparc</span
+          >
+          <span class="block text-xs text-gray-500 dark:text-gray-400"
+            >Renewable Energy</span
+          >
+        </div>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-4 h-4 text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+          ></path>
+        </svg>
+      </a>
+
+      <!-- Barmer - External -->
+      <a
+        href="https://www.barmer.de"
+        target="_blank"
+        rel="noreferrer"
+        class="flex items-center gap-4 p-4 rounded-lg hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors group"
+      >
+        <div
+          class="w-16 h-12 flex items-center justify-center bg-gray-50 dark:bg-zinc-800 rounded-lg group-hover:bg-white dark:group-hover:bg-zinc-700"
+        >
+          <img alt="Barmer" src="/company/barmer.svg" class="h-5 w-auto" />
+        </div>
+        <div class="flex-1">
+          <span class="font-medium text-gray-900 dark:text-gray-100"
+            >Barmer</span
+          >
+          <span class="block text-xs text-gray-500 dark:text-gray-400"
+            >Health Insurance</span
+          >
+        </div>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-4 h-4 text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+          ></path>
+        </svg>
+      </a>
+
+      <!-- MHP - External -->
+      <a
+        href="https://www.mhp.com"
+        target="_blank"
+        rel="noreferrer"
+        class="flex items-center gap-4 p-4 rounded-lg hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors group"
+      >
+        <div
+          class="w-16 h-12 flex items-center justify-center bg-gray-50 dark:bg-zinc-800 rounded-lg group-hover:bg-white dark:group-hover:bg-zinc-700"
+        >
+          <img alt="MHP" src="/company/mhp.svg" class="h-6 w-auto" />
+        </div>
+        <div class="flex-1">
+          <span class="font-medium text-gray-900 dark:text-gray-100">MHP</span>
+          <span class="block text-xs text-gray-500 dark:text-gray-400"
+            >IT Consulting</span
+          >
+        </div>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-4 h-4 text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+          ></path>
+        </svg>
+      </a>
+
+      <!-- Finanzguru - External -->
+      <a
+        href="https://finanzguru.de"
+        target="_blank"
+        rel="noreferrer"
+        class="flex items-center gap-4 p-4 rounded-lg hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors group"
+      >
+        <div
+          class="w-16 h-12 flex items-center justify-center bg-gray-50 dark:bg-zinc-800 rounded-lg group-hover:bg-white dark:group-hover:bg-zinc-700"
+        >
+          <img
+            alt="Finanzguru"
+            src="/company/finanzguru.svg"
+            class="h-7 w-auto"
+          />
+        </div>
+        <div class="flex-1">
+          <span class="font-medium text-gray-900 dark:text-gray-100"
+            >Finanzguru</span
+          >
+          <span class="block text-xs text-gray-500 dark:text-gray-400"
+            >FinTech</span
+          >
+        </div>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-4 h-4 text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+          ></path>
+        </svg>
+      </a>
+    </div>
+
+    <article class="prose lg:prose-lg mt-12">
       <h4>piparo.tech</h4>
 
       <p>

@@ -2,6 +2,7 @@
 import Layout from './Layout.astro'
 import BaseLayout from '../components/BaseLayout.astro'
 import Footer from '../components/Footer.astro'
+import ClientMarquee from '../components/ClientMarquee.astro'
 
 interface Props {
   frontmatter: {
@@ -89,6 +90,9 @@ const dateFormatter = new Intl.DateTimeFormat('en-GB', {
       </svg>
       All blog posts
     </a>
+
+    <ClientMarquee />
+
     <Footer />
   </BaseLayout>
 </Layout>
