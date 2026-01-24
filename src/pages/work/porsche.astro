@@ -1,0 +1,241 @@
+---
+import Layout from '~/layouts/Layout.astro'
+import BaseLayout from '~/components/BaseLayout.astro'
+import Footer from '~/components/Footer.astro'
+---
+
+<Layout title="Porsche Digital - Work">
+  <BaseLayout>
+    <article class="mt-12">
+      <!-- Back link -->
+      <a
+        href="/work"
+        class="inline-flex items-center gap-1 text-sm text-gray-500 hover:text-gray-700 mb-6"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-4 h-4"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M15.75 19.5 8.25 12l7.5-7.5"></path>
+        </svg>
+        Back to Work
+      </a>
+
+      <!-- Header -->
+      <header class="mb-12">
+        <div class="flex flex-col sm:flex-row gap-6 items-start">
+          <div
+            class="flex-shrink-0 flex items-center justify-center w-24 h-24 bg-gray-50 rounded-xl border border-gray-200"
+          >
+            <img
+              src="/company/Porsche-Logo.webp"
+              alt="Porsche Logo"
+              width="70"
+              height="40"
+            />
+          </div>
+          <div class="flex-1">
+            <h1 class="text-2xl font-bold text-gray-900">
+              Mobile App & Backend
+            </h1>
+            <p class="text-gray-600 mt-1">Porsche Digital GmbH</p>
+            <div class="flex flex-wrap gap-4 mt-3 text-sm text-gray-500">
+              <span class="flex items-center gap-1">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-4 h-4"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
+                  ></path>
+                </svg>
+                Fullstack Developer
+              </span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Content -->
+      <div class="prose lg:prose-lg max-w-none">
+        <p>
+          Worked on a consumer-facing mobile application and its backend
+          infrastructure for Porsche Digital. The project involved building a
+          React Native app with real-time video streaming capabilities, in-app
+          subscriptions, and a serverless AWS backend - all within a monorepo
+          architecture.
+        </p>
+
+        <h2>Project Overview</h2>
+        <p>
+          As a fullstack developer, I contributed to all layers of the
+          application: the React Native mobile app, the React web application,
+          and the AWS-based backend infrastructure. The project used a monorepo
+          setup with Turborepo for efficient builds and shared code between
+          applications. Over the course of the project, I made 850+ commits
+          implementing features, fixing bugs, and improving the overall
+          architecture.
+        </p>
+
+        <h2>Key Contributions</h2>
+
+        <h3>Mobile App Development</h3>
+        <p>
+          Built and maintained core features of the React Native mobile
+          application including onboarding flows, subscription paywalls,
+          favorites functionality, and course filtering. Implemented smooth
+          animations using React Native Reanimated and built bottom sheet
+          components for improved UX. Added tracking permission screens and
+          integrated analytics with Firebase and Singular.
+        </p>
+
+        <h3>Video Streaming Integration</h3>
+        <p>
+          Integrated real-time video streaming capabilities using OpenTok SDK.
+          Implemented session management, video playback with
+          react-native-video, and seamless transitions between training
+          sessions. Built features to keep the screen awake during sessions and
+          handle orientation changes.
+        </p>
+
+        <h3>In-App Subscriptions</h3>
+        <p>
+          Implemented subscription management using RevenueCat SDK. Built
+          paywall screens with FAQ integration, pricing comparisons, and
+          promotional offers. Created subscription modals displayed as bottom
+          sheets with proper handling for different device sizes.
+        </p>
+
+        <h3>Backend Development</h3>
+        <p>
+          Developed serverless backend infrastructure using AWS CDK with Lambda
+          functions, DynamoDB tables, and API Gateway. Implemented webhook
+          handlers for RevenueCat subscription events, user management
+          endpoints, and training session APIs. Added database indexes for
+          optimized queries and proper timestamp tracking.
+        </p>
+
+        <h3>Real-time Features</h3>
+        <p>
+          Built active feedback features with smart mirror integration,
+          including toggle settings, informational bottom sheets, and hint
+          displays for users. Implemented smooth transitions between training
+          sessions when started from the web application.
+        </p>
+
+        <h3>Onboarding Experience</h3>
+        <p>
+          Created multi-step onboarding flows with intro videos, active feedback
+          explanations, and personalization options. Implemented skip
+          functionality that moves to the next page instead of skipping the
+          entire process, with smooth animations and proper state management.
+        </p>
+
+        <h3>Performance Optimization</h3>
+        <p>
+          Refactored data fetching to use SWR with request deduplication,
+          removing the need for RxJS in favor of simpler patterns. Optimized API
+          calls by splitting endpoints and implementing proper caching
+          strategies. Improved animation performance and reduced unnecessary
+          re-renders.
+        </p>
+
+        <h3>Web Application</h3>
+        <p>
+          Contributed to the React web application with features like course
+          management, subscription handling, and shared components with the
+          mobile app. Fixed authentication token refresh issues and optimized
+          home section rendering.
+        </p>
+
+        <h3>Developer Experience</h3>
+        <p>
+          Migrated the monorepo from ultra-runner to Turborepo for faster
+          builds. Set up Playwright for end-to-end testing. Maintained ESLint
+          configuration, fixed TypeScript errors, and improved code quality
+          across the codebase. Added documentation for Bitrise CI/CD workflows
+          and development provisioning profiles.
+        </p>
+
+        <h3>Analytics & Monitoring</h3>
+        <p>
+          Integrated Firebase Analytics for user behavior tracking, Sentry for
+          error monitoring, and Fullstory for session replay. Implemented custom
+          tracking for onboarding completion and subscription events. Built
+          backend endpoints for collecting and analyzing user statistics.
+        </p>
+      </div>
+
+      <div class="prose lg:prose-lg max-w-none mt-8">
+        <h2>Technology Stack</h2>
+      </div>
+
+      <!-- Tech Stack Grid -->
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-6 mb-12">
+        <div>
+          <h4 class="text-sm font-semibold text-gray-500 uppercase mb-3">
+            Mobile
+          </h4>
+          <ul class="space-y-2">
+            <li class="text-gray-700">React Native</li>
+            <li class="text-gray-700">TypeScript</li>
+            <li class="text-gray-700">React Navigation</li>
+            <li class="text-gray-700">Reanimated</li>
+            <li class="text-gray-700">SWR</li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-sm font-semibold text-gray-500 uppercase mb-3">
+            Backend
+          </h4>
+          <ul class="space-y-2">
+            <li class="text-gray-700">AWS CDK</li>
+            <li class="text-gray-700">AWS Lambda</li>
+            <li class="text-gray-700">DynamoDB</li>
+            <li class="text-gray-700">API Gateway</li>
+            <li class="text-gray-700">Cognito</li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-sm font-semibold text-gray-500 uppercase mb-3">
+            Services
+          </h4>
+          <ul class="space-y-2">
+            <li class="text-gray-700">RevenueCat</li>
+            <li class="text-gray-700">OpenTok</li>
+            <li class="text-gray-700">Firebase Analytics</li>
+            <li class="text-gray-700">Sentry</li>
+            <li class="text-gray-700">Singular</li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-sm font-semibold text-gray-500 uppercase mb-3">
+            DevOps
+          </h4>
+          <ul class="space-y-2">
+            <li class="text-gray-700">Turborepo</li>
+            <li class="text-gray-700">Bitrise</li>
+            <li class="text-gray-700">Playwright</li>
+            <li class="text-gray-700">Jest</li>
+            <li class="text-gray-700">ESLint</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <Footer />
+  </BaseLayout>
+</Layout>
