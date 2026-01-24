@@ -1,0 +1,252 @@
+---
+import Layout from '~/layouts/Layout.astro'
+import BaseLayout from '~/components/BaseLayout.astro'
+import Footer from '~/components/Footer.astro'
+import { classNames } from '~/utils/classNames'
+---
+
+<Layout title="IBM / Barmer - Work">
+  <BaseLayout>
+    <article class="mt-12">
+      <!-- Back link -->
+      <a
+        href="/work"
+        class="inline-flex items-center gap-1 text-sm text-gray-500 hover:text-gray-700 mb-6"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-4 h-4"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M15.75 19.5 8.25 12l7.5-7.5"></path>
+        </svg>
+        Back to Work
+      </a>
+
+      <!-- Header -->
+      <header class="mb-12">
+        <div class="flex flex-col sm:flex-row gap-6 items-start">
+          <div
+            class="flex-shrink-0 flex items-center justify-center w-24 h-24 bg-gray-50 rounded-xl border border-gray-200"
+          >
+            <div class="flex flex-col items-center gap-2">
+              <img
+                src="/company/IBM_logo.svg"
+                alt="IBM Logo"
+                width="50"
+                height="20"
+              />
+              <img
+                src="/company/barmer.svg"
+                alt="Barmer Logo"
+                width="60"
+                height="16"
+              />
+            </div>
+          </div>
+          <div class="flex-1">
+            <h1 class="text-2xl font-bold text-gray-900">IBM iX / Barmer</h1>
+            <p class="text-gray-600 mt-1">IBM iX (formerly Aperto)</p>
+            <div class="flex flex-wrap gap-4 mt-3 text-sm text-gray-500">
+              <span class="flex items-center gap-1">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-4 h-4"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
+                  ></path>
+                </svg>
+                Senior Frontend Developer
+              </span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Content -->
+      <div class="prose lg:prose-lg max-w-none">
+        <p>
+          IBM iX (formerly Aperto) is IBM's experience design agency, combining
+          strategy, design, and technology to create digital solutions for
+          enterprise clients. As part of the frontend team, I worked on multiple
+          projects for Barmer, one of Germany's largest public health insurance
+          companies with over 8 million members.
+        </p>
+
+        <h2>Projects</h2>
+        <p>
+          During my time at IBM iX, I contributed to several Barmer digital
+          initiatives focused on improving the customer experience through
+          mobile and web applications.
+        </p>
+      </div>
+
+      <!-- Project Cards -->
+      <div class="not-prose grid gap-6 mt-8 mb-12">
+        <!-- Barmer App - Bonus Module -->
+        <a
+          href="/work/ibm/bonus"
+          class={classNames(
+            'group flex flex-col sm:flex-row gap-6 p-6',
+            'border border-gray-200 rounded-xl',
+            'hover:border-gray-300 hover:shadow-lg',
+            'transition-all duration-200',
+          )}
+        >
+          <div
+            class="flex-shrink-0 flex items-center justify-center w-full sm:w-32 h-24 bg-gray-50 rounded-lg"
+          >
+            <img
+              src="/company/barmer.svg"
+              alt="Barmer Logo"
+              width="80"
+              height="22"
+              class="opacity-80"
+            />
+          </div>
+          <div class="flex-1">
+            <h3
+              class="text-lg font-semibold text-gray-900 group-hover:text-black"
+            >
+              Barmer App - Bonus Module
+            </h3>
+            <p class="text-gray-600 mt-1">
+              Contributed to the Bonus module within the Barmer App, enabling
+              members to track health activities, submit receipts, and earn
+              bonus rewards. 230+ commits across mobile app, web app, and shared
+              packages.
+            </p>
+            <div class="flex flex-wrap gap-2 mt-3">
+              <span
+                class="px-2 py-1 text-xs font-medium bg-gray-100 text-gray-700 rounded"
+              >
+                React Native
+              </span>
+              <span
+                class="px-2 py-1 text-xs font-medium bg-gray-100 text-gray-700 rounded"
+              >
+                React
+              </span>
+              <span
+                class="px-2 py-1 text-xs font-medium bg-gray-100 text-gray-700 rounded"
+              >
+                TypeScript
+              </span>
+              <span
+                class="px-2 py-1 text-xs font-medium bg-gray-100 text-gray-700 rounded"
+              >
+                Monorepo
+              </span>
+            </div>
+          </div>
+          <div
+            class="flex-shrink-0 flex items-center text-gray-400 group-hover:text-gray-600"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-5 h-5"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="m8.25 4.5 7.5 7.5-7.5 7.5"></path>
+            </svg>
+          </div>
+        </a>
+
+        <!-- Barmer Puls Design System -->
+        <a
+          href="/work/ibm/barmer-puls"
+          class={classNames(
+            'group flex flex-col sm:flex-row gap-6 p-6',
+            'border border-gray-200 rounded-xl',
+            'hover:border-gray-300 hover:shadow-lg',
+            'transition-all duration-200',
+          )}
+        >
+          <div
+            class="flex-shrink-0 flex items-center justify-center w-full sm:w-32 h-24 bg-gray-50 rounded-lg"
+          >
+            <img
+              src="/company/barmer.svg"
+              alt="Barmer Logo"
+              width="80"
+              height="22"
+              class="opacity-80"
+            />
+          </div>
+          <div class="flex-1">
+            <h3
+              class="text-lg font-semibold text-gray-900 group-hover:text-black"
+            >
+              Barmer Puls Design System
+            </h3>
+            <p class="text-gray-600 mt-1">
+              Cross-platform component library and design system for Barmer's
+              digital products. React and React Native components with
+              comprehensive documentation via Storybook.
+            </p>
+            <div class="flex flex-wrap gap-2 mt-3">
+              <span
+                class="px-2 py-1 text-xs font-medium bg-gray-100 text-gray-700 rounded"
+              >
+                React
+              </span>
+              <span
+                class="px-2 py-1 text-xs font-medium bg-gray-100 text-gray-700 rounded"
+              >
+                React Native
+              </span>
+              <span
+                class="px-2 py-1 text-xs font-medium bg-gray-100 text-gray-700 rounded"
+              >
+                Storybook
+              </span>
+              <span
+                class="px-2 py-1 text-xs font-medium bg-gray-100 text-gray-700 rounded"
+              >
+                Design System
+              </span>
+            </div>
+          </div>
+          <div
+            class="flex-shrink-0 flex items-center text-gray-400 group-hover:text-gray-600"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-5 h-5"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="m8.25 4.5 7.5 7.5-7.5 7.5"></path>
+            </svg>
+          </div>
+        </a>
+      </div>
+    </article>
+
+    <Footer />
+  </BaseLayout>
+</Layout>
