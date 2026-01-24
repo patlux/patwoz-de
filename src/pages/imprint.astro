@@ -1,6 +1,7 @@
 ---
 import Layout from '~/layouts/Layout.astro'
 import BaseLayout from '~/components/BaseLayout.astro'
+import ObfuscatedText from '~/components/ObfuscatedText.astro'
 ---
 
 <Layout title="Imprint">
@@ -14,8 +15,10 @@ import BaseLayout from '~/components/BaseLayout.astro'
       <strong>Responsible for this website:</strong><br />
       piparo.tech GmbH<br />
       Patrick Wozniak<br />
-      Frauentorgraben 61<br />
-      90443 Nürnber<br />
+      <ObfuscatedText
+        text="Frauentorgraben 61\n90443 Nürnberg\n"
+        fallbackEmail="contact@patwoz.de"
+      />
     </p>
   </BaseLayout>
 </Layout>

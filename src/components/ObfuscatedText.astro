@@ -1,0 +1,54 @@
+---
+interface Props {
+  text: string
+  fallbackEmail?: string
+}
+
+const { text, fallbackEmail } = Astro.props
+
+// Generate random key of same length as text
+const key = Array.from({ length: text.length }, () =>
+  Math.floor(Math.random() * 256),
+)
+
+// XOR encode each character
+const encoded = Array.from(text).map((char, i) => char.charCodeAt(0) ^ key[i])
+
+// Base64 encode for safe DOM storage
+const encodedB64 = Buffer.from(encoded).toString('base64')
+const keyB64 = Buffer.from(key).toString('base64')
+---
+
+<span
+  class="obfuscated-text whitespace-pre-line"
+  data-e={encodedB64}
+  data-k={keyB64}></span>
+<noscript
+  ><span class="text-gray-500 dark:text-gray-400"
+    >(Enable JavaScript to see address)<br /></span
+  ></noscript
+>
+{fallbackEmail && <a href={`mailto:${fallbackEmail}`}>{fallbackEmail}</a>}
+
+<script>
+  document.querySelectorAll('.obfuscated-text').forEach((el) => {
+    const e = el.getAttribute('data-e')
+    const k = el.getAttribute('data-k')
+    if (!e || !k) return
+
+    // Base64 decode
+    const encoded = Uint8Array.from(atob(e), (c) => c.charCodeAt(0))
+    const key = Uint8Array.from(atob(k), (c) => c.charCodeAt(0))
+
+    // XOR decode
+    const decoded = Array.from(encoded)
+      .map((byte, i) => String.fromCharCode(byte ^ key[i]))
+      .join('')
+
+    el.textContent = decoded
+
+    // Clean up data attributes to further obscure
+    el.removeAttribute('data-e')
+    el.removeAttribute('data-k')
+  })
+</script>
