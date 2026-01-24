@@ -6,12 +6,6 @@ import StackOverflowIcon from '~/icons/StackOverflowIcon.astro'
 import TwitterIcon from '~/icons/TwitterIcon.astro'
 import XingIcon from '~/icons/XingIcon.astro'
 
-interface MenuLinkProps {
-  href: string
-  isActive?: boolean
-  class?: string
-}
-
 const currentPath = Astro.url.pathname
 ---
 
@@ -22,14 +16,13 @@ const currentPath = Astro.url.pathname
       'bg-gray-50 px-6',
       'ring-1 ring-white/5',
       'border-b xl:border-b-0 xl:border-r border-gray-200',
-      'has-[#menu-toggle:checked]:overflow-y-auto overflow-y-hidden xl:overflow-y-auto',
+      'xl:overflow-y-auto',
     )}
   >
     <!-- Header Bar -->
     <div
       class="flex h-16 shrink-0 items-center justify-center relative xl:justify-start"
     >
-      <input type="checkbox" id="menu-toggle" class="peer sr-only" />
       <label
         for="menu-toggle"
         class="-m-2.5 p-2.5 text-black rounded-lg hover:bg-gray-200 absolute left-0 xl:hidden cursor-pointer"
@@ -60,14 +53,15 @@ const currentPath = Astro.url.pathname
       </a>
     </div>
 
-    <!-- Navigation -->
+    <!-- Checkbox placed as direct sibling before nav for peer to work -->
+    <input type="checkbox" id="menu-toggle" class="peer sr-only" />
+
+    <!-- Navigation - peer-checked now works because checkbox is direct sibling -->
     <nav
-      class="h-0 overflow-hidden peer-checked:h-auto peer-checked:flex-1 peer-checked:pb-6 xl:h-auto xl:flex-1 xl:pb-0 flex flex-col"
+      class="h-0 overflow-hidden peer-checked:h-auto peer-checked:flex-1 peer-checked:pb-6 peer-checked:overflow-y-auto xl:h-auto xl:flex-1 xl:pb-0 xl:overflow-y-auto flex flex-col"
     >
       <ul class="flex flex-1 flex-col xl:gap-y-7">
-        <li
-          class="sm:h-auto sm:flex-1 xl:flex-none h-0 overflow-hidden peer-checked:h-auto xl:h-auto"
-        >
+        <li class="sm:h-auto sm:flex-1 xl:flex-none">
           <ul
             class="space-y-1 flex flex-col sm:flex-row sm:pb-4 xl:pb-0 xl:flex-col sm:justify-center w-full sm:items-center xl:justify-start xl:items-stretch"
           >
@@ -194,7 +188,7 @@ const currentPath = Astro.url.pathname
         </li>
 
         <!-- Tools Section -->
-        <li class="h-0 overflow-hidden peer-checked:h-auto xl:h-auto">
+        <li>
           <div
             class="text-xs font-semibold leading-6 text-gray-400 uppercase"
           >
@@ -240,7 +234,7 @@ const currentPath = Astro.url.pathname
         </li>
 
         <!-- Social Section -->
-        <li class="h-0 overflow-hidden peer-checked:h-auto xl:h-auto">
+        <li>
           <div
             class="text-xs font-semibold leading-6 text-gray-400 uppercase"
           >
@@ -359,7 +353,7 @@ const currentPath = Astro.url.pathname
         </li>
 
         <!-- Business Section -->
-        <li class="h-0 overflow-hidden peer-checked:h-auto xl:h-auto">
+        <li>
           <div
             class="text-xs font-semibold leading-6 text-gray-400 uppercase"
           >
@@ -493,32 +487,10 @@ const currentPath = Astro.url.pathname
       <!-- Close button for mobile -->
       <label
         for="menu-toggle"
-        class="hidden peer-checked:block xl:hidden mt-4 text-center cursor-pointer py-2 rounded-md hover:bg-zinc-200 text-sm font-semibold"
+        class="xl:hidden mt-4 text-center cursor-pointer py-2 rounded-md hover:bg-zinc-200 text-sm font-semibold"
       >
         Close
       </label>
     </nav>
   </div>
 </div>
-
-<style>
-  /* Make navigation visible when checkbox is checked - using container query for peer */
-  #menu-toggle:checked ~ nav {
-    height: auto;
-    flex: 1;
-    padding-bottom: 1.5rem;
-  }
-
-  #menu-toggle:checked ~ nav li {
-    height: auto;
-    overflow: visible;
-  }
-
-  @media (min-width: 1280px) {
-    nav,
-    nav li {
-      height: auto !important;
-      overflow: visible !important;
-    }
-  }
-</style>
