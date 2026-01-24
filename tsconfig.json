@@ -1,24 +1,11 @@
 {
-  "include": ["env.d.ts", "**/*.ts", "**/*.tsx"],
+  "extends": "astro/tsconfigs/strict",
+  "include": ["src/**/*", "packages/**/*"],
+  "exclude": ["node_modules", "dist"],
   "compilerOptions": {
-    "isolatedModules": true,
-    "esModuleInterop": true,
-    "jsx": "react-jsx",
-    "moduleResolution": "bundler",
-    "resolveJsonModule": true,
-    "strict": true,
-    "allowJs": true,
-    "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {
-      "~/*": ["./app/*"]
-    },
-    // Remix takes care of building everything in `remix build`.
-    "noEmit": true,
-    // https://github.com/oven-sh/bun-types#usage
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "module": "esnext",
-    "target": "esnext",
-    "skipLibCheck": true
+      "~/*": ["./src/*"]
+    }
   }
 }

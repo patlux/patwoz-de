@@ -1,0 +1,85 @@
+---
+import '../styles/global.css'
+
+interface Props {
+  title?: string
+  description?: string
+  image?: string
+  ogType?: string
+}
+
+const {
+  title = 'Patrick Wozniak: Software Engineer',
+  description = 'Patrick Wozniak is a self-taught Software Engineer from Nuremberg, Germany.',
+  image = 'https://patwoz.dev/me.jpg',
+  ogType = 'profile',
+} = Astro.props
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site)
+---
+
+<!doctype html>
+<html lang="en">
+  <head prefix="og: https://ogp.me/ns#">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="canonical" href={canonicalURL} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+    <meta property="og:image:width" content="512" />
+    <meta property="og:image:height" content="512" />
+    <meta property="og:type" content={ogType} />
+
+    {
+      ogType === 'profile' && (
+        <>
+          <meta property="profile:first_name" content="Patrick" />
+          <meta property="profile:last_name" content="Wozniak" />
+          <meta property="profile:username" content="patwoz" />
+        </>
+      )
+    }
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={image} />
+  </head>
+  <body class="font-sans antialiased">
+    <slot />
+
+    {
+      import.meta.env.PROD && (
+        <>
+          <script
+            is:inline
+            defer
+            data-domain="patwoz.dev"
+            src="https://notgoogle.piparo.tech/js/script.hash.outbound-links.tagged-events.js"
+          />
+          <script is:inline>
+            window.plausible =
+              window.plausible ||
+              function () {
+                ;(window.plausible.q = window.plausible.q || []).push(arguments)
+              }
+          </script>
+          <script
+            is:inline
+            defer
+            src="https://static.cloudflareinsights.com/beacon.min.js"
+            data-cf-beacon='{"token": "26f6b9d7393b40399c349bb90e1142ec"}'
+          />
+        </>
+      )
+    }
+  </body>
+</html>

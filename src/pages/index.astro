@@ -1,0 +1,106 @@
+---
+import Layout from '~/layouts/Layout.astro'
+import BaseLayout from '~/components/BaseLayout.astro'
+import Footer from '~/components/Footer.astro'
+import Introduction from '~/components/Introduction.astro'
+import { classNames } from '~/utils/classNames'
+---
+
+<Layout>
+  <BaseLayout>
+    <Introduction />
+
+    <article class="prose lg:prose-lg mt-12">
+      <h4>Freelance Work</h4>
+      <p>
+        As a freelancer, I'm open to new opportunities and projects. Whether
+        you're a startup launching your first product, an established business
+        modernizing your systems, or a non-profit tackling a tech challenge, I'd
+        be happy to help bring your vision to life.
+      </p>
+
+      <p>
+        Get in touch: <a href="mailto:hi@patwoz.de">hi@patwoz.de</a>
+      </p>
+
+      <h5 class="font-semibold">I worked for</h5>
+
+      <div class="grid grid-col-2 sm:grid-cols-4 gap-4">
+        <a
+          href="https://www.sap.com/index.html"
+          aria-label="Go to website of sap"
+          target="_blank"
+          rel="noreferrer"
+          class={classNames(
+            'h-24 not-prose flex flex-1 flex-col justify-center items-center border border-transparent hover:border-zinc-200',
+          )}
+        >
+          <img alt="Logo of SAP" src="/company/sap.svg" width="80" />
+        </a>
+        <a
+          href="https://www.porsche.com/germany/"
+          aria-label="Go to website of porsche"
+          target="_blank"
+          rel="noreferrer"
+          class={classNames(
+            'h-24 not-prose flex flex-1 flex-col justify-center items-center border border-transparent hover:border-zinc-200',
+          )}
+        >
+          <img
+            alt="Logo of Porsche"
+            src="/company/Porsche-Logo.wine.svg"
+            width="100"
+          />
+        </a>
+        <a
+          href="https://www.ibm.com/"
+          aria-label="Go to website of IBM"
+          target="_blank"
+          rel="noreferrer"
+          class={classNames(
+            'h-24 not-prose flex flex-1 flex-col justify-center items-center border border-transparent hover:border-zinc-200',
+          )}
+        >
+          <img alt="Logo of IBM" src="/company/IBM_logo.svg" width="100" />
+        </a>
+        <a
+          href="https://www.stroeer.de/"
+          aria-label="Go to website of stroeer"
+          target="_blank"
+          rel="noreferrer"
+          class={classNames(
+            'h-24 not-prose flex flex-1 flex-col justify-center items-center border border-transparent hover:border-zinc-200',
+          )}
+        >
+          <img
+            alt="Logo of Stroeer"
+            src="/company/str-logo-white.svg"
+            width="100"
+          />
+          <img
+            class="mt-2"
+            alt="Logo of t-online, a part of Stroeer"
+            src="/company/t-online-desktop.327ab976.svg"
+            width="80"
+          />
+        </a>
+      </div>
+
+      <h4>piparo.tech</h4>
+
+      <p>
+        Alongside two colleagues, I'm also growing <a href="https://piparo.tech"
+          >piparo.tech</a
+        >, an IT service company dedicated to providing tailored solutions to
+        our clients' specific technology needs. We combine our extensive
+        industry experience to not only offer exceptional services but also
+        develop innovative products designed to solve real-world problems.
+      </p>
+      <p>
+        Contact us: <a href="mailto:info@piparo.tech">info@piparo.tech</a>
+      </p>
+    </article>
+
+    <Footer />
+  </BaseLayout>
+</Layout>

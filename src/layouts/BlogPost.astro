@@ -1,0 +1,94 @@
+---
+import Layout from './Layout.astro'
+import BaseLayout from '../components/BaseLayout.astro'
+import Footer from '../components/Footer.astro'
+
+interface Props {
+  frontmatter: {
+    title: string
+    description: string
+    published: Date
+    image?: string
+  }
+}
+
+const { frontmatter } = Astro.props
+
+const dateFormatter = new Intl.DateTimeFormat('en-GB', {
+  dateStyle: 'long',
+})
+---
+
+<Layout
+  title={frontmatter.title}
+  description={frontmatter.description}
+  image={frontmatter.image}
+  ogType="article"
+>
+  <BaseLayout>
+    <a href="/blog" class="flex items-center gap-x-2 hover:underline">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="w-4 h-4 inline-block"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"></path>
+      </svg>
+      All blog posts
+    </a>
+    <hr class="mt-6" />
+    <article
+      class="my-6 prose font-article max-w-full text-lg text-black leading-8"
+    >
+      <header class="flex flex-col-reverse sm:flex-row gap-x-8 mb-8">
+        <div>
+          <time
+            class="text-base opacity-70"
+            datetime={frontmatter.published.toISOString()}
+          >
+            {dateFormatter.format(frontmatter.published)}
+          </time>
+          <h1>{frontmatter.title}</h1>
+          <blockquote class="mb-0">{frontmatter.description}</blockquote>
+        </div>
+        {
+          frontmatter.image && (
+            <div>
+              <img
+                width="200"
+                height="200"
+                class="w-full sm:w-auto mt-0"
+                src={frontmatter.image}
+                alt={frontmatter.title}
+              />
+            </div>
+          )
+        }
+      </header>
+      <slot />
+    </article>
+    <a href="/blog" class="flex items-center gap-x-2 hover:underline">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="w-4 h-4 inline-block"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"></path>
+      </svg>
+      All blog posts
+    </a>
+    <Footer />
+  </BaseLayout>
+</Layout>

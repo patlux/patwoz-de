@@ -1,0 +1,83 @@
+---
+title: Object.keys() in zig
+description: Learn how to iterate through struct fields and access their values dynamically in Zig, similar to using Object.keys() in JavaScript, and discover the performance benefits of compile-time iteration.
+published: 2024-10-05
+image: /blog-images/2024-10-05-zig-object-keys.avif
+featured: true
+---
+
+As a Javascript developer, it is quite easy to iterate through the keys of an object and access the values of the object via the key:
+
+```ts
+const obj = { a: 1, b: 2, c: true };
+Object.keys(obj).forEach(key => {
+  const value = obj[key];
+  console.log({ key, value });
+})
+// Output
+{key: 'a', value: 1}
+{key: 'b', value: 2}
+{key: 'c', value: true}
+```
+
+Surprisingly, it is also very easy to do the same in zig:
+
+```zig
+const std = @import("std");
+const print = std.debug.print;
+
+const objtype = struct {
+  a: u8,
+  b: u8,
+  c: bool
+};
+
+const obj = objtype{
+  .a = 1,
+  .b = 2,
+  .c = true
+};
+
+
+pub fn main() !void {
+    inline for (@typeInfo(objtype).Struct.fields) |key| {
+      const value = @field(obj, key.name);
+      print("key: '{s}', value: '{any}'", .{key});
+    }
+}
+```
+
+**And zig does it even better: It runs the iteration at compile time!**
+
+In JavaScript, iteration through object keys occurs at runtime, meaning that performance can be affected as the size of the object grows. However, in Zig, the iteration is handled during compile time, meaning no overhead is added during execution. Zig's inline for loop allows for efficient iteration that is optimized before the program runs.
+
+So after compilation zig will create something like the following instructions:
+
+```zig
+const std = @import("std");
+const print = std.debug.print;
+
+const objtype = struct {
+    a: u8,
+    b: u8,
+    c: bool
+};
+
+const obj = objtype{
+    .a = 1,
+    .b = 2,
+    .c = true
+};
+
+pub fn main() !void {
+    print("key: 'a', value: '{d}'\n", .{obj.a});
+    print("key: 'b', value: '{d}'\n", .{obj.b});
+    print("key: 'c', value: '{any}'\n", .{obj.c});
+}
+```
+
+Quite nice, if you ask me :)
+
+## @typeInfo and @field
+
+`@typeInfo` gives detailed type information about a structure (or other types), and using `Struct.fields`, we can access the fields of a struct in Zig. `@field` is then used to access the field values dynamically by passing the object and field name.

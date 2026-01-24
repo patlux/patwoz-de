@@ -12,19 +12,17 @@ export const startServer = async () => {
 
   // Do not run "bun run dev" otherwise the server will not be killed
   // because we get the pid of the parent process and not from the sub process
-  const proc = spawn(['bun', 'run', 'remix', 'vite:dev'], {
+  const proc = spawn(['bun', 'run', 'astro', 'dev', '--port', `${port}`], {
     env: {
       PATH: process.env.PATH,
-      PORT: `${port}`,
     },
   })
 
   const waitUntilServerStarted = async () => {
     const td = new TextDecoder()
-    // @ts-expect-error
     for await (const line of proc.stdout) {
       const lineStr = td.decode(line)
-      if (lineStr.includes('Local')) {
+      if (lineStr.includes('Local') || lineStr.includes('localhost')) {
         break
       }
     }

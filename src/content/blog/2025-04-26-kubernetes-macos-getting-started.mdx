@@ -1,0 +1,267 @@
+---
+title: 'Kubernetes on macOS: Getting started'
+description: 'Learn how to set up Kubernetes locally on macOS with Orbstack, create your first deployment, and understand how pods and services work.'
+published: 2025-04-26
+featured: true
+---
+
+Kubernetes is incredibly powerful — and equally intimidating when you're starting out.  
+When I first explored Kubernetes, I struggled to find a simple, structured path to getting it running on my development machine.  
+This guide is what I wish I had back then.
+
+> Prerequisite: You should already be comfortable with Docker and understand its basic concepts.
+
+## Installing Kubernetes Locally
+
+There are many tools for running Kubernetes locally — minikube, k3s, k0s, k3d, etc.  
+For macOS, I recommend [Orbstack](https://orbstack.dev/), which offers [native Kubernetes support](https://docs.orbstack.dev/kubernetes/).
+
+**Why Orbstack?**  
+Orbstack automatically configures service DNS (`<service>.<namespace>.svc.cluster.local`), so you don't have to mess with `/etc/hosts` manually. This makes testing, debugging, and development much easier.
+
+After installing Orbstack, start Kubernetes:
+
+```sh
+$ orb start k8s
+```
+
+> If `orb` isn't found, double-check your [Orbstack installation](https://docs.orbstack.dev/install).
+
+Verify Kubernetes is running:
+
+```sh
+$ kubectl config get-contexts
+CURRENT   NAME       CLUSTER    AUTHINFO   NAMESPACE
+*         orbstack   orbstack   orbstack
+```
+
+## Your First Deployment
+
+If you've used [Podman](https://podman.io/), you're already familiar with Pods.  
+In Kubernetes, Pods usually sit behind a higher-level abstraction: **Deployments**.
+
+In Docker, you launch a container like this:
+
+```sh
+$ docker run nginx
+```
+
+In Kubernetes, you describe containers in YAML and apply the configuration with `kubectl`.
+
+Create a file `example.yaml`:
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: example-deployment # deployment name
+spec:
+  selector:
+    matchLabels:
+      app: example-pod # -----
+  template: #    |
+    metadata: #    |
+      labels: #    |
+        app: example-pod # <--
+    spec:
+      containers:
+        - name: example-container
+          image: nginx
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: example-service
+spec:
+  selector:
+    app: example-pod # selector which pod
+  ports:
+    - protocol: TCP
+      port: 8080 # exposed port
+      targetPort: 80 # container port
+```
+
+Apply the configuration:
+
+```sh
+$ kubectl apply -f example.yaml
+deployment.apps/example created
+service/example-service created
+```
+
+Check the deployment status:
+
+```sh
+$ kubectl get deployments --watch
+NAME      READY   UP-TO-DATE   AVAILABLE   AGE
+example   1/1     1            1
+```
+
+Wait until `READY` shows `1/1`.
+
+Check the running pods:
+
+```sh
+$ kubectl get pods --watch
+NAME                       READY   STATUS    RESTARTS   AGE
+example-54c9b4c747-v7mbj   1/1     Running   0          10s
+```
+
+### Accessing Your Application
+
+Your service is now reachable at:
+
+[http://example-service.default.svc.cluster.local:8080/](http://example-service.default.svc.cluster.local:8080/)
+
+You can also access it via its cluster IP:
+
+```sh
+$ kubectl get svc
+NAME              TYPE        CLUSTER-IP        EXTERNAL-IP   PORT(S)    AGE
+example-service   ClusterIP   192.168.194.207   <none>        8080/TCP   2s
+```
+
+> Note: Cluster IPs change after restarting services. DNS access via Orbstack remains stable.
+
+### Cleaning Up
+
+Delete your resources:
+
+```sh
+$ kubectl delete -f example.yaml
+```
+
+Verify pods are gone:
+
+```sh
+$ kubectl get pods
+No resources found in default namespace.
+```
+
+### Understanding Kubernetes Layers
+
+#### Level 1: Docker — Direct Container
+
+```sh
+docker run nginx  →  [ Container ]
+```
+
+- Single container, immediate run.
+
+#### Level 2: Podman — Pod-Based Grouping
+
+```sh
+$ podman pod create --name mypod             →  [ Pod ]
+$ podman run --pod mypod -p 8080:80 nginx    →     ├─ [ Container ]
+$ podman run --pod mypod redis               →     └─ [ Container ]
+```
+
+- Multiple containers share a network namespace.
+
+#### Level 3: Kubernetes — Declarative Deployment
+
+```sh
+YAML (Deployment) → kubectl apply → [ Deployment ]
+                                        └─ [ Pod ]
+                                             ├─ [ Container ]
+                                             └─ [ Container ]
+```
+
+- Declarative infrastructure, automated scaling and healing.
+
+### What Is a Deployment?
+
+A `Deployment` in Kubernetes manages Pods, ensuring the desired number of replicas are always running.
+
+You can scale your deployment by adding `replicas: 2` to your `example.yaml`:
+
+```yaml
+
+---
+spec:
+  replicas: 2
+```
+
+Apply changes:
+
+```sh
+$ kubectl apply -f example.yaml
+```
+
+List your pods:
+
+```sh
+$ kubectl get pods
+NAME                                  READY   STATUS    RESTARTS   AGE
+example-deployment-779f6bb7dc-nvvq7   1/1     Running   0          4s
+example-deployment-779f6bb7dc-wlfzg   1/1     Running   0          4s
+```
+
+Kubernetes will automatically distribute traffic between the two instances.
+
+[Read more about deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/).
+
+### What Is a Service?
+
+A `Service` in Kubernetes provides a stable way to access one or more Pods.  
+It assigns a **Cluster IP** (internal virtual IP) and a **DNS name** (e.g., `example-service.default.svc.cluster.local`) inside the cluster.
+
+However, it's important to understand the difference between running Kubernetes in **k3d** (or any other tool) versus **Orbstack**:
+
+#### k3d
+
+- k3d runs Kubernetes inside a Docker container.
+- The internal DNS names (`*.svc.cluster.local`) are only resolvable **inside the cluster** (between Pods).
+- Your **host machine** (macOS) is **not part of the cluster's network**.
+- As a result, you **cannot reach** `example-service.default.svc.cluster.local` directly from your Mac without special DNS routing or port-forwarding.
+- Typical workarounds:
+  - `kubectl port-forward`
+  - Exposing services as `NodePort`
+  - Setting up an Ingress controller
+
+#### Orbstack
+
+- Orbstack tightly integrates your host machine into the cluster network.
+- It **automatically configures DNS** so that `.svc.cluster.local` names are **resolvable from your Mac**.
+- You can directly open `http://example-service.default.svc.cluster.local:8080/` in your browser without any extra configuration.
+- This makes development, debugging, and service access much simpler.
+
+**Orbstack** gives you a much smoother local development experience by bridging the cluster and host DNS automatically, while **k3d** needs extra setup if you want to access services easily from your Mac.
+
+[Read more about services](https://kubernetes.io/docs/concepts/services-networking/service/).
+
+## Conclusion
+
+Setting up Kubernetes on macOS doesn't have to be painful.
+
+With Orbstack, a few YAML files, and some `kubectl` commands, you can be up and running fast — and focus on learning Kubernetes without unnecessary friction.
+
+### What's Next?
+
+Now that you have Kubernetes running locally and deployed your first app, here are some great next steps to deepen your knowledge:
+
+- **Explore `kubectl` Commands**  
+  Learn how to inspect Pods, Services, Deployments, and troubleshoot issues using `kubectl describe`, `kubectl logs`, and `kubectl exec`.
+
+- **Dive Into Helm**  
+  Helm is the package manager for Kubernetes. It helps you install complex applications easily.  
+  Recommended starting point: [Helm Quickstart Guide](https://helm.sh/docs/intro/quickstart/)
+
+- **Understand Ingress Controllers**  
+  Move beyond ClusterIP and NodePort services by setting up an Ingress (like Traefik or NGINX) to manage external access to your apps.
+
+- **Learn about StatefulSets, Jobs, and CronJobs**  
+  Deploy workloads that require persistent storage or scheduled execution — not everything fits neatly into stateless Deployments.
+
+- **Set Up Local CI/CD Pipelines**  
+  Try integrating your Kubernetes setup with local GitOps tools like ArgoCD or simple CI pipelines that deploy automatically into your cluster.
+
+- **Join the Community**  
+  Engage with Kubernetes communities (Slack, Discord, CNCF meetups) to stay updated and ask questions when stuck.
+
+Kubernetes has a steep learning curve — but with a solid local setup and consistent hands-on practice, you'll progress faster than you think.
+
+**Happy clustering!**

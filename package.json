@@ -3,20 +3,19 @@
   "name": "patwoz-de",
   "description": "https://patwoz.de",
   "license": "MIT",
-  "sideEffects": false,
+  "type": "module",
   "scripts": {
-    "dev": "remix vite:dev",
-    "build": "NODE_ENV=production remix vite:build",
-    "start": "wrangler pages dev ./build/client",
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "start": "wrangler pages dev ./dist",
     "build-start": "bun run build && bun run start",
     "deploy": "bun run build && wrangler pages deploy && bun run clear:cdn",
     "format": "prettier --ignore-path .gitignore --write .",
     "check-format": "prettier --ignore-path .gitignore --check .",
     "test": "bun test",
     "check-build": "bun run build",
-    "check-lint": "eslint --cache --ext .tsx,.ts,.js .",
-    "check-types": "tsc --noEmit --skipLibCheck",
-    "check-tests": "bun run test",
+    "check-types": "astro check",
     "validate": "run-p check-*",
     "docker:build": "docker build -t patwoz-de:latest .",
     "docker:run": " docker run --rm -p 3000:3000 --name patwoz-de patwoz-de:latest",
@@ -24,59 +23,52 @@
     "dive": "dive build -t patwoz-de:latest .",
     "test:e2e": "playwright test",
     "build:deps": "bun run --filter '*' build",
-    "typegen": "wrangler types",
-    "preview": "bun run build && wrangler pages dev",
-    "cf-typegen": "wrangler types",
     "clear:cdn": "sh -c \"curl -v -X POST 'https://api.bunny.net/purge?url=https://patwoz.dev/*' -H 'AccessKey: $BUNNY_CDN_API_KEY'\""
   },
   "workspaces": [
     "./packages/barcode"
   ],
   "dependencies": {
-    "@heroicons/react": "^2.0.17",
+    "@astrojs/cloudflare": "^12.0.0",
+    "@astrojs/mdx": "^4.0.0",
+    "@astrojs/sitemap": "^3.2.0",
+    "@astrojs/tailwind": "^6.0.0",
     "@patwoz.dev/barcode": "workspace:*",
-    "bun-sqlite-migrations": "^1.0.2",
+    "astro": "^5.1.0",
     "bwip-js": "^4.1.2",
     "clsx": "^1.2.1",
-    "remix-utils": "^8.0.0",
-    "tailwind-merge": "^1.12.0",
-    "zod": "^3.21.4",
-    "@remix-run/cloudflare": "^2.15.2",
-    "@remix-run/cloudflare-pages": "^2.15.2",
-    "@remix-run/react": "^2.15.2",
-    "isbot": "^4.1.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "tailwind-merge": "^1.12.0"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20250109.0",
-    "@mdx-js/rollup": "^3.0.1",
     "@playwright/test": "^1.33.0",
-    "@remix-run/dev": "^2.15.2",
-    "@remix-run/eslint-config": "^2.11.2",
     "@tailwindcss/typography": "^0.5.9",
     "@types/bwip-js": "^3.2.3",
-    "@types/react": "^18.2.5",
-    "@types/react-dom": "^18.2.4",
     "bun-types": "^1.1.29",
     "checkly": "^4.0.4",
-    "eslint": "^8.40.0",
     "lefthook": "^1.4.8",
     "npm-run-all": "^4.1.5",
     "postcss": "^8.4.38",
     "prettier": "^3.4.2",
-    "rehype-pretty-code": "^0.14.0",
-    "remark-frontmatter": "^5.0.0",
-    "remark-mdx-frontmatter": "^5.0.0",
+    "prettier-plugin-astro": "^0.14.1",
     "tailwindcss": "^3.4.4",
     "typescript": "^5.1.6",
-    "vite": "^5.1.0",
-    "vite-tsconfig-paths": "^4.2.1",
     "wrangler": "^3.102.0"
   },
   "prettier": {
     "semi": false,
-    "singleQuote": true
+    "singleQuote": true,
+    "plugins": [
+      "prettier-plugin-astro"
+    ],
+    "overrides": [
+      {
+        "files": "*.astro",
+        "options": {
+          "parser": "astro"
+        }
+      }
+    ]
   },
   "trustedDependencies": [
     "esbuild"

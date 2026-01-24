@@ -1,0 +1,47 @@
+---
+import { getCollection } from 'astro:content'
+import Layout from '~/layouts/Layout.astro'
+import BaseLayout from '~/components/BaseLayout.astro'
+import Introduction from '~/components/Introduction.astro'
+
+const posts = await getCollection('blog')
+const sortedPosts = posts.sort(
+  (a, b) =>
+    new Date(b.data.published).getTime() - new Date(a.data.published).getTime(),
+)
+
+const dateFormatter = new Intl.DateTimeFormat('en-GB', {
+  dateStyle: 'medium',
+})
+---
+
+<Layout title="Blog | Patrick Wozniak">
+  <BaseLayout>
+    <Introduction />
+    <hr class="mt-8" />
+    <ul class="space-y-8 mt-8">
+      {
+        sortedPosts.map((post) => (
+          <li>
+            <article class="prose lg:prose-lg prose-a:no-underline prose-headings:my-0">
+              <a
+                href={`/blog/${post.slug}`}
+                class="flex flex-col-reverse sm:flex-row gap-x-6 sm:items-center group"
+              >
+                <time
+                  class="block text-base font-mono text-cyan-700 no-underline w-36 whitespace-nowrap"
+                  datetime={post.data.published.toISOString()}
+                >
+                  {dateFormatter.format(post.data.published)}
+                </time>
+                <h3 class="text-base font-bold prose:mt-0 m:mb-0 w-full group-hover:underline">
+                  {post.data.title}
+                </h3>
+              </a>
+            </article>
+          </li>
+        ))
+      }
+    </ul>
+  </BaseLayout>
+</Layout>

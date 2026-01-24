@@ -1,0 +1,81 @@
+---
+title: 'zig: use a c library from a dependency'
+description: 'Learn how to seamlessly integrate C libraries, specifically focusing on cJSON, into your Zig projects by leveraging zig fetch and modifying your build.zig file.'
+published: 2024-10-13
+image: /blog-images/2024-10-13-zig-add-c-library.avif
+featured: true
+---
+
+The [zig](https://ziglang.org/) community is large, but the number of native zig libraries is still growing. However, you can easily import any C library into your zig project.
+
+**Step 1: Fetch and Install the C Library**
+
+First install the c library, we will use [cJSON](https://github.com/DaveGamble/cJSON) as an example.
+
+```sh
+zig fetch --save=cjson https://github.com/DaveGamble/cJSON/archive/refs/heads/master.zip
+```
+
+**Step 2: Modify build.zig to Include the C Library**
+
+Now we need to adjust `build.zig` to import the library to our executable:
+
+```zig
+// ...
+const cjsonDep = b.dependency("cjson", .{});
+exe.addIncludePath(cjsonDep.path(""));
+exe.linkLibC();
+exe.addCSourceFiles(.{
+    .root = .{
+        .dependency = .{
+            .dependency = cjsonDep,
+            .sub_path = "",
+        },
+    },
+    .files = &[_][]const u8{
+        "cJSON.c",
+    },
+});
+// ...
+```
+
+**Step 3: Use the C Library in Your zig Application**
+
+Now, you can access the public API of `cJSON` in your zig application.
+
+```zig
+const c = @cImport({
+    @cInclude("cJSON.h");
+});
+
+const value = c.cJSON_Parse(
+    "{ \"name\": \"Patrick\" }",
+);
+defer std.c.free(value);
+const name = c.cJSON_GetObjectItemCaseSensitive(
+    value,
+    "name",
+);
+defer std.c.free(name);
+if (c.cJSON_IsString(name) == 1) {
+    const str: [:0]u8 = std.mem.span(name.*.valuestring);
+    std.debug.print(
+        "name = {s}, len = {d}\n",
+        .{
+            str,
+            str.len,
+        },
+    );
+}
+```
+
+Output:
+
+```sh
+> zig build run
+name = Patrick, len = 7
+```
+
+With this approach, you can easily extend your Zig applications using the vast ecosystem of C libraries, like cJSON. This flexibility allows you to bridge the gap between Zig and C seamlessly.
+
+[Source Code](https://github.com/patlux/zig-cjson)
