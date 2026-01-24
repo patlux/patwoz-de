@@ -11,6 +11,24 @@ import logoImage from '~/assets/images/patwoz-logo-transparent-800px.png'
 const currentPath = Astro.url.pathname
 ---
 
+<!-- Checkbox at top for peer access by all elements -->
+<input type="checkbox" id="menu-toggle" class="peer sr-only" />
+
+<!-- Backdrop (mobile only) -->
+<label
+  for="menu-toggle"
+  class={classNames(
+    'fixed inset-0 z-30 bg-black/50',
+    'opacity-0 pointer-events-none',
+    'transition-opacity duration-300',
+    'peer-checked:opacity-100 peer-checked:pointer-events-auto',
+    'xl:hidden',
+  )}
+>
+  <span class="sr-only">Close menu</span>
+</label>
+
+<!-- Main sidebar container -->
 <div class="xl:fixed xl:inset-y-0 xl:z-50 xl:flex xl:w-72 xl:flex-col">
   <div
     class={classNames(
@@ -21,31 +39,10 @@ const currentPath = Astro.url.pathname
       'xl:overflow-y-auto',
     )}
   >
-    <!-- Header Bar -->
+    <!-- Header Bar (logo only) -->
     <div
-      class="flex h-16 shrink-0 items-center justify-center relative xl:justify-start"
+      class="flex h-16 shrink-0 items-center justify-center xl:justify-start"
     >
-      <label
-        for="menu-toggle"
-        class="-m-2.5 p-2.5 text-black rounded-lg hover:bg-gray-200 absolute left-0 xl:hidden cursor-pointer"
-      >
-        <span class="sr-only">Open sidebar</span>
-        <!-- Bars3Icon -->
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          class="h-5 w-5"
-          aria-hidden="true"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
-        </svg>
-      </label>
       <a href="/">
         <Image
           src={logoImage}
@@ -57,14 +54,61 @@ const currentPath = Astro.url.pathname
       </a>
     </div>
 
-    <!-- Checkbox placed as direct sibling before nav for peer to work -->
-    <input type="checkbox" id="menu-toggle" class="peer sr-only" />
-
-    <!-- Navigation - peer-checked now works because checkbox is direct sibling -->
+    <!-- Navigation - bottom sheet on mobile, sidebar on desktop -->
     <nav
-      class="h-0 overflow-hidden peer-checked:h-auto peer-checked:flex-1 peer-checked:pb-6 peer-checked:overflow-y-auto xl:h-auto xl:flex-1 xl:pb-0 xl:overflow-y-auto flex flex-col"
+      class={classNames(
+        'mobile-menu',
+        // Mobile: bottom sheet
+        'fixed inset-x-0 bottom-0 z-40',
+        'bg-gray-50 rounded-t-2xl shadow-2xl',
+        'max-h-[85vh] overflow-y-auto',
+        'origin-bottom-right',
+        'transition-all duration-300 ease-out',
+        // Desktop: normal sidebar
+        'xl:relative xl:inset-auto xl:z-auto',
+        'xl:rounded-none xl:shadow-none',
+        'xl:max-h-none xl:origin-center',
+        'xl:scale-100 xl:opacity-100',
+        'xl:h-auto xl:flex-1',
+        'flex flex-col',
+      )}
     >
-      <ul class="flex flex-1 flex-col xl:gap-y-7">
+      <!-- Close header (mobile only) -->
+      <div
+        class="flex items-center justify-between pl-7 pr-6 py-4 border-b border-gray-200 xl:hidden"
+      >
+        <a href="/">
+          <Image
+            src={logoImage}
+            alt="Logo of patwoz.de"
+            width={40}
+            height={40}
+            format="webp"
+          />
+        </a>
+        <label
+          for="menu-toggle"
+          class="p-2 -mr-2 rounded-full hover:bg-gray-200 cursor-pointer"
+        >
+          <span class="sr-only">Close menu</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-5 h-5"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18 18 6M6 6l12 12"></path>
+          </svg>
+        </label>
+      </div>
+
+      <!-- Menu content -->
+      <ul class="flex flex-1 flex-col xl:gap-y-7 p-6 pb-24 xl:p-0 xl:pb-0">
         <li class="sm:h-auto sm:flex-1 xl:flex-none">
           <ul
             class="space-y-1 flex flex-col sm:flex-row sm:pb-4 xl:pb-0 xl:flex-col sm:justify-center w-full sm:items-center xl:justify-start xl:items-stretch"
@@ -438,14 +482,56 @@ const currentPath = Astro.url.pathname
           </ul>
         </li>
       </ul>
-
-      <!-- Close button for mobile -->
-      <label
-        for="menu-toggle"
-        class="xl:hidden mt-4 text-center cursor-pointer py-2 rounded-md hover:bg-zinc-200 text-sm font-semibold"
-      >
-        Close
-      </label>
     </nav>
   </div>
 </div>
+
+<!-- Floating Action Button (mobile only) -->
+<label
+  for="menu-toggle"
+  class={classNames(
+    'fixed bottom-6 right-6 z-50',
+    'h-14 px-5 rounded-full',
+    'bg-black text-white',
+    'shadow-lg hover:shadow-xl hover:bg-gray-800',
+    'flex items-center justify-center gap-2',
+    'cursor-pointer',
+    'transition-all duration-300',
+    'xl:hidden',
+  )}
+>
+  <span class="icon-hamburger text-sm font-medium">Menu</span>
+  <span class="icon-close text-sm font-medium">Close</span>
+
+  <!-- Hamburger icon (visible when closed) -->
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke-width="1.5"
+    stroke="currentColor"
+    class="icon-hamburger w-6 h-6"
+    aria-hidden="true"
+  >
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
+  </svg>
+
+  <!-- X icon (visible when open) -->
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke-width="1.5"
+    stroke="currentColor"
+    class="icon-close w-6 h-6"
+    aria-hidden="true"
+  >
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      d="M6 18 18 6M6 6l12 12"></path>
+  </svg>
+</label>

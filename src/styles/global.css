@@ -91,3 +91,33 @@ pre > code[data-line-numbers-max-digits='3'] > .line::before {
 .prose p code:after {
   display: none;
 }
+
+/* Mobile menu FAB icon toggle */
+#menu-toggle:checked ~ label[for='menu-toggle'] .icon-hamburger {
+  display: none;
+}
+
+#menu-toggle:checked ~ label[for='menu-toggle'] .icon-close {
+  display: block;
+}
+
+#menu-toggle:not(:checked) ~ label[for='menu-toggle'] .icon-hamburger {
+  display: block;
+}
+
+#menu-toggle:not(:checked) ~ label[for='menu-toggle'] .icon-close {
+  display: none;
+}
+
+/* Mobile menu bottom sheet toggle */
+body:has(#menu-toggle:checked) nav.mobile-menu {
+  transform: scale(1) !important;
+  opacity: 1 !important;
+}
+
+@media (max-width: 1279px) {
+  nav.mobile-menu {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
