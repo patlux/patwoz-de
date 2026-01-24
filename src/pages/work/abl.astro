@@ -1,0 +1,270 @@
+---
+import Layout from '~/layouts/Layout.astro'
+import BaseLayout from '~/components/BaseLayout.astro'
+import Footer from '~/components/Footer.astro'
+import { classNames } from '~/utils/classNames'
+---
+
+<Layout title="ABL - Work">
+  <BaseLayout>
+    <article class="mt-12">
+      <!-- Back link -->
+      <a
+        href="/work"
+        class="inline-flex items-center gap-1 text-sm text-gray-500 hover:text-gray-700 mb-6"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-4 h-4"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M15.75 19.5 8.25 12l7.5-7.5"></path>
+        </svg>
+        Back to Work
+      </a>
+
+      <!-- Header -->
+      <header class="mb-12">
+        <div class="flex flex-col sm:flex-row gap-6 items-start">
+          <div
+            class="flex-shrink-0 flex items-center justify-center w-24 h-24 bg-gray-50 rounded-xl border border-gray-200"
+          >
+            <img src="/company/abl.svg" alt="ABL Logo" width="60" height="24" />
+          </div>
+          <div class="flex-1">
+            <h1 class="text-2xl font-bold text-gray-900">
+              ABL Configuration App
+            </h1>
+            <p class="text-gray-600 mt-1">ABL GmbH</p>
+            <div class="flex flex-wrap gap-4 mt-3 text-sm text-gray-500">
+              <span class="flex items-center gap-1">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-4 h-4"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
+                  ></path>
+                </svg>
+                Senior React Native Developer
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- App Store Links -->
+        <div class="flex flex-wrap gap-3 mt-6">
+          <a
+            href="https://apps.apple.com/de/app/abl-configuration/id6446492340"
+            target="_blank"
+            rel="noreferrer"
+            class={classNames(
+              'inline-flex items-center gap-2 px-4 py-2',
+              'bg-black text-white text-sm font-medium rounded-lg',
+              'hover:bg-gray-800 transition-colors',
+            )}
+          >
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"
+              ></path>
+            </svg>
+            App Store
+          </a>
+          <a
+            href="https://play.google.com/store/apps/details?id=com.abl_config_app"
+            target="_blank"
+            rel="noreferrer"
+            class={classNames(
+              'inline-flex items-center gap-2 px-4 py-2',
+              'bg-black text-white text-sm font-medium rounded-lg',
+              'hover:bg-gray-800 transition-colors',
+            )}
+          >
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"
+              ></path>
+            </svg>
+            Google Play
+          </a>
+        </div>
+      </header>
+
+      <!-- Content -->
+      <div class="prose lg:prose-lg max-w-none">
+        <p>
+          ABL is a German manufacturer of electric vehicle charging
+          infrastructure, producing wallboxes and charging stations for home and
+          commercial use. The Configuration App enables installers and end users
+          to set up, configure, and manage ABL charging stations via WiFi and
+          Bluetooth connectivity.
+        </p>
+
+        <h2>Project Overview</h2>
+        <p>
+          As the primary developer, I built and maintained the ABL Configuration
+          App from its early stages. The app communicates directly with ABL
+          wallboxes over local WiFi networks and Bluetooth, enabling device
+          setup, firmware updates, network configuration, and system management.
+          Over 1,300+ commits spanning multiple years of development, including
+          React Native upgrades and continuous feature additions.
+        </p>
+
+        <h2>Key Contributions</h2>
+
+        <h3>Device Communication</h3>
+        <p>
+          Implemented the core communication layer for connecting to ABL
+          wallboxes via WiFi Access Point mode and local network connections.
+          Built robust connection handling with automatic reconnection, timeout
+          management, and error recovery. The app runs a local HTTP server to
+          facilitate device communication.
+        </p>
+
+        <h3>QR Code Scanning</h3>
+        <p>
+          Integrated camera-based QR code scanning using Vision Camera for
+          device discovery and onboarding. Implemented barcode detection,
+          handled device-specific camera issues on Samsung devices, and added
+          support for ultrawide camera lenses. Built manual input fallback for
+          cases where scanning isn't possible.
+        </p>
+
+        <h3>Firmware Updates</h3>
+        <p>
+          Built the firmware update system allowing users to update their
+          wallbox firmware over-the-air. Implemented update progress tracking,
+          error handling for stuck updates, and proper device state management
+          during the update process.
+        </p>
+
+        <h3>Network Configuration</h3>
+        <p>
+          Developed comprehensive network setup flows including WiFi
+          configuration, LTE/mobile data setup, and Ethernet (LAN) connectivity.
+          Implemented WiFi password management, network switching operations,
+          and proper handling of different connection scenarios (AP mode, LAN,
+          extender).
+        </p>
+
+        <h3>Controller & Extender Management</h3>
+        <p>
+          Built the system for managing controller devices and their associated
+          extenders (satellite charging points). Implemented device grouping,
+          extender discovery via mDNS, and the workflow for adding extenders to
+          controller groups over LAN connections.
+        </p>
+
+        <h3>Multi-language Support</h3>
+        <p>
+          Implemented internationalization using i18next with support for
+          German, English, French, Spanish, Italian, and Dutch. Integrated with
+          Lokalise for translation management, including upload and download
+          scripts for keeping translations in sync.
+        </p>
+
+        <h3>State Management</h3>
+        <p>
+          Built the application state architecture using MobX for reactive state
+          management. Implemented stores for device state, controller
+          configuration, connection status, and user preferences. Added React
+          Query for server state management and caching.
+        </p>
+
+        <h3>UI Components</h3>
+        <p>
+          Developed the component library using NativeWind (Tailwind CSS for
+          React Native). Built reusable components including custom dropdown
+          menus, loading overlays, modal dialogs, and form inputs with React
+          Hook Form integration.
+        </p>
+
+        <h3>Error Tracking & Analytics</h3>
+        <p>
+          Integrated Sentry for crash reporting and error tracking with session
+          replay capabilities. Added Mixpanel for analytics to track user
+          behavior and connection attempts. Implemented proper error context and
+          tagging for searchable error logs.
+        </p>
+
+        <h3>React Native Upgrades</h3>
+        <p>
+          Performed multiple React Native version upgrades throughout the
+          project lifecycle (up to RN 0.75). Handled breaking changes, updated
+          native dependencies, fixed Xcode 15 build issues, and maintained
+          compatibility with the latest iOS and Android requirements.
+        </p>
+      </div>
+
+      <div class="prose lg:prose-lg max-w-none mt-8">
+        <h2>Technology Stack</h2>
+      </div>
+
+      <!-- Tech Stack Grid -->
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-6 mb-12">
+        <div>
+          <h4 class="text-sm font-semibold text-gray-500 uppercase mb-3">
+            Mobile
+          </h4>
+          <ul class="space-y-2">
+            <li class="text-gray-700">React Native 0.75</li>
+            <li class="text-gray-700">TypeScript</li>
+            <li class="text-gray-700">MobX</li>
+            <li class="text-gray-700">React Query</li>
+            <li class="text-gray-700">NativeWind</li>
+            <li class="text-gray-700">React Navigation</li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-sm font-semibold text-gray-500 uppercase mb-3">
+            Device Integration
+          </h4>
+          <ul class="space-y-2">
+            <li class="text-gray-700">Vision Camera</li>
+            <li class="text-gray-700">Local HTTP Server</li>
+            <li class="text-gray-700">WiFi Management</li>
+            <li class="text-gray-700">mDNS Discovery</li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-sm font-semibold text-gray-500 uppercase mb-3">
+            Services
+          </h4>
+          <ul class="space-y-2">
+            <li class="text-gray-700">Sentry</li>
+            <li class="text-gray-700">Mixpanel</li>
+            <li class="text-gray-700">i18next</li>
+            <li class="text-gray-700">Lokalise</li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-sm font-semibold text-gray-500 uppercase mb-3">
+            DevOps
+          </h4>
+          <ul class="space-y-2">
+            <li class="text-gray-700">Fastlane</li>
+            <li class="text-gray-700">Lefthook</li>
+            <li class="text-gray-700">Jest</li>
+            <li class="text-gray-700">MSW</li>
+            <li class="text-gray-700">ESLint</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <Footer />
+  </BaseLayout>
+</Layout>
