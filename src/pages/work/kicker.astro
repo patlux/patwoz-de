@@ -11,7 +11,7 @@ import AppStoreLinks from '~/components/AppStoreLinks.astro'
       <!-- Back link -->
       <a
         href="/work"
-        class="inline-flex items-center gap-1 text-sm text-gray-500 hover:text-gray-700 mb-6"
+        class="inline-flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 mb-6"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -33,7 +33,7 @@ import AppStoreLinks from '~/components/AppStoreLinks.astro'
       <header class="mb-12">
         <div class="flex flex-col sm:flex-row gap-6 items-start">
           <div
-            class="flex-shrink-0 flex items-center justify-center w-24 h-24 bg-gray-50 rounded-xl border border-gray-200"
+            class="flex-shrink-0 flex items-center justify-center w-24 h-24 bg-gray-50 dark:bg-zinc-800 rounded-xl border border-gray-200 dark:border-zinc-700"
           >
             <img
               src="/company/kicker.svg"
@@ -43,11 +43,15 @@ import AppStoreLinks from '~/components/AppStoreLinks.astro'
             />
           </div>
           <div class="flex-1">
-            <h1 class="text-2xl font-bold text-gray-900">
+            <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100">
               FWMFL - Football Was My First Love
             </h1>
-            <p class="text-gray-600 mt-1">Olympia Verlag (Kicker)</p>
-            <div class="flex flex-wrap gap-4 mt-3 text-sm text-gray-500">
+            <p class="text-gray-600 dark:text-gray-400 mt-1">
+              Olympia Verlag (Kicker)
+            </p>
+            <div
+              class="flex flex-wrap gap-4 mt-3 text-sm text-gray-500 dark:text-gray-400"
+            >
               <span class="flex items-center gap-1">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -208,50 +212,58 @@ import AppStoreLinks from '~/components/AppStoreLinks.astro'
       <!-- Tech Stack Grid -->
       <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-6 mb-12">
         <div>
-          <h4 class="text-sm font-semibold text-gray-500 uppercase mb-3">
+          <h4
+            class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase mb-3"
+          >
             Mobile
           </h4>
           <ul class="space-y-2">
-            <li class="text-gray-700">React Native 0.79</li>
-            <li class="text-gray-700">Expo 53</li>
-            <li class="text-gray-700">TypeScript</li>
-            <li class="text-gray-700">NativeWind</li>
-            <li class="text-gray-700">Zustand</li>
-            <li class="text-gray-700">React Query</li>
+            <li class="text-gray-700 dark:text-gray-300">React Native 0.79</li>
+            <li class="text-gray-700 dark:text-gray-300">Expo 53</li>
+            <li class="text-gray-700 dark:text-gray-300">TypeScript</li>
+            <li class="text-gray-700 dark:text-gray-300">NativeWind</li>
+            <li class="text-gray-700 dark:text-gray-300">Zustand</li>
+            <li class="text-gray-700 dark:text-gray-300">React Query</li>
           </ul>
         </div>
         <div>
-          <h4 class="text-sm font-semibold text-gray-500 uppercase mb-3">
+          <h4
+            class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase mb-3"
+          >
             Backend
           </h4>
           <ul class="space-y-2">
-            <li class="text-gray-700">Go</li>
-            <li class="text-gray-700">Rust</li>
-            <li class="text-gray-700">MySQL</li>
-            <li class="text-gray-700">SQLite (mobile)</li>
-            <li class="text-gray-700">Laravel (legacy)</li>
+            <li class="text-gray-700 dark:text-gray-300">Go</li>
+            <li class="text-gray-700 dark:text-gray-300">Rust</li>
+            <li class="text-gray-700 dark:text-gray-300">MySQL</li>
+            <li class="text-gray-700 dark:text-gray-300">SQLite (mobile)</li>
+            <li class="text-gray-700 dark:text-gray-300">Laravel (legacy)</li>
           </ul>
         </div>
         <div>
-          <h4 class="text-sm font-semibold text-gray-500 uppercase mb-3">
+          <h4
+            class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase mb-3"
+          >
             Web
           </h4>
           <ul class="space-y-2">
-            <li class="text-gray-700">Astro</li>
-            <li class="text-gray-700">Tailwind CSS</li>
-            <li class="text-gray-700">TypeScript</li>
+            <li class="text-gray-700 dark:text-gray-300">Astro</li>
+            <li class="text-gray-700 dark:text-gray-300">Tailwind CSS</li>
+            <li class="text-gray-700 dark:text-gray-300">TypeScript</li>
           </ul>
         </div>
         <div>
-          <h4 class="text-sm font-semibold text-gray-500 uppercase mb-3">
+          <h4
+            class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase mb-3"
+          >
             Infrastructure
           </h4>
           <ul class="space-y-2">
-            <li class="text-gray-700">Kubernetes</li>
-            <li class="text-gray-700">Helm</li>
-            <li class="text-gray-700">Terraform</li>
-            <li class="text-gray-700">Docker</li>
-            <li class="text-gray-700">Tilt / Skaffold</li>
+            <li class="text-gray-700 dark:text-gray-300">Kubernetes</li>
+            <li class="text-gray-700 dark:text-gray-300">Helm</li>
+            <li class="text-gray-700 dark:text-gray-300">Terraform</li>
+            <li class="text-gray-700 dark:text-gray-300">Docker</li>
+            <li class="text-gray-700 dark:text-gray-300">Tilt / Skaffold</li>
           </ul>
         </div>
       </div>

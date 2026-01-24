@@ -1,13 +1,16 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/typography';
 
+/* Use class-based dark mode instead of media query */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --font-article: 'Helvetica Neue', ui-serif, Georgia, Cambria,
     'Times New Roman', Times, serif;
 }
 
 a.button {
-  @apply inline-block rounded-xl border border-gray-200 bg-white px-6 py-2 shadow-md transition-shadow hover:shadow-xl;
+  @apply inline-block rounded-xl border border-gray-200 bg-white px-6 py-2 shadow-md transition-shadow hover:shadow-xl dark:bg-zinc-800 dark:border-zinc-600 dark:text-gray-100;
 }
 
 h1 {
@@ -80,8 +83,42 @@ pre > code[data-line-numbers-max-digits='3'] > .line::before {
   width: 1.75rem;
 }
 
+/* Prose dark mode overrides */
+.prose {
+  @apply text-gray-700 dark:text-gray-300;
+}
+
+.prose p {
+  @apply text-gray-700 dark:text-gray-300;
+}
+
+.prose a {
+  @apply text-blue-600 dark:text-blue-400;
+}
+
+.prose a:hover {
+  @apply text-blue-800 dark:text-blue-300;
+}
+
+.prose strong {
+  @apply text-gray-900 dark:text-gray-100;
+}
+
+.prose blockquote {
+  @apply border-gray-300 text-gray-600 dark:border-gray-600 dark:text-gray-400;
+}
+
+.prose ul,
+.prose ol {
+  @apply text-gray-700 dark:text-gray-300;
+}
+
+.prose li::marker {
+  @apply text-gray-400 dark:text-gray-500;
+}
+
 .prose p code {
-  @apply rounded-md border border-black/10 bg-yellow-50 px-1 font-medium text-black;
+  @apply rounded-md border border-black/10 bg-yellow-50 px-1 font-medium text-black dark:border-zinc-600 dark:bg-zinc-700 dark:text-gray-200;
 }
 
 .prose p code:before {

@@ -10,7 +10,7 @@ import Footer from '~/components/Footer.astro'
       <!-- Back link -->
       <a
         href="/work/ibm"
-        class="inline-flex items-center gap-1 text-sm text-gray-500 hover:text-gray-700 mb-6"
+        class="inline-flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 mb-6"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -32,7 +32,7 @@ import Footer from '~/components/Footer.astro'
       <header class="mb-12">
         <div class="flex flex-col sm:flex-row gap-6 items-start">
           <div
-            class="flex-shrink-0 flex items-center justify-center w-24 h-24 bg-gray-50 rounded-xl border border-gray-200"
+            class="flex-shrink-0 flex items-center justify-center w-24 h-24 bg-gray-50 dark:bg-zinc-800 rounded-xl border border-gray-200 dark:border-zinc-700"
           >
             <img
               src="/company/barmer.svg"
@@ -42,11 +42,13 @@ import Footer from '~/components/Footer.astro'
             />
           </div>
           <div class="flex-1">
-            <h1 class="text-2xl font-bold text-gray-900">
+            <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100">
               Barmer Puls Design System
             </h1>
-            <p class="text-gray-600 mt-1">IBM iX / Barmer</p>
-            <div class="flex flex-wrap gap-4 mt-3 text-sm text-gray-500">
+            <p class="text-gray-600 dark:text-gray-400 mt-1">IBM iX / Barmer</p>
+            <div
+              class="flex flex-wrap gap-4 mt-3 text-sm text-gray-500 dark:text-gray-400"
+            >
               <span class="flex items-center gap-1">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -144,47 +146,55 @@ import Footer from '~/components/Footer.astro'
       <!-- Tech Stack Grid -->
       <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-6 mb-12">
         <div>
-          <h4 class="text-sm font-semibold text-gray-500 uppercase mb-3">
+          <h4
+            class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase mb-3"
+          >
             Frontend
           </h4>
           <ul class="space-y-2">
-            <li class="text-gray-700">React</li>
-            <li class="text-gray-700">React Native</li>
-            <li class="text-gray-700">TypeScript</li>
-            <li class="text-gray-700">Storybook</li>
+            <li class="text-gray-700 dark:text-gray-300">React</li>
+            <li class="text-gray-700 dark:text-gray-300">React Native</li>
+            <li class="text-gray-700 dark:text-gray-300">TypeScript</li>
+            <li class="text-gray-700 dark:text-gray-300">Storybook</li>
           </ul>
         </div>
         <div>
-          <h4 class="text-sm font-semibold text-gray-500 uppercase mb-3">
+          <h4
+            class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase mb-3"
+          >
             Styling
           </h4>
           <ul class="space-y-2">
-            <li class="text-gray-700">Design Tokens</li>
-            <li class="text-gray-700">Theming System</li>
-            <li class="text-gray-700">Dark Mode</li>
-            <li class="text-gray-700">CSS-in-JS</li>
+            <li class="text-gray-700 dark:text-gray-300">Design Tokens</li>
+            <li class="text-gray-700 dark:text-gray-300">Theming System</li>
+            <li class="text-gray-700 dark:text-gray-300">Dark Mode</li>
+            <li class="text-gray-700 dark:text-gray-300">CSS-in-JS</li>
           </ul>
         </div>
         <div>
-          <h4 class="text-sm font-semibold text-gray-500 uppercase mb-3">
+          <h4
+            class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase mb-3"
+          >
             Tooling
           </h4>
           <ul class="space-y-2">
-            <li class="text-gray-700">Yarn Workspaces</li>
-            <li class="text-gray-700">Changesets</li>
-            <li class="text-gray-700">Vitest</li>
-            <li class="text-gray-700">Playwright</li>
+            <li class="text-gray-700 dark:text-gray-300">Yarn Workspaces</li>
+            <li class="text-gray-700 dark:text-gray-300">Changesets</li>
+            <li class="text-gray-700 dark:text-gray-300">Vitest</li>
+            <li class="text-gray-700 dark:text-gray-300">Playwright</li>
           </ul>
         </div>
         <div>
-          <h4 class="text-sm font-semibold text-gray-500 uppercase mb-3">
+          <h4
+            class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase mb-3"
+          >
             DevOps
           </h4>
           <ul class="space-y-2">
-            <li class="text-gray-700">GitLab CI</li>
-            <li class="text-gray-700">Docker</li>
-            <li class="text-gray-700">ESLint</li>
-            <li class="text-gray-700">Prettier</li>
+            <li class="text-gray-700 dark:text-gray-300">GitLab CI</li>
+            <li class="text-gray-700 dark:text-gray-300">Docker</li>
+            <li class="text-gray-700 dark:text-gray-300">ESLint</li>
+            <li class="text-gray-700 dark:text-gray-300">Prettier</li>
           </ul>
         </div>
       </div>

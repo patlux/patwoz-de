@@ -11,7 +11,7 @@ import AppStoreLinks from '~/components/AppStoreLinks.astro'
       <!-- Back link -->
       <a
         href="/work"
-        class="inline-flex items-center gap-1 text-sm text-gray-500 hover:text-gray-700 mb-6"
+        class="inline-flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 mb-6"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -33,14 +33,18 @@ import AppStoreLinks from '~/components/AppStoreLinks.astro'
       <header class="mb-12">
         <div class="flex flex-col sm:flex-row gap-6 items-start">
           <div
-            class="flex-shrink-0 flex items-center justify-center w-24 h-24 bg-gray-50 rounded-xl border border-gray-200"
+            class="flex-shrink-0 flex items-center justify-center w-24 h-24 bg-gray-50 dark:bg-zinc-800 rounded-xl border border-gray-200 dark:border-zinc-700"
           >
             <img src="/company/sap.svg" alt="SAP Logo" width="70" height="35" />
           </div>
           <div class="flex-1">
-            <h1 class="text-2xl font-bold text-gray-900">KulturPass DE</h1>
-            <p class="text-gray-600 mt-1">SAP SE</p>
-            <div class="flex flex-wrap gap-4 mt-3 text-sm text-gray-500">
+            <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100">
+              KulturPass DE
+            </h1>
+            <p class="text-gray-600 dark:text-gray-400 mt-1">SAP SE</p>
+            <div
+              class="flex flex-wrap gap-4 mt-3 text-sm text-gray-500 dark:text-gray-400"
+            >
               <span class="flex items-center gap-1">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -211,48 +215,60 @@ import AppStoreLinks from '~/components/AppStoreLinks.astro'
       <!-- Tech Stack Grid -->
       <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-6 mb-12">
         <div>
-          <h4 class="text-sm font-semibold text-gray-500 uppercase mb-3">
+          <h4
+            class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase mb-3"
+          >
             Frontend
           </h4>
           <ul class="space-y-2">
-            <li class="text-gray-700">React Native 0.70</li>
-            <li class="text-gray-700">TypeScript</li>
-            <li class="text-gray-700">Redux Toolkit</li>
-            <li class="text-gray-700">Redux Saga</li>
-            <li class="text-gray-700">React Navigation</li>
-            <li class="text-gray-700">React Hook Form</li>
+            <li class="text-gray-700 dark:text-gray-300">React Native 0.70</li>
+            <li class="text-gray-700 dark:text-gray-300">TypeScript</li>
+            <li class="text-gray-700 dark:text-gray-300">Redux Toolkit</li>
+            <li class="text-gray-700 dark:text-gray-300">Redux Saga</li>
+            <li class="text-gray-700 dark:text-gray-300">React Navigation</li>
+            <li class="text-gray-700 dark:text-gray-300">React Hook Form</li>
           </ul>
         </div>
         <div>
-          <h4 class="text-sm font-semibold text-gray-500 uppercase mb-3">
+          <h4
+            class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase mb-3"
+          >
             Services
           </h4>
           <ul class="space-y-2">
-            <li class="text-gray-700">AppCenter Analytics</li>
-            <li class="text-gray-700">AppCenter Crashes</li>
-            <li class="text-gray-700">i18next</li>
-            <li class="text-gray-700">Axios</li>
+            <li class="text-gray-700 dark:text-gray-300">
+              AppCenter Analytics
+            </li>
+            <li class="text-gray-700 dark:text-gray-300">AppCenter Crashes</li>
+            <li class="text-gray-700 dark:text-gray-300">i18next</li>
+            <li class="text-gray-700 dark:text-gray-300">Axios</li>
           </ul>
         </div>
         <div>
-          <h4 class="text-sm font-semibold text-gray-500 uppercase mb-3">
+          <h4
+            class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase mb-3"
+          >
             Security
           </h4>
           <ul class="space-y-2">
-            <li class="text-gray-700">Encrypted Storage</li>
-            <li class="text-gray-700">Zod Validation</li>
-            <li class="text-gray-700">AusweisApp2 SDK</li>
+            <li class="text-gray-700 dark:text-gray-300">Encrypted Storage</li>
+            <li class="text-gray-700 dark:text-gray-300">Zod Validation</li>
+            <li class="text-gray-700 dark:text-gray-300">AusweisApp2 SDK</li>
           </ul>
         </div>
         <div>
-          <h4 class="text-sm font-semibold text-gray-500 uppercase mb-3">
+          <h4
+            class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase mb-3"
+          >
             DevOps
           </h4>
           <ul class="space-y-2">
-            <li class="text-gray-700">Jest</li>
-            <li class="text-gray-700">React Native Testing Library</li>
-            <li class="text-gray-700">ESLint</li>
-            <li class="text-gray-700">GitHub Actions</li>
+            <li class="text-gray-700 dark:text-gray-300">Jest</li>
+            <li class="text-gray-700 dark:text-gray-300">
+              React Native Testing Library
+            </li>
+            <li class="text-gray-700 dark:text-gray-300">ESLint</li>
+            <li class="text-gray-700 dark:text-gray-300">GitHub Actions</li>
           </ul>
         </div>
       </div>

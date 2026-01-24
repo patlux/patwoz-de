@@ -1,0 +1,189 @@
+---
+/**
+ * ThemeToggle - Three-state theme toggle
+ * - Default (system): shows sun/moon based on system preference
+ * - User forced dark: shows moon with toggled state
+ * - User forced light: shows sun with toggled state
+ */
+---
+
+<button
+  id="theme-toggle"
+  type="button"
+  class="p-2 rounded-lg transition-colors"
+  aria-label="Toggle theme"
+>
+  <!-- Sun icon -->
+  <svg
+    id="theme-icon-light"
+    class="w-5 h-5 hidden"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke-width="1.5"
+    stroke="currentColor"
+  >
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"
+    ></path>
+  </svg>
+
+  <!-- Moon icon -->
+  <svg
+    id="theme-icon-dark"
+    class="w-5 h-5 hidden"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke-width="1.5"
+    stroke="currentColor"
+  >
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z"
+    ></path>
+  </svg>
+</button>
+
+<script>
+  function initThemeToggle() {
+    const toggleEl = document.getElementById('theme-toggle')
+    const iconLightEl = document.getElementById('theme-icon-light')
+    const iconDarkEl = document.getElementById('theme-icon-dark')
+    if (!toggleEl || !iconLightEl || !iconDarkEl) return
+
+    // Capture as non-null for use in nested functions
+    const toggle = toggleEl
+    const iconLight = iconLightEl
+    const iconDark = iconDarkEl
+
+    // Get stored theme: 'light', 'dark', or null (system)
+    function getStoredTheme(): string | null {
+      return localStorage.getItem('theme')
+    }
+
+    // Check system preference
+    function systemPrefersDark(): boolean {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches
+    }
+
+    // Apply theme to document
+    function applyTheme(theme: string | null) {
+      const shouldBeDark =
+        theme === 'dark' || (theme === null && systemPrefersDark())
+
+      if (shouldBeDark) {
+        document.documentElement.classList.add('dark')
+      } else {
+        document.documentElement.classList.remove('dark')
+      }
+    }
+
+    // Update button and icon states
+    function updateState(theme: string | null) {
+      const isForced = theme !== null
+
+      // Determine which icon to show:
+      // - If forced: show icon matching forced theme
+      // - If system: show icon matching system preference
+      const showMoon =
+        theme === 'dark' || (theme === null && systemPrefersDark())
+
+      // Update icon visibility and colors
+      const lightClasses = isForced
+        ? 'w-5 h-5 text-amber-500'
+        : 'w-5 h-5 text-gray-500 dark:text-gray-400'
+      const darkClasses = isForced
+        ? 'w-5 h-5 text-blue-400'
+        : 'w-5 h-5 text-gray-500 dark:text-gray-400'
+
+      iconLight.setAttribute(
+        'class',
+        showMoon ? `${lightClasses} hidden` : lightClasses,
+      )
+      iconDark.setAttribute(
+        'class',
+        showMoon ? darkClasses : `${darkClasses} hidden`,
+      )
+
+      // Update button toggled state
+      toggle.className = isForced
+        ? 'p-2 rounded-lg transition-colors bg-gray-200 dark:bg-zinc-700 hover:bg-gray-300 dark:hover:bg-zinc-600'
+        : 'p-2 rounded-lg transition-colors hover:bg-gray-200 dark:hover:bg-zinc-700'
+    }
+
+    // Toggle theme on click
+    function handleClick() {
+      const current = getStoredTheme()
+      const prefersDark = systemPrefersDark()
+
+      let next: string | null
+
+      if (current === null) {
+        // System -> force opposite of system preference
+        next = prefersDark ? 'light' : 'dark'
+      } else {
+        // Forced -> back to system
+        next = null
+      }
+
+      if (next === null) {
+        localStorage.removeItem('theme')
+      } else {
+        localStorage.setItem('theme', next)
+      }
+
+      applyTheme(next)
+      updateState(next)
+      updateAriaLabel(next)
+    }
+
+    // Update aria-label
+    function updateAriaLabel(theme: string | null) {
+      if (theme === 'light') {
+        toggle.setAttribute(
+          'aria-label',
+          'Theme: Light mode. Click to use system preference.',
+        )
+      } else if (theme === 'dark') {
+        toggle.setAttribute(
+          'aria-label',
+          'Theme: Dark mode. Click to use system preference.',
+        )
+      } else {
+        toggle.setAttribute(
+          'aria-label',
+          'Theme: System preference. Click to toggle.',
+        )
+      }
+    }
+
+    // Initialize
+    const initialTheme = getStoredTheme()
+    updateState(initialTheme)
+    updateAriaLabel(initialTheme)
+
+    // Handle click
+    toggle.addEventListener('click', handleClick)
+
+    // Listen for system preference changes
+    window
+      .matchMedia('(prefers-color-scheme: dark)')
+      .addEventListener('change', () => {
+        const theme = getStoredTheme()
+        if (theme === null) {
+          applyTheme(null)
+          updateState(null)
+        }
+      })
+  }
+
+  // Run on initial load
+  initThemeToggle()
+
+  // Re-run after Astro page transitions (View Transitions)
+  document.addEventListener('astro:after-swap', initThemeToggle)
+</script>

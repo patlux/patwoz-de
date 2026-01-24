@@ -6,6 +6,7 @@ import LinkedInIcon from '~/icons/LinkedInIcon.astro'
 import StackOverflowIcon from '~/icons/StackOverflowIcon.astro'
 import TwitterIcon from '~/icons/TwitterIcon.astro'
 import XingIcon from '~/icons/XingIcon.astro'
+import ThemeToggle from '~/components/ThemeToggle.astro'
 import logoImage from '~/assets/images/patwoz-logo-transparent-800px.png'
 
 const currentPath = Astro.url.pathname
@@ -33,15 +34,15 @@ const currentPath = Astro.url.pathname
   <div
     class={classNames(
       'flex grow flex-col xl:gap-y-5',
-      'bg-gray-50 px-6',
+      'bg-gray-50 dark:bg-zinc-800 px-6',
       'ring-1 ring-white/5',
-      'border-b xl:border-b-0 xl:border-r border-gray-200',
+      'border-b xl:border-b-0 xl:border-r border-gray-200 dark:border-zinc-700',
       'xl:overflow-y-auto',
     )}
   >
-    <!-- Header Bar (logo only) -->
+    <!-- Header Bar (logo + theme toggle) -->
     <div
-      class="flex h-16 shrink-0 items-center justify-center xl:justify-start"
+      class="flex h-16 shrink-0 items-center justify-center xl:justify-between"
     >
       <a href="/">
         <Image
@@ -50,8 +51,12 @@ const currentPath = Astro.url.pathname
           width={60}
           height={60}
           format="webp"
+          class="dark:invert"
         />
       </a>
+      <div class="hidden xl:block">
+        <ThemeToggle />
+      </div>
     </div>
 
     <!-- Navigation - bottom sheet on mobile, sidebar on desktop -->
@@ -60,7 +65,7 @@ const currentPath = Astro.url.pathname
         'mobile-menu',
         // Mobile: bottom sheet
         'fixed inset-x-0 bottom-0 z-40',
-        'bg-gray-50 rounded-t-2xl shadow-2xl',
+        'bg-gray-50 dark:bg-zinc-800 rounded-t-2xl shadow-2xl',
         'max-h-[85vh] overflow-y-auto',
         'origin-bottom-right',
         'transition-all duration-300 ease-out',
@@ -75,7 +80,7 @@ const currentPath = Astro.url.pathname
     >
       <!-- Close header (mobile only) -->
       <div
-        class="flex items-center justify-between pl-7 pr-6 py-4 border-b border-gray-200 xl:hidden"
+        class="flex items-center justify-between pl-7 pr-4 py-4 border-b border-gray-200 dark:border-zinc-700 xl:hidden"
       >
         <a href="/">
           <Image
@@ -84,27 +89,31 @@ const currentPath = Astro.url.pathname
             width={40}
             height={40}
             format="webp"
+            class="dark:invert"
           />
         </a>
-        <label
-          for="menu-toggle"
-          class="p-2 -mr-2 rounded-full hover:bg-gray-200 cursor-pointer"
-        >
-          <span class="sr-only">Close menu</span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-5 h-5"
+        <div class="flex items-center gap-1">
+          <ThemeToggle />
+          <label
+            for="menu-toggle"
+            class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-zinc-700 cursor-pointer"
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M6 18 18 6M6 6l12 12"></path>
-          </svg>
-        </label>
+            <span class="sr-only">Close menu</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-5 h-5"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M6 18 18 6M6 6l12 12"></path>
+            </svg>
+          </label>
+        </div>
       </div>
 
       <!-- Menu content -->
@@ -120,7 +129,7 @@ const currentPath = Astro.url.pathname
                   'flex gap-x-2 items-center',
                   'rounded-md px-4 py-2',
                   'text-sm leading-6 font-semibold',
-                  'text-black hover:bg-zinc-200',
+                  'text-black dark:text-gray-100 hover:bg-zinc-200 dark:hover:bg-zinc-700',
                   currentPath === '/' &&
                     'bg-black hover:bg-black/70 text-white',
                 )}
@@ -150,7 +159,7 @@ const currentPath = Astro.url.pathname
                   'flex gap-x-2 items-center',
                   'rounded-md px-4 py-2',
                   'text-sm leading-6 font-semibold',
-                  'text-black hover:bg-zinc-200',
+                  'text-black dark:text-gray-100 hover:bg-zinc-200 dark:hover:bg-zinc-700',
                   currentPath.startsWith('/work') &&
                     'bg-black hover:bg-black/70 text-white',
                 )}
@@ -180,7 +189,7 @@ const currentPath = Astro.url.pathname
                   'flex gap-x-2 items-center',
                   'rounded-md px-4 py-2',
                   'text-sm leading-6 font-semibold',
-                  'text-black hover:bg-zinc-200',
+                  'text-black dark:text-gray-100 hover:bg-zinc-200 dark:hover:bg-zinc-700',
                   currentPath.startsWith('/blog') &&
                     'bg-black hover:bg-black/70 text-white',
                 )}
@@ -210,7 +219,7 @@ const currentPath = Astro.url.pathname
                   'flex gap-x-2 items-center',
                   'rounded-md px-4 py-2',
                   'text-sm leading-6 font-semibold',
-                  'text-black hover:bg-zinc-200',
+                  'text-black dark:text-gray-100 hover:bg-zinc-200 dark:hover:bg-zinc-700',
                   currentPath === '/what-i-built' &&
                     'bg-black hover:bg-black/70 text-white',
                 )}
@@ -240,7 +249,7 @@ const currentPath = Astro.url.pathname
                   'flex gap-x-2 items-center',
                   'rounded-md px-4 py-2',
                   'text-sm leading-6 font-semibold',
-                  'text-black hover:bg-zinc-200',
+                  'text-black dark:text-gray-100 hover:bg-zinc-200 dark:hover:bg-zinc-700',
                   currentPath === '/what-i-use' &&
                     'bg-black hover:bg-black/70 text-white',
                 )}
@@ -275,7 +284,7 @@ const currentPath = Astro.url.pathname
             <li>
               <a
                 href="https://github.com/patlux"
-                class="flex gap-x-2 items-center rounded-md px-4 py-0.5 text-sm leading-6 font-semibold text-black hover:bg-zinc-200"
+                class="flex gap-x-2 items-center rounded-md px-4 py-0.5 text-sm leading-6 font-semibold text-black dark:text-gray-100 hover:bg-zinc-200 dark:hover:bg-zinc-700"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -301,7 +310,7 @@ const currentPath = Astro.url.pathname
             <li>
               <a
                 href="https://stackoverflow.com/users/6300994/patrick-wozniak?tab=profile"
-                class="flex gap-x-2 items-center rounded-md px-4 py-0.5 text-sm leading-6 font-semibold text-black hover:bg-zinc-200"
+                class="flex gap-x-2 items-center rounded-md px-4 py-0.5 text-sm leading-6 font-semibold text-black dark:text-gray-100 hover:bg-zinc-200 dark:hover:bg-zinc-700"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -327,7 +336,7 @@ const currentPath = Astro.url.pathname
             <li>
               <a
                 href="https://twitter.com/de_patwoz"
-                class="flex gap-x-2 items-center rounded-md px-4 py-0.5 text-sm leading-6 font-semibold text-black hover:bg-zinc-200"
+                class="flex gap-x-2 items-center rounded-md px-4 py-0.5 text-sm leading-6 font-semibold text-black dark:text-gray-100 hover:bg-zinc-200 dark:hover:bg-zinc-700"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -353,12 +362,12 @@ const currentPath = Astro.url.pathname
             <li>
               <a
                 href="https://www.thingiverse.com/patwoz"
-                class="flex gap-x-2 items-center rounded-md px-4 py-0.5 text-sm leading-6 font-semibold text-black hover:bg-zinc-200"
+                class="flex gap-x-2 items-center rounded-md px-4 py-0.5 text-sm leading-6 font-semibold text-black dark:text-gray-100 hover:bg-zinc-200 dark:hover:bg-zinc-700"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <div
-                  class="w-5 h-5 border border-black rounded-sm text-xs flex justify-center items-center"
+                  class="w-5 h-5 border border-black dark:border-gray-100 rounded-sm text-xs flex justify-center items-center"
                 >
                   3D
                 </div>
@@ -410,7 +419,7 @@ const currentPath = Astro.url.pathname
             <li>
               <a
                 href="https://de.linkedin.com/in/patrick-wozniak-696453123"
-                class="flex gap-x-2 items-center rounded-md px-4 py-0.5 text-sm leading-6 font-semibold text-black hover:bg-zinc-200"
+                class="flex gap-x-2 items-center rounded-md px-4 py-0.5 text-sm leading-6 font-semibold text-black dark:text-gray-100 hover:bg-zinc-200 dark:hover:bg-zinc-700"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -436,7 +445,7 @@ const currentPath = Astro.url.pathname
             <li>
               <a
                 href="https://www.xing.com/profile/Patrick_Wozniak5"
-                class="flex gap-x-2 items-center rounded-md px-4 py-0.5 text-sm leading-6 font-semibold text-black hover:bg-zinc-200"
+                class="flex gap-x-2 items-center rounded-md px-4 py-0.5 text-sm leading-6 font-semibold text-black dark:text-gray-100 hover:bg-zinc-200 dark:hover:bg-zinc-700"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -462,7 +471,7 @@ const currentPath = Astro.url.pathname
             <li>
               <a
                 href="https://www.freelance.de/Freiberufler/215868-Senior-TypeScript-Developer-ReactJS-React-Native/highlight=react"
-                class="flex gap-x-2 items-center rounded-md px-4 py-0.5 text-sm leading-6 font-semibold text-black hover:bg-zinc-200"
+                class="flex gap-x-2 items-center rounded-md px-4 py-0.5 text-sm leading-6 font-semibold text-black dark:text-gray-100 hover:bg-zinc-200 dark:hover:bg-zinc-700"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -487,7 +496,7 @@ const currentPath = Astro.url.pathname
             <li>
               <a
                 href="https://www.freelancermap.de/freelancer-verzeichnis/profile/entwicklung/381396-profil-patrick-wozniak-senior-typescript-developer-reactjs-react-native-aus-schwaig.html"
-                class="flex gap-x-2 items-center rounded-md px-4 py-0.5 text-sm leading-6 font-semibold text-black hover:bg-zinc-200"
+                class="flex gap-x-2 items-center rounded-md px-4 py-0.5 text-sm leading-6 font-semibold text-black dark:text-gray-100 hover:bg-zinc-200 dark:hover:bg-zinc-700"
                 target="_blank"
                 rel="noopener noreferrer"
               >

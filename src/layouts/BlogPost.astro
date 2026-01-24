@@ -27,7 +27,10 @@ const dateFormatter = new Intl.DateTimeFormat('en-GB', {
   ogType="article"
 >
   <BaseLayout>
-    <a href="/blog" class="flex items-center gap-x-2 hover:underline">
+    <a
+      href="/blog"
+      class="flex items-center gap-x-2 hover:underline text-gray-700 dark:text-gray-300"
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -43,7 +46,7 @@ const dateFormatter = new Intl.DateTimeFormat('en-GB', {
       </svg>
       All blog posts
     </a>
-    <hr class="mt-6" />
+    <hr class="mt-6 border-gray-200 dark:border-zinc-700" />
     <article
       class="my-6 prose font-article max-w-full text-lg text-gray-900 dark:text-gray-100 leading-8"
     >
@@ -74,7 +77,10 @@ const dateFormatter = new Intl.DateTimeFormat('en-GB', {
       </header>
       <slot />
     </article>
-    <a href="/blog" class="flex items-center gap-x-2 hover:underline">
+    <a
+      href="/blog"
+      class="flex items-center gap-x-2 hover:underline text-gray-700 dark:text-gray-300"
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
