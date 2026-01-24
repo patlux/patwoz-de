@@ -1,6 +1,9 @@
 pre-commit:
   parallel: true
   commands:
+    eslint:
+      glob: '*.{ts,js,astro}'
+      run: bun x eslint --cache {staged_files}
     prettier:
       glob: '*.{ts,tsx,json,md,js,yml,astro}'
       run: TIMING=1 bun x prettier --cache --write {staged_files} && git add {staged_files}
