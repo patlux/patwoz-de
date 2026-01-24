@@ -6,19 +6,21 @@ import ObfuscatedText from '~/components/ObfuscatedText.astro'
 
 <Layout title="Imprint">
   <BaseLayout>
-    <br />
-    <br />
-    <br />
-    <h1>Imprint</h1>
-    <br />
-    <p>
-      <strong>Responsible for this website:</strong><br />
-      piparo.tech GmbH<br />
-      Patrick Wozniak<br />
-      <ObfuscatedText
-        text="Frauentorgraben 61\n90443 Nürnberg\n"
-        fallbackEmail="contact@patwoz.de"
-      />
-    </p>
+    <article class="prose mt-12">
+      <h1>Imprint</h1>
+      <dl class="mt-6">
+        <dt class="font-semibold text-gray-900 dark:text-gray-100">
+          Responsible for this website
+        </dt>
+        <dd class="mt-2 text-gray-700 dark:text-gray-300">
+          piparo.tech GmbH<br />
+          Patrick Wozniak<br />
+          <ObfuscatedText
+            text={'Frauentorgraben 61\n90443 Nürnberg\n'}
+            fallbackEmail="contact@patwoz.de"
+          />
+        </dd>
+      </dl>
+    </article>
   </BaseLayout>
 </Layout>
