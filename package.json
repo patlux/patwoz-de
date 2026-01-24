@@ -25,17 +25,12 @@
     "build:deps": "bun run --filter '*' build",
     "clear:cdn": "sh -c \"curl -v -X POST 'https://api.bunny.net/purge?url=https://patwoz.dev/*' -H 'AccessKey: $BUNNY_CDN_API_KEY'\""
   },
-  "workspaces": [
-    "./packages/barcode"
-  ],
   "dependencies": {
     "@astrojs/cloudflare": "^12.0.0",
     "@astrojs/mdx": "^4.0.0",
     "@astrojs/sitemap": "^3.2.0",
     "@astrojs/tailwind": "^6.0.0",
-    "@patwoz.dev/barcode": "workspace:*",
     "astro": "^5.1.0",
-    "bwip-js": "^4.1.2",
     "clsx": "^1.2.1",
     "tailwind-merge": "^1.12.0"
   },
@@ -43,14 +38,16 @@
     "@cloudflare/workers-types": "^4.20250109.0",
     "@playwright/test": "^1.33.0",
     "@tailwindcss/typography": "^0.5.9",
-    "@types/bwip-js": "^3.2.3",
     "bun-types": "^1.1.29",
     "checkly": "^4.0.4",
     "lefthook": "^1.4.8",
     "npm-run-all": "^4.1.5",
+    "pngquant-bin": "^9.0.0",
     "postcss": "^8.4.38",
     "prettier": "^3.4.2",
     "prettier-plugin-astro": "^0.14.1",
+    "sharp": "^0.34.5",
+    "svgo": "^4.0.0",
     "tailwindcss": "^3.4.4",
     "typescript": "^5.1.6",
     "wrangler": "^3.102.0"
@@ -71,6 +68,7 @@
     ]
   },
   "trustedDependencies": [
-    "esbuild"
+    "esbuild",
+    "pngquant-bin"
   ]
 }

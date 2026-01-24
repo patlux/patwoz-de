@@ -7,7 +7,15 @@ import sitemap from '@astrojs/sitemap'
 export default defineConfig({
   site: 'https://patwoz.dev',
   output: 'static',
-  adapter: cloudflare({ imageService: 'passthrough' }),
+  adapter: cloudflare(),
+  image: {
+    service: {
+      entrypoint: 'astro/assets/services/sharp',
+      config: {
+        limitInputPixels: false,
+      },
+    },
+  },
   integrations: [tailwind(), mdx(), sitemap()],
   markdown: {
     shikiConfig: {
