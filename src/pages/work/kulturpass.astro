@@ -1,0 +1,307 @@
+---
+import Layout from '~/layouts/Layout.astro'
+import BaseLayout from '~/components/BaseLayout.astro'
+import Footer from '~/components/Footer.astro'
+import { classNames } from '~/utils/classNames'
+---
+
+<Layout title="SAP KulturPass - Work">
+  <BaseLayout>
+    <article class="mt-12">
+      <!-- Back link -->
+      <a
+        href="/work"
+        class="inline-flex items-center gap-1 text-sm text-gray-500 hover:text-gray-700 mb-6"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-4 h-4"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M15.75 19.5 8.25 12l7.5-7.5"></path>
+        </svg>
+        Back to Work
+      </a>
+
+      <!-- Header -->
+      <header class="mb-12">
+        <div class="flex flex-col sm:flex-row gap-6 items-start">
+          <div
+            class="flex-shrink-0 flex items-center justify-center w-24 h-24 bg-gray-50 rounded-xl border border-gray-200"
+          >
+            <img src="/company/sap.svg" alt="SAP Logo" width="70" height="35" />
+          </div>
+          <div class="flex-1">
+            <h1 class="text-2xl font-bold text-gray-900">KulturPass DE</h1>
+            <p class="text-gray-600 mt-1">SAP SE</p>
+            <div class="flex flex-wrap gap-4 mt-3 text-sm text-gray-500">
+              <span class="flex items-center gap-1">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-4 h-4"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
+                  ></path>
+                </svg>
+                Senior React Native Developer
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- App Store Links -->
+        <div class="flex flex-wrap gap-3 mt-6">
+          <a
+            href="https://apps.apple.com/de/app/kulturpass-de/id6446174970"
+            target="_blank"
+            rel="noreferrer"
+            class={classNames(
+              'inline-flex items-center gap-2 px-4 py-2',
+              'bg-black text-white text-sm font-medium rounded-lg',
+              'hover:bg-gray-800 transition-colors',
+            )}
+          >
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"
+              ></path>
+            </svg>
+            App Store
+          </a>
+          <a
+            href="https://play.google.com/store/apps/details?id=de.bkm.kulturpass"
+            target="_blank"
+            rel="noreferrer"
+            class={classNames(
+              'inline-flex items-center gap-2 px-4 py-2',
+              'bg-black text-white text-sm font-medium rounded-lg',
+              'hover:bg-gray-800 transition-colors',
+            )}
+          >
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"
+              ></path>
+            </svg>
+            Google Play
+          </a>
+        </div>
+      </header>
+
+      <!-- Discontinuation Notice -->
+      <div
+        class="mb-8 p-4 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg"
+      >
+        <p class="text-sm text-amber-800 dark:text-amber-200 m-0">
+          <strong>Note:</strong> The KulturPass program was discontinued at the end
+          of 2025. The app and web services were terminated on November 30, 2025,
+          with redemptions possible until December 15, 2025.
+          <a
+            href="https://digitale-chancen.zammad.com/help/de-de/91-infos-zum-projektende/265-das-kulturpass-projekt-endet-wichtige-informationen"
+            target="_blank"
+            rel="noreferrer"
+            class="inline-flex items-center gap-1 ml-1 underline hover:no-underline"
+          >
+            Learn more
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+              class="w-3 h-3"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+              ></path>
+            </svg>
+          </a>
+        </p>
+      </div>
+
+      <!-- Content -->
+      <div class="prose lg:prose-lg max-w-none">
+        <p>
+          KulturPass was a German government initiative that provided all
+          18-year-olds in Germany with a digital budget of 200 EUR to spend on
+          cultural activities such as books, concert tickets, museum visits, and
+          more. The app enabled young adults to discover and redeem cultural
+          offers from participating providers across Germany.
+        </p>
+
+        <h2>Project Overview</h2>
+        <p>
+          Contributed to the development of the KulturPass mobile application
+          built with React Native. As part of the SAP development team, I
+          implemented core features including the favorites system, form
+          validation, secure storage, and state management architecture. The app
+          integrates with Germany's national ID card (Personalausweis) for
+          identity verification and connects to a commerce backend for offer
+          discovery and redemption.
+        </p>
+
+        <h2>Key Contributions</h2>
+
+        <h3>Favorites System</h3>
+        <p>
+          Built the complete favorites functionality allowing users to save and
+          manage cultural offers they're interested in. Implemented the list
+          view with product images, pricing badges, and swipeable delete
+          actions. Added comprehensive accessibility labels for screen reader
+          support and thorough test coverage.
+        </p>
+
+        <h3>Form Validation</h3>
+        <p>
+          Implemented client-side and server-side form validation for login and
+          registration flows using React Hook Form and Zod. Created a robust
+          error handling system that displays translated validation messages for
+          each form field, with proper integration of CDC (Customer Data Cloud)
+          API error responses.
+        </p>
+
+        <h3>Secure Storage</h3>
+        <p>
+          Set up encrypted storage for sensitive user data using
+          react-native-encrypted-storage. Implemented a layered storage
+          architecture separating persistent data from secure credentials, with
+          proper Redux Persist integration for state hydration.
+        </p>
+
+        <h3>Redux State Management</h3>
+        <p>
+          Established the Redux architecture using Redux Toolkit with Redux Saga
+          for side effects and Redux Persist for state persistence. Configured
+          separate storage backends for regular and sensitive data, ensuring
+          proper serialization and type safety throughout.
+        </p>
+
+        <h3>React Native Upgrade</h3>
+        <p>
+          Led the upgrade of React Native from earlier versions to 0.70.x,
+          including Hermes engine updates and dependency migrations. Resolved
+          breaking changes, fixed build errors, and patched security
+          vulnerabilities in third-party packages.
+        </p>
+
+        <h3>Code Quality & Testing</h3>
+        <p>
+          Improved code quality by enabling stricter ESLint rules and fixing
+          TypeScript errors across the codebase. Set up React Native Testing
+          Library and wrote comprehensive unit tests for components and
+          services, establishing testing patterns for the team.
+        </p>
+
+        <h3>Environment Configuration</h3>
+        <p>
+          Built a dynamic environment configuration system that reads build
+          configurations from YAML files. Implemented a configuration picker UI
+          for development builds, allowing easy switching between different
+          backend environments.
+        </p>
+
+        <h3>API Error Handling</h3>
+        <p>
+          Created an error registry system for consistent error handling across
+          the app. Implemented error modals for API failures with proper error
+          code mapping and user-friendly error messages.
+        </p>
+
+        <h3>Registration & Authentication</h3>
+        <p>
+          Implemented the preferences screen for user registration including
+          location (ZIP code) input with validation. Built the forgot password
+          flow with proper error handling and user feedback.
+        </p>
+
+        <h3>CI/CD Pipeline</h3>
+        <p>
+          Set up continuous integration pipelines running TypeScript checks,
+          ESLint, and Jest tests. Configured the build wrapper repository for
+          automated app builds and distribution.
+        </p>
+      </div>
+
+      <div class="prose lg:prose-lg max-w-none mt-8">
+        <h2>Technology Stack</h2>
+      </div>
+
+      <!-- Tech Stack Grid -->
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-6 mb-12">
+        <div>
+          <h4 class="text-sm font-semibold text-gray-500 uppercase mb-3">
+            Frontend
+          </h4>
+          <ul class="space-y-2">
+            <li class="text-gray-700">React Native 0.70</li>
+            <li class="text-gray-700">TypeScript</li>
+            <li class="text-gray-700">Redux Toolkit</li>
+            <li class="text-gray-700">Redux Saga</li>
+            <li class="text-gray-700">React Navigation</li>
+            <li class="text-gray-700">React Hook Form</li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-sm font-semibold text-gray-500 uppercase mb-3">
+            Services
+          </h4>
+          <ul class="space-y-2">
+            <li class="text-gray-700">AppCenter Analytics</li>
+            <li class="text-gray-700">AppCenter Crashes</li>
+            <li class="text-gray-700">i18next</li>
+            <li class="text-gray-700">Axios</li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-sm font-semibold text-gray-500 uppercase mb-3">
+            Security
+          </h4>
+          <ul class="space-y-2">
+            <li class="text-gray-700">Encrypted Storage</li>
+            <li class="text-gray-700">Zod Validation</li>
+            <li class="text-gray-700">AusweisApp2 SDK</li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-sm font-semibold text-gray-500 uppercase mb-3">
+            DevOps
+          </h4>
+          <ul class="space-y-2">
+            <li class="text-gray-700">Jest</li>
+            <li class="text-gray-700">React Native Testing Library</li>
+            <li class="text-gray-700">ESLint</li>
+            <li class="text-gray-700">GitHub Actions</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="prose lg:prose-lg max-w-none">
+        <h2>Additional Contributions</h2>
+
+        <h3>react-native-ausweisapp2-wrapper</h3>
+        <p>
+          Contributed to the React Native wrapper for the AusweisApp2 SDK, which
+          enables integration with the German national ID card (Personalausweis)
+          for secure identity verification within the app.
+        </p>
+      </div>
+    </article>
+
+    <Footer />
+  </BaseLayout>
+</Layout>
