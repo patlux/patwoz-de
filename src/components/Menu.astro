@@ -1,5 +1,4 @@
 ---
-import { Image } from 'astro:assets'
 import { classNames } from '~/utils/classNames'
 import GithubIcon from '~/icons/GithubIcon.astro'
 import LinkedInIcon from '~/icons/LinkedInIcon.astro'
@@ -7,7 +6,7 @@ import StackOverflowIcon from '~/icons/StackOverflowIcon.astro'
 import TwitterIcon from '~/icons/TwitterIcon.astro'
 import XingIcon from '~/icons/XingIcon.astro'
 import ThemeToggle from '~/components/ThemeToggle.astro'
-import logoImage from '~/assets/images/patwoz-logo-transparent-800px.png'
+import LogoSvg from '~/assets/images/patwoz-logo.svg?raw'
 
 const currentPath = Astro.url.pathname
 ---
@@ -34,7 +33,7 @@ const currentPath = Astro.url.pathname
   <div
     class={classNames(
       'flex grow flex-col xl:gap-y-5',
-      'bg-gray-50 dark:bg-zinc-800 px-6',
+      'bg-gray-50 dark:bg-zinc-800 xl:px-6',
       'ring-1 ring-white/5',
       'border-b xl:border-b-0 xl:border-r border-gray-200 dark:border-zinc-700',
       'xl:overflow-y-auto',
@@ -42,19 +41,16 @@ const currentPath = Astro.url.pathname
   >
     <!-- Header Bar (logo + theme toggle) -->
     <div
-      class="flex h-16 shrink-0 items-center justify-center xl:justify-between"
+      class="flex h-16 shrink-0 items-center justify-between px-6 w-full sm:max-w-2xl md:max-w-4xl mx-auto xl:max-w-none xl:mx-0 xl:px-0"
     >
-      <a href="/">
-        <Image
-          src={logoImage}
-          alt="Logo of patwoz.de"
-          width={60}
-          height={60}
-          format="webp"
-          class="dark:invert"
-        />
+      <a
+        href="/"
+        class="block w-16 pl-1 text-black dark:text-white"
+        aria-label="Home"
+      >
+        <Fragment set:html={LogoSvg} />
       </a>
-      <div class="hidden xl:block">
+      <div class="xl:block">
         <ThemeToggle />
       </div>
     </div>
@@ -82,42 +78,22 @@ const currentPath = Astro.url.pathname
       <div
         class="flex items-center justify-between pl-7 pr-4 py-4 border-b border-gray-200 dark:border-zinc-700 xl:hidden"
       >
-        <a href="/">
-          <Image
-            src={logoImage}
-            alt="Logo of patwoz.de"
-            width={40}
-            height={40}
-            format="webp"
-            class="dark:invert"
-          />
+        <a
+          href="/"
+          class="block w-12 pl-1 text-black dark:text-white"
+          aria-label="Home"
+        >
+          <Fragment set:html={LogoSvg} />
         </a>
         <div class="flex items-center gap-1">
           <ThemeToggle />
-          <label
-            for="menu-toggle"
-            class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-zinc-700 cursor-pointer"
-          >
-            <span class="sr-only">Close menu</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="w-5 h-5"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M6 18 18 6M6 6l12 12"></path>
-            </svg>
-          </label>
         </div>
       </div>
 
       <!-- Menu content -->
-      <ul class="flex flex-1 flex-col xl:gap-y-7 p-6 pb-24 xl:p-0 xl:pb-0">
+      <ul
+        class="flex flex-1 flex-col gap-y-6 xl:gap-y-7 p-6 pb-24 xl:p-0 xl:pb-0"
+      >
         <li class="sm:h-auto sm:flex-1 xl:flex-none">
           <ul
             class="space-y-1 flex flex-col sm:flex-row sm:pb-4 xl:pb-0 xl:flex-col sm:justify-center w-full sm:items-center xl:justify-start xl:items-stretch"

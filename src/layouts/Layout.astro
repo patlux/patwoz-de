@@ -87,6 +87,9 @@ const optimizedLogo = await getImage({
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content={image} />
+
+    <!-- Enable View Transitions API for same-document transitions (theme toggle) -->
+    <meta name="view-transition" content="same-document" />
   </head>
   <body class="font-sans antialiased">
     <slot />

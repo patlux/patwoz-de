@@ -176,3 +176,31 @@ body:has(#menu-toggle:checked) nav.mobile-menu {
 .animate-marquee:hover {
   animation-play-state: paused;
 }
+
+/* View Transitions API - Theme toggle circular reveal animation */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+/* New view always on top, expanding to reveal */
+::view-transition-old(root) {
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  z-index: 999;
+  clip-path: circle(
+    0% at var(--view-transition-x, 50%) var(--view-transition-y, 50%)
+  );
+  animation: theme-reveal 0.4s ease-out forwards;
+}
+
+@keyframes theme-reveal {
+  to {
+    clip-path: circle(
+      150% at var(--view-transition-x, 50%) var(--view-transition-y, 50%)
+    );
+  }
+}
