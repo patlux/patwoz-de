@@ -21,8 +21,18 @@ const {
 const canonicalURL = new URL(Astro.url.pathname, Astro.site)
 
 // Get optimized image URLs for preloading
-const optimizedMe = await getImage({ src: meImage, width: 128, height: 128, format: 'webp' })
-const optimizedLogo = await getImage({ src: logoImage, width: 60, height: 60, format: 'webp' })
+const optimizedMe = await getImage({
+  src: meImage,
+  width: 128,
+  height: 128,
+  format: 'webp',
+})
+const optimizedLogo = await getImage({
+  src: logoImage,
+  width: 60,
+  height: 60,
+  format: 'webp',
+})
 ---
 
 <!doctype html>
@@ -78,11 +88,8 @@ const optimizedLogo = await getImage({ src: logoImage, width: 60, height: 60, fo
             src="https://notgoogle.piparo.tech/js/script.hash.outbound-links.tagged-events.js"
           />
           <script is:inline>
-            window.plausible =
-              window.plausible ||
-              function () {
-                ;(window.plausible.q = window.plausible.q || []).push(arguments)
-              }
+            window.plausible = window.plausible || function (){' '}
+            {(window.plausible.q = window.plausible.q || []).push(arguments)}
           </script>
           <script
             is:inline

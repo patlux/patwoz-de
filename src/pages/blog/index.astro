@@ -5,8 +5,9 @@ import BaseLayout from '~/components/BaseLayout.astro'
 import Introduction from '~/components/Introduction.astro'
 
 const posts = await getCollection('blog')
+type BlogPost = (typeof posts)[number]
 const sortedPosts = posts.sort(
-  (a, b) =>
+  (a: BlogPost, b: BlogPost) =>
     new Date(b.data.published).getTime() - new Date(a.data.published).getTime(),
 )
 
@@ -21,7 +22,7 @@ const dateFormatter = new Intl.DateTimeFormat('en-GB', {
     <hr class="mt-8" />
     <ul class="space-y-8 mt-8">
       {
-        sortedPosts.map((post) => (
+        sortedPosts.map((post: BlogPost) => (
           <li>
             <article class="prose lg:prose-lg prose-a:no-underline prose-headings:my-0">
               <a

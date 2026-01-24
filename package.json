@@ -16,7 +16,7 @@
     "test": "bun test",
     "check-build": "bun run build",
     "check-types": "astro check",
-    "validate": "run-p check-*",
+    "validate": "bun run check-format && bun run check-types && bun run check-build",
     "docker:build": "docker build -t patwoz-de:latest .",
     "docker:run": " docker run --rm -p 3000:3000 --name patwoz-de patwoz-de:latest",
     "docker:kill": "docker kill patwoz-de",
@@ -35,6 +35,7 @@
     "tailwind-merge": "^1.12.0"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.6",
     "@cloudflare/workers-types": "^4.20250109.0",
     "@playwright/test": "^1.33.0",
     "@tailwindcss/typography": "^0.5.9",

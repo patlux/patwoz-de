@@ -47,7 +47,13 @@ const currentPath = Astro.url.pathname
         </svg>
       </label>
       <a href="/">
-        <Image src={logoImage} alt="Logo of patwoz.de" width={60} height={60} format="webp" />
+        <Image
+          src={logoImage}
+          alt="Logo of patwoz.de"
+          width={60}
+          height={60}
+          format="webp"
+        />
       </a>
     </div>
 
@@ -71,7 +77,8 @@ const currentPath = Astro.url.pathname
                   'rounded-md px-4 py-2',
                   'text-sm leading-6 font-semibold',
                   'text-black hover:bg-zinc-200',
-                  currentPath === '/' && 'bg-black hover:bg-black/70 text-white',
+                  currentPath === '/' &&
+                    'bg-black hover:bg-black/70 text-white',
                 )}
               >
                 <!-- HomeIcon -->
@@ -187,9 +194,7 @@ const currentPath = Astro.url.pathname
 
         <!-- Social Section -->
         <li>
-          <div
-            class="text-xs font-semibold leading-6 text-gray-400 uppercase"
-          >
+          <div class="text-xs font-semibold leading-6 text-gray-400 uppercase">
             Social
           </div>
           <ul class="mt-2 space-y-1">
@@ -306,9 +311,7 @@ const currentPath = Astro.url.pathname
 
         <!-- Business Section -->
         <li>
-          <div
-            class="text-xs font-semibold leading-6 text-gray-400 uppercase"
-          >
+          <div class="text-xs font-semibold leading-6 text-gray-400 uppercase">
             Business
           </div>
           <ul class="mt-2 space-y-1">
