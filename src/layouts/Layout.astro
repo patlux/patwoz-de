@@ -1,5 +1,8 @@
 ---
+import { getImage } from 'astro:assets'
 import '../styles/global.css'
+import meImage from '~/assets/images/me.jpg'
+import logoImage from '~/assets/images/patwoz-logo-transparent-800px.png'
 
 interface Props {
   title?: string
@@ -16,6 +19,10 @@ const {
 } = Astro.props
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site)
+
+// Get optimized image URLs for preloading
+const optimizedMe = await getImage({ src: meImage, width: 128, height: 128, format: 'webp' })
+const optimizedLogo = await getImage({ src: logoImage, width: 60, height: 60, format: 'webp' })
 ---
 
 <!doctype html>
@@ -23,6 +30,11 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site)
   <head prefix="og: https://ogp.me/ns#">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+    <!-- Preload critical images -->
+    <link rel="preload" as="image" type="image/webp" href={optimizedLogo.src} />
+    <link rel="preload" as="image" type="image/webp" href={optimizedMe.src} />
+
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
