@@ -11,46 +11,46 @@
   --font-display: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
   --font-article: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
 
-  /* Slate color palette - cool, professional */
-  --color-warm-50: #f8fafc;
-  --color-warm-100: #f1f5f9;
-  --color-warm-200: #e2e8f0;
-  --color-warm-300: #cbd5e1;
-  --color-warm-400: #94a3b8;
-  --color-warm-500: #64748b;
-  --color-warm-600: #475569;
-  --color-warm-700: #334155;
-  --color-warm-800: #1e293b;
-  --color-warm-900: #0f172a;
+  /* Monochrome - pure neutrals */
+  --color-warm-50: #fafafa;
+  --color-warm-100: #f5f5f5;
+  --color-warm-200: #e5e5e5;
+  --color-warm-300: #d4d4d4;
+  --color-warm-400: #a3a3a3;
+  --color-warm-500: #737373;
+  --color-warm-600: #525252;
+  --color-warm-700: #404040;
+  --color-warm-800: #262626;
+  --color-warm-900: #171717;
 
-  /* Accent - vibrant blue */
-  --color-accent-50: #eff6ff;
-  --color-accent-100: #dbeafe;
-  --color-accent-200: #bfdbfe;
-  --color-accent-300: #93c5fd;
-  --color-accent-400: #60a5fa;
-  --color-accent-500: #3b82f6;
-  --color-accent-600: #2563eb;
-  --color-accent-700: #1d4ed8;
-  --color-accent-800: #1e40af;
-  --color-accent-900: #1e3a8a;
+  /* Accent - single pop of color (emerald) */
+  --color-accent-50: #ecfdf5;
+  --color-accent-100: #d1fae5;
+  --color-accent-200: #a7f3d0;
+  --color-accent-300: #6ee7b7;
+  --color-accent-400: #34d399;
+  --color-accent-500: #10b981;
+  --color-accent-600: #059669;
+  --color-accent-700: #047857;
+  --color-accent-800: #065f46;
+  --color-accent-900: #064e3b;
 
-  /* Dark mode - deep slate */
-  --color-dark-bg: #0f172a;
-  --color-dark-surface: #1e293b;
-  --color-dark-elevated: #334155;
+  /* Dark mode - true blacks */
+  --color-dark-bg: #0a0a0a;
+  --color-dark-surface: #171717;
+  --color-dark-elevated: #262626;
 }
 
 a.button {
-  @apply inline-block rounded-2xl border border-warm-200 bg-warm-50 px-6 py-2.5 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-warm-300 hover:-translate-y-0.5 dark:bg-dark-surface dark:border-warm-700 dark:text-warm-100;
+  @apply inline-block rounded-xl border border-warm-200 bg-white px-6 py-2.5 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-warm-300 hover:-translate-y-0.5 dark:bg-dark-surface dark:border-warm-700 dark:text-warm-100;
 }
 
 h1 {
-  @apply text-3xl font-bold text-warm-900 dark:text-warm-100 font-display tracking-tight;
+  @apply text-3xl font-bold text-warm-900 dark:text-warm-100 tracking-tight;
 }
 
 h2 {
-  @apply text-2xl font-bold text-warm-900 dark:text-warm-100 font-display;
+  @apply text-2xl font-bold text-warm-900 dark:text-warm-100;
 }
 
 h3 {
@@ -65,14 +65,14 @@ h6 {
 
 /* Shiki code block styling */
 pre {
-  @apply overflow-x-auto rounded-2xl p-5;
-  background-color: #1e293b;
-  color: #e2e8f0;
+  @apply overflow-x-auto rounded-xl p-5;
+  background-color: #171717;
+  color: #e5e5e5;
 }
 
-/* Shiki github-dark token colors as classes */
+/* Shiki token colors */
 .c-fg {
-  color: #e2e8f0;
+  color: #e5e5e5;
 }
 .c-kw {
   color: #f472b6;
@@ -90,7 +90,7 @@ pre {
   color: #34d399;
 }
 .c-cm {
-  color: #64748b;
+  color: #737373;
 }
 
 pre > code {
@@ -104,7 +104,7 @@ pre > code > .line::before {
   width: 1rem;
   margin-right: 1.5rem;
   text-align: right;
-  color: #64748b;
+  color: #525252;
 }
 
 pre > code[data-line-numbers-max-digits='2'] > .line::before {
@@ -115,21 +115,21 @@ pre > code[data-line-numbers-max-digits='3'] > .line::before {
   width: 1.75rem;
 }
 
-/* Prose styling with slate tones */
+/* Prose styling - clean monochrome */
 .prose {
   @apply text-warm-700 dark:text-warm-300;
 }
 
 .prose p {
-  @apply text-warm-600 dark:text-warm-300 leading-relaxed;
+  @apply text-warm-600 dark:text-warm-400 leading-relaxed;
 }
 
 .prose a {
-  @apply text-accent-600 dark:text-accent-400 no-underline border-b border-accent-300 dark:border-accent-600 transition-colors hover:border-accent-500 dark:hover:border-accent-400;
+  @apply text-warm-900 dark:text-warm-100 no-underline border-b border-warm-400 dark:border-warm-500 transition-colors hover:border-accent-500 dark:hover:border-accent-400;
 }
 
 .prose a:hover {
-  @apply text-accent-700 dark:text-accent-300;
+  @apply text-accent-600 dark:text-accent-400;
 }
 
 .prose strong {
@@ -137,20 +137,20 @@ pre > code[data-line-numbers-max-digits='3'] > .line::before {
 }
 
 .prose blockquote {
-  @apply border-accent-400 text-warm-600 dark:border-accent-500 dark:text-warm-400 bg-warm-50 dark:bg-dark-elevated rounded-r-xl pl-4 pr-4 py-2 italic;
+  @apply border-warm-300 text-warm-600 dark:border-warm-600 dark:text-warm-400 bg-warm-50 dark:bg-dark-elevated rounded-r-xl pl-4 pr-4 py-2 italic;
 }
 
 .prose ul,
 .prose ol {
-  @apply text-warm-600 dark:text-warm-300;
+  @apply text-warm-600 dark:text-warm-400;
 }
 
 .prose li::marker {
-  @apply text-accent-500 dark:text-accent-400;
+  @apply text-warm-400 dark:text-warm-500;
 }
 
 .prose p code {
-  @apply rounded-lg border border-warm-200 bg-warm-100 px-1.5 py-0.5 font-medium text-warm-800 dark:border-warm-700 dark:bg-dark-elevated dark:text-warm-200;
+  @apply rounded-md border border-warm-200 bg-warm-100 px-1.5 py-0.5 font-medium text-warm-800 dark:border-warm-700 dark:bg-dark-elevated dark:text-warm-200;
 }
 
 .prose p code:before {
@@ -301,18 +301,18 @@ body:has(#menu-toggle:checked) nav.mobile-menu {
 
 /* Accent glow for CTA buttons */
 .glow-accent {
-  box-shadow: 0 4px 20px -4px rgba(59, 130, 246, 0.35);
+  box-shadow: 0 4px 20px -4px rgba(16, 185, 129, 0.3);
 }
 
 .glow-accent:hover {
-  box-shadow: 0 8px 30px -4px rgba(59, 130, 246, 0.5);
+  box-shadow: 0 8px 30px -4px rgba(16, 185, 129, 0.45);
 }
 
 /* Soft card styling */
 .card-soft {
-  @apply bg-white dark:bg-dark-surface rounded-2xl border border-warm-200 dark:border-warm-700/50 transition-all duration-300;
+  @apply bg-white dark:bg-dark-surface rounded-xl border border-warm-200 dark:border-warm-800 transition-all duration-300;
 }
 
 .card-soft:hover {
-  @apply border-warm-300 dark:border-warm-600 shadow-lg shadow-warm-300/30 dark:shadow-black/20;
+  @apply border-warm-300 dark:border-warm-700 shadow-lg shadow-warm-200/50 dark:shadow-black/30;
 }
