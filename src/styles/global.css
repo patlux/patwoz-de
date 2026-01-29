@@ -237,7 +237,7 @@ body:has(#menu-toggle:checked) nav.mobile-menu {
   }
 }
 
-/* Subtle fade-in animation for page elements */
+/* Subtle fade-in animation for page elements - only on first visit */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -251,6 +251,12 @@ body:has(#menu-toggle:checked) nav.mobile-menu {
 
 .animate-fade-in-up {
   animation: fadeInUp 0.5s ease-out forwards;
+}
+
+/* Disable animations if user has visited before (session) */
+.animation-done .animate-fade-in-up {
+  animation: none;
+  opacity: 1;
 }
 
 /* Stagger animation delays */

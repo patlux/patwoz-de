@@ -38,9 +38,10 @@ const optimizedLogo = await getImage({
 <!doctype html>
 <html lang="en">
   <head prefix="og: https://ogp.me/ns#">
-    <!-- Theme initialization - runs before page renders to prevent flash -->
+    <!-- Theme and animation initialization - runs before page renders -->
     <script is:inline>
       ;(function () {
+        // Theme initialization
         const stored = localStorage.getItem('theme')
         const prefersDark = window.matchMedia(
           '(prefers-color-scheme: dark)',
@@ -48,6 +49,13 @@ const optimizedLogo = await getImage({
 
         if (stored === 'dark' || (stored !== 'light' && prefersDark)) {
           document.documentElement.classList.add('dark')
+        }
+
+        // Skip animations if user has already visited this session
+        if (sessionStorage.getItem('visited')) {
+          document.documentElement.classList.add('animation-done')
+        } else {
+          sessionStorage.setItem('visited', 'true')
         }
       })()
     </script>
