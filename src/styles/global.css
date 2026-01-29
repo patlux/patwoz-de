@@ -11,38 +11,38 @@
   --font-display: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
   --font-article: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
 
-  /* Warm color palette */
-  --color-warm-50: #fefdfb;
-  --color-warm-100: #fdf8f3;
-  --color-warm-200: #f9ede0;
-  --color-warm-300: #f3dcc4;
-  --color-warm-400: #e8c49e;
-  --color-warm-500: #d4a373;
-  --color-warm-600: #bc8a5f;
-  --color-warm-700: #9c6f4a;
-  --color-warm-800: #7d5a3d;
-  --color-warm-900: #5f4530;
+  /* Slate color palette - cool, professional */
+  --color-warm-50: #f8fafc;
+  --color-warm-100: #f1f5f9;
+  --color-warm-200: #e2e8f0;
+  --color-warm-300: #cbd5e1;
+  --color-warm-400: #94a3b8;
+  --color-warm-500: #64748b;
+  --color-warm-600: #475569;
+  --color-warm-700: #334155;
+  --color-warm-800: #1e293b;
+  --color-warm-900: #0f172a;
 
-  /* Accent - warm coral/terracotta */
-  --color-accent-50: #fef5f2;
-  --color-accent-100: #fee9e3;
-  --color-accent-200: #fdd7cc;
-  --color-accent-300: #fab8a5;
-  --color-accent-400: #f58d70;
-  --color-accent-500: #eb6b47;
-  --color-accent-600: #d84f2a;
-  --color-accent-700: #b53f20;
-  --color-accent-800: #95361f;
-  --color-accent-900: #7b3120;
+  /* Accent - vibrant blue */
+  --color-accent-50: #eff6ff;
+  --color-accent-100: #dbeafe;
+  --color-accent-200: #bfdbfe;
+  --color-accent-300: #93c5fd;
+  --color-accent-400: #60a5fa;
+  --color-accent-500: #3b82f6;
+  --color-accent-600: #2563eb;
+  --color-accent-700: #1d4ed8;
+  --color-accent-800: #1e40af;
+  --color-accent-900: #1e3a8a;
 
-  /* Dark mode warm tones */
-  --color-dark-bg: #1a1714;
-  --color-dark-surface: #252119;
-  --color-dark-elevated: #302a21;
+  /* Dark mode - deep slate */
+  --color-dark-bg: #0f172a;
+  --color-dark-surface: #1e293b;
+  --color-dark-elevated: #334155;
 }
 
 a.button {
-  @apply inline-block rounded-2xl border border-warm-200 bg-warm-50 px-6 py-2.5 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-warm-300 hover:-translate-y-0.5 dark:bg-dark-surface dark:border-warm-800 dark:text-warm-100;
+  @apply inline-block rounded-2xl border border-warm-200 bg-warm-50 px-6 py-2.5 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-warm-300 hover:-translate-y-0.5 dark:bg-dark-surface dark:border-warm-700 dark:text-warm-100;
 }
 
 h1 {
@@ -66,31 +66,31 @@ h6 {
 /* Shiki code block styling */
 pre {
   @apply overflow-x-auto rounded-2xl p-5;
-  background-color: #1e1e1e;
-  color: #e1e4e8;
+  background-color: #1e293b;
+  color: #e2e8f0;
 }
 
 /* Shiki github-dark token colors as classes */
 .c-fg {
-  color: #e1e4e8;
+  color: #e2e8f0;
 }
 .c-kw {
-  color: #f97583;
+  color: #f472b6;
 }
 .c-cn {
-  color: #79b8ff;
+  color: #60a5fa;
 }
 .c-pm {
-  color: #ffab70;
+  color: #fbbf24;
 }
 .c-fn {
-  color: #b392f0;
+  color: #a78bfa;
 }
 .c-st {
-  color: #9ecbff;
+  color: #34d399;
 }
 .c-cm {
-  color: #6a737d;
+  color: #64748b;
 }
 
 pre > code {
@@ -104,7 +104,7 @@ pre > code > .line::before {
   width: 1rem;
   margin-right: 1.5rem;
   text-align: right;
-  color: #6a737d;
+  color: #64748b;
 }
 
 pre > code[data-line-numbers-max-digits='2'] > .line::before {
@@ -115,13 +115,13 @@ pre > code[data-line-numbers-max-digits='3'] > .line::before {
   width: 1.75rem;
 }
 
-/* Prose dark mode overrides with warm tones */
+/* Prose styling with slate tones */
 .prose {
-  @apply text-warm-800 dark:text-warm-200;
+  @apply text-warm-700 dark:text-warm-300;
 }
 
 .prose p {
-  @apply text-warm-700 dark:text-warm-300 leading-relaxed;
+  @apply text-warm-600 dark:text-warm-300 leading-relaxed;
 }
 
 .prose a {
@@ -137,16 +137,16 @@ pre > code[data-line-numbers-max-digits='3'] > .line::before {
 }
 
 .prose blockquote {
-  @apply border-warm-300 text-warm-600 dark:border-warm-600 dark:text-warm-400 bg-warm-50 dark:bg-dark-elevated rounded-r-xl pl-4 pr-4 py-2 italic;
+  @apply border-accent-400 text-warm-600 dark:border-accent-500 dark:text-warm-400 bg-warm-50 dark:bg-dark-elevated rounded-r-xl pl-4 pr-4 py-2 italic;
 }
 
 .prose ul,
 .prose ol {
-  @apply text-warm-700 dark:text-warm-300;
+  @apply text-warm-600 dark:text-warm-300;
 }
 
 .prose li::marker {
-  @apply text-accent-400 dark:text-accent-500;
+  @apply text-accent-500 dark:text-accent-400;
 }
 
 .prose p code {
@@ -282,7 +282,7 @@ body:has(#menu-toggle:checked) nav.mobile-menu {
   @apply -translate-y-1 shadow-lg;
 }
 
-/* Warm gradient backgrounds */
+/* Gradient backgrounds */
 .bg-warm-gradient {
   background: linear-gradient(
     135deg,
@@ -301,18 +301,18 @@ body:has(#menu-toggle:checked) nav.mobile-menu {
 
 /* Accent glow for CTA buttons */
 .glow-accent {
-  box-shadow: 0 4px 20px -4px rgba(235, 107, 71, 0.3);
+  box-shadow: 0 4px 20px -4px rgba(59, 130, 246, 0.35);
 }
 
 .glow-accent:hover {
-  box-shadow: 0 8px 30px -4px rgba(235, 107, 71, 0.4);
+  box-shadow: 0 8px 30px -4px rgba(59, 130, 246, 0.5);
 }
 
 /* Soft card styling */
 .card-soft {
-  @apply bg-white dark:bg-dark-surface rounded-2xl border border-warm-200 dark:border-warm-800/50 transition-all duration-300;
+  @apply bg-white dark:bg-dark-surface rounded-2xl border border-warm-200 dark:border-warm-700/50 transition-all duration-300;
 }
 
 .card-soft:hover {
-  @apply border-warm-300 dark:border-warm-700 shadow-lg shadow-warm-200/50 dark:shadow-warm-900/30;
+  @apply border-warm-300 dark:border-warm-600 shadow-lg shadow-warm-300/30 dark:shadow-black/20;
 }
