@@ -9,31 +9,29 @@ import Introduction from '~/components/Introduction.astro'
   <BaseLayout>
     <Introduction />
 
-    <article class="prose lg:prose-lg mt-12">
-      <h4>Freelance Work</h4>
-      <p>
-        As a freelancer, I'm open to new opportunities and projects. Whether
-        you're a startup launching your first product, an established business
-        modernizing your systems, or a non-profit tackling a tech challenge, I'd
-        be happy to help bring your vision to life.
-      </p>
-
-      <p>
-        Get in touch: <a href="mailto:hi@patwoz.de">hi@patwoz.de</a>
-      </p>
-
-      <div class="flex items-center justify-between">
-        <h5 class="font-semibold">I worked for</h5>
+    <!-- Client Work Section -->
+    <section class="mt-16 animate-fade-in-up opacity-0 stagger-4">
+      <div class="flex items-center justify-between mb-6">
+        <div>
+          <h2
+            class="text-2xl font-display font-bold text-warm-900 dark:text-warm-100"
+          >
+            Trusted by Industry Leaders
+          </h2>
+          <p class="text-warm-600 dark:text-warm-400 mt-1">
+            Companies I've helped build great products
+          </p>
+        </div>
         <a
           href="/work"
-          class="inline-flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors"
+          class="hidden sm:inline-flex items-center gap-2 text-sm font-medium text-accent-600 dark:text-accent-400 hover:text-accent-700 dark:hover:text-accent-300 transition-colors group"
         >
-          View all
+          View all work
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
             fill="currentColor"
-            class="w-4 h-4"
+            class="w-4 h-4 group-hover:translate-x-1 transition-transform"
           >
             <path
               fill-rule="evenodd"
@@ -42,420 +40,481 @@ import Introduction from '~/components/Introduction.astro'
           </svg>
         </a>
       </div>
-    </article>
 
-    <div class="not-prose grid sm:grid-cols-2 gap-3 mt-4">
-      <!-- SAP - Internal project page -->
-      <a
-        href="/work/kulturpass"
-        class="flex items-center gap-4 p-4 rounded-lg hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors group"
-      >
-        <div
-          class="w-16 h-12 flex items-center justify-center bg-gray-50 dark:bg-zinc-800 rounded-lg group-hover:bg-white dark:group-hover:bg-zinc-700"
+      <div class="grid sm:grid-cols-2 gap-4">
+        <!-- SAP - Internal project page -->
+        <a
+          href="/work/kulturpass"
+          class="card-soft p-5 flex items-center gap-4 group hover-lift"
         >
-          <img alt="SAP" src="/company/sap.svg" class="h-6 w-auto" />
-        </div>
-        <div class="flex-1">
-          <span class="font-medium text-gray-900 dark:text-gray-100"
-            >SAP / KulturPass</span
+          <div
+            class="w-14 h-14 flex items-center justify-center bg-warm-100 dark:bg-dark-elevated rounded-xl group-hover:bg-warm-200 dark:group-hover:bg-warm-800/30 transition-colors"
           >
-          <span class="block text-xs text-gray-500 dark:text-gray-400"
-            >Enterprise Software</span
+            <img alt="SAP" src="/company/sap.svg" class="h-7 w-auto" />
+          </div>
+          <div class="flex-1 min-w-0">
+            <span class="font-semibold text-warm-900 dark:text-warm-100 block"
+              >SAP / KulturPass</span
+            >
+            <span class="text-sm text-warm-500 dark:text-warm-400"
+              >Enterprise Software</span
+            >
+          </div>
+          <div
+            class="text-warm-400 group-hover:text-accent-500 transition-colors"
           >
-        </div>
-        <span
-          class="text-xs font-medium text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300 flex items-center gap-1"
-        >
-          View project
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="2"
-            stroke="currentColor"
-            class="w-3 h-3"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"></path>
-          </svg>
-        </span>
-      </a>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              class="w-5 h-5"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
+                clip-rule="evenodd"></path>
+            </svg>
+          </div>
+        </a>
 
-      <!-- Porsche - Internal project page -->
-      <a
-        href="/work/porsche"
-        class="flex items-center gap-4 p-4 rounded-lg hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors group"
-      >
-        <div
-          class="w-16 h-12 flex items-center justify-center bg-gray-50 dark:bg-zinc-800 rounded-lg group-hover:bg-white dark:group-hover:bg-zinc-700"
+        <!-- Porsche - Internal project page -->
+        <a
+          href="/work/porsche"
+          class="card-soft p-5 flex items-center gap-4 group hover-lift"
         >
-          <img
-            alt="Porsche"
-            src="/company/Porsche-Logo.webp"
-            class="h-8 w-auto"
-          />
-        </div>
-        <div class="flex-1">
-          <span class="font-medium text-gray-900 dark:text-gray-100"
-            >Porsche Digital</span
+          <div
+            class="w-14 h-14 flex items-center justify-center bg-warm-100 dark:bg-dark-elevated rounded-xl group-hover:bg-warm-200 dark:group-hover:bg-warm-800/30 transition-colors"
           >
-          <span class="block text-xs text-gray-500 dark:text-gray-400"
-            >Automotive</span
+            <img
+              alt="Porsche"
+              src="/company/Porsche-Logo.webp"
+              class="h-9 w-auto"
+            />
+          </div>
+          <div class="flex-1 min-w-0">
+            <span class="font-semibold text-warm-900 dark:text-warm-100 block"
+              >Porsche Digital</span
+            >
+            <span class="text-sm text-warm-500 dark:text-warm-400"
+              >Automotive</span
+            >
+          </div>
+          <div
+            class="text-warm-400 group-hover:text-accent-500 transition-colors"
           >
-        </div>
-        <span
-          class="text-xs font-medium text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300 flex items-center gap-1"
-        >
-          View project
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="2"
-            stroke="currentColor"
-            class="w-3 h-3"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"></path>
-          </svg>
-        </span>
-      </a>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              class="w-5 h-5"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
+                clip-rule="evenodd"></path>
+            </svg>
+          </div>
+        </a>
 
-      <!-- IBM - Internal project page -->
-      <a
-        href="/work/ibm"
-        class="flex items-center gap-4 p-4 rounded-lg hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors group"
-      >
-        <div
-          class="w-16 h-12 flex items-center justify-center bg-gray-50 dark:bg-zinc-800 rounded-lg group-hover:bg-white dark:group-hover:bg-zinc-700"
+        <!-- IBM - Internal project page -->
+        <a
+          href="/work/ibm"
+          class="card-soft p-5 flex items-center gap-4 group hover-lift"
         >
-          <img alt="IBM" src="/company/IBM_logo.svg" class="h-5 w-auto" />
-        </div>
-        <div class="flex-1">
-          <span class="font-medium text-gray-900 dark:text-gray-100"
-            >IBM iX</span
+          <div
+            class="w-14 h-14 flex items-center justify-center bg-warm-100 dark:bg-dark-elevated rounded-xl group-hover:bg-warm-200 dark:group-hover:bg-warm-800/30 transition-colors"
           >
-          <span class="block text-xs text-gray-500 dark:text-gray-400"
-            >Technology</span
+            <img alt="IBM" src="/company/IBM_logo.svg" class="h-6 w-auto" />
+          </div>
+          <div class="flex-1 min-w-0">
+            <span class="font-semibold text-warm-900 dark:text-warm-100 block"
+              >IBM iX</span
+            >
+            <span class="text-sm text-warm-500 dark:text-warm-400"
+              >Technology</span
+            >
+          </div>
+          <div
+            class="text-warm-400 group-hover:text-accent-500 transition-colors"
           >
-        </div>
-        <span
-          class="text-xs font-medium text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300 flex items-center gap-1"
-        >
-          View project
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="2"
-            stroke="currentColor"
-            class="w-3 h-3"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"></path>
-          </svg>
-        </span>
-      </a>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              class="w-5 h-5"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
+                clip-rule="evenodd"></path>
+            </svg>
+          </div>
+        </a>
 
-      <!-- Stroeer - Internal project page -->
-      <a
-        href="/work/stroeer"
-        class="flex items-center gap-4 p-4 rounded-lg hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors group"
-      >
-        <div
-          class="w-16 h-12 flex flex-col items-center justify-center bg-gray-50 dark:bg-zinc-800 rounded-lg group-hover:bg-white dark:group-hover:bg-zinc-700 gap-0.5"
+        <!-- Stroeer - Internal project page -->
+        <a
+          href="/work/stroeer"
+          class="card-soft p-5 flex items-center gap-4 group hover-lift"
         >
-          <img
-            alt="Stroeer"
-            src="/company/str-logo-white.svg"
-            class="h-3 w-auto dark:invert"
-          />
-          <img
-            alt="t-online"
-            src="/company/t-online-desktop.327ab976.svg"
-            class="h-2.5 w-auto dark:invert"
-          />
-        </div>
-        <div class="flex-1">
-          <span class="font-medium text-gray-900 dark:text-gray-100"
-            >Stroeer / t-online</span
+          <div
+            class="w-14 h-14 flex flex-col items-center justify-center bg-warm-100 dark:bg-dark-elevated rounded-xl group-hover:bg-warm-200 dark:group-hover:bg-warm-800/30 transition-colors gap-0.5"
           >
-          <span class="block text-xs text-gray-500 dark:text-gray-400"
-            >Media & Publishing</span
+            <img
+              alt="Stroeer"
+              src="/company/str-logo-white.svg"
+              class="h-3 w-auto dark:invert"
+            />
+            <img
+              alt="t-online"
+              src="/company/t-online-desktop.327ab976.svg"
+              class="h-2.5 w-auto dark:invert"
+            />
+          </div>
+          <div class="flex-1 min-w-0">
+            <span class="font-semibold text-warm-900 dark:text-warm-100 block"
+              >Stroeer / t-online</span
+            >
+            <span class="text-sm text-warm-500 dark:text-warm-400"
+              >Media & Publishing</span
+            >
+          </div>
+          <div
+            class="text-warm-400 group-hover:text-accent-500 transition-colors"
           >
-        </div>
-        <span
-          class="text-xs font-medium text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300 flex items-center gap-1"
-        >
-          View project
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="2"
-            stroke="currentColor"
-            class="w-3 h-3"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"></path>
-          </svg>
-        </span>
-      </a>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              class="w-5 h-5"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
+                clip-rule="evenodd"></path>
+            </svg>
+          </div>
+        </a>
 
-      <!-- Kicker - Internal project page -->
-      <a
-        href="/work/kicker"
-        class="flex items-center gap-4 p-4 rounded-lg hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors group"
-      >
-        <div
-          class="w-16 h-12 flex items-center justify-center bg-gray-50 dark:bg-zinc-800 rounded-lg group-hover:bg-white dark:group-hover:bg-zinc-700"
+        <!-- Kicker - Internal project page -->
+        <a
+          href="/work/kicker"
+          class="card-soft p-5 flex items-center gap-4 group hover-lift"
         >
-          <img alt="Kicker" src="/company/kicker.svg" class="h-5 w-auto" />
-        </div>
-        <div class="flex-1">
-          <span class="font-medium text-gray-900 dark:text-gray-100"
-            >Olympia Verlag (Kicker)</span
+          <div
+            class="w-14 h-14 flex items-center justify-center bg-warm-100 dark:bg-dark-elevated rounded-xl group-hover:bg-warm-200 dark:group-hover:bg-warm-800/30 transition-colors"
           >
-          <span class="block text-xs text-gray-500 dark:text-gray-400"
-            >Sports Media</span
+            <img alt="Kicker" src="/company/kicker.svg" class="h-6 w-auto" />
+          </div>
+          <div class="flex-1 min-w-0">
+            <span class="font-semibold text-warm-900 dark:text-warm-100 block"
+              >Olympia Verlag (Kicker)</span
+            >
+            <span class="text-sm text-warm-500 dark:text-warm-400"
+              >Sports Media</span
+            >
+          </div>
+          <div
+            class="text-warm-400 group-hover:text-accent-500 transition-colors"
           >
-        </div>
-        <span
-          class="text-xs font-medium text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300 flex items-center gap-1"
-        >
-          View project
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="2"
-            stroke="currentColor"
-            class="w-3 h-3"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"></path>
-          </svg>
-        </span>
-      </a>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              class="w-5 h-5"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
+                clip-rule="evenodd"></path>
+            </svg>
+          </div>
+        </a>
 
-      <!-- ABL - Internal project page -->
-      <a
-        href="/work/abl"
-        class="flex items-center gap-4 p-4 rounded-lg hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors group"
-      >
-        <div
-          class="w-16 h-12 flex items-center justify-center bg-gray-50 dark:bg-zinc-800 rounded-lg group-hover:bg-white dark:group-hover:bg-zinc-700"
+        <!-- ABL - Internal project page -->
+        <a
+          href="/work/abl"
+          class="card-soft p-5 flex items-center gap-4 group hover-lift"
         >
-          <img
-            alt="ABL"
-            src="/company/abl.svg"
-            class="h-5 w-auto dark:invert"
-          />
-        </div>
-        <div class="flex-1">
-          <span class="font-medium text-gray-900 dark:text-gray-100">ABL</span>
-          <span class="block text-xs text-gray-500 dark:text-gray-400"
-            >E-Mobility</span
+          <div
+            class="w-14 h-14 flex items-center justify-center bg-warm-100 dark:bg-dark-elevated rounded-xl group-hover:bg-warm-200 dark:group-hover:bg-warm-800/30 transition-colors"
           >
-        </div>
-        <span
-          class="text-xs font-medium text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300 flex items-center gap-1"
-        >
-          View project
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="2"
-            stroke="currentColor"
-            class="w-3 h-3"
+            <img
+              alt="ABL"
+              src="/company/abl.svg"
+              class="h-6 w-auto dark:invert"
+            />
+          </div>
+          <div class="flex-1 min-w-0">
+            <span class="font-semibold text-warm-900 dark:text-warm-100 block"
+              >ABL</span
+            >
+            <span class="text-sm text-warm-500 dark:text-warm-400"
+              >E-Mobility</span
+            >
+          </div>
+          <div
+            class="text-warm-400 group-hover:text-accent-500 transition-colors"
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"></path>
-          </svg>
-        </span>
-      </a>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              class="w-5 h-5"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
+                clip-rule="evenodd"></path>
+            </svg>
+          </div>
+        </a>
 
-      <!-- Enerparc - External -->
-      <a
-        href="https://www.enerparc.de"
-        target="_blank"
-        rel="noreferrer"
-        class="flex items-center gap-4 p-4 rounded-lg hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors group"
-      >
-        <div
-          class="w-16 h-12 flex items-center justify-center bg-gray-50 dark:bg-zinc-800 rounded-lg group-hover:bg-white dark:group-hover:bg-zinc-700"
+        <!-- Barmer - Internal project page -->
+        <a
+          href="/work/ibm"
+          class="card-soft p-5 flex items-center gap-4 group hover-lift"
         >
-          <img alt="Enerparc" src="/company/enerparc.svg" class="h-5 w-auto" />
-        </div>
-        <div class="flex-1">
-          <span class="font-medium text-gray-900 dark:text-gray-100"
-            >Enerparc</span
+          <div
+            class="w-14 h-14 flex items-center justify-center bg-warm-100 dark:bg-dark-elevated rounded-xl group-hover:bg-warm-200 dark:group-hover:bg-warm-800/30 transition-colors"
           >
-          <span class="block text-xs text-gray-500 dark:text-gray-400"
-            >Renewable Energy</span
+            <img alt="Barmer" src="/company/barmer.svg" class="h-6 w-auto" />
+          </div>
+          <div class="flex-1 min-w-0">
+            <span class="font-semibold text-warm-900 dark:text-warm-100 block"
+              >Barmer</span
+            >
+            <span class="text-sm text-warm-500 dark:text-warm-400"
+              >Health Insurance</span
+            >
+          </div>
+          <div
+            class="text-warm-400 group-hover:text-accent-500 transition-colors"
           >
-        </div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              class="w-5 h-5"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
+                clip-rule="evenodd"></path>
+            </svg>
+          </div>
+        </a>
+
+        <!-- Enerparc - External -->
+        <a
+          href="https://www.enerparc.de"
+          target="_blank"
+          rel="noreferrer"
+          class="card-soft p-5 flex items-center gap-4 group hover-lift"
+        >
+          <div
+            class="w-14 h-14 flex items-center justify-center bg-warm-100 dark:bg-dark-elevated rounded-xl group-hover:bg-warm-200 dark:group-hover:bg-warm-800/30 transition-colors"
+          >
+            <img
+              alt="Enerparc"
+              src="/company/enerparc.svg"
+              class="h-6 w-auto"
+            />
+          </div>
+          <div class="flex-1 min-w-0">
+            <span class="font-semibold text-warm-900 dark:text-warm-100 block"
+              >Enerparc</span
+            >
+            <span class="text-sm text-warm-500 dark:text-warm-400"
+              >Renewable Energy</span
+            >
+          </div>
+          <div
+            class="text-warm-400 group-hover:text-accent-500 transition-colors"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+              class="w-5 h-5"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+              ></path>
+            </svg>
+          </div>
+        </a>
+
+        <!-- MHP - External -->
+        <a
+          href="https://www.mhp.com"
+          target="_blank"
+          rel="noreferrer"
+          class="card-soft p-5 flex items-center gap-4 group hover-lift"
+        >
+          <div
+            class="w-14 h-14 flex items-center justify-center bg-warm-100 dark:bg-dark-elevated rounded-xl group-hover:bg-warm-200 dark:group-hover:bg-warm-800/30 transition-colors"
+          >
+            <img
+              alt="MHP"
+              src="/company/mhp.svg"
+              class="h-7 w-auto dark:invert"
+            />
+          </div>
+          <div class="flex-1 min-w-0">
+            <span class="font-semibold text-warm-900 dark:text-warm-100 block"
+              >MHP</span
+            >
+            <span class="text-sm text-warm-500 dark:text-warm-400"
+              >IT Consulting</span
+            >
+          </div>
+          <div
+            class="text-warm-400 group-hover:text-accent-500 transition-colors"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+              class="w-5 h-5"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+              ></path>
+            </svg>
+          </div>
+        </a>
+
+        <!-- Finanzguru - External -->
+        <a
+          href="https://finanzguru.de"
+          target="_blank"
+          rel="noreferrer"
+          class="card-soft p-5 flex items-center gap-4 group hover-lift"
+        >
+          <div
+            class="w-14 h-14 flex items-center justify-center bg-warm-100 dark:bg-dark-elevated rounded-xl group-hover:bg-warm-200 dark:group-hover:bg-warm-800/30 transition-colors"
+          >
+            <img
+              alt="Finanzguru"
+              src="/company/finanzguru.svg"
+              class="h-8 w-auto"
+            />
+          </div>
+          <div class="flex-1 min-w-0">
+            <span class="font-semibold text-warm-900 dark:text-warm-100 block"
+              >Finanzguru</span
+            >
+            <span class="text-sm text-warm-500 dark:text-warm-400">FinTech</span
+            >
+          </div>
+          <div
+            class="text-warm-400 group-hover:text-accent-500 transition-colors"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+              class="w-5 h-5"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+              ></path>
+            </svg>
+          </div>
+        </a>
+      </div>
+
+      <!-- Mobile view all link -->
+      <a
+        href="/work"
+        class="sm:hidden mt-4 w-full inline-flex items-center justify-center gap-2 text-sm font-medium text-accent-600 dark:text-accent-400 hover:text-accent-700 dark:hover:text-accent-300 transition-colors py-3 border border-warm-200 dark:border-warm-700 rounded-xl"
+      >
+        View all work
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          class="w-4 h-4 text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          class="w-4 h-4"
         >
           <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
-          ></path>
+            fill-rule="evenodd"
+            d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
+            clip-rule="evenodd"></path>
         </svg>
       </a>
+    </section>
 
-      <!-- Barmer - Internal project page -->
-      <a
-        href="/work/ibm"
-        class="flex items-center gap-4 p-4 rounded-lg hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors group"
-      >
+    <!-- piparo.tech Section -->
+    <section
+      class="mt-16 animate-fade-in-up opacity-0 stagger-5 p-6 card-soft bg-gradient-to-br from-warm-50 to-warm-100 dark:from-dark-surface dark:to-dark-elevated"
+    >
+      <div class="flex items-start gap-4">
         <div
-          class="w-16 h-12 flex items-center justify-center bg-gray-50 dark:bg-zinc-800 rounded-lg group-hover:bg-white dark:group-hover:bg-zinc-700"
+          class="w-12 h-12 flex items-center justify-center bg-warm-200 dark:bg-warm-800/30 rounded-xl flex-shrink-0"
         >
-          <img alt="Barmer" src="/company/barmer.svg" class="h-5 w-auto" />
-        </div>
-        <div class="flex-1">
-          <span class="font-medium text-gray-900 dark:text-gray-100"
-            >Barmer</span
-          >
-          <span class="block text-xs text-gray-500 dark:text-gray-400"
-            >Health Insurance</span
-          >
-        </div>
-        <span
-          class="text-xs font-medium text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300 flex items-center gap-1"
-        >
-          View project
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            fill="none"
             viewBox="0 0 24 24"
-            stroke-width="2"
-            stroke="currentColor"
-            class="w-3 h-3"
+            fill="currentColor"
+            class="w-6 h-6 text-accent-600 dark:text-accent-400"
           >
             <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"></path>
+              fill-rule="evenodd"
+              d="M8.25 6.75a3.75 3.75 0 117.5 0 3.75 3.75 0 01-7.5 0zM15.75 9.75a3 3 0 116 0 3 3 0 01-6 0zM2.25 9.75a3 3 0 116 0 3 3 0 01-6 0zM6.31 15.117A6.745 6.745 0 0112 12a6.745 6.745 0 016.709 7.498.75.75 0 01-.372.568A12.696 12.696 0 0112 21.75c-2.305 0-4.47-.612-6.337-1.684a.75.75 0 01-.372-.568 6.787 6.787 0 011.019-4.38z"
+              clip-rule="evenodd"></path>
+            <path
+              d="M5.082 14.254a8.287 8.287 0 00-1.308 5.135 9.687 9.687 0 01-1.764-.44l-.115-.04a.563.563 0 01-.373-.487l-.01-.121a3.75 3.75 0 013.57-4.047zM20.226 19.389a8.287 8.287 0 00-1.308-5.135 3.75 3.75 0 013.57 4.047l-.01.121a.563.563 0 01-.373.486l-.115.04c-.567.2-1.156.349-1.764.441z"
+            ></path>
           </svg>
-        </span>
-      </a>
-
-      <!-- MHP - External -->
-      <a
-        href="https://www.mhp.com"
-        target="_blank"
-        rel="noreferrer"
-        class="flex items-center gap-4 p-4 rounded-lg hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors group"
-      >
-        <div
-          class="w-16 h-12 flex items-center justify-center bg-gray-50 dark:bg-zinc-800 rounded-lg group-hover:bg-white dark:group-hover:bg-zinc-700"
-        >
-          <img
-            alt="MHP"
-            src="/company/mhp.svg"
-            class="h-6 w-auto dark:invert"
-          />
         </div>
         <div class="flex-1">
-          <span class="font-medium text-gray-900 dark:text-gray-100">MHP</span>
-          <span class="block text-xs text-gray-500 dark:text-gray-400"
-            >IT Consulting</span
+          <h3
+            class="font-display text-xl font-semibold text-warm-900 dark:text-warm-100"
           >
-        </div>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          class="w-4 h-4 text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
-          ></path>
-        </svg>
-      </a>
-
-      <!-- Finanzguru - External -->
-      <a
-        href="https://finanzguru.de"
-        target="_blank"
-        rel="noreferrer"
-        class="flex items-center gap-4 p-4 rounded-lg hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors group"
-      >
-        <div
-          class="w-16 h-12 flex items-center justify-center bg-gray-50 dark:bg-zinc-800 rounded-lg group-hover:bg-white dark:group-hover:bg-zinc-700"
-        >
-          <img
-            alt="Finanzguru"
-            src="/company/finanzguru.svg"
-            class="h-7 w-auto"
-          />
-        </div>
-        <div class="flex-1">
-          <span class="font-medium text-gray-900 dark:text-gray-100"
-            >Finanzguru</span
+            piparo.tech
+          </h3>
+          <p class="text-warm-600 dark:text-warm-400 mt-2 leading-relaxed">
+            Alongside two colleagues, I'm also growing <a
+              href="https://piparo.tech"
+              class="text-accent-600 dark:text-accent-400 font-medium hover:text-accent-700 dark:hover:text-accent-300 border-b border-accent-300 dark:border-accent-600"
+              >piparo.tech</a
+            >, an IT service company dedicated to providing tailored solutions
+            to our clients' specific technology needs.
+          </p>
+          <a
+            href="mailto:info@piparo.tech"
+            class="inline-flex items-center gap-2 mt-4 text-sm font-medium text-accent-600 dark:text-accent-400 hover:text-accent-700 dark:hover:text-accent-300 transition-colors"
           >
-          <span class="block text-xs text-gray-500 dark:text-gray-400"
-            >FinTech</span
-          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              class="w-4 h-4"
+            >
+              <path
+                d="M3 4a2 2 0 00-2 2v1.161l8.441 4.221a1.25 1.25 0 001.118 0L19 7.162V6a2 2 0 00-2-2H3z"
+              ></path>
+              <path
+                d="M19 8.839l-7.77 3.885a2.75 2.75 0 01-2.46 0L1 8.839V14a2 2 0 002 2h14a2 2 0 002-2V8.839z"
+              ></path>
+            </svg>
+            info@piparo.tech
+          </a>
         </div>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          class="w-4 h-4 text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
-          ></path>
-        </svg>
-      </a>
-    </div>
-
-    <article class="prose lg:prose-lg mt-12">
-      <h4>piparo.tech</h4>
-
-      <p>
-        Alongside two colleagues, I'm also growing <a href="https://piparo.tech"
-          >piparo.tech</a
-        >, an IT service company dedicated to providing tailored solutions to
-        our clients' specific technology needs. We combine our extensive
-        industry experience to not only offer exceptional services but also
-        develop innovative products designed to solve real-world problems.
-      </p>
-      <p>
-        Contact us: <a href="mailto:info@piparo.tech">info@piparo.tech</a>
-      </p>
-    </article>
+      </div>
+    </section>
 
     <Footer />
   </BaseLayout>

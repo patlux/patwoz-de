@@ -3,83 +3,83 @@ import Layout from '~/layouts/Layout.astro'
 import BaseLayout from '~/components/BaseLayout.astro'
 import Footer from '~/components/Footer.astro'
 import ClientMarquee from '~/components/ClientMarquee.astro'
-import { classNames } from '~/utils/classNames'
 ---
 
 <Layout title="Work">
   <BaseLayout>
-    <article class="prose lg:prose-lg mt-12">
-      <h1>Client Work</h1>
-      <p>
+    <section class="animate-fade-in-up opacity-0">
+      <h1
+        class="text-3xl sm:text-4xl font-display font-bold text-warm-900 dark:text-warm-100"
+      >
+        Client Work
+      </h1>
+      <p class="text-lg text-warm-600 dark:text-warm-400 mt-3 leading-relaxed">
         A selection of projects I've worked on as a freelance developer. Each
         project showcases my expertise in building high-quality mobile and web
         applications.
       </p>
+    </section>
 
-      <div class="not-prose grid gap-6 mt-8">
-        <!-- Porsche Digital -->
-        <a
-          href="/work/porsche"
-          class={classNames(
-            'group flex flex-col sm:flex-row gap-6 p-6',
-            'border border-gray-200 dark:border-zinc-700 rounded-xl',
-            'hover:border-gray-300 dark:hover:border-zinc-600 hover:shadow-lg',
-            'transition-all duration-200',
-          )}
-        >
+    <div class="grid gap-5 mt-10">
+      <!-- Porsche Digital -->
+      <a
+        href="/work/porsche"
+        class="card-soft p-6 group hover-lift animate-fade-in-up opacity-0 stagger-1"
+      >
+        <div class="flex flex-col sm:flex-row gap-6">
           <div
-            class="flex-shrink-0 flex items-center justify-center w-full sm:w-32 h-24 bg-gray-50 dark:bg-zinc-800 rounded-lg"
+            class="flex-shrink-0 flex items-center justify-center w-full sm:w-32 h-24 bg-warm-100 dark:bg-dark-elevated rounded-xl group-hover:bg-warm-200 dark:group-hover:bg-warm-800/30 transition-colors"
           >
             <img
               src="/company/Porsche-Logo.webp"
               alt="Porsche Logo"
               width="80"
               height="46"
-              class="opacity-80"
+              class="opacity-90"
             />
           </div>
           <div class="flex-1">
             <h3
-              class="text-lg font-semibold text-gray-900 dark:text-gray-100 group-hover:text-black dark:group-hover:text-white"
+              class="text-lg font-semibold text-warm-900 dark:text-warm-100 group-hover:text-accent-600 dark:group-hover:text-accent-400 transition-colors"
             >
               Porsche Digital
             </h3>
-            <p class="text-gray-600 dark:text-gray-400 mt-1">
+            <p class="text-warm-600 dark:text-warm-400 mt-2 leading-relaxed">
               Fullstack development for a consumer-facing mobile app with
               real-time video streaming, in-app subscriptions, and serverless
               AWS backend. 850+ commits across mobile, web, and infrastructure.
             </p>
-            <div class="flex flex-wrap gap-2 mt-3">
+            <div class="flex flex-wrap gap-2 mt-4">
               <span
-                class="px-2 py-1 text-xs font-medium bg-gray-100 dark:bg-zinc-700 text-gray-700 dark:text-gray-300 rounded"
+                class="px-2.5 py-1 text-xs font-medium bg-warm-200 dark:bg-warm-800/40 text-warm-700 dark:text-warm-300 rounded-lg"
               >
                 React Native
               </span>
               <span
-                class="px-2 py-1 text-xs font-medium bg-gray-100 dark:bg-zinc-700 text-gray-700 dark:text-gray-300 rounded"
+                class="px-2.5 py-1 text-xs font-medium bg-warm-200 dark:bg-warm-800/40 text-warm-700 dark:text-warm-300 rounded-lg"
               >
                 AWS CDK
               </span>
               <span
-                class="px-2 py-1 text-xs font-medium bg-gray-100 dark:bg-zinc-700 text-gray-700 dark:text-gray-300 rounded"
+                class="px-2.5 py-1 text-xs font-medium bg-warm-200 dark:bg-warm-800/40 text-warm-700 dark:text-warm-300 rounded-lg"
               >
                 TypeScript
               </span>
               <span
-                class="px-2 py-1 text-xs font-medium bg-gray-100 dark:bg-zinc-700 text-gray-700 dark:text-gray-300 rounded"
+                class="px-2.5 py-1 text-xs font-medium bg-warm-200 dark:bg-warm-800/40 text-warm-700 dark:text-warm-300 rounded-lg"
               >
                 Fullstack
               </span>
             </div>
           </div>
           <div
-            class="flex-shrink-0 flex items-center text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300"
+            class="flex-shrink-0 flex items-center text-warm-400 group-hover:text-accent-500 transition-colors"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              stroke-width="1.5"
+              stroke-width="2"
               stroke="currentColor"
               class="w-5 h-5"
             >
@@ -89,72 +89,69 @@ import { classNames } from '~/utils/classNames'
                 d="m8.25 4.5 7.5 7.5-7.5 7.5"></path>
             </svg>
           </div>
-        </a>
+        </div>
+      </a>
 
-        <!-- SAP KulturPass -->
-        <a
-          href="/work/kulturpass"
-          class={classNames(
-            'group flex flex-col sm:flex-row gap-6 p-6',
-            'border border-gray-200 dark:border-zinc-700 rounded-xl',
-            'hover:border-gray-300 dark:hover:border-zinc-600 hover:shadow-lg',
-            'transition-all duration-200',
-          )}
-        >
+      <!-- SAP KulturPass -->
+      <a
+        href="/work/kulturpass"
+        class="card-soft p-6 group hover-lift animate-fade-in-up opacity-0 stagger-2"
+      >
+        <div class="flex flex-col sm:flex-row gap-6">
           <div
-            class="flex-shrink-0 flex items-center justify-center w-full sm:w-32 h-24 bg-gray-50 dark:bg-zinc-800 rounded-lg"
+            class="flex-shrink-0 flex items-center justify-center w-full sm:w-32 h-24 bg-warm-100 dark:bg-dark-elevated rounded-xl group-hover:bg-warm-200 dark:group-hover:bg-warm-800/30 transition-colors"
           >
             <img
               src="/company/sap.svg"
               alt="SAP Logo"
               width="80"
               height="40"
-              class="opacity-80"
+              class="opacity-90"
             />
           </div>
           <div class="flex-1">
             <h3
-              class="text-lg font-semibold text-gray-900 dark:text-gray-100 group-hover:text-black dark:group-hover:text-white"
+              class="text-lg font-semibold text-warm-900 dark:text-warm-100 group-hover:text-accent-600 dark:group-hover:text-accent-400 transition-colors"
             >
               SAP / KulturPass DE
             </h3>
-            <p class="text-gray-600 dark:text-gray-400 mt-1">
+            <p class="text-warm-600 dark:text-warm-400 mt-2 leading-relaxed">
               Contributed to the KulturPass mobile app, a German government
               initiative providing 18-year-olds with cultural budget.
               Implemented favorites, form validation, secure storage, and Redux
               architecture.
             </p>
-            <div class="flex flex-wrap gap-2 mt-3">
+            <div class="flex flex-wrap gap-2 mt-4">
               <span
-                class="px-2 py-1 text-xs font-medium bg-gray-100 dark:bg-zinc-700 text-gray-700 dark:text-gray-300 rounded"
+                class="px-2.5 py-1 text-xs font-medium bg-warm-200 dark:bg-warm-800/40 text-warm-700 dark:text-warm-300 rounded-lg"
               >
                 React Native
               </span>
               <span
-                class="px-2 py-1 text-xs font-medium bg-gray-100 dark:bg-zinc-700 text-gray-700 dark:text-gray-300 rounded"
+                class="px-2.5 py-1 text-xs font-medium bg-warm-200 dark:bg-warm-800/40 text-warm-700 dark:text-warm-300 rounded-lg"
               >
                 Redux Toolkit
               </span>
               <span
-                class="px-2 py-1 text-xs font-medium bg-gray-100 dark:bg-zinc-700 text-gray-700 dark:text-gray-300 rounded"
+                class="px-2.5 py-1 text-xs font-medium bg-warm-200 dark:bg-warm-800/40 text-warm-700 dark:text-warm-300 rounded-lg"
               >
                 TypeScript
               </span>
               <span
-                class="px-2 py-1 text-xs font-medium bg-gray-100 dark:bg-zinc-700 text-gray-700 dark:text-gray-300 rounded"
+                class="px-2.5 py-1 text-xs font-medium bg-warm-200 dark:bg-warm-800/40 text-warm-700 dark:text-warm-300 rounded-lg"
               >
                 DevOps
               </span>
             </div>
           </div>
           <div
-            class="flex-shrink-0 flex items-center text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300"
+            class="flex-shrink-0 flex items-center text-warm-400 group-hover:text-accent-500 transition-colors"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              stroke-width="1.5"
+              stroke-width="2"
               stroke="currentColor"
               class="w-5 h-5"
             >
@@ -164,20 +161,17 @@ import { classNames } from '~/utils/classNames'
                 d="m8.25 4.5 7.5 7.5-7.5 7.5"></path>
             </svg>
           </div>
-        </a>
+        </div>
+      </a>
 
-        <!-- Stroeer / t-online -->
-        <a
-          href="/work/stroeer"
-          class={classNames(
-            'group flex flex-col sm:flex-row gap-6 p-6',
-            'border border-gray-200 dark:border-zinc-700 rounded-xl',
-            'hover:border-gray-300 dark:hover:border-zinc-600 hover:shadow-lg',
-            'transition-all duration-200',
-          )}
-        >
+      <!-- Stroeer / t-online -->
+      <a
+        href="/work/stroeer"
+        class="card-soft p-6 group hover-lift animate-fade-in-up opacity-0 stagger-3"
+      >
+        <div class="flex flex-col sm:flex-row gap-6">
           <div
-            class="flex-shrink-0 flex items-center justify-center w-full sm:w-32 h-24 bg-gray-50 dark:bg-zinc-800 rounded-lg"
+            class="flex-shrink-0 flex items-center justify-center w-full sm:w-32 h-24 bg-warm-100 dark:bg-dark-elevated rounded-xl group-hover:bg-warm-200 dark:group-hover:bg-warm-800/30 transition-colors"
           >
             <div class="flex flex-col items-center gap-1">
               <img
@@ -185,59 +179,59 @@ import { classNames } from '~/utils/classNames'
                 alt="Stroeer Logo"
                 width="80"
                 height="17"
-                class="opacity-80 dark:invert"
+                class="opacity-90 dark:invert"
               />
               <img
                 src="/company/t-online-desktop.327ab976.svg"
                 alt="t-online Logo"
                 width="60"
                 height="13"
-                class="opacity-80 dark:invert"
+                class="opacity-90 dark:invert"
               />
             </div>
           </div>
           <div class="flex-1">
             <h3
-              class="text-lg font-semibold text-gray-900 dark:text-gray-100 group-hover:text-black dark:group-hover:text-white"
+              class="text-lg font-semibold text-warm-900 dark:text-warm-100 group-hover:text-accent-600 dark:group-hover:text-accent-400 transition-colors"
             >
               Stroeer / t-online
             </h3>
-            <p class="text-gray-600 dark:text-gray-400 mt-1">
+            <p class="text-warm-600 dark:text-warm-400 mt-2 leading-relaxed">
               Built the t-online news mobile app from the ground up using React
               Native and Expo. Implemented core features including configurable
               navigation, search, push notifications, and ad monetization.
             </p>
-            <div class="flex flex-wrap gap-2 mt-3">
+            <div class="flex flex-wrap gap-2 mt-4">
               <span
-                class="px-2 py-1 text-xs font-medium bg-gray-100 dark:bg-zinc-700 text-gray-700 dark:text-gray-300 rounded"
+                class="px-2.5 py-1 text-xs font-medium bg-warm-200 dark:bg-warm-800/40 text-warm-700 dark:text-warm-300 rounded-lg"
               >
                 React Native
               </span>
               <span
-                class="px-2 py-1 text-xs font-medium bg-gray-100 dark:bg-zinc-700 text-gray-700 dark:text-gray-300 rounded"
+                class="px-2.5 py-1 text-xs font-medium bg-warm-200 dark:bg-warm-800/40 text-warm-700 dark:text-warm-300 rounded-lg"
               >
                 Expo
               </span>
               <span
-                class="px-2 py-1 text-xs font-medium bg-gray-100 dark:bg-zinc-700 text-gray-700 dark:text-gray-300 rounded"
+                class="px-2.5 py-1 text-xs font-medium bg-warm-200 dark:bg-warm-800/40 text-warm-700 dark:text-warm-300 rounded-lg"
               >
                 TypeScript
               </span>
               <span
-                class="px-2 py-1 text-xs font-medium bg-gray-100 dark:bg-zinc-700 text-gray-700 dark:text-gray-300 rounded"
+                class="px-2.5 py-1 text-xs font-medium bg-warm-200 dark:bg-warm-800/40 text-warm-700 dark:text-warm-300 rounded-lg"
               >
                 DevOps
               </span>
             </div>
           </div>
           <div
-            class="flex-shrink-0 flex items-center text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300"
+            class="flex-shrink-0 flex items-center text-warm-400 group-hover:text-accent-500 transition-colors"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              stroke-width="1.5"
+              stroke-width="2"
               stroke="currentColor"
               class="w-5 h-5"
             >
@@ -247,72 +241,69 @@ import { classNames } from '~/utils/classNames'
                 d="m8.25 4.5 7.5 7.5-7.5 7.5"></path>
             </svg>
           </div>
-        </a>
+        </div>
+      </a>
 
-        <!-- ABL -->
-        <a
-          href="/work/abl"
-          class={classNames(
-            'group flex flex-col sm:flex-row gap-6 p-6',
-            'border border-gray-200 dark:border-zinc-700 rounded-xl',
-            'hover:border-gray-300 dark:hover:border-zinc-600 hover:shadow-lg',
-            'transition-all duration-200',
-          )}
-        >
+      <!-- ABL -->
+      <a
+        href="/work/abl"
+        class="card-soft p-6 group hover-lift animate-fade-in-up opacity-0 stagger-4"
+      >
+        <div class="flex flex-col sm:flex-row gap-6">
           <div
-            class="flex-shrink-0 flex items-center justify-center w-full sm:w-32 h-24 bg-gray-50 dark:bg-zinc-800 rounded-lg"
+            class="flex-shrink-0 flex items-center justify-center w-full sm:w-32 h-24 bg-warm-100 dark:bg-dark-elevated rounded-xl group-hover:bg-warm-200 dark:group-hover:bg-warm-800/30 transition-colors"
           >
             <img
               src="/company/abl.svg"
               alt="ABL Logo"
               width="80"
               height="32"
-              class="opacity-80 dark:invert"
+              class="opacity-90 dark:invert"
             />
           </div>
           <div class="flex-1">
             <h3
-              class="text-lg font-semibold text-gray-900 dark:text-gray-100 group-hover:text-black dark:group-hover:text-white"
+              class="text-lg font-semibold text-warm-900 dark:text-warm-100 group-hover:text-accent-600 dark:group-hover:text-accent-400 transition-colors"
             >
               ABL
             </h3>
-            <p class="text-gray-600 dark:text-gray-400 mt-1">
+            <p class="text-warm-600 dark:text-warm-400 mt-2 leading-relaxed">
               Built and maintained the ABL Configuration App for EV wallbox
               setup and management. 1,300+ commits over multiple years,
               including device communication via WiFi/Bluetooth, firmware
               updates, and multi-language support.
             </p>
-            <div class="flex flex-wrap gap-2 mt-3">
+            <div class="flex flex-wrap gap-2 mt-4">
               <span
-                class="px-2 py-1 text-xs font-medium bg-gray-100 dark:bg-zinc-700 text-gray-700 dark:text-gray-300 rounded"
+                class="px-2.5 py-1 text-xs font-medium bg-warm-200 dark:bg-warm-800/40 text-warm-700 dark:text-warm-300 rounded-lg"
               >
                 React Native
               </span>
               <span
-                class="px-2 py-1 text-xs font-medium bg-gray-100 dark:bg-zinc-700 text-gray-700 dark:text-gray-300 rounded"
+                class="px-2.5 py-1 text-xs font-medium bg-warm-200 dark:bg-warm-800/40 text-warm-700 dark:text-warm-300 rounded-lg"
               >
                 MobX
               </span>
               <span
-                class="px-2 py-1 text-xs font-medium bg-gray-100 dark:bg-zinc-700 text-gray-700 dark:text-gray-300 rounded"
+                class="px-2.5 py-1 text-xs font-medium bg-warm-200 dark:bg-warm-800/40 text-warm-700 dark:text-warm-300 rounded-lg"
               >
                 TypeScript
               </span>
               <span
-                class="px-2 py-1 text-xs font-medium bg-gray-100 dark:bg-zinc-700 text-gray-700 dark:text-gray-300 rounded"
+                class="px-2.5 py-1 text-xs font-medium bg-warm-200 dark:bg-warm-800/40 text-warm-700 dark:text-warm-300 rounded-lg"
               >
                 IoT
               </span>
             </div>
           </div>
           <div
-            class="flex-shrink-0 flex items-center text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300"
+            class="flex-shrink-0 flex items-center text-warm-400 group-hover:text-accent-500 transition-colors"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              stroke-width="1.5"
+              stroke-width="2"
               stroke="currentColor"
               class="w-5 h-5"
             >
@@ -322,20 +313,17 @@ import { classNames } from '~/utils/classNames'
                 d="m8.25 4.5 7.5 7.5-7.5 7.5"></path>
             </svg>
           </div>
-        </a>
+        </div>
+      </a>
 
-        <!-- IBM / Barmer -->
-        <a
-          href="/work/ibm"
-          class={classNames(
-            'group flex flex-col sm:flex-row gap-6 p-6',
-            'border border-gray-200 dark:border-zinc-700 rounded-xl',
-            'hover:border-gray-300 dark:hover:border-zinc-600 hover:shadow-lg',
-            'transition-all duration-200',
-          )}
-        >
+      <!-- IBM / Barmer -->
+      <a
+        href="/work/ibm"
+        class="card-soft p-6 group hover-lift animate-fade-in-up opacity-0 stagger-5"
+      >
+        <div class="flex flex-col sm:flex-row gap-6">
           <div
-            class="flex-shrink-0 flex items-center justify-center w-full sm:w-32 h-24 bg-gray-50 dark:bg-zinc-800 rounded-lg"
+            class="flex-shrink-0 flex items-center justify-center w-full sm:w-32 h-24 bg-warm-100 dark:bg-dark-elevated rounded-xl group-hover:bg-warm-200 dark:group-hover:bg-warm-800/30 transition-colors"
           >
             <div class="flex flex-col items-center gap-2">
               <img
@@ -343,59 +331,59 @@ import { classNames } from '~/utils/classNames'
                 alt="IBM Logo"
                 width="50"
                 height="20"
-                class="opacity-80"
+                class="opacity-90"
               />
               <img
                 src="/company/barmer.svg"
                 alt="Barmer Logo"
                 width="60"
                 height="16"
-                class="opacity-80"
+                class="opacity-90"
               />
             </div>
           </div>
           <div class="flex-1">
             <h3
-              class="text-lg font-semibold text-gray-900 dark:text-gray-100 group-hover:text-black dark:group-hover:text-white"
+              class="text-lg font-semibold text-warm-900 dark:text-warm-100 group-hover:text-accent-600 dark:group-hover:text-accent-400 transition-colors"
             >
               IBM iX / Barmer
             </h3>
-            <p class="text-gray-600 dark:text-gray-400 mt-1">
+            <p class="text-warm-600 dark:text-warm-400 mt-2 leading-relaxed">
               Frontend development for Barmer, one of Germany's largest health
               insurers. Contributed to the Bonus module in the Barmer App and
               the Puls cross-platform design system.
             </p>
-            <div class="flex flex-wrap gap-2 mt-3">
+            <div class="flex flex-wrap gap-2 mt-4">
               <span
-                class="px-2 py-1 text-xs font-medium bg-gray-100 dark:bg-zinc-700 text-gray-700 dark:text-gray-300 rounded"
+                class="px-2.5 py-1 text-xs font-medium bg-warm-200 dark:bg-warm-800/40 text-warm-700 dark:text-warm-300 rounded-lg"
               >
                 React Native
               </span>
               <span
-                class="px-2 py-1 text-xs font-medium bg-gray-100 dark:bg-zinc-700 text-gray-700 dark:text-gray-300 rounded"
+                class="px-2.5 py-1 text-xs font-medium bg-warm-200 dark:bg-warm-800/40 text-warm-700 dark:text-warm-300 rounded-lg"
               >
                 React
               </span>
               <span
-                class="px-2 py-1 text-xs font-medium bg-gray-100 dark:bg-zinc-700 text-gray-700 dark:text-gray-300 rounded"
+                class="px-2.5 py-1 text-xs font-medium bg-warm-200 dark:bg-warm-800/40 text-warm-700 dark:text-warm-300 rounded-lg"
               >
                 TypeScript
               </span>
               <span
-                class="px-2 py-1 text-xs font-medium bg-gray-100 dark:bg-zinc-700 text-gray-700 dark:text-gray-300 rounded"
+                class="px-2.5 py-1 text-xs font-medium bg-warm-200 dark:bg-warm-800/40 text-warm-700 dark:text-warm-300 rounded-lg"
               >
                 Design System
               </span>
             </div>
           </div>
           <div
-            class="flex-shrink-0 flex items-center text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300"
+            class="flex-shrink-0 flex items-center text-warm-400 group-hover:text-accent-500 transition-colors"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              stroke-width="1.5"
+              stroke-width="2"
               stroke="currentColor"
               class="w-5 h-5"
             >
@@ -405,72 +393,69 @@ import { classNames } from '~/utils/classNames'
                 d="m8.25 4.5 7.5 7.5-7.5 7.5"></path>
             </svg>
           </div>
-        </a>
+        </div>
+      </a>
 
-        <!-- Olympia Verlag / Kicker -->
-        <a
-          href="/work/kicker"
-          class={classNames(
-            'group flex flex-col sm:flex-row gap-6 p-6',
-            'border border-gray-200 dark:border-zinc-700 rounded-xl',
-            'hover:border-gray-300 dark:hover:border-zinc-600 hover:shadow-lg',
-            'transition-all duration-200',
-          )}
-        >
+      <!-- Olympia Verlag / Kicker -->
+      <a
+        href="/work/kicker"
+        class="card-soft p-6 group hover-lift animate-fade-in-up opacity-0 stagger-6"
+      >
+        <div class="flex flex-col sm:flex-row gap-6">
           <div
-            class="flex-shrink-0 flex items-center justify-center w-full sm:w-32 h-24 bg-gray-50 dark:bg-zinc-800 rounded-lg"
+            class="flex-shrink-0 flex items-center justify-center w-full sm:w-32 h-24 bg-warm-100 dark:bg-dark-elevated rounded-xl group-hover:bg-warm-200 dark:group-hover:bg-warm-800/30 transition-colors"
           >
             <img
               src="/company/kicker.svg"
               alt="Kicker Logo"
               width="80"
               height="32"
-              class="opacity-80"
+              class="opacity-90"
             />
           </div>
           <div class="flex-1">
             <h3
-              class="text-lg font-semibold text-gray-900 dark:text-gray-100 group-hover:text-black dark:group-hover:text-white"
+              class="text-lg font-semibold text-warm-900 dark:text-warm-100 group-hover:text-accent-600 dark:group-hover:text-accent-400 transition-colors"
             >
               Olympia Verlag (Kicker)
             </h3>
-            <p class="text-gray-600 dark:text-gray-400 mt-1">
+            <p class="text-warm-600 dark:text-warm-400 mt-2 leading-relaxed">
               Lead fullstack development for FWMFL, a podcast and audiobook
               streaming platform for football fans. 1,600+ commits across mobile
               app, backend services (Go/Rust), website, and Kubernetes
               infrastructure.
             </p>
-            <div class="flex flex-wrap gap-2 mt-3">
+            <div class="flex flex-wrap gap-2 mt-4">
               <span
-                class="px-2 py-1 text-xs font-medium bg-gray-100 dark:bg-zinc-700 text-gray-700 dark:text-gray-300 rounded"
+                class="px-2.5 py-1 text-xs font-medium bg-warm-200 dark:bg-warm-800/40 text-warm-700 dark:text-warm-300 rounded-lg"
               >
                 React Native
               </span>
               <span
-                class="px-2 py-1 text-xs font-medium bg-gray-100 dark:bg-zinc-700 text-gray-700 dark:text-gray-300 rounded"
+                class="px-2.5 py-1 text-xs font-medium bg-warm-200 dark:bg-warm-800/40 text-warm-700 dark:text-warm-300 rounded-lg"
               >
                 Go / Rust
               </span>
               <span
-                class="px-2 py-1 text-xs font-medium bg-gray-100 dark:bg-zinc-700 text-gray-700 dark:text-gray-300 rounded"
+                class="px-2.5 py-1 text-xs font-medium bg-warm-200 dark:bg-warm-800/40 text-warm-700 dark:text-warm-300 rounded-lg"
               >
                 Kubernetes
               </span>
               <span
-                class="px-2 py-1 text-xs font-medium bg-gray-100 dark:bg-zinc-700 text-gray-700 dark:text-gray-300 rounded"
+                class="px-2.5 py-1 text-xs font-medium bg-warm-200 dark:bg-warm-800/40 text-warm-700 dark:text-warm-300 rounded-lg"
               >
                 Fullstack
               </span>
             </div>
           </div>
           <div
-            class="flex-shrink-0 flex items-center text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300"
+            class="flex-shrink-0 flex items-center text-warm-400 group-hover:text-accent-500 transition-colors"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              stroke-width="1.5"
+              stroke-width="2"
               stroke="currentColor"
               class="w-5 h-5"
             >
@@ -480,9 +465,9 @@ import { classNames } from '~/utils/classNames'
                 d="m8.25 4.5 7.5 7.5-7.5 7.5"></path>
             </svg>
           </div>
-        </a>
-      </div>
-    </article>
+        </div>
+      </a>
+    </div>
 
     <ClientMarquee />
 

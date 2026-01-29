@@ -1,26 +1,134 @@
 ---
 import Layout from '~/layouts/Layout.astro'
 import BaseLayout from '~/components/BaseLayout.astro'
+import Footer from '~/components/Footer.astro'
 import ObfuscatedText from '~/components/ObfuscatedText.astro'
 ---
 
 <Layout title="Imprint">
   <BaseLayout>
-    <article class="prose mt-12">
-      <h1>Imprint</h1>
-      <dl class="mt-6">
-        <dt class="font-semibold text-gray-900 dark:text-gray-100">
-          Responsible for this website
-        </dt>
-        <dd class="mt-2 text-gray-700 dark:text-gray-300">
-          piparo.tech GmbH<br />
-          Patrick Wozniak<br />
-          <ObfuscatedText
-            text={'Frauentorgraben 61\n90443 Nürnberg\n'}
-            fallbackEmail="contact@patwoz.de"
-          />
-        </dd>
-      </dl>
+    <!-- Back link -->
+    <a
+      href="/"
+      class="inline-flex items-center gap-2 text-sm text-warm-500 dark:text-warm-400 hover:text-warm-700 dark:hover:text-warm-300 transition-colors mb-8 group"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+        class="w-4 h-4 group-hover:-translate-x-1 transition-transform"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M17 10a.75.75 0 01-.75.75H5.612l4.158 3.96a.75.75 0 11-1.04 1.08l-5.5-5.25a.75.75 0 010-1.08l5.5-5.25a.75.75 0 111.04 1.08L5.612 9.25H16.25A.75.75 0 0117 10z"
+          clip-rule="evenodd"></path>
+      </svg>
+      Back to home
+    </a>
+
+    <article class="animate-fade-in-up opacity-0">
+      <h1
+        class="text-3xl sm:text-4xl font-display font-bold text-warm-900 dark:text-warm-100"
+      >
+        Imprint
+      </h1>
+      <p class="text-warm-600 dark:text-warm-400 mt-2">
+        Legal information and contact details
+      </p>
+
+      <div class="mt-10 space-y-8">
+        <!-- Company Info Card -->
+        <div class="card-soft p-6">
+          <div class="flex items-start gap-4">
+            <div
+              class="w-12 h-12 flex items-center justify-center bg-warm-100 dark:bg-dark-elevated rounded-xl flex-shrink-0"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                class="w-6 h-6 text-accent-600 dark:text-accent-400"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M4.5 2.25a.75.75 0 000 1.5v16.5h-.75a.75.75 0 000 1.5h16.5a.75.75 0 000-1.5h-.75V3.75a.75.75 0 000-1.5h-15zM9 6a.75.75 0 000 1.5h1.5a.75.75 0 000-1.5H9zm-.75 3.75A.75.75 0 019 9h1.5a.75.75 0 010 1.5H9a.75.75 0 01-.75-.75zM9 12a.75.75 0 000 1.5h1.5a.75.75 0 000-1.5H9zm3.75-5.25A.75.75 0 0113.5 6H15a.75.75 0 010 1.5h-1.5a.75.75 0 01-.75-.75zM13.5 9a.75.75 0 000 1.5H15A.75.75 0 0015 9h-1.5zm-.75 3.75a.75.75 0 01.75-.75H15a.75.75 0 010 1.5h-1.5a.75.75 0 01-.75-.75zM9 19.5v-2.25a.75.75 0 01.75-.75h4.5a.75.75 0 01.75.75v2.25a.75.75 0 01-.75.75h-4.5A.75.75 0 019 19.5z"
+                  clip-rule="evenodd"></path>
+              </svg>
+            </div>
+            <div class="flex-1">
+              <h2
+                class="text-lg font-semibold text-warm-900 dark:text-warm-100"
+              >
+                Responsible for this website
+              </h2>
+              <div
+                class="mt-3 text-warm-700 dark:text-warm-300 leading-relaxed"
+              >
+                <p class="font-medium">piparo.tech GmbH</p>
+                <p>Patrick Wozniak</p>
+                <div class="mt-2">
+                  <ObfuscatedText
+                    text={'Frauentorgraben 61\n90443 Nürnberg\nGermany'}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Card -->
+        <div class="card-soft p-6">
+          <div class="flex items-start gap-4">
+            <div
+              class="w-12 h-12 flex items-center justify-center bg-warm-100 dark:bg-dark-elevated rounded-xl flex-shrink-0"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                class="w-6 h-6 text-accent-600 dark:text-accent-400"
+              >
+                <path
+                  d="M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.928 5.493a3 3 0 01-3.144 0L1.5 8.67z"
+                ></path>
+                <path
+                  d="M22.5 6.908V6.75a3 3 0 00-3-3h-15a3 3 0 00-3 3v.158l9.714 5.978a1.5 1.5 0 001.572 0L22.5 6.908z"
+                ></path>
+              </svg>
+            </div>
+            <div class="flex-1">
+              <h2
+                class="text-lg font-semibold text-warm-900 dark:text-warm-100"
+              >
+                Contact
+              </h2>
+              <div class="mt-3 space-y-2">
+                <a
+                  href="mailto:hi@patwoz.de"
+                  class="inline-flex items-center gap-2 text-accent-600 dark:text-accent-400 hover:text-accent-700 dark:hover:text-accent-300 transition-colors"
+                >
+                  hi@patwoz.de
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Disclaimer -->
+        <div
+          class="p-5 bg-warm-100 dark:bg-dark-elevated rounded-2xl border border-warm-200 dark:border-warm-800/50"
+        >
+          <p class="text-sm text-warm-600 dark:text-warm-400 leading-relaxed">
+            <strong class="text-warm-700 dark:text-warm-300">Disclaimer:</strong
+            > The content of this website has been created with care. However, I
+            cannot guarantee the accuracy, completeness, or timeliness of the information
+            provided. As a service provider, I am responsible for my own content
+            on these pages according to general laws.
+          </p>
+        </div>
+      </div>
     </article>
+
+    <Footer />
   </BaseLayout>
 </Layout>

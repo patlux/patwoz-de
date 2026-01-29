@@ -1,3 +1,6 @@
+/* Import distinctive fonts - must come first */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&display=swap');
+
 @import 'tailwindcss';
 @plugin '@tailwindcss/typography';
 
@@ -5,36 +8,66 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --font-article: 'Helvetica Neue', ui-serif, Georgia, Cambria,
-    'Times New Roman', Times, serif;
+  --font-sans: 'DM Sans', system-ui, sans-serif;
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-article: 'Fraunces', Georgia, 'Times New Roman', serif;
+
+  /* Warm color palette */
+  --color-warm-50: #fefdfb;
+  --color-warm-100: #fdf8f3;
+  --color-warm-200: #f9ede0;
+  --color-warm-300: #f3dcc4;
+  --color-warm-400: #e8c49e;
+  --color-warm-500: #d4a373;
+  --color-warm-600: #bc8a5f;
+  --color-warm-700: #9c6f4a;
+  --color-warm-800: #7d5a3d;
+  --color-warm-900: #5f4530;
+
+  /* Accent - warm coral/terracotta */
+  --color-accent-50: #fef5f2;
+  --color-accent-100: #fee9e3;
+  --color-accent-200: #fdd7cc;
+  --color-accent-300: #fab8a5;
+  --color-accent-400: #f58d70;
+  --color-accent-500: #eb6b47;
+  --color-accent-600: #d84f2a;
+  --color-accent-700: #b53f20;
+  --color-accent-800: #95361f;
+  --color-accent-900: #7b3120;
+
+  /* Dark mode warm tones */
+  --color-dark-bg: #1a1714;
+  --color-dark-surface: #252119;
+  --color-dark-elevated: #302a21;
 }
 
 a.button {
-  @apply inline-block rounded-xl border border-gray-200 bg-white px-6 py-2 shadow-md transition-shadow hover:shadow-xl dark:bg-zinc-800 dark:border-zinc-600 dark:text-gray-100;
+  @apply inline-block rounded-2xl border border-warm-200 bg-warm-50 px-6 py-2.5 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-warm-300 hover:-translate-y-0.5 dark:bg-dark-surface dark:border-warm-800 dark:text-warm-100;
 }
 
 h1 {
-  @apply text-2xl font-bold text-gray-900 dark:text-gray-100;
+  @apply text-3xl font-bold text-warm-900 dark:text-warm-100 font-display tracking-tight;
 }
 
 h2 {
-  @apply text-xl font-bold text-gray-900 dark:text-gray-100;
+  @apply text-2xl font-bold text-warm-900 dark:text-warm-100 font-display;
 }
 
 h3 {
-  @apply text-lg font-semibold text-gray-900 dark:text-gray-100;
+  @apply text-xl font-semibold text-warm-900 dark:text-warm-100;
 }
 
 h4,
 h5,
 h6 {
-  @apply text-base font-semibold text-gray-900 dark:text-gray-100;
+  @apply text-base font-semibold text-warm-900 dark:text-warm-100;
 }
 
 /* Shiki code block styling */
 pre {
-  @apply overflow-x-auto rounded-lg p-4;
-  background-color: #24292e;
+  @apply overflow-x-auto rounded-2xl p-5;
+  background-color: #1e1e1e;
   color: #e1e4e8;
 }
 
@@ -72,7 +105,7 @@ pre > code > .line::before {
   width: 1rem;
   margin-right: 1.5rem;
   text-align: right;
-  color: gray;
+  color: #6a737d;
 }
 
 pre > code[data-line-numbers-max-digits='2'] > .line::before {
@@ -83,42 +116,42 @@ pre > code[data-line-numbers-max-digits='3'] > .line::before {
   width: 1.75rem;
 }
 
-/* Prose dark mode overrides */
+/* Prose dark mode overrides with warm tones */
 .prose {
-  @apply text-gray-700 dark:text-gray-300;
+  @apply text-warm-800 dark:text-warm-200;
 }
 
 .prose p {
-  @apply text-gray-700 dark:text-gray-300;
+  @apply text-warm-700 dark:text-warm-300 leading-relaxed;
 }
 
 .prose a {
-  @apply text-blue-600 dark:text-blue-400;
+  @apply text-accent-600 dark:text-accent-400 no-underline border-b border-accent-300 dark:border-accent-600 transition-colors hover:border-accent-500 dark:hover:border-accent-400;
 }
 
 .prose a:hover {
-  @apply text-blue-800 dark:text-blue-300;
+  @apply text-accent-700 dark:text-accent-300;
 }
 
 .prose strong {
-  @apply text-gray-900 dark:text-gray-100;
+  @apply text-warm-900 dark:text-warm-100 font-semibold;
 }
 
 .prose blockquote {
-  @apply border-gray-300 text-gray-600 dark:border-gray-600 dark:text-gray-400;
+  @apply border-warm-300 text-warm-600 dark:border-warm-600 dark:text-warm-400 bg-warm-50 dark:bg-dark-elevated rounded-r-xl pl-4 pr-4 py-2 italic;
 }
 
 .prose ul,
 .prose ol {
-  @apply text-gray-700 dark:text-gray-300;
+  @apply text-warm-700 dark:text-warm-300;
 }
 
 .prose li::marker {
-  @apply text-gray-400 dark:text-gray-500;
+  @apply text-accent-400 dark:text-accent-500;
 }
 
 .prose p code {
-  @apply rounded-md border border-black/10 bg-yellow-50 px-1 font-medium text-black dark:border-zinc-600 dark:bg-zinc-700 dark:text-gray-200;
+  @apply rounded-lg border border-warm-200 bg-warm-100 px-1.5 py-0.5 font-medium text-warm-800 dark:border-warm-700 dark:bg-dark-elevated dark:text-warm-200;
 }
 
 .prose p code:before {
@@ -203,4 +236,84 @@ body:has(#menu-toggle:checked) nav.mobile-menu {
       150% at var(--view-transition-x, 50%) var(--view-transition-y, 50%)
     );
   }
+}
+
+/* Subtle fade-in animation for page elements */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.5s ease-out forwards;
+}
+
+/* Stagger animation delays */
+.stagger-1 {
+  animation-delay: 0.1s;
+}
+.stagger-2 {
+  animation-delay: 0.15s;
+}
+.stagger-3 {
+  animation-delay: 0.2s;
+}
+.stagger-4 {
+  animation-delay: 0.25s;
+}
+.stagger-5 {
+  animation-delay: 0.3s;
+}
+.stagger-6 {
+  animation-delay: 0.35s;
+}
+
+/* Smooth hover lift effect */
+.hover-lift {
+  @apply transition-all duration-300 ease-out;
+}
+
+.hover-lift:hover {
+  @apply -translate-y-1 shadow-lg;
+}
+
+/* Warm gradient backgrounds */
+.bg-warm-gradient {
+  background: linear-gradient(
+    135deg,
+    var(--color-warm-50) 0%,
+    var(--color-warm-100) 100%
+  );
+}
+
+.dark .bg-warm-gradient {
+  background: linear-gradient(
+    135deg,
+    var(--color-dark-bg) 0%,
+    var(--color-dark-surface) 100%
+  );
+}
+
+/* Accent glow for CTA buttons */
+.glow-accent {
+  box-shadow: 0 4px 20px -4px rgba(235, 107, 71, 0.3);
+}
+
+.glow-accent:hover {
+  box-shadow: 0 8px 30px -4px rgba(235, 107, 71, 0.4);
+}
+
+/* Soft card styling */
+.card-soft {
+  @apply bg-white dark:bg-dark-surface rounded-2xl border border-warm-200 dark:border-warm-800/50 transition-all duration-300;
+}
+
+.card-soft:hover {
+  @apply border-warm-300 dark:border-warm-700 shadow-lg shadow-warm-200/50 dark:shadow-warm-900/30;
 }

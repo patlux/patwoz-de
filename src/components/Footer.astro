@@ -2,17 +2,29 @@
 const currentYear = new Date().getFullYear()
 ---
 
-<div
-  role="separator"
-  class="mt-12 mb-6 w-full h-px bg-gray-200 dark:bg-zinc-700"
->
+<div class="mt-16 mb-8 animate-fade-in-up opacity-0 stagger-6">
+  <div
+    role="separator"
+    class="w-full h-px bg-gradient-to-r from-transparent via-warm-300 dark:via-warm-700 to-transparent"
+  >
+  </div>
 </div>
 <footer
-  class="flex flex-1 flex-row justify-between text-sm text-gray-500 dark:text-gray-400 pb-24 xl:pb-0"
+  class="flex flex-col sm:flex-row gap-4 sm:items-center justify-between text-sm text-warm-500 dark:text-warm-500 pb-24 xl:pb-0 animate-fade-in-up opacity-0 stagger-6"
 >
-  <span class="flex-1">&copy; {currentYear} Patrick Wozniak</span>
+  <span>&copy; {currentYear} Patrick Wozniak</span>
   <slot />
-  <div class="flex flex-1 justify-end">
-    <a href="/imprint" class="underline">Imprint</a>
+  <div class="flex items-center gap-4">
+    <a
+      href="/imprint"
+      class="hover:text-warm-700 dark:hover:text-warm-300 transition-colors"
+      >Imprint</a
+    >
+    <span class="text-warm-300 dark:text-warm-700">|</span>
+    <a
+      href="mailto:hi@patwoz.de"
+      class="hover:text-warm-700 dark:hover:text-warm-300 transition-colors"
+      >hi@patwoz.de</a
+    >
   </div>
 </footer>
