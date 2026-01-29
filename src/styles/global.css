@@ -11,86 +11,86 @@
   --font-display: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
   --font-article: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
 
-  /* Monochrome - pure neutrals */
-  --color-warm-50: #fafafa;
-  --color-warm-100: #f5f5f5;
-  --color-warm-200: #e5e5e5;
-  --color-warm-300: #d4d4d4;
-  --color-warm-400: #a3a3a3;
-  --color-warm-500: #737373;
-  --color-warm-600: #525252;
+  /* Pure black & white base */
+  --color-warm-50: #ffffff;
+  --color-warm-100: #fafafa;
+  --color-warm-200: #f0f0f0;
+  --color-warm-300: #e0e0e0;
+  --color-warm-400: #b0b0b0;
+  --color-warm-500: #808080;
+  --color-warm-600: #606060;
   --color-warm-700: #404040;
-  --color-warm-800: #262626;
-  --color-warm-900: #171717;
+  --color-warm-800: #202020;
+  --color-warm-900: #101010;
 
-  /* Accent - single pop of color (emerald) */
-  --color-accent-50: #ecfdf5;
-  --color-accent-100: #d1fae5;
-  --color-accent-200: #a7f3d0;
-  --color-accent-300: #6ee7b7;
-  --color-accent-400: #34d399;
-  --color-accent-500: #10b981;
-  --color-accent-600: #059669;
-  --color-accent-700: #047857;
-  --color-accent-800: #065f46;
-  --color-accent-900: #064e3b;
+  /* Accent - electric indigo */
+  --color-accent-50: #eef2ff;
+  --color-accent-100: #e0e7ff;
+  --color-accent-200: #c7d2fe;
+  --color-accent-300: #a5b4fc;
+  --color-accent-400: #818cf8;
+  --color-accent-500: #6366f1;
+  --color-accent-600: #4f46e5;
+  --color-accent-700: #4338ca;
+  --color-accent-800: #3730a3;
+  --color-accent-900: #312e81;
 
-  /* Dark mode - true blacks */
-  --color-dark-bg: #0a0a0a;
-  --color-dark-surface: #171717;
-  --color-dark-elevated: #262626;
+  /* Dark mode - true black */
+  --color-dark-bg: #000000;
+  --color-dark-surface: #0a0a0a;
+  --color-dark-elevated: #141414;
 }
 
 a.button {
-  @apply inline-block rounded-xl border border-warm-200 bg-white px-6 py-2.5 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-warm-300 hover:-translate-y-0.5 dark:bg-dark-surface dark:border-warm-700 dark:text-warm-100;
+  @apply inline-block rounded-lg border border-warm-200 bg-white px-6 py-2.5 shadow-sm transition-all duration-300 hover:shadow-md hover:border-accent-400 hover:-translate-y-0.5 dark:bg-dark-surface dark:border-warm-800 dark:text-warm-100 dark:hover:border-accent-500;
 }
 
 h1 {
-  @apply text-3xl font-bold text-warm-900 dark:text-warm-100 tracking-tight;
+  @apply text-3xl font-bold text-warm-900 dark:text-white tracking-tight;
 }
 
 h2 {
-  @apply text-2xl font-bold text-warm-900 dark:text-warm-100;
+  @apply text-2xl font-bold text-warm-900 dark:text-white;
 }
 
 h3 {
-  @apply text-xl font-semibold text-warm-900 dark:text-warm-100;
+  @apply text-xl font-semibold text-warm-900 dark:text-white;
 }
 
 h4,
 h5,
 h6 {
-  @apply text-base font-semibold text-warm-900 dark:text-warm-100;
+  @apply text-base font-semibold text-warm-900 dark:text-white;
 }
 
 /* Shiki code block styling */
 pre {
-  @apply overflow-x-auto rounded-xl p-5;
-  background-color: #171717;
-  color: #e5e5e5;
+  @apply overflow-x-auto rounded-lg p-5;
+  background-color: #0a0a0a;
+  color: #e0e0e0;
 }
 
 /* Shiki token colors */
 .c-fg {
-  color: #e5e5e5;
+  color: #e0e0e0;
 }
 .c-kw {
-  color: #f472b6;
+  color: #c084fc;
 }
 .c-cn {
-  color: #60a5fa;
+  color: #818cf8;
 }
 .c-pm {
   color: #fbbf24;
 }
 .c-fn {
-  color: #a78bfa;
+  color: #a5b4fc;
 }
 .c-st {
-  color: #34d399;
+  color: #6ee7b7;
 }
 .c-cm {
-  color: #737373;
+  color: #606060;
 }
 
 pre > code {
@@ -104,7 +104,7 @@ pre > code > .line::before {
   width: 1rem;
   margin-right: 1.5rem;
   text-align: right;
-  color: #525252;
+  color: #404040;
 }
 
 pre > code[data-line-numbers-max-digits='2'] > .line::before {
@@ -115,7 +115,7 @@ pre > code[data-line-numbers-max-digits='3'] > .line::before {
   width: 1.75rem;
 }
 
-/* Prose styling - clean monochrome */
+/* Prose styling - clean with accent pops */
 .prose {
   @apply text-warm-700 dark:text-warm-300;
 }
@@ -125,19 +125,19 @@ pre > code[data-line-numbers-max-digits='3'] > .line::before {
 }
 
 .prose a {
-  @apply text-warm-900 dark:text-warm-100 no-underline border-b border-warm-400 dark:border-warm-500 transition-colors hover:border-accent-500 dark:hover:border-accent-400;
+  @apply text-accent-600 dark:text-accent-400 no-underline border-b border-accent-300 dark:border-accent-700 transition-colors hover:border-accent-500 dark:hover:border-accent-400;
 }
 
 .prose a:hover {
-  @apply text-accent-600 dark:text-accent-400;
+  @apply text-accent-500 dark:text-accent-300;
 }
 
 .prose strong {
-  @apply text-warm-900 dark:text-warm-100 font-semibold;
+  @apply text-warm-900 dark:text-white font-semibold;
 }
 
 .prose blockquote {
-  @apply border-warm-300 text-warm-600 dark:border-warm-600 dark:text-warm-400 bg-warm-50 dark:bg-dark-elevated rounded-r-xl pl-4 pr-4 py-2 italic;
+  @apply border-accent-500 text-warm-600 dark:border-accent-400 dark:text-warm-400 bg-warm-100 dark:bg-dark-elevated rounded-r-lg pl-4 pr-4 py-2 italic;
 }
 
 .prose ul,
@@ -146,11 +146,11 @@ pre > code[data-line-numbers-max-digits='3'] > .line::before {
 }
 
 .prose li::marker {
-  @apply text-warm-400 dark:text-warm-500;
+  @apply text-accent-500 dark:text-accent-400;
 }
 
 .prose p code {
-  @apply rounded-md border border-warm-200 bg-warm-100 px-1.5 py-0.5 font-medium text-warm-800 dark:border-warm-700 dark:bg-dark-elevated dark:text-warm-200;
+  @apply rounded-md border border-warm-200 bg-warm-100 px-1.5 py-0.5 font-medium text-warm-800 dark:border-warm-800 dark:bg-dark-elevated dark:text-warm-200;
 }
 
 .prose p code:before {
@@ -301,18 +301,18 @@ body:has(#menu-toggle:checked) nav.mobile-menu {
 
 /* Accent glow for CTA buttons */
 .glow-accent {
-  box-shadow: 0 4px 20px -4px rgba(16, 185, 129, 0.3);
+  box-shadow: 0 4px 20px -4px rgba(99, 102, 241, 0.4);
 }
 
 .glow-accent:hover {
-  box-shadow: 0 8px 30px -4px rgba(16, 185, 129, 0.45);
+  box-shadow: 0 8px 30px -4px rgba(99, 102, 241, 0.55);
 }
 
 /* Soft card styling */
 .card-soft {
-  @apply bg-white dark:bg-dark-surface rounded-xl border border-warm-200 dark:border-warm-800 transition-all duration-300;
+  @apply bg-white dark:bg-dark-surface rounded-lg border border-warm-200 dark:border-warm-800 transition-all duration-300;
 }
 
 .card-soft:hover {
-  @apply border-warm-300 dark:border-warm-700 shadow-lg shadow-warm-200/50 dark:shadow-black/30;
+  @apply border-accent-300 dark:border-accent-700 shadow-lg shadow-warm-200/50 dark:shadow-accent-900/20;
 }
