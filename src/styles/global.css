@@ -63,56 +63,90 @@ h6 {
   @apply text-base font-semibold text-warm-900 dark:text-white;
 }
 
-/* Shiki code block styling */
-pre {
-  @apply overflow-x-auto rounded-lg p-5;
-  background-color: #0a0a0a;
-  color: #e0e0e0;
+/* Expressive Code overrides */
+.expressive-code {
+  margin: 1.5rem 0;
 }
 
-/* Shiki token colors */
+.expressive-code .frame {
+  border-color: #6366f1 !important;
+}
+
+@media (min-width: 640px) {
+  pre {
+    @apply rounded-md;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+pre code,
+pre code .line,
+pre code span {
+  background: transparent !important;
+  border: none !important;
+}
+
+pre code {
+  font-family: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Monaco, Consolas,
+    monospace;
+  font-size: 0.8125rem;
+  line-height: 1.75;
+  letter-spacing: -0.01em;
+}
+
+/* Syntax highlighting - restrained, monochrome-forward */
 .c-fg {
-  color: #e0e0e0;
+  color: #d4d4d4;
 }
 .c-kw {
-  color: #c084fc;
-}
-.c-cn {
   color: #818cf8;
 }
-.c-pm {
-  color: #fbbf24;
-}
-.c-fn {
+.c-cn {
   color: #a5b4fc;
 }
+.c-pm {
+  color: #e5e5e5;
+}
+.c-fn {
+  color: #c7d2fe;
+}
 .c-st {
-  color: #6ee7b7;
+  color: #a3a3a3;
 }
 .c-cm {
-  color: #606060;
+  color: #525252;
+  font-style: italic;
 }
 
+/* Line numbers - subtle, integrated */
 pre > code {
   counter-reset: line;
+  display: block;
+}
+
+pre > code > .line {
+  display: block;
 }
 
 pre > code > .line::before {
   counter-increment: line;
   content: counter(line);
   display: inline-block;
-  width: 1rem;
-  margin-right: 1.5rem;
+  width: 1.5rem;
+  margin-right: 1rem;
   text-align: right;
   color: #404040;
+  font-size: 0.75rem;
+  user-select: none;
 }
 
 pre > code[data-line-numbers-max-digits='2'] > .line::before {
-  width: 1.25rem;
+  width: 1.75rem;
 }
 
 pre > code[data-line-numbers-max-digits='3'] > .line::before {
-  width: 1.75rem;
+  width: 2rem;
 }
 
 /* Prose styling - clean with accent pops */

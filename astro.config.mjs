@@ -3,36 +3,8 @@ import cloudflare from '@astrojs/cloudflare'
 import tailwindcss from '@tailwindcss/vite'
 import mdx from '@astrojs/mdx'
 import sitemap from '@astrojs/sitemap'
-
-// Map github-dark hex colors to CSS class names
-const colorToClass = {
-  '#E1E4E8': 'c-fg',
-  '#F97583': 'c-kw', // keyword
-  '#79B8FF': 'c-cn', // constant
-  '#FFAB70': 'c-pm', // parameter
-  '#B392F0': 'c-fn', // function
-  '#9ECBFF': 'c-st', // string
-  '#6A737D': 'c-cm', // comment
-}
-
-// Custom transformer to convert inline color styles to classes
-const transformerColorToClass = () => ({
-  name: 'color-to-class',
-  span(node) {
-    const style = node.properties?.style
-    if (typeof style === 'string') {
-      const match = style.match(/color:(#[A-Fa-f0-9]+)/)
-      if (match) {
-        const color = match[1].toUpperCase()
-        const className = colorToClass[color]
-        if (className) {
-          node.properties.class = className
-          delete node.properties.style
-        }
-      }
-    }
-  },
-})
+import expressiveCode from 'astro-expressive-code'
+import { pluginLineNumbers } from '@expressive-code/plugin-line-numbers'
 
 export default defineConfig({
   site: 'https://patwoz.dev',
@@ -49,12 +21,48 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  integrations: [mdx(), sitemap()],
-  markdown: {
-    shikiConfig: {
-      theme: 'github-dark',
-      wrap: true,
-      transformers: [transformerColorToClass()],
-    },
-  },
+  integrations: [
+    expressiveCode({
+      plugins: [pluginLineNumbers()],
+      themes: ['github-dark'],
+      defaultProps: {
+        showLineNumbers: true,
+      },
+      styleOverrides: {
+        // Border with indigo accent
+        borderColor: '#6366f1',
+        borderWidth: '1px',
+        borderRadius: '0.5rem',
+        // Code styling
+        codeFontFamily:
+          "ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Monaco, Consolas, monospace",
+        codeFontSize: '0.875rem',
+        codeLineHeight: '1.7',
+        codePaddingBlock: '1rem',
+        codePaddingInline: '1.25rem',
+        // Background
+        codeBackground: '#0a0a0a',
+        // Frames
+        frames: {
+          frameBoxShadowCssValue: 'none',
+          editorActiveTabBackground: '#0a0a0a',
+          editorActiveTabBorderColor: '#6366f1',
+          editorTabBarBackground: '#111',
+          editorTabBarBorderBottomColor: '#222',
+          terminalBackground: '#0a0a0a',
+          terminalTitlebarBackground: '#111',
+          terminalTitlebarBorderBottomColor: '#222',
+        },
+        // Line numbers
+        lineNumbers: {
+          foreground: '#404040',
+        },
+      },
+      frames: {
+        showCopyToClipboardButton: true,
+      },
+    }),
+    mdx(),
+    sitemap(),
+  ],
 })
