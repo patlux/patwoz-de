@@ -29,7 +29,10 @@ const postsByYear = sortedPosts.reduce(
 const years = Object.keys(postsByYear).sort((a, b) => Number(b) - Number(a))
 ---
 
-<Layout title="Blog | Patrick Wozniak">
+<Layout
+  title="Blog | Patrick Wozniak"
+  description="Thoughts on software development, DevOps, and the tools I use."
+>
   <BaseLayout>
     <!-- Header -->
     <section class="animate-fade-in-up opacity-0">

@@ -14,6 +14,22 @@ interface Props {
 }
 
 const { frontmatter } = Astro.props
+const canonicalURL = new URL(Astro.url.pathname, Astro.site)
+const blogSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: frontmatter.title,
+  description: frontmatter.description,
+  datePublished: frontmatter.published.toISOString(),
+  dateModified: frontmatter.published.toISOString(),
+  mainEntityOfPage: canonicalURL.toString(),
+  author: {
+    '@type': 'Person',
+    name: 'Patrick Wozniak',
+    url: Astro.site?.toString() || 'https://patwoz.dev',
+  },
+  image: frontmatter.image || undefined,
+}
 
 const dateFormatter = new Intl.DateTimeFormat('en-GB', {
   dateStyle: 'long',
@@ -27,6 +43,8 @@ const dateFormatter = new Intl.DateTimeFormat('en-GB', {
   ogType="article"
 >
   <BaseLayout>
+    <script type="application/ld+json" set:html={JSON.stringify(blogSchema)} />
+
     <!-- Back link -->
     <a
       href="/blog"
