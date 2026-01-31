@@ -94,10 +94,269 @@ const currentPath = Astro.url.pathname
       <ul
         class="flex flex-1 flex-col gap-y-6 xl:gap-y-7 p-6 pb-24 xl:p-0 xl:pb-0"
       >
-        <li class="sm:h-auto sm:flex-1 xl:flex-none">
-          <ul
-            class="space-y-1 flex flex-col sm:flex-row sm:pb-4 xl:pb-0 xl:flex-col sm:justify-center w-full sm:items-center xl:justify-start xl:items-stretch"
+        <!-- Social Section -->
+        <li class="order-1 xl:order-2">
+          <div
+            class="text-xs font-semibold leading-6 text-warm-500 dark:text-warm-500 uppercase tracking-wider"
           >
+            Social
+          </div>
+          <ul class="mt-3 flex flex-wrap gap-2 xl:flex-col xl:gap-0.5">
+            <li>
+              <a
+                href="https://github.com/patlux"
+                class="inline-flex gap-x-2 items-center rounded-xl px-4 py-2 text-sm font-medium text-warm-600 dark:text-warm-400 hover:bg-warm-200 dark:hover:bg-warm-800/30 hover:text-warm-900 dark:hover:text-warm-100 transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <GithubIcon class="w-5" />
+                Github
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-4 opacity-30"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+                  ></path>
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://stackoverflow.com/users/6300994/patrick-wozniak?tab=profile"
+                class="inline-flex gap-x-2 items-center rounded-xl px-4 py-2 text-sm font-medium text-warm-600 dark:text-warm-400 hover:bg-warm-200 dark:hover:bg-warm-800/30 hover:text-warm-900 dark:hover:text-warm-100 transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <StackOverflowIcon class="w-5" />
+                Stack Overflow
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-4 opacity-30"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+                  ></path>
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://x.com/de_patwoz"
+                class="inline-flex gap-x-2 items-center rounded-xl px-4 py-2 text-sm font-medium text-warm-600 dark:text-warm-400 hover:bg-warm-200 dark:hover:bg-warm-800/30 hover:text-warm-900 dark:hover:text-warm-100 transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <XIcon class="w-5" />
+                X
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-4 opacity-30"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+                  ></path>
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://www.thingiverse.com/patwoz"
+                class="inline-flex gap-x-2 items-center rounded-xl px-4 py-2 text-sm font-medium text-warm-600 dark:text-warm-400 hover:bg-warm-200 dark:hover:bg-warm-800/30 hover:text-warm-900 dark:hover:text-warm-100 transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <div
+                  class="w-5 h-5 border border-warm-500 dark:border-warm-500 rounded-md text-xs flex justify-center items-center font-bold"
+                >
+                  3D
+                </div>
+                Thingiverse
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-4 opacity-30"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+                  ></path>
+                </svg>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <!-- Business Section -->
+        <li class="order-2 xl:order-3">
+          <div
+            class="text-xs font-semibold leading-6 text-warm-500 dark:text-warm-500 uppercase tracking-wider"
+          >
+            Business
+          </div>
+          <ul class="mt-3 flex flex-wrap gap-2 xl:flex-col xl:gap-1">
+            <li>
+              <a
+                href="mailto:hi@patwoz.de"
+                class={classNames(
+                  'flex gap-x-2 items-center justify-center',
+                  'bg-gradient-to-r from-accent-500 to-accent-600',
+                  'hover:from-accent-600 hover:to-accent-700',
+                  'focus:ring-4 focus:outline-none focus:ring-accent-300 dark:focus:ring-accent-800',
+                  'glow-accent',
+                  'text-white text-sm font-semibold text-center',
+                  'rounded-xl',
+                  'px-4 py-3',
+                  'w-auto',
+                  'transition-all duration-300',
+                  'hover:-translate-y-0.5',
+                )}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  class="w-5 h-5"
+                >
+                  <path
+                    d="M3 4a2 2 0 00-2 2v1.161l8.441 4.221a1.25 1.25 0 001.118 0L19 7.162V6a2 2 0 00-2-2H3z"
+                  ></path>
+                  <path
+                    d="M19 8.839l-7.77 3.885a2.75 2.75 0 01-2.46 0L1 8.839V14a2 2 0 002 2h14a2 2 0 002-2V8.839z"
+                  ></path>
+                </svg>
+                Hire me
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://de.linkedin.com/in/patrick-wozniak-696453123"
+                class="inline-flex gap-x-2 items-center rounded-xl px-4 py-2 text-sm font-medium text-warm-600 dark:text-warm-400 hover:bg-warm-200 dark:hover:bg-warm-800/30 hover:text-warm-900 dark:hover:text-warm-100 transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <LinkedInIcon class="w-5" />
+                LinkedIn
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-4 opacity-30"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+                  ></path>
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://www.xing.com/profile/Patrick_Wozniak5"
+                class="inline-flex gap-x-2 items-center rounded-xl px-4 py-2 text-sm font-medium text-warm-600 dark:text-warm-400 hover:bg-warm-200 dark:hover:bg-warm-800/30 hover:text-warm-900 dark:hover:text-warm-100 transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <XingIcon class="w-5" />
+                Xing
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-4 opacity-30"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+                  ></path>
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://www.freelance.de/Freiberufler/215868-Senior-TypeScript-Developer-ReactJS-React-Native/highlight=react"
+                class="inline-flex gap-x-2 items-center rounded-xl px-4 py-2 text-sm font-medium text-warm-600 dark:text-warm-400 hover:bg-warm-200 dark:hover:bg-warm-800/30 hover:text-warm-900 dark:hover:text-warm-100 transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span class="w-5 text-center">F</span>
+                Freelance.de
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-4 opacity-30"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+                  ></path>
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://www.freelancermap.de/freelancer-verzeichnis/profile/entwicklung/381396-profil-patrick-wozniak-senior-typescript-developer-reactjs-react-native-aus-schwaig.html"
+                class="inline-flex gap-x-2 items-center rounded-xl px-4 py-2 text-sm font-medium text-warm-600 dark:text-warm-400 hover:bg-warm-200 dark:hover:bg-warm-800/30 hover:text-warm-900 dark:hover:text-warm-100 transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span class="w-5 text-center">F</span>
+                Freelancermap.de
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-4 opacity-30"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+                  ></path>
+                </svg>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li
+          class="order-3 xl:order-1 mt-auto pt-6 border-t border-warm-200 dark:border-warm-700/50 xl:mt-0 xl:pt-0 xl:border-t-0"
+        >
+          <ul class="space-y-1 flex flex-col w-full">
             <li>
               <a
                 href="/"
@@ -282,273 +541,6 @@ const currentPath = Astro.url.pathname
                   ></path>
                 </svg>
                 What I Use
-              </a>
-            </li>
-          </ul>
-        </li>
-
-        <!-- Social Section -->
-        <li>
-          <div
-            class="text-xs font-semibold leading-6 text-warm-500 dark:text-warm-500 uppercase tracking-wider"
-          >
-            Social
-          </div>
-          <ul class="mt-2 space-y-0.5">
-            <li>
-              <a
-                href="https://github.com/patlux"
-                class="flex gap-x-3 items-center rounded-xl px-4 py-2 text-sm font-medium text-warm-600 dark:text-warm-400 hover:bg-warm-200 dark:hover:bg-warm-800/30 hover:text-warm-900 dark:hover:text-warm-100 transition-colors"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <GithubIcon class="w-5" />
-                Github
-                <span class="flex-1"></span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  class="w-4 opacity-30"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
-                  ></path>
-                </svg>
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://stackoverflow.com/users/6300994/patrick-wozniak?tab=profile"
-                class="flex gap-x-3 items-center rounded-xl px-4 py-2 text-sm font-medium text-warm-600 dark:text-warm-400 hover:bg-warm-200 dark:hover:bg-warm-800/30 hover:text-warm-900 dark:hover:text-warm-100 transition-colors"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <StackOverflowIcon class="w-5" />
-                Stack Overflow
-                <span class="flex-1"></span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  class="w-4 opacity-30"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
-                  ></path>
-                </svg>
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://x.com/de_patwoz"
-                class="flex gap-x-3 items-center rounded-xl px-4 py-2 text-sm font-medium text-warm-600 dark:text-warm-400 hover:bg-warm-200 dark:hover:bg-warm-800/30 hover:text-warm-900 dark:hover:text-warm-100 transition-colors"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <XIcon class="w-5" />
-                X
-                <span class="flex-1"></span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  class="w-4 opacity-30"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
-                  ></path>
-                </svg>
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://www.thingiverse.com/patwoz"
-                class="flex gap-x-3 items-center rounded-xl px-4 py-2 text-sm font-medium text-warm-600 dark:text-warm-400 hover:bg-warm-200 dark:hover:bg-warm-800/30 hover:text-warm-900 dark:hover:text-warm-100 transition-colors"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <div
-                  class="w-5 h-5 border border-warm-500 dark:border-warm-500 rounded-md text-xs flex justify-center items-center font-bold"
-                >
-                  3D
-                </div>
-                Thingiverse
-                <span class="flex-1"></span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  class="w-4 opacity-30"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
-                  ></path>
-                </svg>
-              </a>
-            </li>
-          </ul>
-        </li>
-
-        <!-- Business Section -->
-        <li>
-          <div
-            class="text-xs font-semibold leading-6 text-warm-500 dark:text-warm-500 uppercase tracking-wider"
-          >
-            Business
-          </div>
-          <ul class="mt-2 space-y-1">
-            <li>
-              <a
-                href="mailto:hi@patwoz.de"
-                class={classNames(
-                  'flex gap-x-2 items-center justify-center',
-                  'bg-gradient-to-r from-accent-500 to-accent-600',
-                  'hover:from-accent-600 hover:to-accent-700',
-                  'focus:ring-4 focus:outline-none focus:ring-accent-300 dark:focus:ring-accent-800',
-                  'glow-accent',
-                  'text-white text-sm font-semibold text-center',
-                  'rounded-xl',
-                  'px-4 py-3',
-                  'mb-4',
-                  'transition-all duration-300',
-                  'hover:-translate-y-0.5',
-                )}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  class="w-5 h-5"
-                >
-                  <path
-                    d="M3 4a2 2 0 00-2 2v1.161l8.441 4.221a1.25 1.25 0 001.118 0L19 7.162V6a2 2 0 00-2-2H3z"
-                  ></path>
-                  <path
-                    d="M19 8.839l-7.77 3.885a2.75 2.75 0 01-2.46 0L1 8.839V14a2 2 0 002 2h14a2 2 0 002-2V8.839z"
-                  ></path>
-                </svg>
-                Hire me
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://de.linkedin.com/in/patrick-wozniak-696453123"
-                class="flex gap-x-3 items-center rounded-xl px-4 py-2 text-sm font-medium text-warm-600 dark:text-warm-400 hover:bg-warm-200 dark:hover:bg-warm-800/30 hover:text-warm-900 dark:hover:text-warm-100 transition-colors"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <LinkedInIcon class="w-5" />
-                LinkedIn
-                <span class="flex-1"></span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  class="w-4 opacity-30"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
-                  ></path>
-                </svg>
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://www.xing.com/profile/Patrick_Wozniak5"
-                class="flex gap-x-3 items-center rounded-xl px-4 py-2 text-sm font-medium text-warm-600 dark:text-warm-400 hover:bg-warm-200 dark:hover:bg-warm-800/30 hover:text-warm-900 dark:hover:text-warm-100 transition-colors"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <XingIcon class="w-5" />
-                Xing
-                <span class="flex-1"></span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  class="w-4 opacity-30"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
-                  ></path>
-                </svg>
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://www.freelance.de/Freiberufler/215868-Senior-TypeScript-Developer-ReactJS-React-Native/highlight=react"
-                class="flex gap-x-3 items-center rounded-xl px-4 py-2 text-sm font-medium text-warm-600 dark:text-warm-400 hover:bg-warm-200 dark:hover:bg-warm-800/30 hover:text-warm-900 dark:hover:text-warm-100 transition-colors"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span class="w-5 text-center">F</span>
-                Freelance.de
-                <span class="flex-1"></span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  class="w-4 opacity-30"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
-                  ></path>
-                </svg>
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://www.freelancermap.de/freelancer-verzeichnis/profile/entwicklung/381396-profil-patrick-wozniak-senior-typescript-developer-reactjs-react-native-aus-schwaig.html"
-                class="flex gap-x-3 items-center rounded-xl px-4 py-2 text-sm font-medium text-warm-600 dark:text-warm-400 hover:bg-warm-200 dark:hover:bg-warm-800/30 hover:text-warm-900 dark:hover:text-warm-100 transition-colors"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span class="w-5 text-center">F</span>
-                Freelancermap.de
-                <span class="flex-1"></span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  class="w-4 opacity-30"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
-                  ></path>
-                </svg>
               </a>
             </li>
           </ul>
