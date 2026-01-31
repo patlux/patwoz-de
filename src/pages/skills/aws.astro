@@ -1,0 +1,38 @@
+---
+import Layout from '~/layouts/Layout.astro'
+import BaseLayout from '~/components/BaseLayout.astro'
+import Footer from '~/components/Footer.astro'
+import SkillPage from '~/components/SkillPage.astro'
+
+const intro =
+  'I build and migrate systems on AWS, from serverless backends to Kubernetes-based platforms.'
+
+const delivered = [
+  'Implemented a serverless backend for <a href="/work/porsche">Porsche Digital</a> using <a href="/skills/aws" class="text-accent-600 dark:text-accent-400 hover:text-accent-700 dark:hover:text-accent-300">AWS</a> CDK, Lambda, DynamoDB, and API Gateway.',
+  'Led the migration of multiple services to <a href="/skills/aws" class="text-accent-600 dark:text-accent-400 hover:text-accent-700 dark:hover:text-accent-300">AWS</a> for <a href="/work/kicker">Kicker</a>, including an EKS-based <a href="/skills/kubernetes" class="text-accent-600 dark:text-accent-400 hover:text-accent-700 dark:hover:text-accent-300">Kubernetes</a> setup and infrastructure as code.',
+]
+
+const why =
+  'I can design AWS architectures that scale while keeping costs and operational complexity in check. That includes understanding serverless trade-offs, infrastructure automation, and production reliability.'
+
+const projects = [
+  { label: 'Porsche Digital', href: '/work/porsche' },
+  { label: 'Kicker', href: '/work/kicker' },
+]
+---
+
+<Layout
+  title="AWS | Patrick Wozniak"
+  description="AWS experience across serverless backends, migrations, and platform infrastructure."
+>
+  <BaseLayout>
+    <SkillPage
+      title="AWS"
+      intro={intro}
+      delivered={delivered}
+      why={why}
+      projects={projects}
+    />
+    <Footer />
+  </BaseLayout>
+</Layout>

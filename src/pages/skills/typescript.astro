@@ -1,0 +1,43 @@
+---
+import Layout from '~/layouts/Layout.astro'
+import BaseLayout from '~/components/BaseLayout.astro'
+import Footer from '~/components/Footer.astro'
+import SkillPage from '~/components/SkillPage.astro'
+
+const intro =
+  'TypeScript is my default language for production work. I use it to keep large codebases predictable across React Native apps, React web apps, and shared libraries.'
+
+const delivered = [
+  'Improved type safety and code quality across a React Native + React monorepo at <a href="/work/porsche" class="text-accent-600 dark:text-accent-400 hover:text-accent-700 dark:hover:text-accent-300">Porsche Digital</a>, including fixing TypeScript errors and tightening lint rules.',
+  'Stabilized the <a href="/work/kulturpass" class="text-accent-600 dark:text-accent-400 hover:text-accent-700 dark:hover:text-accent-300">KulturPass</a> codebase by resolving TypeScript issues and reinforcing the Redux architecture with strict typing.',
+  'Built and maintained a large TypeScript-based mobile app for <a href="/work/kicker" class="text-accent-600 dark:text-accent-400 hover:text-accent-700 dark:hover:text-accent-300">Kicker</a> and a long-running device configuration app for <a href="/work/abl" class="text-accent-600 dark:text-accent-400 hover:text-accent-700 dark:hover:text-accent-300">ABL</a>.',
+  'Contributed to a shared design system with TypeScript components across React web and React Native in <a href="/work/ibm/barmer-puls" class="text-accent-600 dark:text-accent-400 hover:text-accent-700 dark:hover:text-accent-300">Barmer Puls</a>.',
+]
+
+const why =
+  'I rely on TypeScript to model complex domains, enforce API contracts, and refactor safely at scale. It lets me move fast without breaking core flows, especially on long-lived products with multiple platforms.'
+
+const projects = [
+  { label: 'Porsche Digital', href: '/work/porsche' },
+  { label: 'SAP / KulturPass', href: '/work/kulturpass' },
+  { label: 'Kicker', href: '/work/kicker' },
+  { label: 'ABL', href: '/work/abl' },
+  { label: 'IBM iX / Barmer Puls', href: '/work/ibm/barmer-puls' },
+]
+---
+
+<Layout
+  title="TypeScript | Patrick Wozniak"
+  description="TypeScript expertise across React Native, React, and large-scale product work."
+>
+  <BaseLayout>
+    <SkillPage
+      title="TypeScript"
+      intro={intro}
+      delivered={delivered}
+      why={why}
+      projects={projects}
+    />
+    <Footer />
+  </BaseLayout>
+</Layout>

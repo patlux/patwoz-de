@@ -1,0 +1,36 @@
+---
+import Layout from '~/layouts/Layout.astro'
+import BaseLayout from '~/components/BaseLayout.astro'
+import Footer from '~/components/Footer.astro'
+import SkillPage from '~/components/SkillPage.astro'
+
+const intro =
+  'I use Kubernetes to run multi-service platforms with reliable deployments and scalable infrastructure.'
+
+const delivered = [
+  'Migrated the <a href="/work/kicker">Kicker</a> platform to <a href="/skills/aws" class="text-accent-600 dark:text-accent-400 hover:text-accent-700 dark:hover:text-accent-300">AWS</a> EKS and set up Kubernetes infrastructure using Helm charts.',
+  'Built local development tooling with Tilt and Skaffold to speed up iteration across services.',
+  'Managed deployments and environment configuration for multiple stages using infrastructure as code.',
+]
+
+const why =
+  'I understand how to operate Kubernetes beyond basic deployments. That includes environment management, developer workflows, and keeping systems stable as traffic scales.'
+
+const projects = [{ label: 'Kicker', href: '/work/kicker' }]
+---
+
+<Layout
+  title="Kubernetes | Patrick Wozniak"
+  description="Kubernetes experience for scalable platforms, infrastructure as code, and developer tooling."
+>
+  <BaseLayout>
+    <SkillPage
+      title="Kubernetes"
+      intro={intro}
+      delivered={delivered}
+      why={why}
+      projects={projects}
+    />
+    <Footer />
+  </BaseLayout>
+</Layout>

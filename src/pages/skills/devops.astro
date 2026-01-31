@@ -1,0 +1,42 @@
+---
+import Layout from '~/layouts/Layout.astro'
+import BaseLayout from '~/components/BaseLayout.astro'
+import Footer from '~/components/Footer.astro'
+import SkillPage from '~/components/SkillPage.astro'
+
+const intro =
+  'I build the systems that keep products stable: automated pipelines, CI/CD, and predictable release processes.'
+
+const delivered = [
+  'Set up EAS Build and GitHub Actions workflows for validation, testing, and deployment at <a href="/work/stroeer">Stroeer</a>.',
+  'Built <a href="/skills/ci-cd" class="text-accent-600 dark:text-accent-400 hover:text-accent-700 dark:hover:text-accent-300">CI/CD</a> pipelines for <a href="/skills/typescript" class="text-accent-600 dark:text-accent-400 hover:text-accent-700 dark:hover:text-accent-300">TypeScript</a> checks, ESLint, and Jest tests on <a href="/work/kulturpass">KulturPass</a>.',
+  'Documented and supported Bitrise workflows for the <a href="/work/porsche">Porsche Digital</a> monorepo.',
+  'Automated infrastructure and deployments for <a href="/work/kicker">Kicker</a> using <a href="/skills/kubernetes" class="text-accent-600 dark:text-accent-400 hover:text-accent-700 dark:hover:text-accent-300">Kubernetes</a> and infrastructure as code.',
+]
+
+const why =
+  'I focus on repeatability and reliability. That means building pipelines that catch issues early, reduce manual steps, and keep releases consistent across environments.'
+
+const projects = [
+  { label: 'Stroeer / t-online', href: '/work/stroeer' },
+  { label: 'SAP / KulturPass', href: '/work/kulturpass' },
+  { label: 'Porsche Digital', href: '/work/porsche' },
+  { label: 'Kicker', href: '/work/kicker' },
+]
+---
+
+<Layout
+  title="DevOps | Patrick Wozniak"
+  description="DevOps experience across CI/CD, infrastructure automation, and release workflows."
+>
+  <BaseLayout>
+    <SkillPage
+      title="DevOps"
+      intro={intro}
+      delivered={delivered}
+      why={why}
+      projects={projects}
+    />
+    <Footer />
+  </BaseLayout>
+</Layout>

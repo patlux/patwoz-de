@@ -1,0 +1,40 @@
+---
+import Layout from '~/layouts/Layout.astro'
+import BaseLayout from '~/components/BaseLayout.astro'
+import Footer from '~/components/Footer.astro'
+import SkillPage from '~/components/SkillPage.astro'
+
+const intro =
+  'I set up CI/CD pipelines that keep releases consistent and reduce manual overhead for teams shipping web and mobile apps.'
+
+const delivered = [
+  'Built CI pipelines for <a href="/skills/typescript" class="text-accent-600 dark:text-accent-400 hover:text-accent-700 dark:hover:text-accent-300">TypeScript</a> checks, ESLint, and Jest tests on <a href="/work/kulturpass">KulturPass</a>.',
+  'Automated mobile builds and submissions using EAS Build on <a href="/work/stroeer">Stroeer</a>.',
+  'Supported Bitrise workflows and documentation for the <a href="/work/porsche">Porsche Digital</a> monorepo.',
+]
+
+const why =
+  'I focus on fast feedback loops and reproducible releases. That means checks that catch issues early and pipelines that scale with the product.'
+
+const projects = [
+  { label: 'SAP / KulturPass', href: '/work/kulturpass' },
+  { label: 'Stroeer / t-online', href: '/work/stroeer' },
+  { label: 'Porsche Digital', href: '/work/porsche' },
+]
+---
+
+<Layout
+  title="CI/CD | Patrick Wozniak"
+  description="CI/CD experience for automated testing, builds, and release pipelines."
+>
+  <BaseLayout>
+    <SkillPage
+      title="CI/CD"
+      intro={intro}
+      delivered={delivered}
+      why={why}
+      projects={projects}
+    />
+    <Footer />
+  </BaseLayout>
+</Layout>

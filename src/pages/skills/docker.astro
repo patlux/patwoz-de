@@ -1,0 +1,38 @@
+---
+import Layout from '~/layouts/Layout.astro'
+import BaseLayout from '~/components/BaseLayout.astro'
+import Footer from '~/components/Footer.astro'
+import SkillPage from '~/components/SkillPage.astro'
+
+const intro =
+  'I use Docker to create consistent development environments and to containerize services for production.'
+
+const delivered = [
+  'Added Docker configuration for the documentation site and Storybook in the <a href="/work/ibm/barmer-puls">Barmer Puls</a> design system.',
+  'Worked with containerized services and infrastructure in the <a href="/work/kicker">Kicker</a> platform, alongside <a href="/skills/kubernetes" class="text-accent-600 dark:text-accent-400 hover:text-accent-700 dark:hover:text-accent-300">Kubernetes</a> tooling.',
+]
+
+const why =
+  'I rely on Docker to eliminate environment drift and to package services in a way that scales from local development to production deployments.'
+
+const projects = [
+  { label: 'IBM iX / Barmer Puls', href: '/work/ibm/barmer-puls' },
+  { label: 'Kicker', href: '/work/kicker' },
+]
+---
+
+<Layout
+  title="Docker | Patrick Wozniak"
+  description="Docker experience for reproducible development, tooling, and production workflows."
+>
+  <BaseLayout>
+    <SkillPage
+      title="Docker"
+      intro={intro}
+      delivered={delivered}
+      why={why}
+      projects={projects}
+    />
+    <Footer />
+  </BaseLayout>
+</Layout>

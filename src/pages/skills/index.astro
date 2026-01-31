@@ -1,0 +1,184 @@
+---
+import Layout from '~/layouts/Layout.astro'
+import BaseLayout from '~/components/BaseLayout.astro'
+import Footer from '~/components/Footer.astro'
+import ClientMarquee from '~/components/ClientMarquee.astro'
+---
+
+<Layout
+  title="Skills"
+  description="Skill overview with short summaries and links to detailed project highlights."
+>
+  <BaseLayout>
+    <section class="animate-fade-in-up opacity-0">
+      <h1
+        class="text-3xl sm:text-4xl font-display font-bold text-warm-900 dark:text-warm-100"
+      >
+        Skills
+      </h1>
+      <p class="text-lg text-warm-600 dark:text-warm-400 mt-3 leading-relaxed">
+        A quick overview of the areas I work in most. Each skill links to a
+        short summary of past projects and contributions.
+      </p>
+    </section>
+
+    <div class="grid sm:grid-cols-2 gap-4 mt-10">
+      <a
+        href="/skills/typescript"
+        class="card-soft p-5 group hover-lift animate-fade-in-up opacity-0 stagger-1"
+      >
+        <h3
+          class="text-lg font-semibold text-warm-900 dark:text-warm-100 group-hover:text-accent-600 dark:group-hover:text-accent-400 transition-colors"
+        >
+          TypeScript
+        </h3>
+        <p class="text-warm-600 dark:text-warm-400 mt-2">
+          Type-safe frontend and platform development across web and mobile.
+        </p>
+      </a>
+
+      <a
+        href="/skills/react"
+        class="card-soft p-5 group hover-lift animate-fade-in-up opacity-0 stagger-2"
+      >
+        <h3
+          class="text-lg font-semibold text-warm-900 dark:text-warm-100 group-hover:text-accent-600 dark:group-hover:text-accent-400 transition-colors"
+        >
+          React
+        </h3>
+        <p class="text-warm-600 dark:text-warm-400 mt-2">
+          Web apps and shared design systems with reusable components.
+        </p>
+      </a>
+
+      <a
+        href="/skills/react-native"
+        class="card-soft p-5 group hover-lift animate-fade-in-up opacity-0 stagger-3"
+      >
+        <h3
+          class="text-lg font-semibold text-warm-900 dark:text-warm-100 group-hover:text-accent-600 dark:group-hover:text-accent-400 transition-colors"
+        >
+          React Native
+        </h3>
+        <p class="text-warm-600 dark:text-warm-400 mt-2">
+          Production mobile apps with native integrations and long-term upkeep.
+        </p>
+      </a>
+
+      <a
+        href="/skills/expo"
+        class="card-soft p-5 group hover-lift animate-fade-in-up opacity-0 stagger-4"
+      >
+        <h3
+          class="text-lg font-semibold text-warm-900 dark:text-warm-100 group-hover:text-accent-600 dark:group-hover:text-accent-400 transition-colors"
+        >
+          Expo
+        </h3>
+        <p class="text-warm-600 dark:text-warm-400 mt-2">
+          Expo tooling, custom modules, and release automation.
+        </p>
+      </a>
+
+      <a
+        href="/skills/nodejs"
+        class="card-soft p-5 group hover-lift animate-fade-in-up opacity-0 stagger-5"
+      >
+        <h3
+          class="text-lg font-semibold text-warm-900 dark:text-warm-100 group-hover:text-accent-600 dark:group-hover:text-accent-400 transition-colors"
+        >
+          Node.js
+        </h3>
+        <p class="text-warm-600 dark:text-warm-400 mt-2">
+          Backend services and ingestion tooling that power products.
+        </p>
+      </a>
+
+      <a
+        href="/skills/aws"
+        class="card-soft p-5 group hover-lift animate-fade-in-up opacity-0 stagger-6"
+      >
+        <h3
+          class="text-lg font-semibold text-warm-900 dark:text-warm-100 group-hover:text-accent-600 dark:group-hover:text-accent-400 transition-colors"
+        >
+          AWS
+        </h3>
+        <p class="text-warm-600 dark:text-warm-400 mt-2">
+          Serverless backends, migrations, and scalable infrastructure.
+        </p>
+      </a>
+
+      <a
+        href="/skills/devops"
+        class="card-soft p-5 group hover-lift animate-fade-in-up opacity-0 stagger-7"
+      >
+        <h3
+          class="text-lg font-semibold text-warm-900 dark:text-warm-100 group-hover:text-accent-600 dark:group-hover:text-accent-400 transition-colors"
+        >
+          DevOps
+        </h3>
+        <p class="text-warm-600 dark:text-warm-400 mt-2">
+          Automated pipelines, reliable releases, and infrastructure tooling.
+        </p>
+      </a>
+
+      <a
+        href="/skills/docker"
+        class="card-soft p-5 group hover-lift animate-fade-in-up opacity-0 stagger-8"
+      >
+        <h3
+          class="text-lg font-semibold text-warm-900 dark:text-warm-100 group-hover:text-accent-600 dark:group-hover:text-accent-400 transition-colors"
+        >
+          Docker
+        </h3>
+        <p class="text-warm-600 dark:text-warm-400 mt-2">
+          Consistent environments and containerized services.
+        </p>
+      </a>
+
+      <a
+        href="/skills/kubernetes"
+        class="card-soft p-5 group hover-lift animate-fade-in-up opacity-0 stagger-9"
+      >
+        <h3
+          class="text-lg font-semibold text-warm-900 dark:text-warm-100 group-hover:text-accent-600 dark:group-hover:text-accent-400 transition-colors"
+        >
+          Kubernetes
+        </h3>
+        <p class="text-warm-600 dark:text-warm-400 mt-2">
+          Platform operations, deployments, and developer workflows.
+        </p>
+      </a>
+
+      <a
+        href="/skills/ci-cd"
+        class="card-soft p-5 group hover-lift animate-fade-in-up opacity-0 stagger-10"
+      >
+        <h3
+          class="text-lg font-semibold text-warm-900 dark:text-warm-100 group-hover:text-accent-600 dark:group-hover:text-accent-400 transition-colors"
+        >
+          CI/CD
+        </h3>
+        <p class="text-warm-600 dark:text-warm-400 mt-2">
+          Automated testing, builds, and release pipelines.
+        </p>
+      </a>
+
+      <a
+        href="/skills/e2e-testing"
+        class="card-soft p-5 group hover-lift animate-fade-in-up opacity-0 stagger-11"
+      >
+        <h3
+          class="text-lg font-semibold text-warm-900 dark:text-warm-100 group-hover:text-accent-600 dark:group-hover:text-accent-400 transition-colors"
+        >
+          E2E Testing
+        </h3>
+        <p class="text-warm-600 dark:text-warm-400 mt-2">
+          Playwright, Cypress, and automated user-flow validation.
+        </p>
+      </a>
+    </div>
+
+    <ClientMarquee />
+    <Footer />
+  </BaseLayout>
+</Layout>

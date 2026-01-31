@@ -162,6 +162,37 @@ const currentPath = Astro.url.pathname
             </li>
             <li>
               <a
+                href="/skills"
+                class={classNames(
+                  'flex gap-x-3 items-center',
+                  'rounded-xl px-4 py-2.5',
+                  'text-sm leading-6 font-semibold',
+                  'text-warm-700 dark:text-warm-300 hover:bg-warm-200 dark:hover:bg-warm-800/30',
+                  'transition-all duration-200',
+                  currentPath.startsWith('/skills') &&
+                    'bg-warm-900 hover:bg-warm-800 dark:bg-warm-100 dark:hover:bg-warm-200 text-white dark:text-warm-900',
+                )}
+              >
+                <!-- SparklesIcon -->
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-5"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-2.846-2.846L2.5 12l2.846-.813a4.5 4.5 0 0 0 2.846-2.846L9 5.5l.813 2.846a4.5 4.5 0 0 0 2.846 2.846L15.5 12l-2.846.813a4.5 4.5 0 0 0-2.846 2.846ZM18.25 10.5l.433-1.518a2.25 2.25 0 0 1 1.518-1.518L21.72 7l-1.518-.433a2.25 2.25 0 0 1-1.518-1.518L18.25 3.5l-.433 1.518a2.25 2.25 0 0 1-1.518 1.518L14.78 7l1.518.433a2.25 2.25 0 0 1 1.518 1.518L18.25 10.5ZM16 21.5l.347-1.214a2.25 2.25 0 0 1 1.214-1.214L18.775 18l-1.214-.347a2.25 2.25 0 0 1-1.214-1.214L16 15.225l-.347 1.214a2.25 2.25 0 0 1-1.214 1.214L13.225 18l1.214.347a2.25 2.25 0 0 1 1.214 1.214L16 21.5Z"
+                  ></path>
+                </svg>
+                Skills
+              </a>
+            </li>
+            <li>
+              <a
                 href="/blog"
                 class={classNames(
                   'flex gap-x-3 items-center',

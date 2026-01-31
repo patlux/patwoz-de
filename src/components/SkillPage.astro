@@ -1,0 +1,147 @@
+---
+import ClientMarquee from '~/components/ClientMarquee.astro'
+
+interface Props {
+  title: string
+  intro: string
+  delivered: string[]
+  why: string
+  projects: { label: string; href: string }[]
+  note?: string
+}
+
+const {
+  title,
+  intro,
+  delivered,
+  why,
+  projects,
+  note = 'This page is a short highlight and does not list all contributions or details.',
+} = Astro.props as Props
+
+const siteUrl = Astro.site?.toString() || 'https://patwoz.dev'
+const canonicalURL = new URL(Astro.url.pathname, Astro.site)
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: siteUrl,
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Skills',
+      item: new URL('/skills', siteUrl).toString(),
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: title,
+      item: canonicalURL.toString(),
+    },
+  ],
+}
+---
+
+<script
+  type="application/ld+json"
+  set:html={JSON.stringify(breadcrumbSchema)}
+/>
+
+<article class="mt-12">
+  <a
+    href="/"
+    class="inline-flex items-center gap-1 text-sm text-warm-500 dark:text-warm-400 hover:text-warm-700 dark:hover:text-warm-200 mb-6"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="1.5"
+      stroke="currentColor"
+      class="w-4 h-4"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M15.75 19.5 8.25 12l7.5-7.5"></path>
+    </svg>
+    Back to Home
+  </a>
+
+  <header class="max-w-3xl">
+    <p
+      class="text-xs font-semibold uppercase tracking-wider text-warm-500 dark:text-warm-400"
+    >
+      Skill
+    </p>
+    <h1
+      class="mt-2 text-3xl sm:text-4xl font-display font-bold text-warm-900 dark:text-warm-100"
+    >
+      {title}
+    </h1>
+    <p class="mt-3 text-lg text-warm-600 dark:text-warm-400">
+      {intro}
+    </p>
+    <p class="mt-3 text-sm text-warm-500 dark:text-warm-400">
+      {note}
+    </p>
+    <a
+      href="/work"
+      class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-accent-600 dark:text-accent-400 hover:text-accent-700 dark:hover:text-accent-300"
+    >
+      View all work
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+        class="w-4 h-4"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
+          clip-rule="evenodd"></path>
+      </svg>
+    </a>
+  </header>
+
+  <div class="mt-10 space-y-10 max-w-3xl">
+    <section>
+      <h2 class="text-lg font-semibold text-warm-900 dark:text-warm-100">
+        What I delivered
+      </h2>
+      <ul
+        class="mt-4 space-y-3 list-disc pl-5 text-warm-700 dark:text-warm-300"
+      >
+        {
+          delivered.map((item) => (
+            <li>
+              <span set:html={item} />
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section class="prose lg:prose-lg max-w-none">
+      <h2>Why it's a skill</h2>
+      <p>{why}</p>
+      <h2>Where it shows up</h2>
+      <ul>
+        {
+          projects.map((project) => (
+            <li>
+              <a href={project.href}>{project.label}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+  </div>
+</article>
+
+<ClientMarquee />

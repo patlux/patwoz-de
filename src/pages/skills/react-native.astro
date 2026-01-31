@@ -1,0 +1,44 @@
+---
+import Layout from '~/layouts/Layout.astro'
+import BaseLayout from '~/components/BaseLayout.astro'
+import Footer from '~/components/Footer.astro'
+import SkillPage from '~/components/SkillPage.astro'
+
+const intro =
+  'React Native is where I spend most of my time. I build production apps, integrate native SDKs, and maintain long-lived products across iOS and Android.'
+
+const delivered = [
+  'Built complex mobile features at <a href="/work/porsche">Porsche Digital</a> including onboarding flows, in-app subscriptions, animations, and real-time video streaming.',
+  'Implemented core app functionality for <a href="/work/kulturpass">KulturPass</a> with secure storage, validation, and a full React Native upgrade.',
+  'Delivered the t-online news app with a hybrid WebView architecture and custom native integrations for <a href="/work/stroeer">Stroeer</a>.',
+  'Led the React Native + <a href="/skills/expo" class="text-accent-600 dark:text-accent-400 hover:text-accent-700 dark:hover:text-accent-300">Expo</a> rebuild of the <a href="/work/kicker">Kicker</a> streaming app with offline playback and subscription management.',
+  'Built device communication, QR scanning, and firmware update flows for <a href="/work/abl">ABL</a>, maintaining the app through multiple RN upgrades.',
+]
+
+const why =
+  'I can ship native-quality experiences while keeping performance, stability, and maintainability in focus. That includes integrating SDKs, managing complex state, and evolving apps over multiple years.'
+
+const projects = [
+  { label: 'Porsche Digital', href: '/work/porsche' },
+  { label: 'SAP / KulturPass', href: '/work/kulturpass' },
+  { label: 'Stroeer / t-online', href: '/work/stroeer' },
+  { label: 'Kicker', href: '/work/kicker' },
+  { label: 'ABL', href: '/work/abl' },
+]
+---
+
+<Layout
+  title="React Native | Patrick Wozniak"
+  description="React Native expertise across consumer apps, enterprise products, and long-term maintenance."
+>
+  <BaseLayout>
+    <SkillPage
+      title="React Native"
+      intro={intro}
+      delivered={delivered}
+      why={why}
+      projects={projects}
+    />
+    <Footer />
+  </BaseLayout>
+</Layout>

@@ -9,8 +9,229 @@ import Introduction from '~/components/Introduction.astro'
   <BaseLayout>
     <Introduction />
 
-    <!-- Client Work Section -->
+    <!-- Expertise Section -->
     <section class="mt-16 animate-fade-in-up opacity-0 stagger-4">
+      <div
+        class="relative overflow-hidden rounded-2xl border border-warm-200 dark:border-warm-700/60 bg-white/70 dark:bg-dark-surface/80 p-6 sm:p-7"
+      >
+        <div
+          class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-accent-400 via-warm-300 to-accent-500"
+        >
+        </div>
+        <div class="grid gap-6 lg:grid-cols-[1.1fr_1.6fr] lg:items-center">
+          <div>
+            <p
+              class="text-xs font-semibold uppercase tracking-wider text-warm-500 dark:text-warm-400"
+            >
+              Expertise
+            </p>
+            <h2
+              class="text-3xl font-display font-bold text-warm-900 dark:text-warm-100"
+            >
+              Experte in
+            </h2>
+            <p class="text-warm-600 dark:text-warm-400 mt-2 max-w-md">
+              Core technologies I build with every day
+            </p>
+            <p class="text-sm text-warm-500 dark:text-warm-400 mt-2">
+              Explore each skill to see real project work
+            </p>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <a
+              href="/skills/typescript"
+              class="inline-flex items-center gap-2 px-3 py-1.5 text-sm font-semibold rounded-full bg-warm-100 text-warm-800 ring-1 ring-warm-200 shadow-sm hover:bg-warm-200 hover:text-warm-900 hover:-translate-y-0.5 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-400/70 dark:bg-dark-elevated dark:text-warm-100 dark:ring-warm-700 dark:hover:bg-warm-800/50 dark:hover:text-warm-100"
+            >
+              TypeScript
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                class="w-3.5 h-3.5"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
+                  clip-rule="evenodd"></path>
+              </svg>
+            </a>
+            <a
+              href="/skills/react"
+              class="inline-flex items-center gap-2 px-3 py-1.5 text-sm font-semibold rounded-full bg-warm-100 text-warm-800 ring-1 ring-warm-200 shadow-sm hover:bg-warm-200 hover:text-warm-900 hover:-translate-y-0.5 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-400/70 dark:bg-dark-elevated dark:text-warm-100 dark:ring-warm-700 dark:hover:bg-warm-800/50 dark:hover:text-warm-100"
+            >
+              React
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                class="w-3.5 h-3.5"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
+                  clip-rule="evenodd"></path>
+              </svg>
+            </a>
+            <a
+              href="/skills/react-native"
+              class="inline-flex items-center gap-2 px-3 py-1.5 text-sm font-semibold rounded-full bg-warm-100 text-warm-800 ring-1 ring-warm-200 shadow-sm hover:bg-warm-200 hover:text-warm-900 hover:-translate-y-0.5 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-400/70 dark:bg-dark-elevated dark:text-warm-100 dark:ring-warm-700 dark:hover:bg-warm-800/50 dark:hover:text-warm-100"
+            >
+              React Native
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                class="w-3.5 h-3.5"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
+                  clip-rule="evenodd"></path>
+              </svg>
+            </a>
+            <a
+              href="/skills/expo"
+              class="inline-flex items-center gap-2 px-3 py-1.5 text-sm font-semibold rounded-full bg-warm-100 text-warm-800 ring-1 ring-warm-200 shadow-sm hover:bg-warm-200 hover:text-warm-900 hover:-translate-y-0.5 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-400/70 dark:bg-dark-elevated dark:text-warm-100 dark:ring-warm-700 dark:hover:bg-warm-800/50 dark:hover:text-warm-100"
+            >
+              Expo
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                class="w-3.5 h-3.5"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
+                  clip-rule="evenodd"></path>
+              </svg>
+            </a>
+            <a
+              href="/skills/nodejs"
+              class="inline-flex items-center gap-2 px-3 py-1.5 text-sm font-semibold rounded-full bg-warm-100 text-warm-800 ring-1 ring-warm-200 shadow-sm hover:bg-warm-200 hover:text-warm-900 hover:-translate-y-0.5 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-400/70 dark:bg-dark-elevated dark:text-warm-100 dark:ring-warm-700 dark:hover:bg-warm-800/50 dark:hover:text-warm-100"
+            >
+              Node.js
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                class="w-3.5 h-3.5"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
+                  clip-rule="evenodd"></path>
+              </svg>
+            </a>
+            <a
+              href="/skills/aws"
+              class="inline-flex items-center gap-2 px-3 py-1.5 text-sm font-semibold rounded-full bg-warm-100 text-warm-800 ring-1 ring-warm-200 shadow-sm hover:bg-warm-200 hover:text-warm-900 hover:-translate-y-0.5 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-400/70 dark:bg-dark-elevated dark:text-warm-100 dark:ring-warm-700 dark:hover:bg-warm-800/50 dark:hover:text-warm-100"
+            >
+              AWS
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                class="w-3.5 h-3.5"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
+                  clip-rule="evenodd"></path>
+              </svg>
+            </a>
+            <a
+              href="/skills/devops"
+              class="inline-flex items-center gap-2 px-3 py-1.5 text-sm font-semibold rounded-full bg-warm-100 text-warm-800 ring-1 ring-warm-200 shadow-sm hover:bg-warm-200 hover:text-warm-900 hover:-translate-y-0.5 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-400/70 dark:bg-dark-elevated dark:text-warm-100 dark:ring-warm-700 dark:hover:bg-warm-800/50 dark:hover:text-warm-100"
+            >
+              DevOps
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                class="w-3.5 h-3.5"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
+                  clip-rule="evenodd"></path>
+              </svg>
+            </a>
+            <a
+              href="/skills/docker"
+              class="inline-flex items-center gap-2 px-3 py-1.5 text-sm font-semibold rounded-full bg-warm-100 text-warm-800 ring-1 ring-warm-200 shadow-sm hover:bg-warm-200 hover:text-warm-900 hover:-translate-y-0.5 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-400/70 dark:bg-dark-elevated dark:text-warm-100 dark:ring-warm-700 dark:hover:bg-warm-800/50 dark:hover:text-warm-100"
+            >
+              Docker
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                class="w-3.5 h-3.5"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
+                  clip-rule="evenodd"></path>
+              </svg>
+            </a>
+            <a
+              href="/skills/kubernetes"
+              class="inline-flex items-center gap-2 px-3 py-1.5 text-sm font-semibold rounded-full bg-warm-100 text-warm-800 ring-1 ring-warm-200 shadow-sm hover:bg-warm-200 hover:text-warm-900 hover:-translate-y-0.5 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-400/70 dark:bg-dark-elevated dark:text-warm-100 dark:ring-warm-700 dark:hover:bg-warm-800/50 dark:hover:text-warm-100"
+            >
+              Kubernetes
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                class="w-3.5 h-3.5"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
+                  clip-rule="evenodd"></path>
+              </svg>
+            </a>
+            <a
+              href="/skills/ci-cd"
+              class="inline-flex items-center gap-2 px-3 py-1.5 text-sm font-semibold rounded-full bg-warm-100 text-warm-800 ring-1 ring-warm-200 shadow-sm hover:bg-warm-200 hover:text-warm-900 hover:-translate-y-0.5 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-400/70 dark:bg-dark-elevated dark:text-warm-100 dark:ring-warm-700 dark:hover:bg-warm-800/50 dark:hover:text-warm-100"
+            >
+              CI/CD
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                class="w-3.5 h-3.5"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
+                  clip-rule="evenodd"></path>
+              </svg>
+            </a>
+            <a
+              href="/skills/e2e-testing"
+              class="inline-flex items-center gap-2 px-3 py-1.5 text-sm font-semibold rounded-full bg-warm-100 text-warm-800 ring-1 ring-warm-200 shadow-sm hover:bg-warm-200 hover:text-warm-900 hover:-translate-y-0.5 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-400/70 dark:bg-dark-elevated dark:text-warm-100 dark:ring-warm-700 dark:hover:bg-warm-800/50 dark:hover:text-warm-100"
+            >
+              Playwright
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                class="w-3.5 h-3.5"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
+                  clip-rule="evenodd"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Client Work Section -->
+    <section class="mt-16 animate-fade-in-up opacity-0 stagger-5">
       <div class="flex items-center justify-between mb-6">
         <div>
           <h2
@@ -458,7 +679,7 @@ import Introduction from '~/components/Introduction.astro'
 
     <!-- piparo.tech Section -->
     <section
-      class="mt-16 animate-fade-in-up opacity-0 stagger-5 p-6 card-soft bg-gradient-to-br from-warm-50 to-warm-100 dark:from-dark-surface dark:to-dark-elevated"
+      class="mt-16 animate-fade-in-up opacity-0 stagger-6 p-6 card-soft bg-gradient-to-br from-warm-50 to-warm-100 dark:from-dark-surface dark:to-dark-elevated"
     >
       <div class="flex items-start gap-4">
         <div

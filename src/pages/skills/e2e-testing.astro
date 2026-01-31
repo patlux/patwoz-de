@@ -1,0 +1,38 @@
+---
+import Layout from '~/layouts/Layout.astro'
+import BaseLayout from '~/components/BaseLayout.astro'
+import Footer from '~/components/Footer.astro'
+import SkillPage from '~/components/SkillPage.astro'
+
+const intro =
+  'I set up end-to-end testing to validate real user flows and protect critical journeys across web and mobile.'
+
+const delivered = [
+  'Introduced Playwright E2E testing for the <a href="/work/porsche">Porsche Digital</a> monorepo to cover core web app flows.',
+  'Maintained Playwright-based testing as part of the <a href="/work/ibm/barmer-puls">Barmer Puls</a> design system tooling.',
+]
+
+const why =
+  'E2E testing gives teams confidence to ship quickly while catching regressions in real-world scenarios. I focus on stable selectors, reliable CI runs, and meaningful coverage.'
+
+const projects = [
+  { label: 'Porsche Digital', href: '/work/porsche' },
+  { label: 'IBM iX / Barmer Puls', href: '/work/ibm/barmer-puls' },
+]
+---
+
+<Layout
+  title="E2E Testing | Patrick Wozniak"
+  description="E2E testing experience with Playwright and Cypress for reliable user-flow validation."
+>
+  <BaseLayout>
+    <SkillPage
+      title="E2E Testing"
+      intro={intro}
+      delivered={delivered}
+      why={why}
+      projects={projects}
+    />
+    <Footer />
+  </BaseLayout>
+</Layout>
