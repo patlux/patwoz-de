@@ -1,0 +1,38 @@
+---
+import Layout from '~/layouts/Layout.astro'
+import BaseLayout from '~/components/BaseLayout.astro'
+import Footer from '~/components/Footer.astro'
+import SkillPage from '~/components/SkillPage.astro'
+
+const intro =
+  'I use Rust and Go to build high-performance backend services where reliability and speed matter. Both languages let me write safe, efficient code that scales.'
+
+const delivered = [
+  'Built a concurrent RSS importer in Rust for the <a href="/work/kicker">Kicker</a> platform, processing hundreds of podcast feeds with custom XML parsing (quick-xml), async streaming (tokio), and MySQL integration (sqlx).',
+  'Developed the main backend API in Go for the FWMFL podcast app, handling payment processing (Stripe, Apple In-App Purchases, Google Play), user authentication (Auth0), and search indexing (Algolia).',
+  'Implemented real-time Google Cloud Pub/Sub listeners in Go for processing Android subscription events and keeping user entitlements in sync.',
+  'Created type-safe database queries using sqlc in Go and compile-time verified SQL with sqlx in Rust.',
+  'Wrote Dockerfiles for multi-stage builds with optimized release profiles (LTO, single codegen unit) to minimize container image sizes.',
+]
+
+const why =
+  'Rust and Go each shine in different areas. I pick Rust when I need zero-cost abstractions and memory safety for CPU-intensive data processing. Go works well for networked services where simplicity, fast compilation, and built-in concurrency make the codebase easy to maintain. Together they cover most backend needs without sacrificing performance or developer productivity.'
+
+const projects = [{ label: 'Kicker', href: '/work/kicker' }]
+---
+
+<Layout
+  title="Rust / Go | Patrick Wozniak"
+  description="Rust and Go experience for high-performance backend services and data processing."
+>
+  <BaseLayout>
+    <SkillPage
+      title="Rust / Go"
+      intro={intro}
+      delivered={delivered}
+      why={why}
+      projects={projects}
+    />
+    <Footer />
+  </BaseLayout>
+</Layout>
