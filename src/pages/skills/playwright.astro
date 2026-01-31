@@ -1,5 +1,16 @@
 ---
-import { redirect } from 'astro:response'
-
-throw redirect('/skills/e2e-testing')
+const redirectUrl = '/skills/e2e-testing'
 ---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="refresh" content={`0;url=${redirectUrl}`} />
+    <link rel="canonical" href={redirectUrl} />
+    <title>Redirecting...</title>
+  </head>
+  <body>
+    <p>Redirecting to <a href={redirectUrl}>{redirectUrl}</a>...</p>
+  </body>
+</html>
