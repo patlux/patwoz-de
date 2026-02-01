@@ -1,0 +1,39 @@
+---
+import Layout from '~/layouts/Layout.astro'
+import BaseLayout from '~/components/BaseLayout.astro'
+import Footer from '~/components/Footer.astro'
+import SkillPage from '~/components/SkillPage.astro'
+
+const intro =
+  'Ich baue und migriere Systeme auf AWS - von serverlosen Backends bis zu Kubernetes-basierten Plattformen.'
+
+const delivered = [
+  'Ein serverloses Backend für <a href="/de/work/porsche">Porsche Digital</a> mit <a href="/de/skills/aws" class="text-accent-600 dark:text-accent-400 hover:text-accent-700 dark:hover:text-accent-300">AWS</a> CDK, Lambda, DynamoDB und API Gateway implementiert.',
+  'Migration mehrerer Services auf <a href="/de/skills/aws" class="text-accent-600 dark:text-accent-400 hover:text-accent-700 dark:hover:text-accent-300">AWS</a> für <a href="/de/work/kicker">Kicker</a> geführt, inklusive EKS-basierter <a href="/de/skills/kubernetes" class="text-accent-600 dark:text-accent-400 hover:text-accent-700 dark:hover:text-accent-300">Kubernetes</a> Plattform und Infrastructure as Code.',
+]
+
+const why =
+  'Ich entwerfe AWS-Architekturen, die skalieren und gleichzeitig Kosten sowie operative Komplexität im Blick behalten. Dazu gehören serverlose Trade-offs, Infrastruktur-Automation und Produktionszuverlässigkeit.'
+
+const projects = [
+  { label: 'Porsche Digital', href: '/de/work/porsche' },
+  { label: 'Kicker', href: '/de/work/kicker' },
+]
+---
+
+<Layout
+  title="AWS | Patrick Wozniak"
+  description="AWS-Erfahrung für serverlose Backends, Migrationen und Plattform-Infrastruktur."
+  lang="de"
+>
+  <BaseLayout>
+    <SkillPage
+      title="AWS"
+      intro={intro}
+      delivered={delivered}
+      why={why}
+      projects={projects}
+    />
+    <Footer />
+  </BaseLayout>
+</Layout>

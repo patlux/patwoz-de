@@ -1,0 +1,39 @@
+---
+import Layout from '~/layouts/Layout.astro'
+import BaseLayout from '~/components/BaseLayout.astro'
+import Footer from '~/components/Footer.astro'
+import SkillPage from '~/components/SkillPage.astro'
+
+const intro =
+  'Ich nutze Rust und Go, um High-Performance-Backend-Services zu bauen, bei denen Zuverlässigkeit und Geschwindigkeit zählen. Beide Sprachen erlauben sichere, effiziente und skalierbare Implementierungen.'
+
+const delivered = [
+  'Einen nebenläufigen RSS-Importer in Rust für die <a href="/de/work/kicker">Kicker</a> Plattform gebaut, der hunderte Podcast-Feeds mit Custom XML Parsing (quick-xml), Async Streaming (tokio) und MySQL-Integration (sqlx) verarbeitet.',
+  'Die zentrale Backend-API in Go für die FWMFL Podcast-App entwickelt, inkl. Payment Processing (Stripe, Apple In-App Purchases, Google Play), User Auth (Auth0) und Search Indexing (Algolia).',
+  'Realtime Google Cloud Pub/Sub Listener in Go implementiert, um Android-Subscription-Events zu verarbeiten und Berechtigungen zu synchronisieren.',
+  'Typ-sichere Datenbankabfragen mit sqlc in Go sowie compile-time verifiziertes SQL mit sqlx in Rust erstellt.',
+  'Dockerfiles für Multi-Stage-Builds mit optimierten Release-Profilen (LTO, single codegen unit) geschrieben, um Image-Größen zu minimieren.',
+]
+
+const why =
+  'Rust und Go glänzen in unterschiedlichen Bereichen. Rust setze ich ein, wenn ich Zero-Cost-Abstraktionen und Memory-Safety für CPU-intensive Datenverarbeitung brauche. Go passt hervorragend für Netzwerkdienste, bei denen Einfachheit, schnelle Builds und eingebaute Concurrency die Wartbarkeit verbessern. Zusammen decken beide Sprachen die meisten Backend-Anforderungen ab, ohne Performance oder Entwicklerproduktivität zu opfern.'
+
+const projects = [{ label: 'Kicker', href: '/de/work/kicker' }]
+---
+
+<Layout
+  title="Rust / Go | Patrick Wozniak"
+  description="Rust- und Go-Erfahrung für High-Performance-Backend-Services und Datenverarbeitung."
+  lang="de"
+>
+  <BaseLayout>
+    <SkillPage
+      title="Rust / Go"
+      intro={intro}
+      delivered={delivered}
+      why={why}
+      projects={projects}
+    />
+    <Footer />
+  </BaseLayout>
+</Layout>

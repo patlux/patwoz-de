@@ -9,6 +9,7 @@ interface Props {
   description?: string
   image?: string
   ogType?: string
+  lang?: 'en' | 'de'
 }
 
 const {
@@ -16,10 +17,26 @@ const {
   description = 'Patrick Wozniak is a self-taught Software Engineer from Nuremberg, Germany.',
   image = 'https://patwoz.dev/me.jpg',
   ogType = 'profile',
+  lang,
 } = Astro.props
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site)
+const currentPath = Astro.url.pathname
+const isGermanPath = currentPath.startsWith('/de')
+const language = lang || (isGermanPath ? 'de' : 'en')
+const canonicalURL = new URL(currentPath, Astro.site)
 const siteUrl = Astro.site?.toString() || 'https://patwoz.dev'
+const dePath = isGermanPath
+  ? currentPath
+  : currentPath === '/'
+    ? '/de'
+    : `/de${currentPath}`
+const enPath = isGermanPath
+  ? currentPath === '/de'
+    ? '/'
+    : currentPath.replace(/^\/de\//, '/')
+  : currentPath
+const alternateEn = new URL(enPath, siteUrl).toString()
+const alternateDe = new URL(dePath, siteUrl).toString()
 const schema = [
   {
     '@context': 'https://schema.org',
@@ -33,7 +50,7 @@ const schema = [
     '@type': 'WebSite',
     name: 'Patrick Wozniak',
     url: siteUrl,
-    inLanguage: 'en',
+    inLanguage: language,
   },
   {
     '@context': 'https://schema.org',
@@ -65,7 +82,7 @@ const optimizedLogo = await getImage({
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={language}>
   <head prefix="og: https://ogp.me/ns#">
     <!-- Theme and animation initialization - runs before page renders -->
     <script is:inline>
@@ -99,6 +116,9 @@ const optimizedLogo = await getImage({
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="canonical" href={canonicalURL} />
+    <link rel="alternate" hreflang="en" href={alternateEn} />
+    <link rel="alternate" hreflang="de" href={alternateDe} />
+    <link rel="alternate" hreflang="x-default" href={alternateEn} />
     <link rel="sitemap" href="/sitemap.xml" />
 
     <title>{title}</title>
@@ -111,6 +131,10 @@ const optimizedLogo = await getImage({
     <meta property="og:image:width" content="512" />
     <meta property="og:image:height" content="512" />
     <meta property="og:type" content={ogType} />
+    <meta
+      property="og:locale"
+      content={language === 'de' ? 'de_DE' : 'en_US'}
+    />
 
     {
       ogType === 'profile' && (

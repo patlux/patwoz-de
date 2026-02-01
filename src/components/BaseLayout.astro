@@ -1,5 +1,18 @@
 ---
 import Menu from './Menu.astro'
+
+const currentPath = Astro.url.pathname
+const isGerman = currentPath.startsWith('/de')
+const dePath = isGerman
+  ? currentPath
+  : currentPath === '/'
+    ? '/de'
+    : `/de${currentPath}`
+const enPath = isGerman
+  ? currentPath === '/de'
+    ? '/'
+    : currentPath.replace(/^\/de\//, '/')
+  : currentPath
 ---
 
 <Menu />
@@ -8,6 +21,86 @@ import Menu from './Menu.astro'
   class="xl:pl-72 bg-warm-50 dark:bg-dark-bg pt-8 pb-20 xl:py-20 min-h-screen"
 >
   <div class="px-6 w-full sm:max-w-2xl md:max-w-4xl mx-auto">
+    <div
+      id="lang-hint"
+      class="hidden mb-6 rounded-xl border border-warm-200 dark:border-warm-800 bg-warm-100/80 dark:bg-dark-surface px-4 py-3 text-sm text-warm-700 dark:text-warm-200 shadow-sm"
+      data-current-lang={isGerman ? 'de' : 'en'}
+      data-href-de={dePath}
+      data-href-en={enPath}
+      data-text-de="Bevorzugst du Deutsch? Diese Seite gibt es auch auf Deutsch."
+      data-text-en="Prefer English? This page is available in English."
+      data-cta-de="Auf Deutsch ansehen"
+      data-cta-en="View in English"
+      data-close-de="Hinweis schließen"
+      data-close-en="Dismiss language hint"
+    >
+      <div class="flex flex-col sm:flex-row sm:items-center gap-3">
+        <div class="flex-1">
+          <span id="lang-hint-text"></span>
+        </div>
+        <div class="flex items-center gap-2">
+          <a
+            id="lang-hint-link"
+            class="inline-flex items-center gap-2 rounded-lg bg-warm-900 dark:bg-warm-100 text-white dark:text-warm-900 px-3 py-1.5 text-xs font-semibold uppercase tracking-wide hover:opacity-90 transition-opacity"
+            href={dePath}></a>
+          <button
+            id="lang-hint-close"
+            type="button"
+            class="inline-flex items-center justify-center rounded-lg border border-warm-200 dark:border-warm-800 px-2.5 py-1.5 text-xs font-semibold text-warm-600 dark:text-warm-300 hover:text-warm-900 dark:hover:text-warm-100 transition-colors"
+            aria-label="Dismiss language hint"
+          >
+            ✕
+          </button>
+        </div>
+      </div>
+    </div>
     <slot />
   </div>
 </main>
+
+<script is:inline>
+  ;(() => {
+    const hint = document.getElementById('lang-hint')
+    if (!hint) return
+    const dismissed = localStorage.getItem('lang-hint-dismissed')
+    if (dismissed === 'true') return
+
+    const browserLang = (navigator.language || '').toLowerCase()
+    const prefersGerman = browserLang.startsWith('de')
+    const currentLang = hint.dataset.currentLang
+    if (!currentLang) return
+
+    if (
+      (prefersGerman && currentLang === 'de') ||
+      (!prefersGerman && currentLang === 'en')
+    ) {
+      return
+    }
+
+    const text = prefersGerman ? hint.dataset.textDe : hint.dataset.textEn
+    const cta = prefersGerman ? hint.dataset.ctaDe : hint.dataset.ctaEn
+    const href = prefersGerman ? hint.dataset.hrefDe : hint.dataset.hrefEn
+    const closeLabel = prefersGerman
+      ? hint.dataset.closeDe
+      : hint.dataset.closeEn
+
+    const textEl = document.getElementById('lang-hint-text')
+    const linkEl = document.getElementById('lang-hint-link')
+    const closeEl = document.getElementById('lang-hint-close')
+
+    if (!textEl || !linkEl || !closeEl || !href || !text || !cta || !closeLabel)
+      return
+
+    textEl.textContent = text
+    linkEl.textContent = cta
+    linkEl.setAttribute('href', href)
+    closeEl.setAttribute('aria-label', closeLabel)
+
+    hint.classList.remove('hidden')
+
+    closeEl.addEventListener('click', () => {
+      localStorage.setItem('lang-hint-dismissed', 'true')
+      hint.classList.add('hidden')
+    })
+  })()
+</script>

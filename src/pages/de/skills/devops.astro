@@ -1,0 +1,43 @@
+---
+import Layout from '~/layouts/Layout.astro'
+import BaseLayout from '~/components/BaseLayout.astro'
+import Footer from '~/components/Footer.astro'
+import SkillPage from '~/components/SkillPage.astro'
+
+const intro =
+  'Ich baue die Systeme, die Produkte stabil halten: automatisierte Pipelines, CI/CD und planbare Release-Prozesse.'
+
+const delivered = [
+  'EAS Build und GitHub Actions Workflows für Validierung, Tests und Deployments bei <a href="/de/work/stroeer">Ströer</a> eingerichtet.',
+  '<a href="/de/skills/ci-cd" class="text-accent-600 dark:text-accent-400 hover:text-accent-700 dark:hover:text-accent-300">CI/CD</a> Pipelines für <a href="/de/skills/typescript" class="text-accent-600 dark:text-accent-400 hover:text-accent-700 dark:hover:text-accent-300">TypeScript</a> Checks, ESLint und Jest Tests bei <a href="/de/work/kulturpass">KulturPass</a> gebaut.',
+  'Bitrise-Workflows für das <a href="/de/work/porsche">Porsche Digital</a> Monorepo dokumentiert und betreut.',
+  'Infrastruktur und Deployments für <a href="/de/work/kicker">Kicker</a> mit <a href="/de/skills/kubernetes" class="text-accent-600 dark:text-accent-400 hover:text-accent-700 dark:hover:text-accent-300">Kubernetes</a> und Infrastructure as Code automatisiert.',
+]
+
+const why =
+  'Ich fokussiere mich auf Wiederholbarkeit und Zuverlässigkeit. Das bedeutet Pipelines zu bauen, die Probleme früh erkennen, manuelle Schritte reduzieren und Releases konsistent über Umgebungen hinweg halten.'
+
+const projects = [
+  { label: 'Ströer / t-online', href: '/de/work/stroeer' },
+  { label: 'SAP / KulturPass', href: '/de/work/kulturpass' },
+  { label: 'Porsche Digital', href: '/de/work/porsche' },
+  { label: 'Kicker', href: '/de/work/kicker' },
+]
+---
+
+<Layout
+  title="DevOps | Patrick Wozniak"
+  description="DevOps-Erfahrung für CI/CD, Infrastruktur-Automation und Release-Workflows."
+  lang="de"
+>
+  <BaseLayout>
+    <SkillPage
+      title="DevOps"
+      intro={intro}
+      delivered={delivered}
+      why={why}
+      projects={projects}
+    />
+    <Footer />
+  </BaseLayout>
+</Layout>

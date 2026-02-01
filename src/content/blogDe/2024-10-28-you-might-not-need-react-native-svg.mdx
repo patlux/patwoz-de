@@ -1,0 +1,52 @@
+---
+title: 'react-native-svg: Du brauchst es vielleicht nicht'
+description: 'SVG vs PNG in React Native: wann react-native-svg wirklich notwendig ist und wann die Image Komponente reicht.'
+image: /blog-images/2024-10-28-you-might-not-need-react-native-svg.avif
+published: 2024-10-28
+featured: true
+---
+
+Wenn ich in neue Projekte komme, sehe ich fast immer `react-native-svg` - und in allen Fällen war es eigentlich nicht nötig.
+
+## SVG statt PNG
+
+Welche Vorteile hat SVG gegenüber PNG?
+
+- Eine Datei
+- Skalierbar ohne Qualitätsverlust
+- Färben per `fill` und `stroke`
+- SVGs können die Bundle-Größe reduzieren, aber nur wenn viele SVGs genutzt werden, da die Library selbst auch ins Bundle fällt.
+
+Welche Nachteile?
+
+- Du brauchst eine zusätzliche Library (und oft eine zweite, wenn du `react-native-svg-transformer` nutzt)
+- Du musst die Library als Dependency pflegen (und sie kann bei `react-native` Updates brechen!)
+- Zusätzliche Runtime-Kosten
+
+# PNG statt SVG
+
+Welche Vorteile hat PNG gegenüber SVG?
+
+- Keine extra Library. Bilder anzeigen ist in React Native eingebaut.
+- Die eingebaute `tintColor` Property ermöglicht Färbung ohne extra Libraries.
+
+Nachteile?
+
+- Bilder müssen in 3 Auflösungen (1x, 2x, 3x) exportiert werden, was in Tools wie Figma unkompliziert ist.
+- Größeres Bundle (aber nur, wenn du die Library-Größe überschreitest)
+
+## Wann `react-native-svg` sinnvoll ist
+
+Es gibt nur einen Fall, in dem `react-native-svg` technisch notwendig ist: Wenn du `fill` und `stroke` zur Laufzeit ändern musst und die Farben zur Build-Zeit nicht bekannt sind.
+
+Wenn du die Farben zur Build-Zeit kennst, erstelle mehrere Varianten der Grafik, das reicht vollkommen.
+
+## Wann nicht
+
+Wenn deine Icons oder Bilder komplett aus einer einzigen Farbe bestehen, nutze einfach `tintColor`.
+
+```tsx
+<Image tintColor="red" />
+```
+
+Das war's! Danke fürs Lesen!

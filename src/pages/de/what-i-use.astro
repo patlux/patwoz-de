@@ -1,0 +1,160 @@
+---
+import Layout from '~/layouts/Layout.astro'
+import BaseLayout from '~/components/BaseLayout.astro'
+import Footer from '~/components/Footer.astro'
+import Introduction from '~/components/Introduction.astro'
+import ClientMarquee from '~/components/ClientMarquee.astro'
+---
+
+<Layout title="Was ich nutze | Patrick Wozniak" lang="de">
+  <BaseLayout>
+    <Introduction />
+
+    <article class="prose lg:prose-lg mt-12">
+      <h1>Was ich nutze</h1>
+
+      <h2>Hardware</h2>
+      <ul>
+        <li>
+          <strong>MacBook Pro M4 Max</strong> mit 128GB RAM - Mein täglicher Begleiter
+          für Entwicklung
+        </li>
+        <li>
+          <a href="https://dygma.com/pages/raise">Dygma Raise</a> - Geteilte mechanische
+          Tastatur mit RGB und programmierbaren Layern
+        </li>
+      </ul>
+
+      <h2>Entwicklungsumgebung</h2>
+      <ul>
+        <li>
+          <a href="https://wezfurlong.org/wezterm/">WezTerm</a> - GPU-beschleunigter
+          Terminal-Emulator mit Lua-Konfiguration
+        </li>
+        <li>
+          <a href="https://neovim.io">Neovim</a> - Mein Haupteditor mit Lua-Konfiguration
+        </li>
+        <li>
+          <a href="https://mise.jdx.dev">mise</a> - Runtime-Version-Manager für Node,
+          Bun, Rust, Go, Python und mehr
+        </li>
+        <li>
+          <a href="https://github.com/LnL7/nix-darwin">nix-darwin</a> - Deklarative
+          macOS-Systemkonfiguration mit Nix
+        </li>
+      </ul>
+
+      <h2>Produktivitäts-Apps</h2>
+      <ul>
+        <li>
+          <a href="https://zen-browser.app">Zen Browser</a> - Datenschutzfokussierter
+          Firefox-basierter Browser mit minimaler UI
+        </li>
+        <li>
+          <a href="https://raycast.com">Raycast</a> - Launcher und Produktivitätstool
+          als Ersatz für Spotlight
+        </li>
+        <li>
+          <a href="https://obsidian.md">Obsidian</a> - Notizen mit Markdown und Local-First-Speicherung
+        </li>
+        <li>
+          <a href="https://cleanshot.com">CleanShot X</a> - Screenshots, Bildschirmaufnahmen
+          und Annotationen
+        </li>
+        <li>
+          <a href="https://betterdisplay.pro">BetterDisplay</a> - Verwaltung externer
+          Monitore und Display-Anpassungen
+        </li>
+      </ul>
+
+      <h2>Dev Tools</h2>
+      <ul>
+        <li>
+          <a href="https://orbstack.dev">OrbStack</a> - Leichtgewichtige Docker-
+          und Linux-VMs als Ersatz für Docker Desktop
+        </li>
+        <li>
+          <a href="https://tableplus.com">TablePlus</a> - Datenbank-GUI für PostgreSQL,
+          MySQL, Redis und mehr
+        </li>
+        <li>
+          <a href="https://proxyman.io">Proxyman</a> - HTTP-Debugging-Proxy zum Analysieren
+          von Netzwerkverkehr
+        </li>
+        <li>
+          <a href="https://github.com/ArchGPT/insomnium">Insomnium</a> - API-Test-Client
+          (datenschutzfokussierter Insomnia-Fork)
+        </li>
+        <li>
+          <a href="https://github.com/XcodesOrg/XcodesApp">Xcodes</a> - Xcode-Version-
+          Manager für mehrere Installationen
+        </li>
+      </ul>
+
+      <h2>Infrastruktur & DevOps</h2>
+      <ul>
+        <li>
+          <a href="https://kubernetes.io">Kubernetes</a> /
+          <a href="https://k3s.io">K3s</a> - Container-Orchestrierung für Deployments
+          und Betrieb
+        </li>
+        <li>
+          <a href="https://tailscale.com">Tailscale</a> - VPN-Mesh-Netzwerk für sicheren
+          Zugriff auf alle meine Geräte
+        </li>
+        <li>
+          <a href="https://syncthing.net">Syncthing</a> - Peer-to-Peer-Dateisync
+          über Geräte hinweg
+        </li>
+        <li>
+          <a href="https://duplicacy.com">Duplicacy</a> - Verschlüsselte, deduplizierte
+          Backups in die Cloud
+        </li>
+        <li>
+          <a href="https://cli.github.com">gh</a> /
+          <a href="https://gitlab.com/gitlab-org/cli">glab</a> - GitHub- und GitLab-CLI
+          für Repos, PRs und Issues
+        </li>
+      </ul>
+
+      <h2>Self-Hosted Services</h2>
+      <ul>
+        <li>
+          <a href="https://mailinabox.email">mailinabox</a> - Self-hosted Mailserver
+          auf einem <a href="https://www.ovhcloud.com/de/vps/">5 EUR VPS</a>
+        </li>
+        <li>
+          <a href="https://miniflux.app">miniflux</a> - Self-hosted RSS-Reader auf
+          einem
+          <a href="https://vserver.site/de/vserver_kvm_frankfurt.html"
+            >3 EUR VPS</a
+          >
+        </li>
+        <li>
+          <a href="https://www.home-assistant.io">Home Assistant</a> - Home Automation
+          zur Steuerung smarter Geräte
+        </li>
+      </ul>
+
+      <h2>Sonstiges</h2>
+      <ul>
+        <li>
+          <a href="https://www.anycubic.com/products/anycubic-i3-mega-s"
+            >ANYCUBIC I3 Mega S</a
+          > - 3D-Drucker für Prototyping und Hobbyprojekte
+        </li>
+        <li>
+          <a href="https://docs.hyperion-project.org">hyperion</a> - DIY Ambient
+          Lighting für meinen TV (<a
+            href="https://www.youtube.com/watch?v=W870SRqGd_o"
+            >siehe mein Video</a
+          >)
+        </li>
+      </ul>
+    </article>
+
+    <ClientMarquee />
+
+    <Footer />
+  </BaseLayout>
+</Layout>

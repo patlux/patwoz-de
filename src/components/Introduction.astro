@@ -1,6 +1,35 @@
 ---
 import { Image } from 'astro:assets'
 import meImage from '~/assets/images/me.jpg'
+const currentPath = Astro.url.pathname
+const isGerman = currentPath.startsWith('/de')
+const labels = isGerman
+  ? {
+      available: 'Verfügbar',
+      hello: 'Hallo, ich bin',
+      role: 'Software Engineer & Freelance Entwickler',
+      location: 'Nürnberg, Deutschland',
+      experience: '10+ Jahre Erfahrung',
+      intro:
+        'Ich bin ein leidenschaftlicher Softwareentwickler, der mit 16 das Programmieren entdeckt hat und seitdem nicht mehr aufgehört hat. Heute spezialisiere ich mich als <strong>Frontend Engineer</strong> mit Expertise in <strong>TypeScript</strong>, <strong>React</strong> und <strong>React Native</strong>. Außerdem übernehme ich <strong>DevOps</strong>, baue Infrastruktur mit <strong>Docker</strong>, <strong>Kubernetes</strong> und <strong>CI/CD-Pipelines</strong> für reibungslose Deployments.',
+      ctaTitle: 'Suchen Sie einen Freelance-Entwickler?',
+      ctaBody:
+        'Ich bin aktuell für neue Projekte verfügbar und helfe gern dabei, Ihre Vision umzusetzen.',
+      ctaButton: 'Kontakt aufnehmen',
+    }
+  : {
+      available: 'Available',
+      hello: "Hello, I'm",
+      role: 'Software Engineer & Freelance Developer',
+      location: 'Nuremberg, Germany',
+      experience: '10+ Years Experience',
+      intro:
+        "I'm a passionate software developer who discovered coding at 16 and never looked back. Today, I specialize as a <strong>frontend engineer</strong> with expertise in <strong>TypeScript</strong>, <strong>React</strong>, and <strong>React Native</strong>. I also handle <strong>DevOps</strong>, setting up infrastructure with <strong>Docker</strong>, <strong>Kubernetes</strong>, and <strong>CI/CD pipelines</strong> for smooth automated deployments.",
+      ctaTitle: 'Looking for a freelance developer?',
+      ctaBody:
+        "I'm currently available for new projects and would love to help bring your vision to life.",
+      ctaButton: 'Get in Touch',
+    }
 ---
 
 <div class="animate-fade-in-up opacity-0">
@@ -38,7 +67,7 @@ import meImage from '~/assets/images/me.jpg'
             <span class="relative inline-flex rounded-full h-2 w-2 bg-green-200"
             ></span>
           </span>
-          Available
+          {labels.available}
         </div>
       </div>
 
@@ -47,7 +76,7 @@ import meImage from '~/assets/images/me.jpg'
         <p
           class="text-warm-500 dark:text-warm-400 text-sm font-medium tracking-wide uppercase"
         >
-          Hello, I'm
+          {labels.hello}
         </p>
         <h1 class="text-3xl sm:text-4xl font-bold mt-1 font-display">
           Patrick Wozniak
@@ -55,7 +84,7 @@ import meImage from '~/assets/images/me.jpg'
         <p
           class="text-xl text-warm-600 dark:text-warm-400 mt-1 font-display italic"
         >
-          Software Engineer & Freelance Developer
+          {labels.role}
         </p>
 
         <!-- Quick stats -->
@@ -74,7 +103,7 @@ import meImage from '~/assets/images/me.jpg'
                 d="m9.69 18.933.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 00.281-.14c.186-.096.446-.24.757-.433.62-.384 1.445-.966 2.274-1.765C15.302 14.988 17 12.493 17 9A7 7 0 103 9c0 3.492 1.698 5.988 3.355 7.584a13.731 13.731 0 002.273 1.765 11.842 11.842 0 00.976.544l.062.029.018.008.006.003zM10 11.25a2.25 2.25 0 100-4.5 2.25 2.25 0 000 4.5z"
                 clip-rule="evenodd"></path>
             </svg>
-            Nuremberg, Germany
+            {labels.location}
           </div>
           <div
             class="flex items-center gap-2 text-sm text-warm-600 dark:text-warm-400"
@@ -93,7 +122,7 @@ import meImage from '~/assets/images/me.jpg'
                 d="M10 18a8 8 0 100-16 8 8 0 000 16zm0-1.5a6.5 6.5 0 100-13 6.5 6.5 0 000 13z"
                 clip-rule="evenodd"></path>
             </svg>
-            10+ Years Experience
+            {labels.experience}
           </div>
         </div>
       </div>
@@ -103,14 +132,7 @@ import meImage from '~/assets/images/me.jpg'
 
 <article class="prose lg:prose-lg mt-10 animate-fade-in-up opacity-0 stagger-2">
   <p class="text-lg leading-relaxed">
-    I'm a passionate software developer who discovered coding at 16 and never
-    looked back. Today, I specialize as a <strong>frontend engineer</strong> with
-    expertise in <strong>TypeScript</strong>, <strong>React</strong>, and <strong
-      >React Native</strong
-    >. I also handle <strong>DevOps</strong>, setting up infrastructure with <strong
-      >Docker</strong
-    >, <strong>Kubernetes</strong>, and <strong>CI/CD pipelines</strong> for smooth
-    automated deployments.
+    <span set:html={labels.intro} />
   </p>
 </article>
 
@@ -123,11 +145,10 @@ import meImage from '~/assets/images/me.jpg'
       <h4
         class="font-display text-lg font-semibold text-warm-900 dark:text-warm-100"
       >
-        Looking for a freelance developer?
+        {labels.ctaTitle}
       </h4>
       <p class="text-warm-600 dark:text-warm-400 text-sm mt-1">
-        I'm currently available for new projects and would love to help bring
-        your vision to life.
+        {labels.ctaBody}
       </p>
     </div>
     <a
@@ -147,7 +168,7 @@ import meImage from '~/assets/images/me.jpg'
           d="M19 8.839l-7.77 3.885a2.75 2.75 0 01-2.46 0L1 8.839V14a2 2 0 002 2h14a2 2 0 002-2V8.839z"
         ></path>
       </svg>
-      Get in Touch
+      {labels.ctaButton}
     </a>
   </div>
 </div>

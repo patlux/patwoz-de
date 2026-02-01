@@ -3,6 +3,14 @@
  * ClientMarquee - A scrolling marquee of client logos with intro section
  * Used on secondary pages to showcase who I work with
  */
+const currentPath = Astro.url.pathname
+const isGerman = currentPath.startsWith('/de')
+const withLocale = (path: string) =>
+  isGerman ? (path === '/' ? '/de' : `/de${path}`) : path
+const title = isGerman ? 'Freelance-Entwickler' : 'Freelance Developer'
+const description = isGerman
+  ? 'Ich helfe Unternehmen, hochwertige Software zu bauen - vor allem mobile und Web-Anwendungen, aber auch Backend-Systeme und DevOps-Infrastruktur. Von Startups bis zu Enterprises setze ich Ideen mit sauberem Code und modernen Technologien um.'
+  : 'I help companies build high-quality software - primarily mobile and web applications, but also backend systems and DevOps infrastructure. From startups to enterprises, I bring ideas to life with clean code and modern technologies.'
 ---
 
 <section class="mt-16 mb-8">
@@ -10,15 +18,12 @@
     <h2
       class="text-2xl font-display font-bold text-warm-900 dark:text-warm-100 mb-3"
     >
-      Freelance Developer
+      {title}
     </h2>
     <p
       class="text-warm-600 dark:text-warm-400 max-w-xl mx-auto leading-relaxed"
     >
-      I help companies build high-quality software - primarily mobile and web
-      applications, but also backend systems and DevOps infrastructure. From
-      startups to enterprises, I bring ideas to life with clean code and modern
-      technologies.
+      {description}
     </p>
   </div>
 
@@ -33,13 +38,13 @@
     </div>
     <div class="flex animate-marquee gap-12 items-center">
       <a
-        href="/work/kulturpass"
+        href={withLocale('/work/kulturpass')}
         class="flex-shrink-0 opacity-60 hover:opacity-100 transition-opacity"
       >
         <img alt="SAP" src="/company/sap.svg" class="h-10 w-auto" />
       </a>
       <a
-        href="/work/porsche"
+        href={withLocale('/work/porsche')}
         class="flex-shrink-0 opacity-60 hover:opacity-100 transition-opacity"
       >
         <img
@@ -49,17 +54,17 @@
         />
       </a>
       <a
-        href="/work/ibm"
+        href={withLocale('/work/ibm')}
         class="flex-shrink-0 opacity-60 hover:opacity-100 transition-opacity"
       >
         <img alt="IBM" src="/company/IBM_logo.svg" class="h-8 w-auto" />
       </a>
       <a
-        href="/work/stroeer"
+        href={withLocale('/work/stroeer')}
         class="flex-shrink-0 opacity-60 hover:opacity-100 transition-opacity flex flex-col items-center gap-1"
       >
         <img
-          alt="Stroeer"
+          alt="Ströer"
           src="/company/str-logo-white.svg"
           class="h-5 w-auto dark:invert"
         />
@@ -70,13 +75,13 @@
         />
       </a>
       <a
-        href="/work/kicker"
+        href={withLocale('/work/kicker')}
         class="flex-shrink-0 opacity-60 hover:opacity-100 transition-opacity"
       >
         <img alt="Kicker" src="/company/kicker.svg" class="h-8 w-auto" />
       </a>
       <a
-        href="/work/abl"
+        href={withLocale('/work/abl')}
         class="flex-shrink-0 opacity-60 hover:opacity-100 transition-opacity"
       >
         <img alt="ABL" src="/company/abl.svg" class="h-7 w-auto dark:invert" />
@@ -90,7 +95,7 @@
         <img alt="Enerparc" src="/company/enerparc.svg" class="h-8 w-auto" />
       </a>
       <a
-        href="/work/ibm"
+        href={withLocale('/work/ibm')}
         class="flex-shrink-0 opacity-60 hover:opacity-100 transition-opacity"
       >
         <img alt="Barmer" src="/company/barmer.svg" class="h-8 w-auto" />
@@ -117,13 +122,13 @@
       </a>
       <!-- Duplicate for seamless loop -->
       <a
-        href="/work/kulturpass"
+        href={withLocale('/work/kulturpass')}
         class="flex-shrink-0 opacity-60 hover:opacity-100 transition-opacity"
       >
         <img alt="SAP" src="/company/sap.svg" class="h-10 w-auto" />
       </a>
       <a
-        href="/work/porsche"
+        href={withLocale('/work/porsche')}
         class="flex-shrink-0 opacity-60 hover:opacity-100 transition-opacity"
       >
         <img
@@ -133,17 +138,17 @@
         />
       </a>
       <a
-        href="/work/ibm"
+        href={withLocale('/work/ibm')}
         class="flex-shrink-0 opacity-60 hover:opacity-100 transition-opacity"
       >
         <img alt="IBM" src="/company/IBM_logo.svg" class="h-8 w-auto" />
       </a>
       <a
-        href="/work/stroeer"
+        href={withLocale('/work/stroeer')}
         class="flex-shrink-0 opacity-60 hover:opacity-100 transition-opacity flex flex-col items-center gap-1"
       >
         <img
-          alt="Stroeer"
+          alt="Ströer"
           src="/company/str-logo-white.svg"
           class="h-5 w-auto dark:invert"
         />
@@ -154,13 +159,13 @@
         />
       </a>
       <a
-        href="/work/kicker"
+        href={withLocale('/work/kicker')}
         class="flex-shrink-0 opacity-60 hover:opacity-100 transition-opacity"
       >
         <img alt="Kicker" src="/company/kicker.svg" class="h-8 w-auto" />
       </a>
       <a
-        href="/work/abl"
+        href={withLocale('/work/abl')}
         class="flex-shrink-0 opacity-60 hover:opacity-100 transition-opacity"
       >
         <img alt="ABL" src="/company/abl.svg" class="h-7 w-auto dark:invert" />
@@ -174,7 +179,7 @@
         <img alt="Enerparc" src="/company/enerparc.svg" class="h-8 w-auto" />
       </a>
       <a
-        href="/work/ibm"
+        href={withLocale('/work/ibm')}
         class="flex-shrink-0 opacity-60 hover:opacity-100 transition-opacity"
       >
         <img alt="Barmer" src="/company/barmer.svg" class="h-8 w-auto" />

@@ -1,0 +1,20 @@
+---
+title: 'xcode: error: Using the first of multiple matching destinations'
+description: So behebst du den Fehler "Using the first of multiple matching destinations"
+published: 2024-10-14
+image: /blog-images/2024-10-14-xcode-error-destinations.avif
+featured: true
+---
+
+Wenn du folgende Fehlermeldung von `xcodebuild` bekommst:
+
+```sh
+error: --- xcodebuild: WARNING: Using the first of multiple matching destinations:
+{ platform:iOS Simulator, id:dvtdevice-DVTiOSDeviceSimulatorPlaceholder-iphonesimulator:placeholder, name:Any iOS Simulator Device }
+{ platform:iOS Simulator, id:AA07801C-A281-4D5D-B26A-89E867A26C7F, OS:18.0, name:iPad (10th generation) }
+...
+```
+
+Lösche alle Xcode Instanzen von deinem macOS und installiere Xcode neu. Das war der einzige Weg, der bei mir geholfen hat. Nebenbei wurden dadurch auch merkwürdige Build-Probleme in Xcode behoben.
+
+Viel Erfolg ;)

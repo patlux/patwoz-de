@@ -1,0 +1,85 @@
+---
+import Layout from '~/layouts/Layout.astro'
+import BaseLayout from '~/components/BaseLayout.astro'
+import Footer from '~/components/Footer.astro'
+import Introduction from '~/components/Introduction.astro'
+import ClientMarquee from '~/components/ClientMarquee.astro'
+---
+
+<Layout title="Was ich gebaut habe | Patrick Wozniak" lang="de">
+  <BaseLayout>
+    <Introduction />
+
+    <article class="prose lg:prose-lg mt-12">
+      <h1>Was ich gebaut habe</h1>
+      <p>
+        Diese Seite listet Open-Source-Libraries und kleine eigene Projekte. Für
+        professionelle Kundenarbeit schau dir meine <a href="/de/work"
+          >Referenzen</a
+        >
+        an.
+      </p>
+      <ul>
+        <li>
+          <a
+            href="https://github.com/patlux/react-native-bluetooth-state-manager"
+            >react-native-bluetooth-state-manager</a
+          >: Bluetooth-Status des Geräts verwalten
+        </li>
+        <li>
+          <a href="https://github.com/patlux/bun-sqlite-migrations"
+            >bun-sqlite-migrations</a
+          >: Migrations-Management für bun.sh
+        </li>
+        <li>
+          <a href="https://github.com/patlux/react-native-app-state"
+            >react-native-app-state</a
+          >: Deklarative Nutzung von react-native AppState
+        </li>
+        <li>
+          <a href="https://github.com/patlux/expo-cli-docker-images"
+            >expo-cli-docker-images</a
+          >: Docker Images für expo-cli
+        </li>
+        <li>
+          <a href="https://github.com/patlux/dotfiles">dotfiles</a>: Dotfiles
+          für mein persönliches macOS-Setup
+        </li>
+        <li>
+          <a href="https://github.com/patlux/react-supercluster"
+            >react-supercluster</a
+          >: React Hook für Mapbox supercluster
+        </li>
+        <li>
+          <a href="https://github.com/patlux/react-query-cache-persistent"
+            >react-query-cache-persistent</a
+          >: Synchrones Storage für TanStack Query
+        </li>
+        <li>
+          <a href="https://github.com/patlux/smtp2http">smtp2http</a>: Leitet
+          eingehende Mails an einen HTTP REST Endpoint weiter
+        </li>
+        <li>
+          <a href="https://github.com/patlux/patwoz-de">patwoz-de</a>: meine
+          persönliche Website
+        </li>
+        <li>
+          <a href="https://github.com/patlux/node-cec">node-cec</a>: cec-client
+          Wrapper in Node.js
+        </li>
+        <li>
+          <a href="https://github.com/patlux/prettier-config">prettier-config</a
+          >: Meine persönliche Prettier-Konfiguration
+        </li>
+        <li>
+          <a href="https://github.com/patlux/nixos-config">nixos-config</a>:
+          Meine NixOS-Konfiguration auf Basis von flakes
+        </li>
+      </ul>
+    </article>
+
+    <ClientMarquee />
+
+    <Footer />
+  </BaseLayout>
+</Layout>

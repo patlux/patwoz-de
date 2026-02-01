@@ -1,0 +1,254 @@
+---
+import Layout from '~/layouts/Layout.astro'
+import BaseLayout from '~/components/BaseLayout.astro'
+import Footer from '~/components/Footer.astro'
+import AppStoreLinks from '~/components/AppStoreLinks.astro'
+
+const pageTitle = 'Barmer App - Bonus Modul'
+const description = 'Bonus-Modul Arbeit für die Barmer App über Web und Mobile.'
+const canonicalURL = new URL(Astro.url.pathname, Astro.site)
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Startseite',
+      item: new URL('/de', Astro.site).toString(),
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Referenzen',
+      item: new URL('/de/work', Astro.site).toString(),
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: pageTitle,
+      item: canonicalURL.toString(),
+    },
+  ],
+}
+---
+
+<Layout
+  title="Barmer App - Bonus Modul - Referenzen"
+  description={description}
+  lang="de"
+>
+  <BaseLayout>
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(breadcrumbSchema)}
+    />
+    <article class="mt-12">
+      <a
+        href="/de/work/ibm"
+        class="inline-flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 mb-6"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-4 h-4"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M15.75 19.5 8.25 12l7.5-7.5"></path>
+        </svg>
+        Zurück zu IBM / Barmer
+      </a>
+
+      <header class="mb-12">
+        <div class="flex flex-col sm:flex-row gap-6 items-start">
+          <div
+            class="flex-shrink-0 flex items-center justify-center w-24 h-24 bg-gray-50 dark:bg-zinc-800 rounded-xl border border-gray-200 dark:border-zinc-700"
+          >
+            <img
+              src="/company/barmer.svg"
+              alt="Barmer Logo"
+              width="70"
+              height="20"
+            />
+          </div>
+          <div class="flex-1">
+            <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100">
+              Barmer App - Bonus Modul
+            </h1>
+            <p class="text-gray-600 dark:text-gray-400 mt-1">IBM iX / Barmer</p>
+            <div
+              class="flex flex-wrap gap-4 mt-3 text-sm text-gray-500 dark:text-gray-400"
+            >
+              <span class="flex items-center gap-1">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-4 h-4"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
+                  ></path>
+                </svg>
+                Senior Frontend Developer
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <AppStoreLinks
+          appStoreUrl="https://apps.apple.com/de/app/barmer-app/id956752981"
+          playStoreUrl="https://play.google.com/store/apps/details?id=de.barmergek.serviceapp&hl=de"
+        />
+      </header>
+
+      <div class="prose lg:prose-lg max-w-none">
+        <p>
+          Die Barmer App ist die offizielle Mobile-App von Barmer, einer der
+          größten gesetzlichen Krankenkassen Deutschlands. Das Bonus Modul
+          belohnt Mitglieder für gesunde Gewohnheiten und Vorsorge. Mitglieder
+          können Geldprämien erhalten, indem sie Gesundheitsaktivitäten wie
+          Impfungen, Check-ups, Sportvereinsmitgliedschaften und mehr
+          dokumentieren. Die Bonus-Funktion steht auch als eigenständige Web-App
+          zur Verfügung.
+        </p>
+
+        <h2>Projektüberblick</h2>
+        <p>
+          Als Senior Frontend Developer habe ich über 230 Commits im Bonus Modul
+          geliefert, über die React Native Mobile-App, die React Web-App und
+          Shared Packages hinweg. Das Projekt ist als Monorepo organisiert, mit
+          separaten Apps für Mobile (iOS/Android) und Web, die Business Logic
+          und UI-Komponenten über interne Packages teilen.
+        </p>
+
+        <h2>Wichtige Beiträge</h2>
+
+        <h3>Beleg-Upload Flow</h3>
+        <p>
+          Kompletten Workflow für Beleg-Uploads umgesetzt, inklusive Foto-Upload
+          und Validierung. Enthalten sind Dateigrößen-Validierung (max 16MB),
+          Dokumentenlimits und sauberes Error Handling mit userfreundlichem
+          Feedback.
+        </p>
+
+        <h3>Timeline & Activity Tracking</h3>
+        <p>
+          Timeline Interface für Bonus-Aktivitäten, Status und
+          Auszahlungsverlauf gebaut. Detailansichten mit Status-Chips,
+          Last-Updated Indikatoren und korrekter Back Navigation über Web und
+          Mobile implementiert.
+        </p>
+
+        <h3>Alert & Notification System</h3>
+        <p>
+          Alert-System (B300 Alerts) für wichtige Nutzerkommunikation
+          entwickelt, inklusive Bestätigungen, Ablehnungen und Infomeldungen.
+          Dismissible Hints mit Accessibility-Support umgesetzt.
+        </p>
+
+        <h3>Accessibility Improvements</h3>
+        <p>
+          Component Accessibility verbessert, inklusive korrekter Role Ansagen
+          für Buttons, Selects und Bottom Sheets. Probleme behoben, bei denen
+          interaktive Elemente ihren Zweck nicht korrekt an Screenreader
+          kommunizierten.
+        </p>
+
+        <h3>UI Component Fixes</h3>
+        <p>
+          Zahlreiche UI Issues behoben, u.a. Header Truncation im Dashboard,
+          Landscape Scrolling für Error Messages, konsistente Input Abstände,
+          Dialog Scrollbarkeit auf iOS und korrektes Labeling für
+          Drei-Punkte-Menüs.
+        </p>
+
+        <h3>Opt-Out & Settings</h3>
+        <p>
+          Opt-Out Flow für Nutzer implementiert, die das Bonusprogramm verlassen
+          möchten, inklusive Screen Layouts, Confirmation Dialogs und Backend-
+          Integration.
+        </p>
+
+        <h3>Dynamic Content</h3>
+        <p>
+          Dynamische Hint-Texte gebaut, die sich je Bonuszeitraum und Submission
+          Status anpassen. Nutzer erhalten so stets relevante Infos zu ihrem
+          Bonusstatus und möglichen Aktionen.
+        </p>
+      </div>
+
+      <div class="prose lg:prose-lg max-w-none mt-8">
+        <h2>Technologie-Stack</h2>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-6 mb-12">
+        <div>
+          <h4
+            class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase mb-3"
+          >
+            Mobile
+          </h4>
+          <ul class="space-y-2">
+            <li class="text-gray-700 dark:text-gray-300">React Native</li>
+            <li class="text-gray-700 dark:text-gray-300">TypeScript</li>
+            <li class="text-gray-700 dark:text-gray-300">Barmer Puls UI</li>
+            <li class="text-gray-700 dark:text-gray-300">Inversify (DI)</li>
+          </ul>
+        </div>
+        <div>
+          <h4
+            class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase mb-3"
+          >
+            Web
+          </h4>
+          <ul class="space-y-2">
+            <li class="text-gray-700 dark:text-gray-300">React</li>
+            <li class="text-gray-700 dark:text-gray-300">TypeScript</li>
+            <li class="text-gray-700 dark:text-gray-300">Barmer Puls UI</li>
+            <li class="text-gray-700 dark:text-gray-300">Shared Components</li>
+          </ul>
+        </div>
+        <div>
+          <h4
+            class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase mb-3"
+          >
+            Architecture
+          </h4>
+          <ul class="space-y-2">
+            <li class="text-gray-700 dark:text-gray-300">Lerna Monorepo</li>
+            <li class="text-gray-700 dark:text-gray-300">Yarn Workspaces</li>
+            <li class="text-gray-700 dark:text-gray-300">Nx</li>
+            <li class="text-gray-700 dark:text-gray-300">Shared Packages</li>
+          </ul>
+        </div>
+        <div>
+          <h4
+            class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase mb-3"
+          >
+            Testing
+          </h4>
+          <ul class="space-y-2">
+            <li class="text-gray-700 dark:text-gray-300">Jest</li>
+            <li class="text-gray-700 dark:text-gray-300">
+              React Testing Library
+            </li>
+            <li class="text-gray-700 dark:text-gray-300">ESLint</li>
+            <li class="text-gray-700 dark:text-gray-300">Husky</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <Footer />
+  </BaseLayout>
+</Layout>

@@ -1,0 +1,316 @@
+---
+import Layout from '~/layouts/Layout.astro'
+import BaseLayout from '~/components/BaseLayout.astro'
+import Footer from '~/components/Footer.astro'
+import AppStoreLinks from '~/components/AppStoreLinks.astro'
+
+const pageTitle = 'SAP / KulturPass'
+const description =
+  'React Native App für KulturPass mit Favoriten, Validierung, Secure Storage und CI/CD Verbesserungen.'
+const canonicalURL = new URL(Astro.url.pathname, Astro.site)
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Startseite',
+      item: new URL('/de', Astro.site).toString(),
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Referenzen',
+      item: new URL('/de/work', Astro.site).toString(),
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: pageTitle,
+      item: canonicalURL.toString(),
+    },
+  ],
+}
+---
+
+<Layout title="SAP KulturPass - Referenzen" description={description} lang="de">
+  <BaseLayout>
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(breadcrumbSchema)}
+    />
+    <article class="mt-12">
+      <a
+        href="/de/work"
+        class="inline-flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 mb-6"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-4 h-4"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M15.75 19.5 8.25 12l7.5-7.5"></path>
+        </svg>
+        Zurück zu Referenzen
+      </a>
+
+      <header class="mb-12">
+        <div class="flex flex-col sm:flex-row gap-6 items-start">
+          <div
+            class="flex-shrink-0 flex items-center justify-center w-24 h-24 bg-gray-50 dark:bg-zinc-800 rounded-xl border border-gray-200 dark:border-zinc-700"
+          >
+            <img src="/company/sap.svg" alt="SAP Logo" width="70" height="35" />
+          </div>
+          <div class="flex-1">
+            <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100">
+              KulturPass DE
+            </h1>
+            <p class="text-gray-600 dark:text-gray-400 mt-1">SAP SE</p>
+            <div
+              class="flex flex-wrap gap-4 mt-3 text-sm text-gray-500 dark:text-gray-400"
+            >
+              <span class="flex items-center gap-1">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-4 h-4"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
+                  ></path>
+                </svg>
+                Senior React Native Developer
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <AppStoreLinks
+          appStoreUrl="https://apps.apple.com/de/app/kulturpass-de/id6446174970"
+          playStoreUrl="https://play.google.com/store/apps/details?id=de.bkm.kulturpass"
+        />
+      </header>
+
+      <div
+        class="mb-8 p-4 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg"
+      >
+        <p class="text-sm text-amber-800 dark:text-amber-200 m-0">
+          <strong>Hinweis:</strong> Das KulturPass Programm wurde Ende 2025 eingestellt.
+          App und Web-Services wurden am 30. November 2025 abgeschaltet, Einlösungen
+          waren bis 15. Dezember 2025 möglich.
+          <a
+            href="https://digitale-chancen.zammad.com/help/de-de/91-infos-zum-projektende/265-das-kulturpass-projekt-endet-wichtige-informationen"
+            target="_blank"
+            rel="noreferrer"
+            class="inline-flex items-center gap-1 ml-1 underline hover:no-underline"
+          >
+            Mehr erfahren
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+              class="w-3 h-3"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+              ></path>
+            </svg>
+          </a>
+        </p>
+      </div>
+
+      <div class="prose lg:prose-lg max-w-none">
+        <p>
+          KulturPass war eine deutsche Regierungsinitiative, die allen
+          18-Jährigen in Deutschland ein digitales Budget von 200 EUR für
+          kulturelle Angebote wie Bücher, Konzerttickets, Museumsbesuche und
+          mehr bereitstellte. Die App ermöglichte es jungen Erwachsenen,
+          kulturelle Angebote von teilnehmenden Anbietern zu entdecken und
+          einzulösen.
+        </p>
+
+        <h2>Projektüberblick</h2>
+        <p>
+          Ich habe an der Entwicklung der KulturPass Mobile-App mit React Native
+          mitgearbeitet. Als Teil des SAP-Teams implementierte ich Kernfeatures
+          wie das Favoriten-System, Formularvalidierung, Secure Storage und die
+          State- Management-Architektur. Die App integriert den Personalausweis
+          für die Identitätsprüfung und verbindet sich mit einem
+          Commerce-Backend für Angebotssuche und Einlösung.
+        </p>
+
+        <h2>Wichtige Beiträge</h2>
+
+        <h3>Favoriten-System</h3>
+        <p>
+          Das komplette Favoriten-Feature gebaut, mit dem Nutzer kulturelle
+          Angebote speichern und verwalten können. Listenansicht mit
+          Produktbildern, Preis-Badges und Swipe-Delete-Aktionen umgesetzt.
+          Umfangreiche Accessibility- Labels für Screenreader und Tests
+          hinzugefügt.
+        </p>
+
+        <h3>Formularvalidierung</h3>
+        <p>
+          Client- und Server-seitige Formularvalidierung für Login- und
+          Registrierung mit React Hook Form und Zod implementiert. Robustes
+          Error-Handling mit übersetzten Validierungsnachrichten je Feld und
+          korrekter Integration von CDC API Error Responses aufgebaut.
+        </p>
+
+        <h3>Secure Storage</h3>
+        <p>
+          Verschlüsselten Storage für sensible Daten mit
+          react-native-encrypted-storage eingerichtet. Layered Storage
+          Architecture aufgebaut, die persistente Daten von sicheren Credentials
+          trennt, inklusive sauberer Redux Persist Integration.
+        </p>
+
+        <h3>Redux State Management</h3>
+        <p>
+          Redux Architektur mit Redux Toolkit, Redux Saga für Side Effects und
+          Redux Persist für State Persistence etabliert. Separate Storage
+          Backends für normale und sensitive Daten konfiguriert, inklusive
+          sauberer Serialisierung und Type Safety.
+        </p>
+
+        <h3>React Native Upgrade</h3>
+        <p>
+          Upgrade von React Native auf 0.70.x geführt, inklusive Hermes Engine
+          Updates und Dependency-Migrationen. Breaking Changes gelöst,
+          Build-Errors behoben und Security-Updates in Third-Party-Packages
+          eingespielt.
+        </p>
+
+        <h3>Code-Qualität & Testing</h3>
+        <p>
+          Code-Qualität durch strengere ESLint-Regeln verbessert und TypeScript-
+          Fehler über die Codebasis hinweg behoben. React Native Testing Library
+          eingerichtet und umfangreiche Unit-Tests für Komponenten und Services
+          geschrieben, inklusive Test-Patterns für das Team.
+        </p>
+
+        <h3>Environment-Konfiguration</h3>
+        <p>
+          Dynamisches Environment-Config-System gebaut, das
+          Build-Konfigurationen aus YAML Dateien liest. Konfigurations-Picker UI
+          für Dev-Builds umgesetzt, um zwischen Backend-Umgebungen zu wechseln.
+        </p>
+
+        <h3>API Error Handling</h3>
+        <p>
+          Error Registry System für konsistentes Error Handling erstellt. Error-
+          Modals für API-Fehler mit korrektem Error-Code-Mapping und
+          userfreundlichen Meldungen implementiert.
+        </p>
+
+        <h3>Registrierung & Authentifizierung</h3>
+        <p>
+          Preferences Screen für die Registrierung umgesetzt, inklusive Standort
+          (PLZ) Eingabe mit Validierung. Forgot-Password-Flow mit
+          Fehlerbehandlung und User-Feedback gebaut.
+        </p>
+
+        <h3>CI/CD Pipeline</h3>
+        <p>
+          Continuous Integration Pipelines für TypeScript Checks, ESLint und
+          Jest Tests eingerichtet. Build Wrapper Repository für automatisierte
+          App Builds und Distribution konfiguriert.
+        </p>
+      </div>
+
+      <div class="prose lg:prose-lg max-w-none mt-8">
+        <h2>Technologie-Stack</h2>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-6 mb-12">
+        <div>
+          <h4
+            class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase mb-3"
+          >
+            Frontend
+          </h4>
+          <ul class="space-y-2">
+            <li class="text-gray-700 dark:text-gray-300">React Native 0.70</li>
+            <li class="text-gray-700 dark:text-gray-300">TypeScript</li>
+            <li class="text-gray-700 dark:text-gray-300">Redux Toolkit</li>
+            <li class="text-gray-700 dark:text-gray-300">Redux Saga</li>
+            <li class="text-gray-700 dark:text-gray-300">React Navigation</li>
+            <li class="text-gray-700 dark:text-gray-300">React Hook Form</li>
+          </ul>
+        </div>
+        <div>
+          <h4
+            class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase mb-3"
+          >
+            Services
+          </h4>
+          <ul class="space-y-2">
+            <li class="text-gray-700 dark:text-gray-300">
+              AppCenter Analytics
+            </li>
+            <li class="text-gray-700 dark:text-gray-300">AppCenter Crashes</li>
+            <li class="text-gray-700 dark:text-gray-300">i18next</li>
+            <li class="text-gray-700 dark:text-gray-300">Axios</li>
+          </ul>
+        </div>
+        <div>
+          <h4
+            class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase mb-3"
+          >
+            Security
+          </h4>
+          <ul class="space-y-2">
+            <li class="text-gray-700 dark:text-gray-300">Encrypted Storage</li>
+            <li class="text-gray-700 dark:text-gray-300">Zod Validation</li>
+            <li class="text-gray-700 dark:text-gray-300">AusweisApp2 SDK</li>
+          </ul>
+        </div>
+        <div>
+          <h4
+            class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase mb-3"
+          >
+            DevOps
+          </h4>
+          <ul class="space-y-2">
+            <li class="text-gray-700 dark:text-gray-300">Jest</li>
+            <li class="text-gray-700 dark:text-gray-300">
+              React Native Testing Library
+            </li>
+            <li class="text-gray-700 dark:text-gray-300">ESLint</li>
+            <li class="text-gray-700 dark:text-gray-300">GitHub Actions</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="prose lg:prose-lg max-w-none">
+        <h2>Weitere Beiträge</h2>
+
+        <h3>react-native-ausweisapp2-wrapper</h3>
+        <p>
+          Beitrag zum React Native Wrapper für das AusweisApp2 SDK, das die
+          Integration des Personalausweises für sichere Identitätsprüfung in der
+          App ermöglicht.
+        </p>
+      </div>
+    </article>
+
+    <Footer />
+  </BaseLayout>
+</Layout>

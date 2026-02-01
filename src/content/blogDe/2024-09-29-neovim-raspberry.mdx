@@ -1,0 +1,56 @@
+---
+title: Aktuelles Neovim auf Raspberry Pi
+description: Anleitung, wie du die neueste Neovim-Version auf einem Raspberry Pi aus dem Source-Code baust, statt die veraltete Version aus den Standard-Repos zu nutzen.
+published: 2024-09-29
+image: /blog-images/2024-09-29-neovim-raspberry.avif
+featured: true
+---
+
+Wenn du `neovim` auf einem Raspberry Pi über `apt` installierst, bekommst du in der Regel eine veraltete Version wie `0.7.2`. Moderne Setups wie `lazyvim` benötigen jedoch `neovim >=0.9`, daher ist ein Update wichtig.
+
+Diese Anleitung zeigt, wie du die neueste Version direkt aus dem Source-Code baust und installierst.
+
+## Build & Install
+
+```sh
+ssh <dein-raspberry>
+
+sudo apt install git cmake
+
+cd ~/dev # oder wo du willst
+git clone https://github.com/neovim/neovim.git
+cd neovim
+# Mehr Infos: https://github.com/neovim/neovim/blob/master/BUILD.md
+make CMAKE_BUILD_TYPE=RELEASE
+
+# Nach erfolgreichem Build ein .deb Paket erstellen.
+cd build
+cpack -G DEB
+
+# Entweder
+sudo dpkg -i nvim-linux64.deb
+
+# oder wenn Neovim bereits installiert ist
+sudo apt remove neovim
+sudo dpkg -i --force-overwrite nvim-linux64.deb
+```
+
+Installation prüfen:
+
+```sh
+$ nvim --version
+NVIM v0.11.0-dev-862+gdf915f3af
+Build type: Release
+LuaJIT 2.1.1724512491
+Run "nvim -V1 -v" for more info
+```
+
+Fertig!
+
+## Zusätzlich
+
+Stelle sicher, dass du diese Tools installiert hast:
+
+```sh
+sudo apt install fd-find ripgrep python3-pip
+```

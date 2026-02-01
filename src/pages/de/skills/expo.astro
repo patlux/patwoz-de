@@ -1,0 +1,40 @@
+---
+import Layout from '~/layouts/Layout.astro'
+import BaseLayout from '~/components/BaseLayout.astro'
+import Footer from '~/components/Footer.astro'
+import SkillPage from '~/components/SkillPage.astro'
+
+const intro =
+  'Ich nutze Expo, um produktionsreife React-Native-Apps schnell zu liefern und bei Bedarf dennoch native Funktionen umzusetzen.'
+
+const delivered = [
+  'Die t-online News-App mit Expo bei <a href="/de/work/stroeer">Ströer</a> gebaut, inklusive eines Custom Expo Moduls für System-Theme-Erkennung und WebView-Synchronisierung.',
+  'EAS Build eingerichtet und automatisierte Releases für iOS und Android im <a href="/de/work/stroeer">Ströer</a> Projekt umgesetzt.',
+  'Die React Native + Expo Codebasis für <a href="/de/work/kicker">Kicker</a> betreut, inklusive Offline-Playback, Abos und einem High-Traffic Streaming-Erlebnis.',
+]
+
+const why =
+  'Ich balanciere Expos Produktivität mit nativen Integrationen, Performance-Tuning und Release-Pipelines. So kann man schnell liefern, ohne Produktqualität zu opfern.'
+
+const projects = [
+  { label: 'Ströer / t-online', href: '/de/work/stroeer' },
+  { label: 'Kicker', href: '/de/work/kicker' },
+]
+---
+
+<Layout
+  title="Expo | Patrick Wozniak"
+  description="Expo-Kompetenz für produktive React-Native-Apps, Custom Modules und Release-Automation."
+  lang="de"
+>
+  <BaseLayout>
+    <SkillPage
+      title="Expo"
+      intro={intro}
+      delivered={delivered}
+      why={why}
+      projects={projects}
+    />
+    <Footer />
+  </BaseLayout>
+</Layout>

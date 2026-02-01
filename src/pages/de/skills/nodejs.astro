@@ -1,0 +1,36 @@
+---
+import Layout from '~/layouts/Layout.astro'
+import BaseLayout from '~/components/BaseLayout.astro'
+import Footer from '~/components/Footer.astro'
+import SkillPage from '~/components/SkillPage.astro'
+
+const intro =
+  'Ich nutze Node.js für Backend-Services und Ingestion-Tools, die Mobile- und Web-Produkte stabil betreiben.'
+
+const delivered = [
+  'Einen RSS-Importer in Node.js für die <a href="/de/work/kicker">Kicker</a> Plattform gebaut, um Podcast-Feeds automatisch einzulesen und Inhalte aktuell zu halten.',
+  'Node-basierte Services in einen größeren Go- und Rust-Backend-Stack integriert und zuverlässige Ingestion- und Processing-Workflows aufgebaut.',
+]
+
+const why =
+  'Ich entwerfe Node.js-Services, die zuverlässig, beobachtbar und leicht erweiterbar sind. Dazu gehören Datenpipelines, Background Jobs und API-Endpunkte für clientnahe Apps.'
+
+const projects = [{ label: 'Kicker', href: '/de/work/kicker' }]
+---
+
+<Layout
+  title="Node.js | Patrick Wozniak"
+  description="Node.js-Erfahrung für Backend-Services und Content-Ingestion-Tooling."
+  lang="de"
+>
+  <BaseLayout>
+    <SkillPage
+      title="Node.js"
+      intro={intro}
+      delivered={delivered}
+      why={why}
+      projects={projects}
+    />
+    <Footer />
+  </BaseLayout>
+</Layout>

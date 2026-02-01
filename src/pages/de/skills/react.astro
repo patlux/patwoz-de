@@ -1,0 +1,41 @@
+---
+import Layout from '~/layouts/Layout.astro'
+import BaseLayout from '~/components/BaseLayout.astro'
+import Footer from '~/components/Footer.astro'
+import SkillPage from '~/components/SkillPage.astro'
+
+const intro =
+  'Ich baue React-Webanwendungen und gemeinsame Komponenten-Systeme, die über Produkte und Teams hinweg konsistent bleiben.'
+
+const delivered = [
+  'React-Webfeatures bei <a href="/de/work/porsche" class="text-accent-600 dark:text-accent-400 hover:text-accent-700 dark:hover:text-accent-300">Porsche Digital</a> geliefert, inklusive Kursverwaltung, Abo-Handling und geteilten Komponenten mit der Mobile-App.',
+  'Zentrale UI-Komponenten und Theming im <a href="/de/work/ibm/barmer-puls" class="text-accent-600 dark:text-accent-400 hover:text-accent-700 dark:hover:text-accent-300">Barmer Puls</a> Design-System verbessert, genutzt in React Web und <a href="/de/skills/react-native">React Native</a> Apps.',
+  'Beitrag zum <a href="/de/work/ibm/bonus" class="text-accent-600 dark:text-accent-400 hover:text-accent-700 dark:hover:text-accent-300">Barmer Bonus</a> Modul über Web- und Mobile-Oberflächen innerhalb eines gemeinsamen Monorepos.',
+]
+
+const why =
+  'Ich fokussiere mich auf wiederverwendbare Architektur, klare Komponenten-APIs und UI-Konsistenz in großem Maßstab. Das bedeutet Systeme zu bauen, die wartbar bleiben, während Features wachsen und mehrere Teams beitragen.'
+
+const projects = [
+  { label: 'Porsche Digital', href: '/de/work/porsche' },
+  { label: 'IBM iX / Barmer Bonus', href: '/de/work/ibm/bonus' },
+  { label: 'IBM iX / Barmer Puls', href: '/de/work/ibm/barmer-puls' },
+]
+---
+
+<Layout
+  title="React | Patrick Wozniak"
+  description="React-Erfahrung über Webanwendungen und geteilte Design-Systeme hinweg."
+  lang="de"
+>
+  <BaseLayout>
+    <SkillPage
+      title="React"
+      intro={intro}
+      delivered={delivered}
+      why={why}
+      projects={projects}
+    />
+    <Footer />
+  </BaseLayout>
+</Layout>

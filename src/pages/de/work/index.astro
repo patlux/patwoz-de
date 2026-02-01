@@ -1,0 +1,474 @@
+---
+import Layout from '~/layouts/Layout.astro'
+import BaseLayout from '~/components/BaseLayout.astro'
+import Footer from '~/components/Footer.astro'
+import ClientMarquee from '~/components/ClientMarquee.astro'
+---
+
+<Layout
+  title="Referenzen"
+  description="Kundenprojekte und Highlights aus Mobile, Web und Platform Engineering."
+  lang="de"
+>
+  <BaseLayout>
+    <section class="animate-fade-in-up opacity-0">
+      <h1
+        class="text-3xl sm:text-4xl font-display font-bold text-warm-900 dark:text-warm-100"
+      >
+        Kundenprojekte
+      </h1>
+      <p class="text-lg text-warm-600 dark:text-warm-400 mt-3 leading-relaxed">
+        Eine Auswahl von Projekten, an denen ich als Freelance Developer
+        gearbeitet habe. Jedes Projekt zeigt meine Erfahrung im Bau hochwertiger
+        Mobile- und Web-Anwendungen.
+      </p>
+    </section>
+
+    <div class="grid gap-5 mt-10">
+      <a
+        href="/de/work/porsche"
+        class="card-soft p-6 group hover-lift animate-fade-in-up opacity-0 stagger-1"
+      >
+        <div class="flex flex-col sm:flex-row gap-6">
+          <div
+            class="flex-shrink-0 flex items-center justify-center w-full sm:w-32 h-24 bg-warm-100 dark:bg-dark-elevated rounded-xl group-hover:bg-warm-200 dark:group-hover:bg-warm-800/30 transition-colors"
+          >
+            <img
+              src="/company/Porsche-Logo.webp"
+              alt="Porsche Logo"
+              width="80"
+              height="46"
+              class="opacity-90"
+            />
+          </div>
+          <div class="flex-1">
+            <h3
+              class="text-lg font-semibold text-warm-900 dark:text-warm-100 group-hover:text-accent-600 dark:group-hover:text-accent-400 transition-colors"
+            >
+              Porsche Digital
+            </h3>
+            <p class="text-warm-600 dark:text-warm-400 mt-2 leading-relaxed">
+              Fullstack-Entwicklung für eine Consumer-Mobile-App mit Live-Video-
+              Streaming, In-App-Abos und serverlosem AWS-Backend. 850+ Commits
+              über Mobile, Web und Infrastruktur.
+            </p>
+            <div class="flex flex-wrap gap-2 mt-4">
+              <span
+                class="px-2.5 py-1 text-xs font-medium bg-warm-200 dark:bg-warm-800/40 text-warm-700 dark:text-warm-300 rounded-lg"
+              >
+                React Native
+              </span>
+              <span
+                class="px-2.5 py-1 text-xs font-medium bg-warm-200 dark:bg-warm-800/40 text-warm-700 dark:text-warm-300 rounded-lg"
+              >
+                AWS CDK
+              </span>
+              <span
+                class="px-2.5 py-1 text-xs font-medium bg-warm-200 dark:bg-warm-800/40 text-warm-700 dark:text-warm-300 rounded-lg"
+              >
+                TypeScript
+              </span>
+              <span
+                class="px-2.5 py-1 text-xs font-medium bg-warm-200 dark:bg-warm-800/40 text-warm-700 dark:text-warm-300 rounded-lg"
+              >
+                Fullstack
+              </span>
+            </div>
+          </div>
+          <div
+            class="flex-shrink-0 flex items-center text-warm-400 group-hover:text-accent-500 transition-colors"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+              class="w-5 h-5"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="m8.25 4.5 7.5 7.5-7.5 7.5"></path>
+            </svg>
+          </div>
+        </div>
+      </a>
+
+      <a
+        href="/de/work/kulturpass"
+        class="card-soft p-6 group hover-lift animate-fade-in-up opacity-0 stagger-2"
+      >
+        <div class="flex flex-col sm:flex-row gap-6">
+          <div
+            class="flex-shrink-0 flex items-center justify-center w-full sm:w-32 h-24 bg-warm-100 dark:bg-dark-elevated rounded-xl group-hover:bg-warm-200 dark:group-hover:bg-warm-800/30 transition-colors"
+          >
+            <img
+              src="/company/sap.svg"
+              alt="SAP Logo"
+              width="80"
+              height="40"
+              class="opacity-90"
+            />
+          </div>
+          <div class="flex-1">
+            <h3
+              class="text-lg font-semibold text-warm-900 dark:text-warm-100 group-hover:text-accent-600 dark:group-hover:text-accent-400 transition-colors"
+            >
+              SAP / KulturPass DE
+            </h3>
+            <p class="text-warm-600 dark:text-warm-400 mt-2 leading-relaxed">
+              Beitrag zur KulturPass Mobile-App, einer deutschen
+              Regierungsinitiative mit Kulturbudget für 18-Jährige. Favoriten,
+              Formularvalidierung, Secure Storage und Redux-Architektur
+              umgesetzt.
+            </p>
+            <div class="flex flex-wrap gap-2 mt-4">
+              <span
+                class="px-2.5 py-1 text-xs font-medium bg-warm-200 dark:bg-warm-800/40 text-warm-700 dark:text-warm-300 rounded-lg"
+              >
+                React Native
+              </span>
+              <span
+                class="px-2.5 py-1 text-xs font-medium bg-warm-200 dark:bg-warm-800/40 text-warm-700 dark:text-warm-300 rounded-lg"
+              >
+                Redux Toolkit
+              </span>
+              <span
+                class="px-2.5 py-1 text-xs font-medium bg-warm-200 dark:bg-warm-800/40 text-warm-700 dark:text-warm-300 rounded-lg"
+              >
+                TypeScript
+              </span>
+              <span
+                class="px-2.5 py-1 text-xs font-medium bg-warm-200 dark:bg-warm-800/40 text-warm-700 dark:text-warm-300 rounded-lg"
+              >
+                DevOps
+              </span>
+            </div>
+          </div>
+          <div
+            class="flex-shrink-0 flex items-center text-warm-400 group-hover:text-accent-500 transition-colors"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+              class="w-5 h-5"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="m8.25 4.5 7.5 7.5-7.5 7.5"></path>
+            </svg>
+          </div>
+        </div>
+      </a>
+
+      <a
+        href="/de/work/stroeer"
+        class="card-soft p-6 group hover-lift animate-fade-in-up opacity-0 stagger-3"
+      >
+        <div class="flex flex-col sm:flex-row gap-6">
+          <div
+            class="flex-shrink-0 flex items-center justify-center w-full sm:w-32 h-24 bg-warm-100 dark:bg-dark-elevated rounded-xl group-hover:bg-warm-200 dark:group-hover:bg-warm-800/30 transition-colors"
+          >
+            <div class="flex flex-col items-center gap-1">
+              <img
+                src="/company/str-logo-white.svg"
+                alt="Ströer Logo"
+                width="80"
+                height="17"
+                class="opacity-90 dark:invert"
+              />
+              <img
+                src="/company/t-online-desktop.327ab976.svg"
+                alt="t-online Logo"
+                width="60"
+                height="13"
+                class="opacity-90 dark:invert"
+              />
+            </div>
+          </div>
+          <div class="flex-1">
+            <h3
+              class="text-lg font-semibold text-warm-900 dark:text-warm-100 group-hover:text-accent-600 dark:group-hover:text-accent-400 transition-colors"
+            >
+              Ströer / t-online
+            </h3>
+            <p class="text-warm-600 dark:text-warm-400 mt-2 leading-relaxed">
+              Die t-online News-App von Grund auf mit React Native und Expo
+              gebaut. Kernfeatures wie konfigurierbare Navigation, Suche, Push
+              Notifications und Werbemonetarisierung umgesetzt.
+            </p>
+            <div class="flex flex-wrap gap-2 mt-4">
+              <span
+                class="px-2.5 py-1 text-xs font-medium bg-warm-200 dark:bg-warm-800/40 text-warm-700 dark:text-warm-300 rounded-lg"
+              >
+                React Native
+              </span>
+              <span
+                class="px-2.5 py-1 text-xs font-medium bg-warm-200 dark:bg-warm-800/40 text-warm-700 dark:text-warm-300 rounded-lg"
+              >
+                Expo
+              </span>
+              <span
+                class="px-2.5 py-1 text-xs font-medium bg-warm-200 dark:bg-warm-800/40 text-warm-700 dark:text-warm-300 rounded-lg"
+              >
+                TypeScript
+              </span>
+              <span
+                class="px-2.5 py-1 text-xs font-medium bg-warm-200 dark:bg-warm-800/40 text-warm-700 dark:text-warm-300 rounded-lg"
+              >
+                DevOps
+              </span>
+            </div>
+          </div>
+          <div
+            class="flex-shrink-0 flex items-center text-warm-400 group-hover:text-accent-500 transition-colors"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+              class="w-5 h-5"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="m8.25 4.5 7.5 7.5-7.5 7.5"></path>
+            </svg>
+          </div>
+        </div>
+      </a>
+
+      <a
+        href="/de/work/abl"
+        class="card-soft p-6 group hover-lift animate-fade-in-up opacity-0 stagger-4"
+      >
+        <div class="flex flex-col sm:flex-row gap-6">
+          <div
+            class="flex-shrink-0 flex items-center justify-center w-full sm:w-32 h-24 bg-warm-100 dark:bg-dark-elevated rounded-xl group-hover:bg-warm-200 dark:group-hover:bg-warm-800/30 transition-colors"
+          >
+            <img
+              src="/company/abl.svg"
+              alt="ABL Logo"
+              width="80"
+              height="32"
+              class="opacity-90 dark:invert"
+            />
+          </div>
+          <div class="flex-1">
+            <h3
+              class="text-lg font-semibold text-warm-900 dark:text-warm-100 group-hover:text-accent-600 dark:group-hover:text-accent-400 transition-colors"
+            >
+              ABL
+            </h3>
+            <p class="text-warm-600 dark:text-warm-400 mt-2 leading-relaxed">
+              Die ABL Configuration App für EV-Wallbox-Setup und -Management
+              gebaut und gewartet. 1.300+ Commits über mehrere Jahre, inklusive
+              Gerätekommunikation via WiFi/Bluetooth, Firmware-Updates und
+              Mehrsprachigkeit.
+            </p>
+            <div class="flex flex-wrap gap-2 mt-4">
+              <span
+                class="px-2.5 py-1 text-xs font-medium bg-warm-200 dark:bg-warm-800/40 text-warm-700 dark:text-warm-300 rounded-lg"
+              >
+                React Native
+              </span>
+              <span
+                class="px-2.5 py-1 text-xs font-medium bg-warm-200 dark:bg-warm-800/40 text-warm-700 dark:text-warm-300 rounded-lg"
+              >
+                MobX
+              </span>
+              <span
+                class="px-2.5 py-1 text-xs font-medium bg-warm-200 dark:bg-warm-800/40 text-warm-700 dark:text-warm-300 rounded-lg"
+              >
+                TypeScript
+              </span>
+              <span
+                class="px-2.5 py-1 text-xs font-medium bg-warm-200 dark:bg-warm-800/40 text-warm-700 dark:text-warm-300 rounded-lg"
+              >
+                IoT
+              </span>
+            </div>
+          </div>
+          <div
+            class="flex-shrink-0 flex items-center text-warm-400 group-hover:text-accent-500 transition-colors"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+              class="w-5 h-5"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="m8.25 4.5 7.5 7.5-7.5 7.5"></path>
+            </svg>
+          </div>
+        </div>
+      </a>
+
+      <a
+        href="/de/work/ibm"
+        class="card-soft p-6 group hover-lift animate-fade-in-up opacity-0 stagger-5"
+      >
+        <div class="flex flex-col sm:flex-row gap-6">
+          <div
+            class="flex-shrink-0 flex items-center justify-center w-full sm:w-32 h-24 bg-warm-100 dark:bg-dark-elevated rounded-xl group-hover:bg-warm-200 dark:group-hover:bg-warm-800/30 transition-colors"
+          >
+            <div class="flex flex-col items-center gap-2">
+              <img
+                src="/company/IBM_logo.svg"
+                alt="IBM Logo"
+                width="50"
+                height="20"
+                class="opacity-90"
+              />
+              <img
+                src="/company/barmer.svg"
+                alt="Barmer Logo"
+                width="60"
+                height="16"
+                class="opacity-90"
+              />
+            </div>
+          </div>
+          <div class="flex-1">
+            <h3
+              class="text-lg font-semibold text-warm-900 dark:text-warm-100 group-hover:text-accent-600 dark:group-hover:text-accent-400 transition-colors"
+            >
+              IBM iX / Barmer
+            </h3>
+            <p class="text-warm-600 dark:text-warm-400 mt-2 leading-relaxed">
+              Frontend-Entwicklung für Barmer, eine der größten
+              Krankenversicherungen Deutschlands. Beitrag zum Bonus-Modul in der
+              Barmer App und zum Puls Cross-Platform Design-System.
+            </p>
+            <div class="flex flex-wrap gap-2 mt-4">
+              <span
+                class="px-2.5 py-1 text-xs font-medium bg-warm-200 dark:bg-warm-800/40 text-warm-700 dark:text-warm-300 rounded-lg"
+              >
+                React Native
+              </span>
+              <span
+                class="px-2.5 py-1 text-xs font-medium bg-warm-200 dark:bg-warm-800/40 text-warm-700 dark:text-warm-300 rounded-lg"
+              >
+                React
+              </span>
+              <span
+                class="px-2.5 py-1 text-xs font-medium bg-warm-200 dark:bg-warm-800/40 text-warm-700 dark:text-warm-300 rounded-lg"
+              >
+                TypeScript
+              </span>
+              <span
+                class="px-2.5 py-1 text-xs font-medium bg-warm-200 dark:bg-warm-800/40 text-warm-700 dark:text-warm-300 rounded-lg"
+              >
+                Design System
+              </span>
+            </div>
+          </div>
+          <div
+            class="flex-shrink-0 flex items-center text-warm-400 group-hover:text-accent-500 transition-colors"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+              class="w-5 h-5"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="m8.25 4.5 7.5 7.5-7.5 7.5"></path>
+            </svg>
+          </div>
+        </div>
+      </a>
+
+      <a
+        href="/de/work/kicker"
+        class="card-soft p-6 group hover-lift animate-fade-in-up opacity-0 stagger-6"
+      >
+        <div class="flex flex-col sm:flex-row gap-6">
+          <div
+            class="flex-shrink-0 flex items-center justify-center w-full sm:w-32 h-24 bg-warm-100 dark:bg-dark-elevated rounded-xl group-hover:bg-warm-200 dark:group-hover:bg-warm-800/30 transition-colors"
+          >
+            <img
+              src="/company/kicker.svg"
+              alt="Kicker Logo"
+              width="80"
+              height="32"
+              class="opacity-90"
+            />
+          </div>
+          <div class="flex-1">
+            <h3
+              class="text-lg font-semibold text-warm-900 dark:text-warm-100 group-hover:text-accent-600 dark:group-hover:text-accent-400 transition-colors"
+            >
+              Olympia Verlag (Kicker)
+            </h3>
+            <p class="text-warm-600 dark:text-warm-400 mt-2 leading-relaxed">
+              Lead Fullstack-Entwicklung für FWMFL, eine Podcast- und
+              Audiobook-Streaming-Plattform für Fussballfans. 1.600+ Commits
+              über Mobile App, Backend-Services (Go/Rust), Website und
+              Kubernetes- Infrastruktur.
+            </p>
+            <div class="flex flex-wrap gap-2 mt-4">
+              <span
+                class="px-2.5 py-1 text-xs font-medium bg-warm-200 dark:bg-warm-800/40 text-warm-700 dark:text-warm-300 rounded-lg"
+              >
+                React Native
+              </span>
+              <span
+                class="px-2.5 py-1 text-xs font-medium bg-warm-200 dark:bg-warm-800/40 text-warm-700 dark:text-warm-300 rounded-lg"
+              >
+                Go / Rust
+              </span>
+              <span
+                class="px-2.5 py-1 text-xs font-medium bg-warm-200 dark:bg-warm-800/40 text-warm-700 dark:text-warm-300 rounded-lg"
+              >
+                Kubernetes
+              </span>
+              <span
+                class="px-2.5 py-1 text-xs font-medium bg-warm-200 dark:bg-warm-800/40 text-warm-700 dark:text-warm-300 rounded-lg"
+              >
+                Fullstack
+              </span>
+            </div>
+          </div>
+          <div
+            class="flex-shrink-0 flex items-center text-warm-400 group-hover:text-accent-500 transition-colors"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+              class="w-5 h-5"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="m8.25 4.5 7.5 7.5-7.5 7.5"></path>
+            </svg>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <ClientMarquee />
+
+    <Footer />
+  </BaseLayout>
+</Layout>

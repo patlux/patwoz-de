@@ -15,6 +15,20 @@ interface Props {
 
 const { frontmatter } = Astro.props
 const canonicalURL = new URL(Astro.url.pathname, Astro.site)
+const currentPath = Astro.url.pathname
+const isGerman = currentPath.startsWith('/de')
+const blogHref = isGerman ? '/de/blog' : '/blog'
+const labels = isGerman
+  ? {
+      backToBlog: 'Zurück zum Blog',
+      backToAll: 'Zurück zu allen Beiträgen',
+      locale: 'de-DE',
+    }
+  : {
+      backToBlog: 'Back to blog',
+      backToAll: 'Back to all posts',
+      locale: 'en-GB',
+    }
 const blogSchema = {
   '@context': 'https://schema.org',
   '@type': 'BlogPosting',
@@ -31,7 +45,7 @@ const blogSchema = {
   image: frontmatter.image || undefined,
 }
 
-const dateFormatter = new Intl.DateTimeFormat('en-GB', {
+const dateFormatter = new Intl.DateTimeFormat(labels.locale, {
   dateStyle: 'long',
 })
 ---
@@ -47,7 +61,7 @@ const dateFormatter = new Intl.DateTimeFormat('en-GB', {
 
     <!-- Back link -->
     <a
-      href="/blog"
+      href={blogHref}
       class="inline-flex items-center gap-2 text-sm text-warm-500 hover:text-warm-700 dark:hover:text-warm-300 transition-colors group"
     >
       <svg
@@ -61,7 +75,7 @@ const dateFormatter = new Intl.DateTimeFormat('en-GB', {
           d="M17 10a.75.75 0 01-.75.75H5.612l4.158 3.96a.75.75 0 11-1.04 1.08l-5.5-5.25a.75.75 0 010-1.08l5.5-5.25a.75.75 0 111.04 1.08L5.612 9.25H16.25A.75.75 0 0117 10z"
           clip-rule="evenodd"></path>
       </svg>
-      Back to blog
+      {labels.backToBlog}
     </a>
 
     <!-- Article -->
@@ -122,7 +136,7 @@ const dateFormatter = new Intl.DateTimeFormat('en-GB', {
     <!-- Bottom back link -->
     <div class="mt-12 pt-8 border-t border-warm-200 dark:border-warm-800">
       <a
-        href="/blog"
+        href={blogHref}
         class="inline-flex items-center gap-2 text-sm font-medium text-warm-600 dark:text-warm-400 hover:text-accent-600 dark:hover:text-accent-400 transition-colors group"
       >
         <svg
@@ -136,7 +150,7 @@ const dateFormatter = new Intl.DateTimeFormat('en-GB', {
             d="M17 10a.75.75 0 01-.75.75H5.612l4.158 3.96a.75.75 0 11-1.04 1.08l-5.5-5.25a.75.75 0 010-1.08l5.5-5.25a.75.75 0 111.04 1.08L5.612 9.25H16.25A.75.75 0 0117 10z"
             clip-rule="evenodd"></path>
         </svg>
-        Back to all posts
+        {labels.backToAll}
       </a>
     </div>
 

@@ -1,0 +1,132 @@
+---
+title: Redash mit Coolify
+description: Schritt-für-Schritt Anleitung für Redash mit Coolify, inkl. Docker Compose, Env Vars, DB-Init und Server Setup.
+published: 2024-09-13
+image: /blog-images/2024-09-13-coolify-redash.avif
+featured: true
+---
+
+In dieser Anleitung richten wir Redash mit Coolify ein - einer Plattform, die Deployments von containerisierten Apps vereinfacht. Redash ist ein starkes Tool, um Datenbanken abzufragen und Daten zu visualisieren, ideal für Analytics. Coolify hilft dir, Redash in einer Docker-Compose-Umgebung zu betreiben.
+
+## Docker Compose File
+
+Wir starten mit der `docker-compose.yml` für Redash, inklusive Redash Services, Redis und Postgres (mit automatischen Upgrades).
+
+```yml
+x-redash-service:
+  image: 'redash/redash:latest'
+  depends_on:
+    - postgres
+    - redis
+  restart: always
+services:
+  server:
+    image: 'redash/redash:latest'
+    depends_on:
+      - postgres
+      - redis
+    restart: always
+    command: server
+    environment:
+      REDASH_WEB_WORKERS: 4
+  scheduler:
+    image: 'redash/redash:latest'
+    depends_on:
+      - server
+    restart: always
+    command: scheduler
+  scheduled_worker:
+    image: 'redash/redash:latest'
+    depends_on:
+      - server
+    restart: always
+    command: worker
+    environment:
+      QUEUES: 'scheduled_queries,schemas'
+      WORKERS_COUNT: 1
+  adhoc_worker:
+    image: 'redash/redash:latest'
+    depends_on:
+      - server
+    restart: always
+    command: worker
+    environment:
+      QUEUES: queries
+      WORKERS_COUNT: 2
+  redis:
+    image: 'redis:7-alpine'
+    restart: unless-stopped
+  postgres:
+    image: 'pgautoupgrade/pgautoupgrade:latest'
+    volumes:
+      - '/opt/redash/postgres-data:/var/lib/postgresql/data'
+    restart: unless-stopped
+  worker:
+    image: 'redash/redash:latest'
+    depends_on:
+      - postgres
+      - redis
+    restart: always
+    command: worker
+    environment:
+      QUEUES: 'periodic,emails,default'
+      WORKERS_COUNT: 1
+```
+
+Erklärung:
+
+- Redash Services: server, scheduler, scheduled_worker, adhoc_worker und worker für Queries, Scheduling und periodische Tasks.
+- Redis: Schneller In-Memory Store, den Redash benötigt.
+- Postgres: Datenbank für Redash. Hier mit pgautoupgrade für automatische Upgrades.
+- Volumes: Postgres Daten werden unter /opt/redash/postgres-data persistiert.
+
+## Environment Variables
+
+Als nächstes definierst du die Environment Variablen. Sensible Felder (z.B. Secrets) sollten zufällig generiert werden, z.B. mit `pwgen`.
+
+```sh
+PYTHONUNBUFFERED=0
+REDASH_LOG_LEVEL=INFO
+REDASH_REDIS_URL=redis://redis:6379/0
+REDASH_COOKIE_SECRET=
+REDASH_SECRET_KEY=
+POSTGRES_PASSWORD=
+REDASH_DATABASE_URL=postgresql://postgres:__POSTGRES_PASSWORD__@postgres/postgres
+REDASH_ENFORCE_CSRF=true
+REDASH_GUNICORN_TIMEOUT=60
+```
+
+Variablen füllen:
+
+- `REDASH_COOKIE_SECRET` und `REDASH_SECRET_KEY`: Zufallsstrings, z.B. via `pwgen -1s 32`.
+- `POSTGRES_PASSWORD`: Passwort für die PostgreSQL DB.
+- `REDASH_DATABASE_URL`: **POSTGRES_PASSWORD** mit dem gewählten Passwort ersetzen.
+
+Trage die Werte in Coolify unter den Environment Settings ein.
+
+**Datenbank initialisieren**
+
+Nach dem Setup der Container musst du die Redash Tabellen erstellen.
+
+1. In Coolify auf Execute Command gehen.
+2. Den Container server-`<someid>` auswählen.
+3. Folgenden Befehl ausführen:
+
+```sh
+/app/manage.py database create_tables
+```
+
+Damit werden die Tabellen angelegt und Redash ist einsatzbereit.
+
+## Server konfigurieren
+
+Zum Abschluss die Server-Konfiguration:
+
+1. In Coolify zur Service Stack Sektion gehen.
+2. Unter Services den Server auswählen.
+3. Im Settings Tab das Domain-Feld setzen. Dort trägst du die Domain für deine Redash Instanz ein.
+
+## Fertig!
+
+Das war's! Redash ist jetzt über die konfigurierte Domain erreichbar. Du kannst Datenbanken verbinden und Queries ausführen. Bei Problemen hilft die Redash Dokumentation weiter.
+Fertig

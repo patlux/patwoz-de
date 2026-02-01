@@ -1,0 +1,265 @@
+---
+title: 'Kubernetes auf macOS: Einstieg'
+description: 'So richtest du Kubernetes lokal auf macOS mit Orbstack ein, erstellst dein erstes Deployment und verstehst Pods und Services.'
+published: 2025-04-26
+featured: true
+---
+
+Kubernetes ist extrem mächtig - und genauso einschüchternd am Anfang.  
+Als ich erstmals damit gearbeitet habe, fehlte mir ein einfacher, strukturierter Einstieg auf meinem Dev-Rechner.  
+Dieser Guide ist das, was ich damals gebraucht hätte.
+
+> Voraussetzung: Du solltest bereits mit Docker vertraut sein und die Grundlagen verstehen.
+
+## Kubernetes lokal installieren
+
+Es gibt viele Tools für lokales Kubernetes - minikube, k3s, k0s, k3d, etc.  
+Für macOS empfehle ich [Orbstack](https://orbstack.dev/), das [native Kubernetes-Unterstützung](https://docs.orbstack.dev/kubernetes/) bietet.
+
+**Warum Orbstack?**  
+Orbstack konfiguriert Service DNS automatisch (`<service>.<namespace>.svc.cluster.local`), du musst also nicht `/etc/hosts` anfassen. Das macht Testing, Debugging und Entwicklung deutlich einfacher.
+
+Nach der Installation startest du Kubernetes so:
+
+```sh
+$ orb start k8s
+```
+
+> Falls `orb` nicht gefunden wird, prüfe deine [Orbstack Installation](https://docs.orbstack.dev/install).
+
+Prüfe, ob Kubernetes läuft:
+
+```sh
+$ kubectl config get-contexts
+CURRENT   NAME       CLUSTER    AUTHINFO   NAMESPACE
+*         orbstack   orbstack   orbstack
+```
+
+## Dein erstes Deployment
+
+Wenn du [Podman](https://podman.io/) genutzt hast, kennst du Pods bereits.  
+In Kubernetes liegen Pods meist hinter einer höheren Abstraktion: **Deployments**.
+
+In Docker startest du einen Container so:
+
+```sh
+$ docker run nginx
+```
+
+In Kubernetes beschreibst du Container in YAML und wendest die Konfiguration mit `kubectl` an.
+
+Erstelle eine Datei `example.yaml`:
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: example-deployment # deployment name
+spec:
+  selector:
+    matchLabels:
+      app: example-pod # -----
+  template: #    |
+    metadata: #    |
+      labels: #    |
+        app: example-pod # <--
+    spec:
+      containers:
+        - name: example-container
+          image: nginx
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: example-service
+spec:
+  selector:
+    app: example-pod # selector which pod
+  ports:
+    - protocol: TCP
+      port: 8080 # exposed port
+      targetPort: 80 # container port
+```
+
+Konfiguration anwenden:
+
+```sh
+$ kubectl apply -f example.yaml
+deployment.apps/example created
+service/example-service created
+```
+
+Deployment-Status prüfen:
+
+```sh
+$ kubectl get deployments --watch
+NAME      READY   UP-TO-DATE   AVAILABLE   AGE
+example   1/1     1            1
+```
+
+Warte bis `READY` `1/1` zeigt.
+
+Pods prüfen:
+
+```sh
+$ kubectl get pods --watch
+NAME                       READY   STATUS    RESTARTS   AGE
+example-54c9b4c747-v7mbj   1/1     Running   0          10s
+```
+
+### Zugriff auf deine Anwendung
+
+Dein Service ist jetzt erreichbar unter:
+
+[http://example-service.default.svc.cluster.local:8080/](http://example-service.default.svc.cluster.local:8080/)
+
+Oder via Cluster IP:
+
+```sh
+$ kubectl get svc
+NAME              TYPE        CLUSTER-IP        EXTERNAL-IP   PORT(S)    AGE
+example-service   ClusterIP   192.168.194.207   <none>        8080/TCP   2s
+```
+
+> Hinweis: Cluster IPs ändern sich nach Neustarts. DNS-Zugriff über Orbstack bleibt stabil.
+
+### Aufräumen
+
+Ressourcen löschen:
+
+```sh
+$ kubectl delete -f example.yaml
+```
+
+Prüfen, ob Pods weg sind:
+
+```sh
+$ kubectl get pods
+No resources found in default namespace.
+```
+
+### Kubernetes Ebenen verstehen
+
+#### Level 1: Docker - direkter Container
+
+```sh
+docker run nginx  →  [ Container ]
+```
+
+- Single Container, direkt gestartet.
+
+#### Level 2: Podman - Pod-basierte Gruppierung
+
+```sh
+$ podman pod create --name mypod             →  [ Pod ]
+$ podman run --pod mypod -p 8080:80 nginx    →     ├─ [ Container ]
+$ podman run --pod mypod redis               →     └─ [ Container ]
+```
+
+- Mehrere Container teilen sich einen Network Namespace.
+
+#### Level 3: Kubernetes - deklaratives Deployment
+
+```sh
+YAML (Deployment) → kubectl apply → [ Deployment ]
+                                        └─ [ Pod ]
+                                             ├─ [ Container ]
+                                             └─ [ Container ]
+```
+
+- Deklarative Infrastruktur, automatisches Skalieren und Healing.
+
+### Was ist ein Deployment?
+
+Ein `Deployment` verwaltet Pods und stellt sicher, dass die gewünschte Anzahl an Replicas immer läuft.
+
+Du kannst skalieren, indem du `replicas: 2` in deine `example.yaml` einträgst:
+
+```yaml
+---
+spec:
+  replicas: 2
+```
+
+Änderungen anwenden:
+
+```sh
+$ kubectl apply -f example.yaml
+```
+
+Pods listen:
+
+```sh
+$ kubectl get pods
+NAME                                  READY   STATUS    RESTARTS   AGE
+example-deployment-779f6bb7dc-nvvq7   1/1     Running   0          4s
+example-deployment-779f6bb7dc-wlfzg   1/1     Running   0          4s
+```
+
+Kubernetes verteilt Traffic automatisch auf beide Instanzen.
+
+[Mehr zu Deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/).
+
+### Was ist ein Service?
+
+Ein `Service` bietet einen stabilen Zugriff auf einen oder mehrere Pods.  
+Er vergibt eine **Cluster IP** (interne virtuelle IP) und einen **DNS Namen** (z.B. `example-service.default.svc.cluster.local`) im Cluster.
+
+Wichtig ist der Unterschied zwischen **k3d** (oder ähnlichen Tools) und **Orbstack**:
+
+#### k3d
+
+- k3d läuft Kubernetes in einem Docker Container.
+- Interne DNS Namen (`*.svc.cluster.local`) sind nur **im Cluster** auflösbar (zwischen Pods).
+- Dein **Host** (macOS) ist **nicht** Teil des Cluster-Netzwerks.
+- Daher kannst du `example-service.default.svc.cluster.local` nicht direkt vom Mac aus erreichen, ohne extra DNS Routing oder Port-Forwarding.
+- Übliche Workarounds:
+  - `kubectl port-forward`
+  - Services als `NodePort`
+  - Ingress Controller
+
+#### Orbstack
+
+- Orbstack integriert den Host eng in das Cluster-Netzwerk.
+- Es konfiguriert DNS automatisch, sodass `.svc.cluster.local` Namen **vom Mac** auflösbar sind.
+- Du kannst `http://example-service.default.svc.cluster.local:8080/` direkt im Browser öffnen, ohne Zusatzkonfiguration.
+- Das macht Entwicklung und Debugging deutlich einfacher.
+
+**Orbstack** bietet eine viel bessere lokale Dev Experience, weil es Cluster- und Host-DNS automatisch bridged. **k3d** braucht zusätzliches Setup, wenn du Services vom Mac aus erreichen willst.
+
+[Mehr zu Services](https://kubernetes.io/docs/concepts/services-networking/service/).
+
+## Fazit
+
+Kubernetes auf macOS muss nicht schmerzhaft sein.
+
+Mit Orbstack, ein paar YAML Files und `kubectl` bist du schnell startklar - und kannst dich ohne Reibung aufs Lernen konzentrieren.
+
+### Was kommt als Nächstes?
+
+Jetzt wo Kubernetes lokal läuft und deine erste App deployed ist, hier ein paar nächste Schritte:
+
+- **`kubectl` Commands erkunden**  
+  Lerne Pods, Services und Deployments zu inspizieren und Fehler mit `kubectl describe`, `kubectl logs` und `kubectl exec` zu debuggen.
+
+- **In Helm eintauchen**  
+  Helm ist der Package Manager für Kubernetes. Startpunkt: [Helm Quickstart Guide](https://helm.sh/docs/intro/quickstart/)
+
+- **Ingress Controller verstehen**  
+  Gehe über ClusterIP und NodePort hinaus und setze einen Ingress (z.B. Traefik oder NGINX) auf.
+
+- **StatefulSets, Jobs und CronJobs lernen**  
+  Deploye Workloads mit persistentem Storage oder Zeitplanung - nicht alles passt in stateless Deployments.
+
+- **Lokale CI/CD Pipelines bauen**  
+  Integriere Kubernetes mit lokalen GitOps Tools wie ArgoCD oder einfachen CI Pipelines, die automatisch deployen.
+
+- **Community beitreten**  
+  Tausche dich in Kubernetes Communities aus (Slack, Discord, CNCF Meetups).
+
+Kubernetes hat eine steile Lernkurve - aber mit solidem lokalen Setup und kontinuierlicher Praxis kommst du schneller voran.
+
+**Happy clustering!**

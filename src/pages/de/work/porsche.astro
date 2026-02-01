@@ -1,0 +1,282 @@
+---
+import Layout from '~/layouts/Layout.astro'
+import BaseLayout from '~/components/BaseLayout.astro'
+import Footer from '~/components/Footer.astro'
+
+const pageTitle = 'Porsche Digital'
+const description =
+  'Fullstack-Entwicklung für eine Consumer-Mobile-App mit Video-Streaming, Abos und serverlosem AWS-Backend.'
+const canonicalURL = new URL(Astro.url.pathname, Astro.site)
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Startseite',
+      item: new URL('/de', Astro.site).toString(),
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Referenzen',
+      item: new URL('/de/work', Astro.site).toString(),
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: pageTitle,
+      item: canonicalURL.toString(),
+    },
+  ],
+}
+---
+
+<Layout
+  title="Porsche Digital - Referenzen"
+  description={description}
+  lang="de"
+>
+  <BaseLayout>
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(breadcrumbSchema)}
+    />
+    <article class="mt-12">
+      <a
+        href="/de/work"
+        class="inline-flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 mb-6"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-4 h-4"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M15.75 19.5 8.25 12l7.5-7.5"></path>
+        </svg>
+        Zurück zu Referenzen
+      </a>
+
+      <header class="mb-12">
+        <div class="flex flex-col sm:flex-row gap-6 items-start">
+          <div
+            class="flex-shrink-0 flex items-center justify-center w-24 h-24 bg-gray-50 dark:bg-zinc-800 rounded-xl border border-gray-200 dark:border-zinc-700"
+          >
+            <img
+              src="/company/Porsche-Logo.webp"
+              alt="Porsche Logo"
+              width="70"
+              height="40"
+            />
+          </div>
+          <div class="flex-1">
+            <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100">
+              Mobile App & Backend
+            </h1>
+            <p class="text-gray-600 dark:text-gray-400 mt-1">
+              Porsche Digital GmbH
+            </p>
+            <div
+              class="flex flex-wrap gap-4 mt-3 text-sm text-gray-500 dark:text-gray-400"
+            >
+              <span class="flex items-center gap-1">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-4 h-4"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
+                  ></path>
+                </svg>
+                Fullstack-Entwickler
+              </span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div class="prose lg:prose-lg max-w-none">
+        <p>
+          Ich arbeitete an einer Consumer-Mobile-App und deren
+          Backend-Infrastruktur für Porsche Digital. Das Projekt umfasste eine
+          React Native App mit Live-Video-Streaming, In-App-Abos und ein
+          serverloses AWS-Backend in einer Monorepo-Architektur.
+        </p>
+
+        <h2>Projektüberblick</h2>
+        <p>
+          Als Fullstack-Entwickler war ich an allen Schichten beteiligt: der
+          React Native Mobile-App, der React Web-Anwendung und der AWS-basierten
+          Backend- Infrastruktur. Das Projekt nutzte ein Monorepo mit Turborepo
+          für effiziente Builds und geteilten Code. Über die Projektdauer hinweg
+          habe ich 850+ Commits geliefert, Features implementiert, Bugs behoben
+          und die Architektur verbessert.
+        </p>
+
+        <h2>Wichtige Beiträge</h2>
+
+        <h3>Mobile App Entwicklung</h3>
+        <p>
+          Kernfeatures der React Native App gebaut und gewartet, darunter
+          Onboarding- Flows, Abo-Paywalls, Favoriten und Kurs-Filter. Smooth
+          Animations mit React Native Reanimated umgesetzt und Bottom Sheet
+          Komponenten für bessere UX gebaut. Tracking-Permission-Screens
+          hinzugefügt und Analytics mit Firebase sowie Singular integriert.
+        </p>
+
+        <h3>Video-Streaming Integration</h3>
+        <p>
+          Live-Video-Streaming mit dem OpenTok SDK integriert. Session
+          Management, Video Playback mit react-native-video und nahtlose
+          Übergänge zwischen Trainingseinheiten umgesetzt. Features
+          implementiert, um den Bildschirm während Sessions wach zu halten und
+          Orientation Changes zu behandeln.
+        </p>
+
+        <h3>In-App-Abonnements</h3>
+        <p>
+          Abo-Management mit RevenueCat SDK implementiert. Paywall Screens mit
+          FAQ- Integration, Preisvergleichen und Promo-Offers gebaut.
+          Subscription-Modals als Bottom Sheets umgesetzt, inklusive korrekter
+          Handhabung für unterschiedliche Gerätegrößen.
+        </p>
+
+        <h3>Backend-Entwicklung</h3>
+        <p>
+          Serverlose Backend-Infrastruktur mit AWS CDK, Lambda Functions,
+          DynamoDB und API Gateway entwickelt. Webhook-Handler für RevenueCat
+          Events, User- Management Endpunkte und Training Session APIs
+          implementiert. Datenbank- Indizes für optimierte Queries und sauberes
+          Timestamp Tracking hinzugefügt.
+        </p>
+
+        <h3>Realtime Features</h3>
+        <p>
+          Active-Feedback-Features mit Smart-Mirror-Integration gebaut,
+          inklusive Toggle Settings, Info Bottom Sheets und Hint-Displays.
+          Nahtlose Übergänge zwischen Training Sessions umgesetzt, wenn sie aus
+          der Web-App gestartet wurden.
+        </p>
+
+        <h3>Onboarding Experience</h3>
+        <p>
+          Mehrstufige Onboarding-Flows mit Intro-Videos,
+          Active-Feedback-Erklärungen und Personalisierungsoptionen erstellt.
+          Skip-Logik implementiert, die zur nächsten Seite statt zum kompletten
+          Überspringen führt, inklusive smoother Animationen und sauberem State
+          Management.
+        </p>
+
+        <h3>Performance-Optimierung</h3>
+        <p>
+          Data Fetching auf SWR mit Request Deduplication umgestellt und RxJS
+          durch einfachere Patterns ersetzt. API Calls durch gesplittete
+          Endpunkte und Caching-Strategien optimiert. Animations-Performance
+          verbessert und unnötige Re-Renders reduziert.
+        </p>
+
+        <h3>Web-Anwendung</h3>
+        <p>
+          Features in der React Web-App umgesetzt, darunter Kursverwaltung, Abo-
+          Handling und geteilte Komponenten mit der Mobile-App. Auth Token
+          Refresh Probleme behoben und das Rendering der Home Section optimiert.
+        </p>
+
+        <h3>Developer Experience</h3>
+        <p>
+          Monorepo von ultra-runner auf Turborepo migriert, um schnellere Builds
+          zu erreichen. Playwright für End-to-End-Tests eingerichtet.
+          ESLint-Konfiguration gepflegt, TypeScript-Fehler behoben und die
+          Codequalität verbessert. Dokumentation für Bitrise CI/CD Workflows und
+          Development Provisioning Profiles hinzugefügt.
+        </p>
+
+        <h3>Analytics & Monitoring</h3>
+        <p>
+          Firebase Analytics für User-Tracking, Sentry für Error Monitoring und
+          Fullstory für Session Replay integriert. Custom Tracking für
+          Onboarding- Completion und Abo-Events umgesetzt. Backend-Endpunkte für
+          das Sammeln und Auswerten von User-Statistiken gebaut.
+        </p>
+      </div>
+
+      <div class="prose lg:prose-lg max-w-none mt-8">
+        <h2>Technologie-Stack</h2>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-6 mb-12">
+        <div>
+          <h4
+            class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase mb-3"
+          >
+            Mobile
+          </h4>
+          <ul class="space-y-2">
+            <li class="text-gray-700 dark:text-gray-300">React Native</li>
+            <li class="text-gray-700 dark:text-gray-300">TypeScript</li>
+            <li class="text-gray-700 dark:text-gray-300">React Navigation</li>
+            <li class="text-gray-700 dark:text-gray-300">Reanimated</li>
+            <li class="text-gray-700 dark:text-gray-300">SWR</li>
+          </ul>
+        </div>
+        <div>
+          <h4
+            class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase mb-3"
+          >
+            Backend
+          </h4>
+          <ul class="space-y-2">
+            <li class="text-gray-700 dark:text-gray-300">AWS CDK</li>
+            <li class="text-gray-700 dark:text-gray-300">AWS Lambda</li>
+            <li class="text-gray-700 dark:text-gray-300">DynamoDB</li>
+            <li class="text-gray-700 dark:text-gray-300">API Gateway</li>
+            <li class="text-gray-700 dark:text-gray-300">Cognito</li>
+          </ul>
+        </div>
+        <div>
+          <h4
+            class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase mb-3"
+          >
+            Services
+          </h4>
+          <ul class="space-y-2">
+            <li class="text-gray-700 dark:text-gray-300">RevenueCat</li>
+            <li class="text-gray-700 dark:text-gray-300">OpenTok</li>
+            <li class="text-gray-700 dark:text-gray-300">Firebase Analytics</li>
+            <li class="text-gray-700 dark:text-gray-300">Sentry</li>
+            <li class="text-gray-700 dark:text-gray-300">Singular</li>
+          </ul>
+        </div>
+        <div>
+          <h4
+            class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase mb-3"
+          >
+            DevOps
+          </h4>
+          <ul class="space-y-2">
+            <li class="text-gray-700 dark:text-gray-300">Turborepo</li>
+            <li class="text-gray-700 dark:text-gray-300">Bitrise</li>
+            <li class="text-gray-700 dark:text-gray-300">Playwright</li>
+            <li class="text-gray-700 dark:text-gray-300">Jest</li>
+            <li class="text-gray-700 dark:text-gray-300">ESLint</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <Footer />
+  </BaseLayout>
+</Layout>

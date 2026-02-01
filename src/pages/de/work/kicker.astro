@@ -1,0 +1,300 @@
+---
+import Layout from '~/layouts/Layout.astro'
+import BaseLayout from '~/components/BaseLayout.astro'
+import Footer from '~/components/Footer.astro'
+import AppStoreLinks from '~/components/AppStoreLinks.astro'
+
+const pageTitle = 'Kicker'
+const description =
+  'End-to-end Plattformarbeit für die Kicker Streaming App, Backend Services und Kubernetes Infrastruktur.'
+const canonicalURL = new URL(Astro.url.pathname, Astro.site)
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Startseite',
+      item: new URL('/de', Astro.site).toString(),
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Referenzen',
+      item: new URL('/de/work', Astro.site).toString(),
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: pageTitle,
+      item: canonicalURL.toString(),
+    },
+  ],
+}
+---
+
+<Layout
+  title="Olympia Verlag (Kicker) - Referenzen"
+  description={description}
+  lang="de"
+>
+  <BaseLayout>
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(breadcrumbSchema)}
+    />
+    <article class="mt-12">
+      <a
+        href="/de/work"
+        class="inline-flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 mb-6"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-4 h-4"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M15.75 19.5 8.25 12l7.5-7.5"></path>
+        </svg>
+        Zurück zu Referenzen
+      </a>
+
+      <header class="mb-12">
+        <div class="flex flex-col sm:flex-row gap-6 items-start">
+          <div
+            class="flex-shrink-0 flex items-center justify-center w-24 h-24 bg-gray-50 dark:bg-zinc-800 rounded-xl border border-gray-200 dark:border-zinc-700"
+          >
+            <img
+              src="/company/kicker.svg"
+              alt="Kicker Logo"
+              width="70"
+              height="28"
+            />
+          </div>
+          <div class="flex-1">
+            <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100">
+              FWMFL - Football Was My First Love
+            </h1>
+            <p class="text-gray-600 dark:text-gray-400 mt-1">
+              Olympia Verlag (Kicker)
+            </p>
+            <div
+              class="flex flex-wrap gap-4 mt-3 text-sm text-gray-500 dark:text-gray-400"
+            >
+              <span class="flex items-center gap-1">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-4 h-4"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
+                  ></path>
+                </svg>
+                Lead Fullstack Developer
+              </span>
+              <span class="flex items-center gap-1">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-4 h-4"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Z"
+                  ></path>
+                </svg>
+                via piparo.tech
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <AppStoreLinks
+          appStoreUrl="https://apps.apple.com/de/app/football-was-my-first-love/id1476249064"
+          playStoreUrl="https://play.google.com/store/apps/details?id=com.fbwmfl.de"
+        />
+      </header>
+
+      <div class="prose lg:prose-lg max-w-none">
+        <p>
+          Olympia Verlag ist der Publisher von Kicker, Deutschlands führendem
+          Sportmagazin. FWMFL (Football Was My First Love) ist die Podcast- und
+          Audiobook-Streaming-Plattform für Fussballfans mit exklusivem Content
+          wie Podcasts, Hörbüchern, Fangesängen und kuratierten Playlists.
+        </p>
+
+        <h2>Projektüberblick</h2>
+        <p>
+          Als Lead Fullstack Developer über piparo.tech habe ich 1.600+ Commits
+          über die gesamte Plattform geliefert - von der React Native Mobile-App
+          über Backend Services in Go und Rust, der Astro-Website bis zur
+          Kubernetes-Infrastruktur. Das Projekt umfasst eine komplette
+          Streaming- Plattform mit Subscription Management, Offline Playback und
+          Content Sync.
+        </p>
+
+        <h2>Legacy Migration</h2>
+        <p>
+          Beim Projektstart bestand die Infrastruktur aus mehreren PHP Backends
+          mit zwei getrennten Datenbanken und Legacy-Code über verschiedene
+          Hoster. Wir modernisierten den Stack durch eine Neuimplementierung der
+          Services in Go und Rust, konsolidierten die Datenbanken und migrierten
+          alles nach AWS auf EKS (Elastic Kubernetes Service). Das verbesserte
+          Zuverlässigkeit, reduzierte Betriebskosten und ermöglichte CI/CD mit
+          Infrastructure as Code.
+        </p>
+        <p>
+          Die vorherige Mobile-App war mit Cordova gebaut. Wir haben sie in 3
+          Monaten auf React Native portiert und eine native Experience mit
+          besserer Performance, Offline-Fähigkeit und Zugriff auf native APIs
+          für Background Audio und Push Notifications geliefert.
+        </p>
+
+        <h2>Wichtige Beiträge</h2>
+
+        <h3>Mobile Application</h3>
+        <p>
+          React Native + Expo App gebaut und gewartet (890+ Commits).
+          Audio-Streaming mit Background Playback, Offline Downloads,
+          Subscription Management via RevenueCat und Push Notifications
+          implementiert. NativeWind für Styling, neue Architektur für iOS und
+          Android aktiviert.
+        </p>
+
+        <h3>Audio Player & Streaming</h3>
+        <p>
+          Kernfunktionen des Audio Players entwickelt: Queue Management,
+          Progress Tracking und nahtlose Track Transitions. Offline Mode mit
+          SQLite für lokale Speicherung umgesetzt, sodass Inhalte ohne Internet
+          verfügbar sind.
+        </p>
+
+        <h3>Subscription & Monetization</h3>
+        <p>
+          RevenueCat für In-App-Käufe und Abo-Management integriert. Payment
+          Wall UI, Supporter Badge System und Premium Content Gating gebaut.
+          Piano SDK für Analytics Tracking von Engagement und Conversion
+          integriert.
+        </p>
+
+        <h3>Backend Services</h3>
+        <p>
+          Backend Services in Go und Rust für API Endpunkte, Content Management
+          und Datenverarbeitung entwickelt. RSS Importer (Node.js und Rust) für
+          automatische Podcast-Feeds gebaut. Das Backend verarbeitet Episode
+          Metadaten, Audio Files und User Sync.
+        </p>
+
+        <h3>Website</h3>
+        <p>
+          Marketing-Website mit Astro und Tailwind CSS gebaut. SEO
+          Optimierungen, Sitemap Generation, Podcast/Audiobook Detailseiten und
+          FAQ umgesetzt. Die Seite ist statisch generiert für optimale
+          Performance.
+        </p>
+
+        <h3>Infrastructure</h3>
+        <p>
+          Kubernetes-Infrastruktur mit Helm Charts und Terraform aufgebaut und
+          gewartet. Deployments, Services und Ingress für mehrere Umgebungen
+          konfiguriert. Lokales Dev-Tooling mit Tilt und Skaffold für schnelle
+          Iteration implementiert.
+        </p>
+
+        <h3>Accessibility</h3>
+        <p>
+          App Accessibility mit Labels, Hints und Screenreader-Support für
+          zentrale Flows (Auth, Playback Controls, Navigation) verbessert. WCAG
+          Compliance für die Web-Plattform sichergestellt.
+        </p>
+
+        <h3>Error Tracking & Debugging</h3>
+        <p>
+          Sentry mit Session Replay und Custom Error Boundaries integriert.
+          Debug Screens für Playback Troubleshooting, Log-Ansicht und Error
+          Reporting in Development Builds gebaut.
+        </p>
+      </div>
+
+      <div class="prose lg:prose-lg max-w-none mt-8">
+        <h2>Technologie-Stack</h2>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-6 mb-12">
+        <div>
+          <h4
+            class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase mb-3"
+          >
+            Mobile
+          </h4>
+          <ul class="space-y-2">
+            <li class="text-gray-700 dark:text-gray-300">React Native 0.79</li>
+            <li class="text-gray-700 dark:text-gray-300">Expo 53</li>
+            <li class="text-gray-700 dark:text-gray-300">TypeScript</li>
+            <li class="text-gray-700 dark:text-gray-300">NativeWind</li>
+            <li class="text-gray-700 dark:text-gray-300">Zustand</li>
+            <li class="text-gray-700 dark:text-gray-300">React Query</li>
+          </ul>
+        </div>
+        <div>
+          <h4
+            class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase mb-3"
+          >
+            Backend
+          </h4>
+          <ul class="space-y-2">
+            <li class="text-gray-700 dark:text-gray-300">Go</li>
+            <li class="text-gray-700 dark:text-gray-300">Rust</li>
+            <li class="text-gray-700 dark:text-gray-300">MySQL</li>
+            <li class="text-gray-700 dark:text-gray-300">SQLite (mobile)</li>
+            <li class="text-gray-700 dark:text-gray-300">Laravel (legacy)</li>
+          </ul>
+        </div>
+        <div>
+          <h4
+            class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase mb-3"
+          >
+            Web
+          </h4>
+          <ul class="space-y-2">
+            <li class="text-gray-700 dark:text-gray-300">Astro</li>
+            <li class="text-gray-700 dark:text-gray-300">Tailwind CSS</li>
+            <li class="text-gray-700 dark:text-gray-300">TypeScript</li>
+          </ul>
+        </div>
+        <div>
+          <h4
+            class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase mb-3"
+          >
+            Infrastructure
+          </h4>
+          <ul class="space-y-2">
+            <li class="text-gray-700 dark:text-gray-300">Kubernetes</li>
+            <li class="text-gray-700 dark:text-gray-300">Helm</li>
+            <li class="text-gray-700 dark:text-gray-300">Terraform</li>
+            <li class="text-gray-700 dark:text-gray-300">Docker</li>
+            <li class="text-gray-700 dark:text-gray-300">Tilt / Skaffold</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <Footer />
+  </BaseLayout>
+</Layout>

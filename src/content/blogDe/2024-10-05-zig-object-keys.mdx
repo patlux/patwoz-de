@@ -1,0 +1,83 @@
+---
+title: Object.keys() in Zig
+description: Lerne, wie du Struct-Felder in Zig iterierst und ihre Werte dynamisch ausliest - ähnlich zu Object.keys() in JavaScript - und warum Compile-Time-Iteration schneller ist.
+published: 2024-10-05
+image: /blog-images/2024-10-05-zig-object-keys.avif
+featured: true
+---
+
+Als JavaScript-Entwickler ist es ziemlich einfach, über die Keys eines Objekts zu iterieren und die Werte per Key auszulesen:
+
+```ts
+const obj = { a: 1, b: 2, c: true };
+Object.keys(obj).forEach(key => {
+  const value = obj[key];
+  console.log({ key, value });
+})
+// Output
+{key: 'a', value: 1}
+{key: 'b', value: 2}
+{key: 'c', value: true}
+```
+
+Überraschenderweise geht das in Zig genauso einfach:
+
+```zig
+const std = @import("std");
+const print = std.debug.print;
+
+const objtype = struct {
+  a: u8,
+  b: u8,
+  c: bool
+};
+
+const obj = objtype{
+  .a = 1,
+  .b = 2,
+  .c = true
+};
+
+
+pub fn main() !void {
+    inline for (@typeInfo(objtype).Struct.fields) |key| {
+      const value = @field(obj, key.name);
+      print("key: '{s}', value: '{any}'", .{key});
+    }
+}
+```
+
+**Und Zig macht es sogar besser: Die Iteration läuft zur Compile-Time!**
+
+In JavaScript passiert die Iteration zur Laufzeit, was bei grossen Objekten Performance kosten kann. In Zig wird die Iteration zur Compile-Time abgewickelt, wodurch zur Ausführung keine zusätzliche Last entsteht. Zigs inline for wird vor dem Start optimiert.
+
+Nach der Kompilierung generiert Zig also etwas ähnliches wie folgende Instruktionen:
+
+```zig
+const std = @import("std");
+const print = std.debug.print;
+
+const objtype = struct {
+    a: u8,
+    b: u8,
+    c: bool
+};
+
+const obj = objtype{
+    .a = 1,
+    .b = 2,
+    .c = true
+};
+
+pub fn main() !void {
+    print("key: 'a', value: '{d}'\n", .{obj.a});
+    print("key: 'b', value: '{d}'\n", .{obj.b});
+    print("key: 'c', value: '{any}'\n", .{obj.c});
+}
+```
+
+Ziemlich nett, wenn du mich fragst :)
+
+## @typeInfo und @field
+
+`@typeInfo` liefert detaillierte Typinformationen über eine Struktur (oder andere Typen). Mit `Struct.fields` greifen wir auf die Felder zu, und `@field` nutzt dann den Feldnamen, um den Wert dynamisch auszulesen.

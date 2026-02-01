@@ -9,6 +9,48 @@ import ThemeToggle from '~/components/ThemeToggle.astro'
 import LogoSvg from '~/assets/images/patwoz-logo.svg?raw'
 
 const currentPath = Astro.url.pathname
+const isGerman = currentPath.startsWith('/de')
+const localePrefix = isGerman ? '/de' : ''
+const withLocale = (path: string) =>
+  isGerman ? (path === '/' ? '/de' : `${localePrefix}${path}`) : path
+const switchHref = isGerman
+  ? currentPath === '/de'
+    ? '/'
+    : currentPath.replace(/^\/de\//, '/')
+  : currentPath === '/'
+    ? '/de'
+    : `/de${currentPath}`
+const labels = isGerman
+  ? {
+      social: 'Social',
+      business: 'Business',
+      hireMe: 'Projekt anfragen',
+      introduction: 'Über mich',
+      work: 'Referenzen',
+      skills: 'Kompetenzen',
+      blog: 'Blog',
+      whatBuilt: 'Was ich gebaut habe',
+      whatUse: 'Was ich nutze',
+      menu: 'Menü',
+      close: 'Schließen',
+      homeAria: 'Startseite',
+      switchAria: 'Zur englischen Version wechseln',
+    }
+  : {
+      social: 'Social',
+      business: 'Business',
+      hireMe: 'Hire me',
+      introduction: 'Introduction',
+      work: 'Work',
+      skills: 'Skills',
+      blog: 'Blog',
+      whatBuilt: 'What I Built',
+      whatUse: 'What I Use',
+      menu: 'Menu',
+      close: 'Close',
+      homeAria: 'Home',
+      switchAria: 'Switch to German',
+    }
 ---
 
 <!-- Checkbox at top for peer access by all elements -->
@@ -44,13 +86,20 @@ const currentPath = Astro.url.pathname
       class="flex h-16 shrink-0 items-center justify-between px-6 w-full sm:max-w-2xl md:max-w-4xl mx-auto xl:max-w-none xl:mx-0 xl:px-0"
     >
       <a
-        href="/"
+        href={withLocale('/')}
         class="block w-16 pl-1 text-warm-900 dark:text-warm-100 hover:text-accent-600 dark:hover:text-accent-400 transition-colors"
-        aria-label="Home"
+        aria-label={labels.homeAria}
       >
         <Fragment set:html={LogoSvg} />
       </a>
-      <div class="xl:block">
+      <div class="xl:block flex items-center gap-2">
+        <a
+          href={switchHref}
+          aria-label={labels.switchAria}
+          class="inline-flex items-center justify-center h-9 px-3 rounded-lg text-xs font-semibold uppercase tracking-wide text-warm-600 dark:text-warm-300 bg-warm-200/80 dark:bg-warm-800/60 hover:text-warm-900 dark:hover:text-warm-100 transition-colors"
+        >
+          {isGerman ? 'EN' : 'DE'}
+        </a>
         <ThemeToggle />
       </div>
     </div>
@@ -79,13 +128,20 @@ const currentPath = Astro.url.pathname
         class="flex items-center justify-between pl-7 pr-4 py-4 border-b border-warm-200 dark:border-warm-700/50 xl:hidden"
       >
         <a
-          href="/"
+          href={withLocale('/')}
           class="block w-12 pl-1 text-warm-900 dark:text-warm-100"
-          aria-label="Home"
+          aria-label={labels.homeAria}
         >
           <Fragment set:html={LogoSvg} />
         </a>
         <div class="flex items-center gap-1">
+          <a
+            href={switchHref}
+            aria-label={labels.switchAria}
+            class="inline-flex items-center justify-center h-9 px-3 rounded-lg text-xs font-semibold uppercase tracking-wide text-warm-600 dark:text-warm-300 bg-warm-200/80 dark:bg-warm-800/60 hover:text-warm-900 dark:hover:text-warm-100 transition-colors"
+          >
+            {isGerman ? 'EN' : 'DE'}
+          </a>
           <ThemeToggle />
         </div>
       </div>
@@ -99,7 +155,7 @@ const currentPath = Astro.url.pathname
           <div
             class="text-xs font-semibold leading-6 text-warm-500 dark:text-warm-500 uppercase tracking-wider"
           >
-            Social
+            {labels.social}
           </div>
           <ul class="mt-3 flex flex-wrap gap-2 xl:flex-col xl:gap-0.5">
             <li>
@@ -214,7 +270,7 @@ const currentPath = Astro.url.pathname
           <div
             class="text-xs font-semibold leading-6 text-warm-500 dark:text-warm-500 uppercase tracking-wider"
           >
-            Business
+            {labels.business}
           </div>
           <ul class="mt-3 flex flex-wrap gap-2 xl:flex-col xl:gap-1">
             <li>
@@ -247,7 +303,7 @@ const currentPath = Astro.url.pathname
                     d="M19 8.839l-7.77 3.885a2.75 2.75 0 01-2.46 0L1 8.839V14a2 2 0 002 2h14a2 2 0 002-2V8.839z"
                   ></path>
                 </svg>
-                Hire me
+                {labels.hireMe}
               </a>
             </li>
             <li>
@@ -359,14 +415,14 @@ const currentPath = Astro.url.pathname
           <ul class="space-y-1 flex flex-col w-full">
             <li>
               <a
-                href="/"
+                href={withLocale('/')}
                 class={classNames(
                   'flex gap-x-3 items-center',
                   'rounded-xl px-4 py-2.5',
                   'text-sm leading-6 font-semibold',
                   'text-warm-700 dark:text-warm-300 hover:bg-warm-200 dark:hover:bg-warm-800/30',
                   'transition-all duration-200',
-                  currentPath === '/' &&
+                  currentPath === withLocale('/') &&
                     'bg-warm-900 hover:bg-warm-800 dark:bg-warm-100 dark:hover:bg-warm-200 text-white dark:text-warm-900',
                 )}
               >
@@ -385,19 +441,19 @@ const currentPath = Astro.url.pathname
                     d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
                   ></path>
                 </svg>
-                Introduction
+                {labels.introduction}
               </a>
             </li>
             <li>
               <a
-                href="/work"
+                href={withLocale('/work')}
                 class={classNames(
                   'flex gap-x-3 items-center',
                   'rounded-xl px-4 py-2.5',
                   'text-sm leading-6 font-semibold',
                   'text-warm-700 dark:text-warm-300 hover:bg-warm-200 dark:hover:bg-warm-800/30',
                   'transition-all duration-200',
-                  currentPath.startsWith('/work') &&
+                  currentPath.startsWith(withLocale('/work')) &&
                     'bg-warm-900 hover:bg-warm-800 dark:bg-warm-100 dark:hover:bg-warm-200 text-white dark:text-warm-900',
                 )}
               >
@@ -416,19 +472,19 @@ const currentPath = Astro.url.pathname
                     d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Z"
                   ></path>
                 </svg>
-                Work
+                {labels.work}
               </a>
             </li>
             <li>
               <a
-                href="/skills"
+                href={withLocale('/skills')}
                 class={classNames(
                   'flex gap-x-3 items-center',
                   'rounded-xl px-4 py-2.5',
                   'text-sm leading-6 font-semibold',
                   'text-warm-700 dark:text-warm-300 hover:bg-warm-200 dark:hover:bg-warm-800/30',
                   'transition-all duration-200',
-                  currentPath.startsWith('/skills') &&
+                  currentPath.startsWith(withLocale('/skills')) &&
                     'bg-warm-900 hover:bg-warm-800 dark:bg-warm-100 dark:hover:bg-warm-200 text-white dark:text-warm-900',
                 )}
               >
@@ -447,19 +503,19 @@ const currentPath = Astro.url.pathname
                     d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-2.846-2.846L2.5 12l2.846-.813a4.5 4.5 0 0 0 2.846-2.846L9 5.5l.813 2.846a4.5 4.5 0 0 0 2.846 2.846L15.5 12l-2.846.813a4.5 4.5 0 0 0-2.846 2.846ZM18.25 10.5l.433-1.518a2.25 2.25 0 0 1 1.518-1.518L21.72 7l-1.518-.433a2.25 2.25 0 0 1-1.518-1.518L18.25 3.5l-.433 1.518a2.25 2.25 0 0 1-1.518 1.518L14.78 7l1.518.433a2.25 2.25 0 0 1 1.518 1.518L18.25 10.5ZM16 21.5l.347-1.214a2.25 2.25 0 0 1 1.214-1.214L18.775 18l-1.214-.347a2.25 2.25 0 0 1-1.214-1.214L16 15.225l-.347 1.214a2.25 2.25 0 0 1-1.214 1.214L13.225 18l1.214.347a2.25 2.25 0 0 1 1.214 1.214L16 21.5Z"
                   ></path>
                 </svg>
-                Skills
+                {labels.skills}
               </a>
             </li>
             <li>
               <a
-                href="/blog"
+                href={withLocale('/blog')}
                 class={classNames(
                   'flex gap-x-3 items-center',
                   'rounded-xl px-4 py-2.5',
                   'text-sm leading-6 font-semibold',
                   'text-warm-700 dark:text-warm-300 hover:bg-warm-200 dark:hover:bg-warm-800/30',
                   'transition-all duration-200',
-                  currentPath.startsWith('/blog') &&
+                  currentPath.startsWith(withLocale('/blog')) &&
                     'bg-warm-900 hover:bg-warm-800 dark:bg-warm-100 dark:hover:bg-warm-200 text-white dark:text-warm-900',
                 )}
               >
@@ -478,19 +534,19 @@ const currentPath = Astro.url.pathname
                     d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125"
                   ></path>
                 </svg>
-                Blog
+                {labels.blog}
               </a>
             </li>
             <li>
               <a
-                href="/what-i-built"
+                href={withLocale('/what-i-built')}
                 class={classNames(
                   'flex gap-x-3 items-center',
                   'rounded-xl px-4 py-2.5',
                   'text-sm leading-6 font-semibold',
                   'text-warm-700 dark:text-warm-300 hover:bg-warm-200 dark:hover:bg-warm-800/30',
                   'transition-all duration-200',
-                  currentPath === '/what-i-built' &&
+                  currentPath === withLocale('/what-i-built') &&
                     'bg-warm-900 hover:bg-warm-800 dark:bg-warm-100 dark:hover:bg-warm-200 text-white dark:text-warm-900',
                 )}
               >
@@ -509,19 +565,19 @@ const currentPath = Astro.url.pathname
                     d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 0 0 .75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 0 0-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0 1 12 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 0 1-.673-.38m0 0A2.18 2.18 0 0 1 3 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 0 1 3.413-.387m7.5 0V5.25A2.25 2.25 0 0 0 13.5 3h-3a2.25 2.25 0 0 0-2.25 2.25v.894m7.5 0a48.667 48.667 0 0 0-7.5 0M12 12.75h.008v.008H12v-.008Z"
                   ></path>
                 </svg>
-                What I Built
+                {labels.whatBuilt}
               </a>
             </li>
             <li>
               <a
-                href="/what-i-use"
+                href={withLocale('/what-i-use')}
                 class={classNames(
                   'flex gap-x-3 items-center',
                   'rounded-xl px-4 py-2.5',
                   'text-sm leading-6 font-semibold',
                   'text-warm-700 dark:text-warm-300 hover:bg-warm-200 dark:hover:bg-warm-800/30',
                   'transition-all duration-200',
-                  currentPath === '/what-i-use' &&
+                  currentPath === withLocale('/what-i-use') &&
                     'bg-warm-900 hover:bg-warm-800 dark:bg-warm-100 dark:hover:bg-warm-200 text-white dark:text-warm-900',
                 )}
               >
@@ -540,7 +596,7 @@ const currentPath = Astro.url.pathname
                     d="M15.59 14.37a6 6 0 0 1-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 0 0 6.16-12.12A14.98 14.98 0 0 0 9.631 8.41m5.96 5.96a14.926 14.926 0 0 1-5.841 2.58m-.119-8.54a6 6 0 0 0-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 0 0-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 0 1-2.448-2.448 14.9 14.9 0 0 1 .06-.312m-2.24 2.39a4.493 4.493 0 0 0-1.757 4.306 4.493 4.493 0 0 0 4.306-1.758M16.5 9a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"
                   ></path>
                 </svg>
-                What I Use
+                {labels.whatUse}
               </a>
             </li>
           </ul>
@@ -565,8 +621,8 @@ const currentPath = Astro.url.pathname
     'xl:hidden',
   )}
 >
-  <span class="icon-hamburger text-sm font-semibold">Menu</span>
-  <span class="icon-close text-sm font-semibold">Close</span>
+  <span class="icon-hamburger text-sm font-semibold">{labels.menu}</span>
+  <span class="icon-close text-sm font-semibold">{labels.close}</span>
 
   <!-- Hamburger icon (visible when closed) -->
   <svg

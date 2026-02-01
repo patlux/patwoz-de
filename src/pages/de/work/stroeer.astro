@@ -1,0 +1,303 @@
+---
+import Layout from '~/layouts/Layout.astro'
+import BaseLayout from '~/components/BaseLayout.astro'
+import Footer from '~/components/Footer.astro'
+import AppStoreLinks from '~/components/AppStoreLinks.astro'
+
+const pageTitle = 'Ströer / t-online'
+const description =
+  't-online News App mit React Native und Expo gebaut, inklusive Monetization, Analytics und CI/CD.'
+const canonicalURL = new URL(Astro.url.pathname, Astro.site)
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Startseite',
+      item: new URL('/de', Astro.site).toString(),
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Referenzen',
+      item: new URL('/de/work', Astro.site).toString(),
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: pageTitle,
+      item: canonicalURL.toString(),
+    },
+  ],
+}
+---
+
+<Layout
+  title="Ströer / t-online - Referenzen"
+  description={description}
+  lang="de"
+>
+  <BaseLayout>
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(breadcrumbSchema)}
+    />
+    <article class="mt-12">
+      <a
+        href="/de/work"
+        class="inline-flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 mb-6"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-4 h-4"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M15.75 19.5 8.25 12l7.5-7.5"></path>
+        </svg>
+        Zurück zu Referenzen
+      </a>
+
+      <header class="mb-12">
+        <div class="flex flex-col sm:flex-row gap-6 items-start">
+          <div
+            class="flex-shrink-0 flex items-center justify-center w-24 h-24 bg-gray-50 dark:bg-zinc-800 rounded-xl border border-gray-200 dark:border-zinc-700"
+          >
+            <div class="flex flex-col items-center gap-1">
+              <img
+                src="/company/str-logo-white.svg"
+                alt="Ströer Logo"
+                width="60"
+                height="13"
+                class="dark:invert"
+              />
+              <img
+                src="/company/t-online-desktop.327ab976.svg"
+                alt="t-online Logo"
+                width="50"
+                height="11"
+                class="dark:invert"
+              />
+            </div>
+          </div>
+          <div class="flex-1">
+            <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100">
+              t-online News Mobile App
+            </h1>
+            <p class="text-gray-600 dark:text-gray-400 mt-1">
+              Ströer Digital Publishing GmbH
+            </p>
+            <div
+              class="flex flex-wrap gap-4 mt-3 text-sm text-gray-500 dark:text-gray-400"
+            >
+              <span class="flex items-center gap-1">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-4 h-4"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
+                  ></path>
+                </svg>
+                Senior React Native Developer
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <AppStoreLinks
+          appStoreUrl="https://apps.apple.com/de/app/t-online-nachrichten/id339777505"
+          playStoreUrl="https://play.google.com/store/apps/details?id=de.telekom.t_online_de"
+        />
+      </header>
+
+      <div class="prose lg:prose-lg max-w-none">
+        <p>
+          t-online ist eines der größten Nachrichtenportale Deutschlands mit
+          Millionen täglicher Leser. Die Mobile-App bietet eine native
+          Experience für Nachrichten, Live-Sport, Wetter und mehr.
+        </p>
+
+        <h2>Projektüberblick</h2>
+        <p>
+          Die t-online News-App von Grund auf mit React Native und Expo gebaut.
+          Die App liefert t-online.de Inhalte über eine hybride
+          WebView-Architektur mit nativer Navigation, Push Notifications und
+          Werbemonetarisierung. Als hauptverantwortlicher Entwickler habe ich
+          alle Kernfeatures umgesetzt und die technische Basis gelegt.
+        </p>
+
+        <h2>Wichtige Beiträge</h2>
+
+        <h3>Konfigurierbare Tab Bar</h3>
+        <p>
+          Eine benutzerkonfigurierbare Bottom Navigation umgesetzt, mit der
+          Leser ihr Erlebnis personalisieren können. Nutzer wählen bis zu 3 Tabs
+          aus (News, Sport, Wetter, Live Ticker, Themen) und ordnen sie via
+          Drag-and- Drop. Einstellungen werden lokal gespeichert und bleiben
+          erhalten.
+        </p>
+
+        <h3>Suche mit Auto-Suggestions</h3>
+        <p>
+          Performante Suche mit Echtzeit-Vorschlägen gebaut. Request Debouncing
+          und Cancellation via AbortController implementiert, um Race Conditions
+          zu vermeiden. Listen-Rendering mit @shopify/flash-list für smoothes
+          Scrollen durch tausende Ergebnisse optimiert.
+        </p>
+
+        <h3>Multi-WebView Navigation</h3>
+        <p>
+          Architektur für mehrere WebView-Instanzen pro Tab entworfen und
+          implementiert, inkl. sauberem Navigation Stack Management. Jeder Tab
+          behält seine eigene History, was natürliches Back/Forward und das
+          Beibehalten von Scroll-Positionen ermöglicht.
+        </p>
+
+        <h3>Dark Mode Support</h3>
+        <p>
+          Systemweiten Dark Mode umgesetzt und zwischen nativer App Shell und
+          WebView synchronisiert. Custom Expo Modul gebaut, das iOS/Android
+          Theme Detection an die WebView weiterreicht, um eine konsistente
+          Darstellung zu sichern.
+        </p>
+
+        <h3>Push Notifications</h3>
+        <p>
+          Airship SDK für Push-Benachrichtigungen mit Deep Linking integriert.
+          Notification Channels für Kategorien (Breaking News, Sport usw.)
+          implementiert und Background/Foreground Routing umgesetzt.
+        </p>
+
+        <h3>Werbemonetarisierung</h3>
+        <p>
+          Google Mobile Ads SDK und Taboola Native Ads in den WebView-Kontext
+          integriert. Ad Refresh Logik gebaut, die Ads beim Navigieren zwischen
+          Artikeln aktualisiert, um Umsatz zu maximieren und Performance zu
+          wahren.
+        </p>
+
+        <h3>Onboarding Tutorial</h3>
+        <p>
+          Erststart-Tutorial erstellt, das zentrale App-Features erklärt. Das
+          Onboarding führt durch Permission Requests und Personalisierung, bevor
+          Inhalte gezeigt werden.
+        </p>
+
+        <h3>Deep Linking</h3>
+        <p>
+          Universal Links (iOS) und App Links (Android) für t-online.de URLs
+          implementiert. Externe Artikel-Links werden in der App geöffnet statt
+          im Browser.
+        </p>
+
+        <h3>Analytics & Crash Reporting</h3>
+        <p>
+          Firebase Crashlytics für Crash Reporting und Firebase Analytics für
+          User-Tracking integriert. Zudem INFOnline/IVW Tracking für deutsche
+          Medienmessung implementiert.
+        </p>
+
+        <h3>CI/CD Pipeline</h3>
+        <p>
+          EAS Build für automatisierte iOS- und Android-Builds eingerichtet,
+          inklusive App Store/Play Store Submission. GitHub Actions Workflows
+          für Validierung, Tests und Deployments konfiguriert.
+        </p>
+      </div>
+
+      <div class="prose lg:prose-lg max-w-none mt-8">
+        <h2>Technologie-Stack</h2>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-6 mb-12">
+        <div>
+          <h4
+            class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase mb-3"
+          >
+            Frontend
+          </h4>
+          <ul class="space-y-2">
+            <li class="text-gray-700 dark:text-gray-300">React Native</li>
+            <li class="text-gray-700 dark:text-gray-300">Expo 49</li>
+            <li class="text-gray-700 dark:text-gray-300">TypeScript</li>
+            <li class="text-gray-700 dark:text-gray-300">NativeWind</li>
+            <li class="text-gray-700 dark:text-gray-300">React Navigation</li>
+          </ul>
+        </div>
+        <div>
+          <h4
+            class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase mb-3"
+          >
+            Services
+          </h4>
+          <ul class="space-y-2">
+            <li class="text-gray-700 dark:text-gray-300">
+              Firebase Crashlytics
+            </li>
+            <li class="text-gray-700 dark:text-gray-300">Firebase Analytics</li>
+            <li class="text-gray-700 dark:text-gray-300">Airship (Push)</li>
+            <li class="text-gray-700 dark:text-gray-300">INFOnline (IVW)</li>
+          </ul>
+        </div>
+        <div>
+          <h4
+            class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase mb-3"
+          >
+            Monetization
+          </h4>
+          <ul class="space-y-2">
+            <li class="text-gray-700 dark:text-gray-300">Google Mobile Ads</li>
+            <li class="text-gray-700 dark:text-gray-300">Taboola</li>
+          </ul>
+        </div>
+        <div>
+          <h4
+            class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase mb-3"
+          >
+            DevOps
+          </h4>
+          <ul class="space-y-2">
+            <li class="text-gray-700 dark:text-gray-300">EAS Build</li>
+            <li class="text-gray-700 dark:text-gray-300">GitHub Actions</li>
+            <li class="text-gray-700 dark:text-gray-300">Maestro (E2E)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="prose lg:prose-lg max-w-none">
+        <h2>Weitere Beiträge</h2>
+
+        <h3>@stroeer/radio-custom-webview</h3>
+        <p>
+          Eine Custom React Native WebView Library erstellt, die auf die App-
+          Anforderungen zugeschnitten ist. Features: native Taboola Integration,
+          Pull-to-Refresh und Google Mobile Ads SDK Bridging für In-WebView Ads.
+        </p>
+
+        <h3>react-native-infoonline</h3>
+        <p>
+          React Native Wrapper für das INFOnline/IVW Measurement SDK entwickelt,
+          um DSGVO-konformes Analytics Tracking für deutsche Medienpublisher zu
+          ermöglichen. Unterstützt iOS und Android mit automatischem Session
+          Management.
+        </p>
+      </div>
+    </article>
+
+    <Footer />
+  </BaseLayout>
+</Layout>

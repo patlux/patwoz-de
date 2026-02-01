@@ -1,0 +1,143 @@
+---
+import { getCollection } from 'astro:content'
+import Layout from '~/layouts/Layout.astro'
+import BaseLayout from '~/components/BaseLayout.astro'
+import Footer from '~/components/Footer.astro'
+import ClientMarquee from '~/components/ClientMarquee.astro'
+
+const posts = await getCollection('blog-de')
+type BlogPost = (typeof posts)[number]
+const sortedPosts = posts.sort(
+  (a: BlogPost, b: BlogPost) =>
+    new Date(b.data.published).getTime() - new Date(a.data.published).getTime(),
+)
+
+const dateFormatter = new Intl.DateTimeFormat('de-DE', {
+  dateStyle: 'medium',
+})
+
+const postsByYear = sortedPosts.reduce(
+  (acc: Record<string, BlogPost[]>, post: BlogPost) => {
+    const year = new Date(post.data.published).getFullYear().toString()
+    if (!acc[year]) acc[year] = []
+    acc[year].push(post)
+    return acc
+  },
+  {},
+)
+const years = Object.keys(postsByYear).sort((a, b) => Number(b) - Number(a))
+---
+
+<Layout
+  title="Blog | Patrick Wozniak"
+  description="Gedanken zu Softwareentwicklung, DevOps und den Tools, die ich nutze."
+  lang="de"
+>
+  <BaseLayout>
+    <section class="animate-fade-in-up opacity-0">
+      <h1
+        class="text-3xl sm:text-4xl font-display font-bold text-warm-900 dark:text-warm-100"
+      >
+        Blog
+      </h1>
+      <p class="text-lg text-warm-600 dark:text-warm-400 mt-3 leading-relaxed">
+        Gedanken zu Softwareentwicklung, DevOps und den Tools, die ich nutze.
+        Meist Notizen an mein zukünftiges Ich.
+      </p>
+    </section>
+
+    <div class="mt-12 space-y-12">
+      {
+        years.map((year, yearIndex) => (
+          <section
+            class="animate-fade-in-up opacity-0"
+            style={`animation-delay: ${0.1 + yearIndex * 0.05}s`}
+          >
+            <div class="flex items-center gap-4 mb-6">
+              <h2 class="text-2xl font-display font-bold text-warm-400 dark:text-warm-600">
+                {year}
+              </h2>
+              <div class="flex-1 h-px bg-warm-200 dark:bg-warm-800" />
+              <span class="text-sm text-warm-400 dark:text-warm-600">
+                {postsByYear[year].length}{' '}
+                {postsByYear[year].length === 1 ? 'Beitrag' : 'Beiträge'}
+              </span>
+            </div>
+
+            <ul class="space-y-3">
+              {postsByYear[year].map((post: BlogPost) => (
+                <li>
+                  <a
+                    href={`/de/blog/${post.slug}`}
+                    class="card-soft p-4 sm:p-5 flex flex-col sm:flex-row gap-3 sm:gap-6 sm:items-center group hover-lift block"
+                  >
+                    <time
+                      class="text-sm font-medium text-accent-600 dark:text-accent-400 whitespace-nowrap"
+                      datetime={post.data.published.toISOString()}
+                    >
+                      {dateFormatter.format(post.data.published)}
+                    </time>
+                    <div class="flex-1 min-w-0">
+                      <h3 class="font-semibold text-warm-900 dark:text-warm-100 group-hover:text-accent-600 dark:group-hover:text-accent-400 transition-colors line-clamp-2">
+                        {post.data.title}
+                      </h3>
+                      {post.data.description && (
+                        <p class="text-sm text-warm-600 dark:text-warm-400 mt-1 line-clamp-1">
+                          {post.data.description}
+                        </p>
+                      )}
+                    </div>
+                    <div class="hidden sm:flex items-center text-warm-400 group-hover:text-accent-500 transition-colors">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        class="w-5 h-5"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
+                          clip-rule="evenodd"
+                        />
+                      </svg>
+                    </div>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))
+      }
+    </div>
+
+    {
+      sortedPosts.length === 0 && (
+        <div class="text-center py-16">
+          <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-warm-100 dark:bg-dark-elevated flex items-center justify-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-8 h-8 text-warm-400"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125"
+              />
+            </svg>
+          </div>
+          <p class="text-warm-600 dark:text-warm-400">
+            Noch keine Blogbeiträge. Schau bald wieder vorbei!
+          </p>
+        </div>
+      )
+    }
+
+    <ClientMarquee />
+
+    <Footer />
+  </BaseLayout>
+</Layout>

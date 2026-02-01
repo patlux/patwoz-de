@@ -1,0 +1,53 @@
+---
+title: 'AWS EKS: IAM Principal kein Zugriff auf den Cluster'
+description: So behebst du EKS Access-Fehler, indem du den IAM Principal korrekt in den Cluster-Zugriff einträgst und Policies setzt.
+published: 2025-04-14
+featured: true
+image: /blog-images/2025-04-14-aws-eks-iam-principal-no-access-cluster.avif
+---
+
+Wenn du mit Amazon EKS arbeitest, kannst du Access-Fehler bekommen, obwohl du den richtigen IAM User nutzt und den Cluster erstellt hast. Die Fehler tauchen in der CLI (`kubectl`), CloudWatch und der AWS Console auf. Typische Meldungen:
+
+- `error: You must be logged in to the server (the server has asked for the client to provide credentials)`
+- `Identity is not mapped`
+- `Your current IAM principal doesn't have access to Kubernetes objects on this cluster...`
+
+Das weist meist darauf hin, dass ein Access Entry für deinen IAM Principal im EKS Cluster fehlt.
+
+So behebst du es:
+
+## Schritt-für-Schritt: Zugriff für deinen IAM Principal
+
+1. **AWS Console öffnen**  
+   Gehe zu **EKS > Clusters** und wähle deinen Cluster.
+
+2. **Access Tab öffnen**  
+   Klicke im Cluster auf den Tab **Access**.
+
+3. **Access Entry erstellen**
+
+   - Klicke **Create access entry**.
+   - Wähle deine IAM Principal ARN. Du findest sie mit:
+     ```sh
+     aws sts get-caller-identity
+     ```
+     Im Output findest du das Feld `Arn`.
+
+4. **Access Policy zuweisen**
+
+   - Beim Anlegen wähle `AmazonEKSAdminPolicy` als Access Policy.
+
+5. **Cluster Admin Policy hinzufügen**
+
+   - Nach dem Erstellen zurück zum **Access** Tab.
+   - Den eben erstellten Access Entry anklicken.
+   - **Add access policy** wählen und `AmazonEKSClusterAdminPolicy` hinzufügen.
+
+6. **Mit kubectl prüfen**  
+   Danach sollten deine `kubectl` Commands funktionieren und du hast Zugriff auf den Cluster.
+
+## Zusammenfassung
+
+EKS benötigt explizite IAM Access Entries für Principals. Auch wenn dein IAM User den Cluster erstellt hat, bekommt er nicht automatisch volle Rechte. Mit den richtigen Access Entries und Policies ist das behoben.
+
+Sag Bescheid, wenn du ein Script oder Terraform Config zur Automatisierung willst.

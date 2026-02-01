@@ -10,14 +10,37 @@ interface Props {
   note?: string
 }
 
-const {
-  title,
-  intro,
-  delivered,
-  why,
-  projects,
-  note = 'This page is a short highlight and does not list all contributions or details.',
-} = Astro.props as Props
+const { title, intro, delivered, why, projects, note } = Astro.props as Props
+
+const currentPath = Astro.url.pathname
+const isGerman = currentPath.startsWith('/de')
+const labels = isGerman
+  ? {
+      home: 'Startseite',
+      skills: 'Kompetenzen',
+      backHome: 'Zur Startseite',
+      viewWork: 'Alle Projekte ansehen',
+      skill: 'Kompetenz',
+      delivered: 'Was ich geliefert habe',
+      why: 'Warum das eine Kompetenz ist',
+      where: 'Wo es auftaucht',
+      note: 'Diese Seite ist ein kurzer Auszug und listet nicht alle Beiträge oder Details.',
+    }
+  : {
+      home: 'Home',
+      skills: 'Skills',
+      backHome: 'Back to Home',
+      viewWork: 'View all work',
+      skill: 'Skill',
+      delivered: 'What I delivered',
+      why: "Why it's a skill",
+      where: 'Where it shows up',
+      note: 'This page is a short highlight and does not list all contributions or details.',
+    }
+const homeHref = isGerman ? '/de' : '/'
+const skillsHref = isGerman ? '/de/skills' : '/skills'
+const workHref = isGerman ? '/de/work' : '/work'
+const noteText = note || labels.note
 
 const siteUrl = Astro.site?.toString() || 'https://patwoz.dev'
 const canonicalURL = new URL(Astro.url.pathname, Astro.site)
@@ -28,14 +51,14 @@ const breadcrumbSchema = {
     {
       '@type': 'ListItem',
       position: 1,
-      name: 'Home',
-      item: siteUrl,
+      name: labels.home,
+      item: new URL(homeHref, siteUrl).toString(),
     },
     {
       '@type': 'ListItem',
       position: 2,
-      name: 'Skills',
-      item: new URL('/skills', siteUrl).toString(),
+      name: labels.skills,
+      item: new URL(skillsHref, siteUrl).toString(),
     },
     {
       '@type': 'ListItem',
@@ -54,7 +77,7 @@ const breadcrumbSchema = {
 
 <article class="mt-12">
   <a
-    href="/"
+    href={homeHref}
     class="inline-flex items-center gap-1 text-sm text-warm-500 dark:text-warm-400 hover:text-warm-700 dark:hover:text-warm-200 mb-6"
   >
     <svg
@@ -70,14 +93,14 @@ const breadcrumbSchema = {
         stroke-linejoin="round"
         d="M15.75 19.5 8.25 12l7.5-7.5"></path>
     </svg>
-    Back to Home
+    {labels.backHome}
   </a>
 
   <header class="max-w-3xl">
     <p
       class="text-xs font-semibold uppercase tracking-wider text-warm-500 dark:text-warm-400"
     >
-      Skill
+      {labels.skill}
     </p>
     <h1
       class="mt-2 text-3xl sm:text-4xl font-display font-bold text-warm-900 dark:text-warm-100"
@@ -88,13 +111,13 @@ const breadcrumbSchema = {
       {intro}
     </p>
     <p class="mt-3 text-sm text-warm-500 dark:text-warm-400">
-      {note}
+      {noteText}
     </p>
     <a
-      href="/work"
+      href={workHref}
       class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-accent-600 dark:text-accent-400 hover:text-accent-700 dark:hover:text-accent-300"
     >
-      View all work
+      {labels.viewWork}
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 20 20"
@@ -112,7 +135,7 @@ const breadcrumbSchema = {
   <div class="mt-10 space-y-10 max-w-3xl">
     <section>
       <h2 class="text-lg font-semibold text-warm-900 dark:text-warm-100">
-        What I delivered
+        {labels.delivered}
       </h2>
       <ul
         class="mt-4 space-y-3 list-disc pl-5 text-warm-700 dark:text-warm-300"
@@ -128,9 +151,9 @@ const breadcrumbSchema = {
     </section>
 
     <section class="prose lg:prose-lg max-w-none">
-      <h2>Why it's a skill</h2>
+      <h2>{labels.why}</h2>
       <p>{why}</p>
-      <h2>Where it shows up</h2>
+      <h2>{labels.where}</h2>
       <ul>
         {
           projects.map((project) => (

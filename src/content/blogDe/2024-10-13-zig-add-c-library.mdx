@@ -1,0 +1,81 @@
+---
+title: 'zig: C-Library als Dependency nutzen'
+description: 'Lerne, wie du C-Libraries wie cJSON in Zig einbindest, indem du zig fetch verwendest und deine build.zig anpasst.'
+published: 2024-10-13
+image: /blog-images/2024-10-13-zig-add-c-library.avif
+featured: true
+---
+
+Die [zig](https://ziglang.org/) Community ist groß, aber die Anzahl nativer Zig Libraries wächst noch. Trotzdem kannst du problemlos jede C-Library in dein Zig Projekt importieren.
+
+**Schritt 1: C-Library holen und installieren**
+
+Wir verwenden [cJSON](https://github.com/DaveGamble/cJSON) als Beispiel.
+
+```sh
+zig fetch --save=cjson https://github.com/DaveGamble/cJSON/archive/refs/heads/master.zip
+```
+
+**Schritt 2: build.zig anpassen**
+
+Jetzt müssen wir `build.zig` anpassen, um die Library in unser Executable einzubinden:
+
+```zig
+// ...
+const cjsonDep = b.dependency("cjson", .{});
+exe.addIncludePath(cjsonDep.path(""));
+exe.linkLibC();
+exe.addCSourceFiles(.{
+    .root = .{
+        .dependency = .{
+            .dependency = cjsonDep,
+            .sub_path = "",
+        },
+    },
+    .files = &[_][]const u8{
+        "cJSON.c",
+    },
+});
+// ...
+```
+
+**Schritt 3: C-Library in der Zig App nutzen**
+
+Jetzt kannst du die Public API von `cJSON` in deiner Zig App verwenden.
+
+```zig
+const c = @cImport({
+    @cInclude("cJSON.h");
+});
+
+const value = c.cJSON_Parse(
+    "{ \"name\": \"Patrick\" }",
+);
+defer std.c.free(value);
+const name = c.cJSON_GetObjectItemCaseSensitive(
+    value,
+    "name",
+);
+defer std.c.free(name);
+if (c.cJSON_IsString(name) == 1) {
+    const str: [:0]u8 = std.mem.span(name.*.valuestring);
+    std.debug.print(
+        "name = {s}, len = {d}\n",
+        .{
+            str,
+            str.len,
+        },
+    );
+}
+```
+
+Output:
+
+```sh
+> zig build run
+name = Patrick, len = 7
+```
+
+Mit diesem Ansatz kannst du Zig Anwendungen einfach mit dem großen C-Ecosystem erweitern, z.B. cJSON. Diese Flexibilität schließt die Lücke zwischen Zig und C nahtlos.
+
+[Source Code](https://github.com/patlux/zig-cjson)

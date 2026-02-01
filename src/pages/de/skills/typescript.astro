@@ -1,0 +1,44 @@
+---
+import Layout from '~/layouts/Layout.astro'
+import BaseLayout from '~/components/BaseLayout.astro'
+import Footer from '~/components/Footer.astro'
+import SkillPage from '~/components/SkillPage.astro'
+
+const intro =
+  'TypeScript ist meine Standardsprache für produktive Arbeit. Ich nutze sie, um grosse Codebasen in React Native Apps, React Web Apps und geteilten Libraries vorhersehbar zu halten.'
+
+const delivered = [
+  'Verbesserte Typsicherheit und Codequalität in einem React Native + React Monorepo bei <a href="/de/work/porsche" class="text-accent-600 dark:text-accent-400 hover:text-accent-700 dark:hover:text-accent-300">Porsche Digital</a>, inklusive Fixes von TypeScript-Fehlern und schärferen Lint-Regeln.',
+  'Stabilisierte die <a href="/de/work/kulturpass" class="text-accent-600 dark:text-accent-400 hover:text-accent-700 dark:hover:text-accent-300">KulturPass</a> Codebasis durch Behebung von TypeScript-Problemen und Stärkung der Redux-Architektur mit strikter Typisierung.',
+  'Baute und wartete eine grosse TypeScript-basierte Mobile-App für <a href="/de/work/kicker" class="text-accent-600 dark:text-accent-400 hover:text-accent-700 dark:hover:text-accent-300">Kicker</a> sowie eine langlebige Gerätekonfigurations-App für <a href="/de/work/abl" class="text-accent-600 dark:text-accent-400 hover:text-accent-700 dark:hover:text-accent-300">ABL</a>.',
+  'Beitrag zu einem gemeinsamen Design-System mit TypeScript-Komponenten für React Web und React Native bei <a href="/de/work/ibm/barmer-puls" class="text-accent-600 dark:text-accent-400 hover:text-accent-700 dark:hover:text-accent-300">Barmer Puls</a>.',
+]
+
+const why =
+  'Ich nutze TypeScript, um komplexe Domänen zu modellieren, API-Verträge zu erzwingen und sicher zu refactoren. Dadurch kann ich schnell liefern, ohne Kernflows zu brechen - besonders bei langlebigen Produkten über mehrere Plattformen.'
+
+const projects = [
+  { label: 'Porsche Digital', href: '/de/work/porsche' },
+  { label: 'SAP / KulturPass', href: '/de/work/kulturpass' },
+  { label: 'Kicker', href: '/de/work/kicker' },
+  { label: 'ABL', href: '/de/work/abl' },
+  { label: 'IBM iX / Barmer Puls', href: '/de/work/ibm/barmer-puls' },
+]
+---
+
+<Layout
+  title="TypeScript | Patrick Wozniak"
+  description="TypeScript-Kompetenz in React Native, React und skalierbarer Produktentwicklung."
+  lang="de"
+>
+  <BaseLayout>
+    <SkillPage
+      title="TypeScript"
+      intro={intro}
+      delivered={delivered}
+      why={why}
+      projects={projects}
+    />
+    <Footer />
+  </BaseLayout>
+</Layout>

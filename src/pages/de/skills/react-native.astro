@@ -1,0 +1,45 @@
+---
+import Layout from '~/layouts/Layout.astro'
+import BaseLayout from '~/components/BaseLayout.astro'
+import Footer from '~/components/Footer.astro'
+import SkillPage from '~/components/SkillPage.astro'
+
+const intro =
+  'React Native ist der Bereich, in dem ich die meiste Zeit verbringe. Ich baue produktive Apps, integriere native SDKs und betreue langlebige Produkte für iOS und Android.'
+
+const delivered = [
+  'Komplexe Mobile-Features bei <a href="/de/work/porsche">Porsche Digital</a> gebaut, inklusive Onboarding-Flows, In-App-Abos, Animationen und Live-Video-Streaming.',
+  'Kernfunktionalität für <a href="/de/work/kulturpass">KulturPass</a> implementiert, inklusive Secure Storage, Validierung und einem kompletten React-Native-Upgrade.',
+  'Die t-online News-App mit hybrider WebView-Architektur und nativen Integrationen für <a href="/de/work/stroeer">Ströer</a> geliefert.',
+  'Den React Native + <a href="/de/skills/expo" class="text-accent-600 dark:text-accent-400 hover:text-accent-700 dark:hover:text-accent-300">Expo</a> Rebuild der <a href="/de/work/kicker">Kicker</a> Streaming-App geführt, inklusive Offline-Playback und Abo-Management.',
+  'Gerätekommunikation, QR-Scanning und Firmware-Update-Flows für <a href="/de/work/abl">ABL</a> gebaut und die App durch mehrere RN-Upgrades begleitet.',
+]
+
+const why =
+  'Ich liefere native-qualitative Experiences und behalte Performance, Stabilität und Wartbarkeit im Fokus. Dazu gehören SDK-Integrationen, komplexes State-Management und die Weiterentwicklung über mehrere Jahre.'
+
+const projects = [
+  { label: 'Porsche Digital', href: '/de/work/porsche' },
+  { label: 'SAP / KulturPass', href: '/de/work/kulturpass' },
+  { label: 'Ströer / t-online', href: '/de/work/stroeer' },
+  { label: 'Kicker', href: '/de/work/kicker' },
+  { label: 'ABL', href: '/de/work/abl' },
+]
+---
+
+<Layout
+  title="React Native | Patrick Wozniak"
+  description="React Native Kompetenz für Consumer-Apps, Enterprise-Produkte und langfristige Wartung."
+  lang="de"
+>
+  <BaseLayout>
+    <SkillPage
+      title="React Native"
+      intro={intro}
+      delivered={delivered}
+      why={why}
+      projects={projects}
+    />
+    <Footer />
+  </BaseLayout>
+</Layout>
