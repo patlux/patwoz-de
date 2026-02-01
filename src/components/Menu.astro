@@ -92,13 +92,13 @@ const labels = isGerman
       >
         <Fragment set:html={LogoSvg} />
       </a>
-      <div class="xl:block flex items-center gap-2">
+      <div class="flex items-center gap-2">
         <a
           href={switchHref}
           aria-label={labels.switchAria}
           class="inline-flex items-center justify-center h-9 px-3 rounded-lg text-xs font-semibold uppercase tracking-wide text-warm-600 dark:text-warm-300 bg-warm-200/80 dark:bg-warm-800/60 hover:text-warm-900 dark:hover:text-warm-100 transition-colors"
         >
-          {isGerman ? 'EN' : 'DE'}
+          {isGerman ? '🇬🇧' : '🇩🇪'}
         </a>
         <ThemeToggle />
       </div>
@@ -106,6 +106,7 @@ const labels = isGerman
 
     <!-- Navigation - bottom sheet on mobile, sidebar on desktop -->
     <nav
+      id="mobile-menu"
       class={classNames(
         'mobile-menu',
         // Mobile: bottom sheet
@@ -125,7 +126,7 @@ const labels = isGerman
     >
       <!-- Close header (mobile only) -->
       <div
-        class="flex items-center justify-between pl-7 pr-4 py-4 border-b border-warm-200 dark:border-warm-700/50 xl:hidden"
+        class="sticky top-0 z-10 flex items-center justify-between pl-7 pr-4 py-4 border-b border-warm-200 dark:border-warm-700/50 xl:hidden bg-warm-100/90 dark:bg-dark-surface/90 backdrop-blur"
       >
         <a
           href={withLocale('/')}
@@ -140,7 +141,7 @@ const labels = isGerman
             aria-label={labels.switchAria}
             class="inline-flex items-center justify-center h-9 px-3 rounded-lg text-xs font-semibold uppercase tracking-wide text-warm-600 dark:text-warm-300 bg-warm-200/80 dark:bg-warm-800/60 hover:text-warm-900 dark:hover:text-warm-100 transition-colors"
           >
-            {isGerman ? 'EN' : 'DE'}
+            {isGerman ? '🇬🇧' : '🇩🇪'}
           </a>
           <ThemeToggle />
         </div>
@@ -656,3 +657,93 @@ const labels = isGerman
       d="M6 18 18 6M6 6l12 12"></path>
   </svg>
 </label>
+
+<script is:inline>
+  ;(() => {
+    const toggle = document.getElementById('menu-toggle')
+    const menu = document.getElementById('mobile-menu')
+    if (!toggle || !menu) return
+
+    const shouldScroll = () => window.matchMedia('(max-width: 1279px)').matches
+
+    let scrollYBeforeOpen = 0
+
+    const scrollToBottom = () => {
+      if (!shouldScroll()) return
+      menu.scrollTop = menu.scrollHeight
+    }
+
+    const setBodyScroll = (locked, forcedScrollY) => {
+      const body = document.body
+      const html = document.documentElement
+
+      if (locked) {
+        if (body.dataset.scrollLock === 'true') return
+        const scrollY =
+          typeof forcedScrollY === 'number'
+            ? forcedScrollY
+            : window.scrollY || document.documentElement.scrollTop
+        body.dataset.scrollLock = 'true'
+        body.dataset.scrollY = String(scrollY)
+        body.style.position = 'fixed'
+        body.style.top = `-${scrollY}px`
+        body.style.left = '0'
+        body.style.right = '0'
+        body.style.width = '100%'
+        html.classList.add('overflow-hidden')
+        body.classList.add('touch-none')
+      } else {
+        if (body.dataset.scrollLock !== 'true') return
+        const previousScrollY = Number(body.dataset.scrollY || '0')
+        body.style.position = ''
+        body.style.top = ''
+        body.style.left = ''
+        body.style.right = ''
+        body.style.width = ''
+        body.dataset.scrollLock = 'false'
+        body.dataset.scrollY = ''
+        html.classList.remove('overflow-hidden')
+        body.classList.remove('touch-none')
+        requestAnimationFrame(() => {
+          window.scrollTo(0, previousScrollY)
+        })
+      }
+    }
+
+    const labels = Array.from(
+      document.querySelectorAll('label[for="menu-toggle"]'),
+    )
+    labels.forEach((label) => {
+      label.addEventListener('pointerdown', () => {
+        if (!toggle.checked) {
+          scrollYBeforeOpen =
+            window.scrollY || document.documentElement.scrollTop
+        }
+      })
+    })
+
+    setBodyScroll(toggle.checked && shouldScroll(), scrollYBeforeOpen)
+
+    toggle.addEventListener('change', () => {
+      const isOpen = toggle.checked
+      setBodyScroll(isOpen && shouldScroll(), scrollYBeforeOpen)
+      if (isOpen) {
+        requestAnimationFrame(scrollToBottom)
+      }
+    })
+
+    window.addEventListener('resize', () => {
+      if (!toggle.checked) return
+      if (!shouldScroll()) {
+        setBodyScroll(false)
+        return
+      }
+      requestAnimationFrame(scrollToBottom)
+    })
+
+    document.addEventListener('astro:after-swap', () => {
+      if (!toggle.checked) return
+      setBodyScroll(shouldScroll())
+    })
+  })()
+</script>

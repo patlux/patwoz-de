@@ -11,7 +11,7 @@ const blog = defineCollection({
   }),
 })
 
-const blogDe = defineCollection({
+const germanBlog = defineCollection({
   type: 'content',
   schema: z.object({
     title: z.string(),
@@ -22,4 +22,4 @@ const blogDe = defineCollection({
   }),
 })
 
-export const collections = { blog, 'blog-de': blogDe }
+export const collections = { blog, 'blog-de': germanBlog }

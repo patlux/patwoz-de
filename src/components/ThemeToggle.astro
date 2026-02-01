@@ -8,14 +8,13 @@
 ---
 
 <button
-  id="theme-toggle"
   type="button"
-  class="p-2 rounded-lg transition-colors"
+  class="theme-toggle h-9 w-9 flex items-center justify-center rounded-lg transition-colors"
   aria-label="Toggle theme"
 >
   <!-- Sun icon -->
   <svg
-    id="theme-icon-light"
+    data-theme-icon="light"
     class="w-5 h-5 hidden"
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
@@ -32,7 +31,7 @@
 
   <!-- Moon icon -->
   <svg
-    id="theme-icon-dark"
+    data-theme-icon="dark"
     class="w-5 h-5 hidden"
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
@@ -50,27 +49,17 @@
 
 <script>
   function initThemeToggle() {
-    const toggleEl = document.getElementById('theme-toggle')
-    const iconLightEl = document.getElementById('theme-icon-light')
-    const iconDarkEl = document.getElementById('theme-icon-dark')
-    if (!toggleEl || !iconLightEl || !iconDarkEl) return
+    const toggles = Array.from(document.querySelectorAll('.theme-toggle'))
+    if (!toggles.length) return
 
-    // Capture as non-null for use in nested functions
-    const toggle = toggleEl
-    const iconLight = iconLightEl
-    const iconDark = iconDarkEl
-
-    // Get stored theme: 'light', 'dark', or null (system)
     function getStoredTheme(): string | null {
       return localStorage.getItem('theme')
     }
 
-    // Check system preference
     function systemPrefersDark(): boolean {
       return window.matchMedia('(prefers-color-scheme: dark)').matches
     }
 
-    // Apply theme to document
     function applyTheme(theme: string | null) {
       const shouldBeDark =
         theme === 'dark' || (theme === null && systemPrefersDark())
@@ -82,17 +71,15 @@
       }
     }
 
-    // Update button and icon states
-    function updateState(theme: string | null) {
-      const isForced = theme !== null
+    function updateState(toggle: Element, theme: string | null) {
+      const iconLight = toggle.querySelector('[data-theme-icon="light"]')
+      const iconDark = toggle.querySelector('[data-theme-icon="dark"]')
+      if (!iconLight || !iconDark) return
 
-      // Determine which icon to show:
-      // - If forced: show icon matching forced theme
-      // - If system: show icon matching system preference
+      const isForced = theme !== null
       const showMoon =
         theme === 'dark' || (theme === null && systemPrefersDark())
 
-      // Update icon visibility and colors
       const lightClasses = isForced
         ? 'w-5 h-5 text-amber-500'
         : 'w-5 h-5 text-gray-500 dark:text-gray-400'
@@ -109,66 +96,12 @@
         showMoon ? darkClasses : `${darkClasses} hidden`,
       )
 
-      // Update button toggled state
       toggle.className = isForced
-        ? 'p-2 rounded-lg transition-colors bg-gray-200 dark:bg-zinc-700 hover:bg-gray-300 dark:hover:bg-zinc-600'
-        : 'p-2 rounded-lg transition-colors hover:bg-gray-200 dark:hover:bg-zinc-700'
+        ? 'theme-toggle h-9 w-9 flex items-center justify-center rounded-lg transition-colors bg-gray-200 dark:bg-zinc-700 hover:bg-gray-300 dark:hover:bg-zinc-600'
+        : 'theme-toggle h-9 w-9 flex items-center justify-center rounded-lg transition-colors hover:bg-gray-200 dark:hover:bg-zinc-700'
     }
 
-    // Toggle theme on click with View Transitions API animation
-    function handleClick(event: MouseEvent) {
-      const current = getStoredTheme()
-      const prefersDark = systemPrefersDark()
-
-      let next: string | null
-
-      if (current === null) {
-        // System -> force opposite of system preference
-        next = prefersDark ? 'light' : 'dark'
-      } else {
-        // Forced -> back to system
-        next = null
-      }
-
-      // Calculate position for circular reveal animation
-      const x = event.clientX
-      const y = event.clientY
-
-      // Set CSS custom properties for the animation origin
-      document.documentElement.style.setProperty(
-        '--view-transition-x',
-        `${x}px`,
-      )
-      document.documentElement.style.setProperty(
-        '--view-transition-y',
-        `${y}px`,
-      )
-
-      // Use View Transitions API if available, otherwise fall back to instant switch
-      if (document.startViewTransition) {
-        document.startViewTransition(() => {
-          performThemeChange(next)
-        })
-      } else {
-        performThemeChange(next)
-      }
-    }
-
-    // Perform the actual theme change
-    function performThemeChange(next: string | null) {
-      if (next === null) {
-        localStorage.removeItem('theme')
-      } else {
-        localStorage.setItem('theme', next)
-      }
-
-      applyTheme(next)
-      updateState(next)
-      updateAriaLabel(next)
-    }
-
-    // Update aria-label
-    function updateAriaLabel(theme: string | null) {
+    function updateAriaLabel(toggle: Element, theme: string | null) {
       if (theme === 'light') {
         toggle.setAttribute(
           'aria-label',
@@ -187,22 +120,67 @@
       }
     }
 
-    // Initialize
+    function performThemeChange(next: string | null) {
+      if (next === null) {
+        localStorage.removeItem('theme')
+      } else {
+        localStorage.setItem('theme', next)
+      }
+
+      applyTheme(next)
+      toggles.forEach((toggle) => {
+        updateState(toggle, next)
+        updateAriaLabel(toggle, next)
+      })
+    }
+
+    function handleClick(event: MouseEvent) {
+      const current = getStoredTheme()
+      const prefersDark = systemPrefersDark()
+
+      let next: string | null
+
+      if (current === null) {
+        next = prefersDark ? 'light' : 'dark'
+      } else {
+        next = null
+      }
+
+      const x = event.clientX
+      const y = event.clientY
+
+      document.documentElement.style.setProperty(
+        '--view-transition-x',
+        `${x}px`,
+      )
+      document.documentElement.style.setProperty(
+        '--view-transition-y',
+        `${y}px`,
+      )
+
+      if (document.startViewTransition) {
+        document.startViewTransition(() => {
+          performThemeChange(next)
+        })
+      } else {
+        performThemeChange(next)
+      }
+    }
+
     const initialTheme = getStoredTheme()
-    updateState(initialTheme)
-    updateAriaLabel(initialTheme)
+    toggles.forEach((toggle) => {
+      updateState(toggle, initialTheme)
+      updateAriaLabel(toggle, initialTheme)
+      toggle.addEventListener('click', handleClick)
+    })
 
-    // Handle click
-    toggle.addEventListener('click', handleClick)
-
-    // Listen for system preference changes
     window
       .matchMedia('(prefers-color-scheme: dark)')
       .addEventListener('change', () => {
         const theme = getStoredTheme()
         if (theme === null) {
           applyTheme(null)
-          updateState(null)
+          toggles.forEach((toggle) => updateState(toggle, null))
         }
       })
   }
