@@ -1,0 +1,252 @@
+---
+import Layout from '~/layouts/Layout.astro'
+import BaseLayout from '~/components/BaseLayout.astro'
+import Footer from '~/components/Footer.astro'
+import AppStoreLinks from '~/components/AppStoreLinks.astro'
+
+const pageTitle = 'Barmer App - Kompass Module'
+const description =
+  'Kompass module work for the Barmer app across mobile and web, focused on healthcare benefit flows, rebranding, accessibility, and platform stability.'
+const canonicalURL = new URL(Astro.url.pathname, Astro.site)
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: Astro.site?.toString() || 'https://patwoz.dev',
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Work',
+      item: new URL('/work', Astro.site).toString(),
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: pageTitle,
+      item: canonicalURL.toString(),
+    },
+  ],
+}
+---
+
+<Layout title="Barmer App - Kompass Module - Work" description={description}>
+  <BaseLayout>
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(breadcrumbSchema)}
+    />
+    <article class="mt-12">
+      <!-- Back link -->
+      <a
+        href="/work/ibm"
+        class="inline-flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 mb-6"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-4 h-4"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M15.75 19.5 8.25 12l7.5-7.5"></path>
+        </svg>
+        Back to IBM / Barmer
+      </a>
+
+      <!-- Header -->
+      <header class="mb-12">
+        <div class="flex flex-col sm:flex-row gap-6 items-start">
+          <div
+            class="flex-shrink-0 flex items-center justify-center w-24 h-24 bg-gray-50 dark:bg-zinc-800 rounded-xl border border-gray-200 dark:border-zinc-700"
+          >
+            <img
+              src="/company/barmer.svg"
+              alt="Barmer Logo"
+              width="70"
+              height="20"
+            />
+          </div>
+          <div class="flex-1">
+            <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100">
+              Barmer App - Kompass Module
+            </h1>
+            <p class="text-gray-600 dark:text-gray-400 mt-1">IBM iX / Barmer</p>
+            <div
+              class="flex flex-wrap gap-4 mt-3 text-sm text-gray-500 dark:text-gray-400"
+            >
+              <span class="flex items-center gap-1">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-4 h-4"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
+                  ></path>
+                </svg>
+                Senior Frontend Developer
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <AppStoreLinks
+          appStoreUrl="https://apps.apple.com/de/app/barmer-app/id956752981"
+          playStoreUrl="https://play.google.com/store/apps/details?id=de.barmergek.serviceapp&hl=de"
+        />
+      </header>
+
+      <!-- Content -->
+      <div class="prose lg:prose-lg max-w-none">
+        <p>
+          The Kompass module is part of the Barmer App and Meine Barmer web
+          experience. It helps members navigate healthcare benefit and
+          reimbursement topics such as care services, sickness benefits,
+          rehabilitation, medical aids, maternity benefits, dental orthodontics,
+          and ongoing cases.
+        </p>
+
+        <h2>Project Overview</h2>
+        <p>
+          As a senior frontend developer on the Kompass team, I contributed over
+          310 commits to the frontend monorepo between December 2025 and April
+          2026. The work focused on the shared Kompass feature package used by
+          both the React Native app and React Native Web surface, with matching
+          behaviour across iOS, Android, and web.
+        </p>
+
+        <h2>Key Contributions</h2>
+
+        <h3>Rebranding & Feature Screens</h3>
+        <p>
+          Implemented rebranded screens and components across the module,
+          including overview tabs, information sections, error states, and
+          detail pages. The work touched care services, maternity benefits,
+          rehabilitation, medical aids, sickness benefits, child sickness
+          benefits, and orthodontic flows, all aligned with Barmer's Puls design
+          system.
+        </p>
+
+        <h3>Benefit & Reimbursement Workflows</h3>
+        <p>
+          Built and refined UI flows for benefit overviews, payout lists,
+          regular care services, cost summaries, status chips, and detail pages.
+          This included improving empty states, keeping financial rows visually
+          stable, and ensuring list summaries remain readable and consistent
+          across compact mobile layouts.
+        </p>
+
+        <h3>Accessibility</h3>
+        <p>
+          Fixed VoiceOver and TalkBack behaviour across headers, tabs, filters,
+          selects, links, and case detail screens. Added focused workarounds for
+          Android screen readers, improved reading order, avoided duplicate
+          announcements, and ensured web links expose the correct semantics.
+        </p>
+
+        <h3>Keyboard, Layout & Navigation Stability</h3>
+        <p>
+          Integrated keyboard-aware behaviour for forms and dialogs, including
+          feedback dialogs, rehabilitation co-payment screens, and fixed action
+          bars. I also resolved bottom-navigation spacing issues, landscape
+          dialog reachability problems, tab panel height crashes, and native
+          DatePicker/SectionList crashes.
+        </p>
+
+        <h3>Information & Tips Experience</h3>
+        <p>
+          Reworked information tabs, accordions, tip cards, and PDF-related
+          loading states. Improvements included CardSwipeView integration,
+          document size formatting, soft-hyphen handling for long German terms,
+          and better line breaks on both iOS and Android.
+        </p>
+
+        <h3>Testing & Regression Coverage</h3>
+        <p>
+          Kept a large snapshot suite aligned while changing production screens,
+          added targeted tests for new layout behaviour, and fixed lint and type
+          issues during the rebranding work. This helped make repeated
+          main/candidate branch backports safer for release preparation.
+        </p>
+      </div>
+
+      <div class="prose lg:prose-lg max-w-none mt-8">
+        <h2>Technology Stack</h2>
+      </div>
+
+      <!-- Tech Stack Grid -->
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-6 mb-12">
+        <div>
+          <h4
+            class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase mb-3"
+          >
+            Mobile
+          </h4>
+          <ul class="space-y-2">
+            <li class="text-gray-700 dark:text-gray-300">React Native</li>
+            <li class="text-gray-700 dark:text-gray-300">TypeScript</li>
+            <li class="text-gray-700 dark:text-gray-300">React Navigation</li>
+            <li class="text-gray-700 dark:text-gray-300">Barmer Puls UI</li>
+          </ul>
+        </div>
+        <div>
+          <h4
+            class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase mb-3"
+          >
+            Web
+          </h4>
+          <ul class="space-y-2">
+            <li class="text-gray-700 dark:text-gray-300">React</li>
+            <li class="text-gray-700 dark:text-gray-300">React Native Web</li>
+            <li class="text-gray-700 dark:text-gray-300">React Router</li>
+            <li class="text-gray-700 dark:text-gray-300">Webpack</li>
+          </ul>
+        </div>
+        <div>
+          <h4
+            class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase mb-3"
+          >
+            Architecture
+          </h4>
+          <ul class="space-y-2">
+            <li class="text-gray-700 dark:text-gray-300">Yarn Workspaces</li>
+            <li class="text-gray-700 dark:text-gray-300">Lerna Monorepo</li>
+            <li class="text-gray-700 dark:text-gray-300">Redux Toolkit</li>
+            <li class="text-gray-700 dark:text-gray-300">i18next</li>
+          </ul>
+        </div>
+        <div>
+          <h4
+            class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase mb-3"
+          >
+            Quality
+          </h4>
+          <ul class="space-y-2">
+            <li class="text-gray-700 dark:text-gray-300">Jest</li>
+            <li class="text-gray-700 dark:text-gray-300">
+              React Native Testing Library
+            </li>
+            <li class="text-gray-700 dark:text-gray-300">Snapshot Testing</li>
+            <li class="text-gray-700 dark:text-gray-300">ESLint</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <Footer />
+  </BaseLayout>
+</Layout>

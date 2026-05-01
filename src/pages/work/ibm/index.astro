@@ -6,7 +6,7 @@ import { classNames } from '~/utils/classNames'
 
 const pageTitle = 'IBM iX / Barmer'
 const description =
-  'Frontend work for Barmer digital products, including mobile and web experiences.'
+  'Frontend work for Barmer digital products, including mobile and web experiences for Kompass, Bonus, and Puls.'
 const canonicalURL = new URL(Astro.url.pathname, Astro.site)
 const breadcrumbSchema = {
   '@context': 'https://schema.org',
@@ -129,12 +129,88 @@ const breadcrumbSchema = {
         <p>
           During my time at IBM iX, I contributed to several Barmer digital
           initiatives focused on improving the customer experience through
-          mobile and web applications.
+          mobile and web applications, including the Kompass and Bonus modules
+          and the Puls design system.
         </p>
       </div>
 
       <!-- Project Cards -->
       <div class="not-prose grid gap-6 mt-8 mb-12">
+        <!-- Barmer App - Kompass Module -->
+        <a
+          href="/work/ibm/kompass"
+          class={classNames(
+            'group flex flex-col sm:flex-row gap-6 p-6',
+            'border border-gray-200 dark:border-zinc-700 rounded-xl',
+            'hover:border-gray-300 dark:hover:border-zinc-600 hover:shadow-lg',
+            'transition-all duration-200',
+          )}
+        >
+          <div
+            class="flex-shrink-0 flex items-center justify-center w-full sm:w-32 h-24 bg-gray-50 dark:bg-zinc-800 rounded-lg"
+          >
+            <img
+              src="/company/barmer.svg"
+              alt="Barmer Logo"
+              width="80"
+              height="22"
+              class="opacity-80"
+            />
+          </div>
+          <div class="flex-1">
+            <h3
+              class="text-lg font-semibold text-gray-900 dark:text-gray-100 group-hover:text-black dark:group-hover:text-white"
+            >
+              Barmer App - Kompass Module
+            </h3>
+            <p class="text-gray-600 dark:text-gray-400 mt-1">
+              Contributed to the Kompass healthcare benefit module across the
+              Barmer App and Meine Barmer web. 300+ commits covering rebranding,
+              accessibility, keyboard and layout stability, and cross-platform
+              benefit flows.
+            </p>
+            <div class="flex flex-wrap gap-2 mt-3">
+              <span
+                class="px-2 py-1 text-xs font-medium bg-gray-100 dark:bg-zinc-700 text-gray-700 dark:text-gray-300 rounded"
+              >
+                React Native
+              </span>
+              <span
+                class="px-2 py-1 text-xs font-medium bg-gray-100 dark:bg-zinc-700 text-gray-700 dark:text-gray-300 rounded"
+              >
+                React Native Web
+              </span>
+              <span
+                class="px-2 py-1 text-xs font-medium bg-gray-100 dark:bg-zinc-700 text-gray-700 dark:text-gray-300 rounded"
+              >
+                TypeScript
+              </span>
+              <span
+                class="px-2 py-1 text-xs font-medium bg-gray-100 dark:bg-zinc-700 text-gray-700 dark:text-gray-300 rounded"
+              >
+                Accessibility
+              </span>
+            </div>
+          </div>
+          <div
+            class="flex-shrink-0 flex items-center text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-5 h-5"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="m8.25 4.5 7.5 7.5-7.5 7.5"></path>
+            </svg>
+          </div>
+        </a>
+
         <!-- Barmer App - Bonus Module -->
         <a
           href="/work/ibm/bonus"
