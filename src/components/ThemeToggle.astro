@@ -49,7 +49,9 @@
 
 <script>
   function initThemeToggle() {
-    const toggles = Array.from(document.querySelectorAll('.theme-toggle'))
+    const toggles = Array.from(
+      document.querySelectorAll<HTMLButtonElement>('.theme-toggle'),
+    )
     if (!toggles.length) return
 
     function getStoredTheme(): string | null {
@@ -71,7 +73,7 @@
       }
     }
 
-    function updateState(toggle: Element, theme: string | null) {
+    function updateState(toggle: HTMLButtonElement, theme: string | null) {
       const iconLight = toggle.querySelector('[data-theme-icon="light"]')
       const iconDark = toggle.querySelector('[data-theme-icon="dark"]')
       if (!iconLight || !iconDark) return
@@ -101,7 +103,7 @@
         : 'theme-toggle h-9 w-9 flex items-center justify-center rounded-lg transition-colors hover:bg-gray-200 dark:hover:bg-zinc-700'
     }
 
-    function updateAriaLabel(toggle: Element, theme: string | null) {
+    function updateAriaLabel(toggle: HTMLButtonElement, theme: string | null) {
       if (theme === 'light') {
         toggle.setAttribute(
           'aria-label',

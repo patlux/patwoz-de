@@ -4,25 +4,25 @@ on: [push, pull_request]
 
 jobs:
   build:
-    timeout-minutes: 1
+    timeout-minutes: 5
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/setup
-      - name: Build deps
-        run: bun run build:deps
+      - name: Check build
+        run: bun run check-build
 
   formatting:
-    timeout-minutes: 1
+    timeout-minutes: 5
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/setup
       - name: Check formatting
-        run: bun run prettier --check
+        run: bun run check-format
 
   lint:
-    timeout-minutes: 1
+    timeout-minutes: 5
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -31,25 +31,19 @@ jobs:
         run: bun run check-lint
 
   types:
-    timeout-minutes: 1
+    timeout-minutes: 5
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/setup
-      - name: Build deps
-        run: bun run build:deps
-      - name: build
-        run: bun run build
       - name: Check types
         run: bun run check-types
 
   test:
-    timeout-minutes: 1
+    timeout-minutes: 5
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/setup
-      - name: Build deps
-        run: bun run build:deps
       - name: Check tests
         run: bun run check-tests

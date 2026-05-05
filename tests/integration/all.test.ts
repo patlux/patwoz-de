@@ -24,11 +24,11 @@ test('Should open /', async () => {
   expect(res.status).toBe(200)
 
   const html = await res.text()
-  expect(html).toContain('I worked for')
+  expect(html).toContain('Patrick Wozniak')
 })
 
-test('Should open /imprint', async () => {
-  const req = new Request(`${baseUrl}/imprint`)
+test('Should open /de/imprint', async () => {
+  const req = new Request(`${baseUrl}/de/imprint`)
   const res = await fetch(req)
   expect(res.status).toBe(200)
 })

@@ -3,7 +3,7 @@ import tsParser from '@typescript-eslint/parser'
 
 export default [
   {
-    ignores: ['dist/**', 'node_modules/**', '.astro/**'],
+    ignores: ['dist/**', 'build/**', 'node_modules/**', '.astro/**'],
   },
   ...eslintPluginAstro.configs.recommended,
   {
