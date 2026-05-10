@@ -4,6 +4,29 @@ import BaseLayout from '~/components/BaseLayout.astro'
 import Footer from '~/components/Footer.astro'
 import Introduction from '~/components/Introduction.astro'
 import AppIconShowcase from '~/components/AppIconShowcase.astro'
+
+const skillRows = [
+  [
+    { label: 'TypeScript', href: '/skills/typescript' },
+    { label: 'React', href: '/skills/react' },
+    { label: 'React Native', href: '/skills/react-native' },
+  ],
+  [
+    { label: 'Expo', href: '/skills/expo' },
+    { label: 'Node.js', href: '/skills/nodejs' },
+    { label: 'Rust / Go', href: '/skills/rust-go' },
+  ],
+  [
+    { label: 'AWS', href: '/skills/aws' },
+    { label: 'DevOps', href: '/skills/devops' },
+    { label: 'Docker', href: '/skills/docker' },
+  ],
+  [
+    { label: 'Kubernetes', href: '/skills/kubernetes' },
+    { label: 'CI/CD', href: '/skills/ci-cd' },
+    { label: 'Playwright', href: '/skills/e2e-testing' },
+  ],
+]
 ---
 
 <Layout>
@@ -13,236 +36,47 @@ import AppIconShowcase from '~/components/AppIconShowcase.astro'
     <!-- Expertise Section -->
     <section class="mt-16 animate-fade-in-up opacity-0 stagger-4">
       <div
-        class="relative overflow-hidden rounded-2xl border border-warm-200 dark:border-warm-700/60 bg-white/70 dark:bg-dark-surface/80 p-6 sm:p-7"
+        class="overflow-hidden rounded-2xl border border-warm-200 bg-white shadow-sm dark:border-warm-800 dark:bg-dark-surface dark:shadow-2xl dark:shadow-black/30"
       >
         <div
-          class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-accent-400 via-warm-300 to-accent-500"
+          class="flex items-center justify-between border-b border-warm-200 px-5 py-3 dark:border-warm-800"
         >
+          <p
+            class="text-xs font-semibold uppercase tracking-[0.22em] text-accent-600 dark:text-accent-300"
+          >
+            Expertise
+          </p>
+          <p class="text-xs text-warm-500 dark:text-warm-600">12 Skills</p>
         </div>
-        <div class="grid gap-6 lg:grid-cols-[1.1fr_1.6fr] lg:items-center">
-          <div>
-            <p
-              class="text-xs font-semibold uppercase tracking-wider text-warm-500 dark:text-warm-400"
-            >
-              Expertise
-            </p>
+        <div class="grid gap-0 lg:grid-cols-[0.78fr_1.65fr]">
+          <div
+            class="border-b border-warm-200 p-5 dark:border-warm-800 lg:border-b-0 lg:border-r"
+          >
             <h2
-              class="text-3xl font-display font-bold text-warm-900 dark:text-warm-100"
+              class="text-3xl font-display font-bold tracking-tight text-warm-900 dark:text-white"
             >
-              Expert in
+              Tech Ledger
             </h2>
-            <p class="text-warm-600 dark:text-warm-400 mt-2 max-w-md">
-              Core technologies I build with every day
-            </p>
-            <p class="text-sm text-warm-500 dark:text-warm-400 mt-2">
-              Explore each skill to see real project work
+            <p class="mt-3 text-warm-600 dark:text-warm-400">
+              A concise index of the technologies I use most.
             </p>
           </div>
-          <div class="flex flex-wrap gap-2">
-            <a
-              href="/skills/typescript"
-              class="inline-flex items-center gap-2 px-3 py-1.5 text-sm font-semibold rounded-full bg-warm-100 text-warm-800 ring-1 ring-warm-200 shadow-sm hover:bg-warm-200 hover:text-warm-900 hover:-translate-y-0.5 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-400/70 dark:bg-dark-elevated dark:text-warm-100 dark:ring-warm-700 dark:hover:bg-warm-800/50 dark:hover:text-warm-100"
-            >
-              TypeScript
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                class="w-3.5 h-3.5"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
-                  clip-rule="evenodd"></path>
-              </svg>
-            </a>
-            <a
-              href="/skills/react"
-              class="inline-flex items-center gap-2 px-3 py-1.5 text-sm font-semibold rounded-full bg-warm-100 text-warm-800 ring-1 ring-warm-200 shadow-sm hover:bg-warm-200 hover:text-warm-900 hover:-translate-y-0.5 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-400/70 dark:bg-dark-elevated dark:text-warm-100 dark:ring-warm-700 dark:hover:bg-warm-800/50 dark:hover:text-warm-100"
-            >
-              React
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                class="w-3.5 h-3.5"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
-                  clip-rule="evenodd"></path>
-              </svg>
-            </a>
-            <a
-              href="/skills/react-native"
-              class="inline-flex items-center gap-2 px-3 py-1.5 text-sm font-semibold rounded-full bg-warm-100 text-warm-800 ring-1 ring-warm-200 shadow-sm hover:bg-warm-200 hover:text-warm-900 hover:-translate-y-0.5 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-400/70 dark:bg-dark-elevated dark:text-warm-100 dark:ring-warm-700 dark:hover:bg-warm-800/50 dark:hover:text-warm-100"
-            >
-              React Native
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                class="w-3.5 h-3.5"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
-                  clip-rule="evenodd"></path>
-              </svg>
-            </a>
-            <a
-              href="/skills/expo"
-              class="inline-flex items-center gap-2 px-3 py-1.5 text-sm font-semibold rounded-full bg-warm-100 text-warm-800 ring-1 ring-warm-200 shadow-sm hover:bg-warm-200 hover:text-warm-900 hover:-translate-y-0.5 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-400/70 dark:bg-dark-elevated dark:text-warm-100 dark:ring-warm-700 dark:hover:bg-warm-800/50 dark:hover:text-warm-100"
-            >
-              Expo
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                class="w-3.5 h-3.5"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
-                  clip-rule="evenodd"></path>
-              </svg>
-            </a>
-            <a
-              href="/skills/nodejs"
-              class="inline-flex items-center gap-2 px-3 py-1.5 text-sm font-semibold rounded-full bg-warm-100 text-warm-800 ring-1 ring-warm-200 shadow-sm hover:bg-warm-200 hover:text-warm-900 hover:-translate-y-0.5 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-400/70 dark:bg-dark-elevated dark:text-warm-100 dark:ring-warm-700 dark:hover:bg-warm-800/50 dark:hover:text-warm-100"
-            >
-              Node.js
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                class="w-3.5 h-3.5"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
-                  clip-rule="evenodd"></path>
-              </svg>
-            </a>
-            <a
-              href="/skills/rust-go"
-              class="inline-flex items-center gap-2 px-3 py-1.5 text-sm font-semibold rounded-full bg-warm-100 text-warm-800 ring-1 ring-warm-200 shadow-sm hover:bg-warm-200 hover:text-warm-900 hover:-translate-y-0.5 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-400/70 dark:bg-dark-elevated dark:text-warm-100 dark:ring-warm-700 dark:hover:bg-warm-800/50 dark:hover:text-warm-100"
-            >
-              Rust / Go
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                class="w-3.5 h-3.5"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
-                  clip-rule="evenodd"></path>
-              </svg>
-            </a>
-            <a
-              href="/skills/aws"
-              class="inline-flex items-center gap-2 px-3 py-1.5 text-sm font-semibold rounded-full bg-warm-100 text-warm-800 ring-1 ring-warm-200 shadow-sm hover:bg-warm-200 hover:text-warm-900 hover:-translate-y-0.5 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-400/70 dark:bg-dark-elevated dark:text-warm-100 dark:ring-warm-700 dark:hover:bg-warm-800/50 dark:hover:text-warm-100"
-            >
-              AWS
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                class="w-3.5 h-3.5"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
-                  clip-rule="evenodd"></path>
-              </svg>
-            </a>
-            <a
-              href="/skills/devops"
-              class="inline-flex items-center gap-2 px-3 py-1.5 text-sm font-semibold rounded-full bg-warm-100 text-warm-800 ring-1 ring-warm-200 shadow-sm hover:bg-warm-200 hover:text-warm-900 hover:-translate-y-0.5 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-400/70 dark:bg-dark-elevated dark:text-warm-100 dark:ring-warm-700 dark:hover:bg-warm-800/50 dark:hover:text-warm-100"
-            >
-              DevOps
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                class="w-3.5 h-3.5"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
-                  clip-rule="evenodd"></path>
-              </svg>
-            </a>
-            <a
-              href="/skills/docker"
-              class="inline-flex items-center gap-2 px-3 py-1.5 text-sm font-semibold rounded-full bg-warm-100 text-warm-800 ring-1 ring-warm-200 shadow-sm hover:bg-warm-200 hover:text-warm-900 hover:-translate-y-0.5 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-400/70 dark:bg-dark-elevated dark:text-warm-100 dark:ring-warm-700 dark:hover:bg-warm-800/50 dark:hover:text-warm-100"
-            >
-              Docker
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                class="w-3.5 h-3.5"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
-                  clip-rule="evenodd"></path>
-              </svg>
-            </a>
-            <a
-              href="/skills/kubernetes"
-              class="inline-flex items-center gap-2 px-3 py-1.5 text-sm font-semibold rounded-full bg-warm-100 text-warm-800 ring-1 ring-warm-200 shadow-sm hover:bg-warm-200 hover:text-warm-900 hover:-translate-y-0.5 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-400/70 dark:bg-dark-elevated dark:text-warm-100 dark:ring-warm-700 dark:hover:bg-warm-800/50 dark:hover:text-warm-100"
-            >
-              Kubernetes
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                class="w-3.5 h-3.5"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
-                  clip-rule="evenodd"></path>
-              </svg>
-            </a>
-            <a
-              href="/skills/ci-cd"
-              class="inline-flex items-center gap-2 px-3 py-1.5 text-sm font-semibold rounded-full bg-warm-100 text-warm-800 ring-1 ring-warm-200 shadow-sm hover:bg-warm-200 hover:text-warm-900 hover:-translate-y-0.5 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-400/70 dark:bg-dark-elevated dark:text-warm-100 dark:ring-warm-700 dark:hover:bg-warm-800/50 dark:hover:text-warm-100"
-            >
-              CI/CD
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                class="w-3.5 h-3.5"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
-                  clip-rule="evenodd"></path>
-              </svg>
-            </a>
-            <a
-              href="/skills/e2e-testing"
-              class="inline-flex items-center gap-2 px-3 py-1.5 text-sm font-semibold rounded-full bg-warm-100 text-warm-800 ring-1 ring-warm-200 shadow-sm hover:bg-warm-200 hover:text-warm-900 hover:-translate-y-0.5 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-400/70 dark:bg-dark-elevated dark:text-warm-100 dark:ring-warm-700 dark:hover:bg-warm-800/50 dark:hover:text-warm-100"
-            >
-              Playwright
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                class="w-3.5 h-3.5"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
-                  clip-rule="evenodd"></path>
-              </svg>
-            </a>
+          <div class="divide-y divide-warm-200 dark:divide-warm-800">
+            {
+              skillRows.map((row) => (
+                <div class="grid grid-cols-1 divide-y divide-warm-200 dark:divide-warm-800 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+                  {row.map((skill) => (
+                    <a
+                      href={skill.href}
+                      class="flex items-center justify-between px-4 py-3 text-sm font-semibold text-warm-900 transition-colors hover:bg-warm-900 hover:text-white dark:text-warm-100 dark:hover:bg-white dark:hover:text-black"
+                    >
+                      {skill.label}
+                      <span>→</span>
+                    </a>
+                  ))}
+                </div>
+              ))
+            }
           </div>
         </div>
       </div>
@@ -699,52 +533,68 @@ import AppIconShowcase from '~/components/AppIconShowcase.astro'
 
     <!-- Featured Personal Project Section -->
     <section class="mt-16 animate-fade-in-up opacity-0 stagger-6">
-      <div
-        class="relative overflow-hidden rounded-2xl border border-accent-200/70 dark:border-accent-700/50 bg-white/70 dark:bg-dark-surface/80 p-6 sm:p-7"
+      <article
+        class="overflow-hidden rounded-2xl border border-warm-200 bg-white shadow-sm dark:border-warm-800 dark:bg-dark-surface dark:shadow-2xl dark:shadow-black/30"
       >
-        <div
-          class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-accent-400 via-warm-300 to-accent-500"
-        >
-        </div>
-        <div
-          class="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between"
-        >
-          <div>
+        <div class="grid gap-0 lg:grid-cols-[1fr_18rem]">
+          <div class="p-5 sm:p-6">
             <p
-              class="text-xs font-semibold uppercase tracking-wider text-warm-500 dark:text-warm-400"
+              class="text-xs font-semibold uppercase tracking-[0.22em] text-accent-600 dark:text-accent-300"
             >
               Featured personal project
             </p>
             <h2
-              class="mt-1 text-2xl font-display font-bold text-warm-900 dark:text-warm-100"
+              class="mt-3 text-2xl font-display font-bold tracking-tight text-warm-900 dark:text-white"
             >
               Nürnberg Maps Review Removals
             </h2>
-            <p class="text-warm-600 dark:text-warm-400 mt-2 max-w-2xl">
+            <p class="mt-3 max-w-2xl text-warm-600 dark:text-warm-400">
               Local data project analyzing Google Maps review-removal banners in
               Nürnberg.
             </p>
           </div>
-          <div class="flex flex-wrap gap-2">
+          <div
+            class="grid grid-cols-2 border-t border-warm-200 dark:border-warm-800 lg:border-l lg:border-t-0"
+          >
             <a
               href="https://nuernberg-maps-review-removals.patwoz.dev/"
               target="_blank"
               rel="noreferrer"
-              class="inline-flex items-center gap-2 px-3 py-1.5 text-sm font-semibold rounded-full bg-accent-500 text-white hover:bg-accent-600 hover:-translate-y-0.5 transition-all"
+              class="group flex min-h-28 flex-col justify-between border-r border-warm-200 p-4 transition-colors hover:bg-warm-900 hover:text-white dark:border-warm-800 dark:hover:bg-white dark:hover:text-black"
             >
-              Website
+              <span
+                class="text-[10px] font-semibold uppercase tracking-[0.2em] text-warm-500 group-hover:text-white/60 dark:text-warm-600 dark:group-hover:text-black/50"
+              >
+                Open
+              </span>
+              <span
+                class="flex items-center justify-between text-sm font-bold text-warm-900 group-hover:text-white dark:text-white dark:group-hover:text-black"
+              >
+                Website
+                <span>→</span>
+              </span>
             </a>
             <a
               href="https://github.com/patlux/nuernberg-maps-review-removals"
               target="_blank"
               rel="noreferrer"
-              class="inline-flex items-center gap-2 px-3 py-1.5 text-sm font-semibold rounded-full bg-warm-100 text-warm-800 ring-1 ring-warm-200 shadow-sm hover:bg-warm-200 hover:text-warm-900 hover:-translate-y-0.5 transition-all dark:bg-dark-elevated dark:text-warm-100 dark:ring-warm-700 dark:hover:bg-warm-800/50"
+              class="group flex min-h-28 flex-col justify-between p-4 transition-colors hover:bg-warm-900 hover:text-white dark:hover:bg-white dark:hover:text-black"
             >
-              GitHub
+              <span
+                class="text-[10px] font-semibold uppercase tracking-[0.2em] text-warm-500 group-hover:text-white/60 dark:text-warm-600 dark:group-hover:text-black/50"
+              >
+                Open
+              </span>
+              <span
+                class="flex items-center justify-between text-sm font-bold text-warm-900 group-hover:text-white dark:text-white dark:group-hover:text-black"
+              >
+                GitHub
+                <span>→</span>
+              </span>
             </a>
           </div>
         </div>
-      </div>
+      </article>
     </section>
 
     <!-- piparo.tech Section -->
