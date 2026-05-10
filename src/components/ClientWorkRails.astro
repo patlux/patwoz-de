@@ -1,0 +1,604 @@
+---
+type Language = 'en' | 'de'
+
+type Logo = {
+  alt: string
+  src: string
+  className: string
+}
+
+type Client = {
+  name: string
+  industry: Record<Language, string>
+  note: Record<Language, string>
+  href: Record<Language, string>
+  external?: boolean
+  logos: Logo[]
+  accent: string
+  tint: string
+}
+
+interface Props {
+  lang?: Language
+}
+
+const { lang = 'en' } = Astro.props
+
+const copy = {
+  en: {
+    title: 'Trusted by Industry Leaders',
+    subtitle: "Companies I've helped build great products",
+    cta: 'View all work',
+  },
+  de: {
+    title: 'Vertrauen von Branchenführern',
+    subtitle: 'Unternehmen, mit denen ich starke Produkte gebaut habe',
+    cta: 'Alle Projekte ansehen',
+  },
+} satisfies Record<Language, { title: string; subtitle: string; cta: string }>
+
+const clients: Client[] = [
+  {
+    name: 'SAP / KulturPass',
+    industry: { en: 'Enterprise Software', de: 'Enterprise Software' },
+    note: {
+      en: 'Public-sector platform with enterprise-scale delivery',
+      de: 'Public-sector Plattform mit Enterprise-Skalierung',
+    },
+    href: { en: '/work/kulturpass', de: '/de/work/kulturpass' },
+    logos: [{ alt: 'SAP', src: '/company/sap.svg', className: 'logo-sap' }],
+    accent: '#00a2e8',
+    tint: 'rgba(0, 162, 232, 0.13)',
+  },
+  {
+    name: 'Porsche Digital',
+    industry: { en: 'Automotive', de: 'Automotive' },
+    note: {
+      en: 'Digital product teams in premium automotive contexts',
+      de: 'Digitale Produktteams im Premium-Automotive-Umfeld',
+    },
+    href: { en: '/work/porsche', de: '/de/work/porsche' },
+    logos: [
+      {
+        alt: 'Porsche',
+        src: '/company/Porsche-Logo.webp',
+        className: 'logo-porsche',
+      },
+    ],
+    accent: '#d6b25e',
+    tint: 'rgba(214, 178, 94, 0.13)',
+  },
+  {
+    name: 'IBM iX',
+    industry: { en: 'Technology', de: 'Technologie' },
+    note: {
+      en: 'Engineering for major brands and complex systems',
+      de: 'Engineering für große Marken und komplexe Systeme',
+    },
+    href: { en: '/work/ibm', de: '/de/work/ibm' },
+    logos: [
+      { alt: 'IBM', src: '/company/IBM_logo.svg', className: 'logo-ibm' },
+    ],
+    accent: '#0f62fe',
+    tint: 'rgba(15, 98, 254, 0.13)',
+  },
+  {
+    name: 'Ströer / t-online',
+    industry: { en: 'Media & Publishing', de: 'Medien & Publishing' },
+    note: {
+      en: 'High-reach media products and content platforms',
+      de: 'Reichweitenstarke Medienprodukte und Content-Plattformen',
+    },
+    href: { en: '/work/stroeer', de: '/de/work/stroeer' },
+    logos: [
+      {
+        alt: 'Ströer',
+        src: '/company/str-logo-white.svg',
+        className: 'logo-stroeer needs-dark-invert',
+      },
+      {
+        alt: 't-online',
+        src: '/company/t-online-desktop.327ab976.svg',
+        className: 'logo-tonline needs-dark-invert',
+      },
+    ],
+    accent: '#f5f5f5',
+    tint: 'rgba(255, 255, 255, 0.09)',
+  },
+  {
+    name: 'Olympia Verlag (Kicker)',
+    industry: { en: 'Sports Media', de: 'Sportmedien' },
+    note: {
+      en: 'Live sports experiences for a loyal fanbase',
+      de: 'Live-nahe Sporterlebnisse für eine loyale Fanbase',
+    },
+    href: { en: '/work/kicker', de: '/de/work/kicker' },
+    logos: [
+      { alt: 'Kicker', src: '/company/kicker.svg', className: 'logo-kicker' },
+    ],
+    accent: '#ed1c24',
+    tint: 'rgba(237, 28, 36, 0.13)',
+  },
+  {
+    name: 'ABL',
+    industry: { en: 'E-Mobility', de: 'E-Mobility' },
+    note: {
+      en: 'Software for charging infrastructure and e-mobility workflows',
+      de: 'Software für Ladeinfrastruktur und E-Mobility-Prozesse',
+    },
+    href: { en: '/work/abl', de: '/de/work/abl' },
+    logos: [
+      {
+        alt: 'ABL',
+        src: '/company/abl.svg',
+        className: 'logo-abl needs-dark-invert',
+      },
+    ],
+    accent: '#f5f5f5',
+    tint: 'rgba(255, 255, 255, 0.09)',
+  },
+  {
+    name: 'Barmer',
+    industry: { en: 'Health Insurance', de: 'Krankenversicherung' },
+    note: {
+      en: 'Digital services in regulated healthcare environments',
+      de: 'Digitale Services in regulierten Gesundheitsumfeldern',
+    },
+    href: { en: '/work/ibm', de: '/de/work/ibm' },
+    logos: [
+      { alt: 'Barmer', src: '/company/barmer.svg', className: 'logo-barmer' },
+    ],
+    accent: '#72bf00',
+    tint: 'rgba(114, 191, 0, 0.13)',
+  },
+  {
+    name: 'Enerparc',
+    industry: { en: 'Renewable Energy', de: 'Erneuerbare Energien' },
+    note: {
+      en: 'Solar and energy products with pragmatic workflows',
+      de: 'Solar- und Energieprodukte mit pragmatischen Workflows',
+    },
+    href: { en: 'https://www.enerparc.de', de: 'https://www.enerparc.de' },
+    external: true,
+    logos: [
+      {
+        alt: 'Enerparc',
+        src: '/company/enerparc.svg',
+        className: 'logo-enerparc',
+      },
+    ],
+    accent: '#006fb7',
+    tint: 'rgba(0, 111, 183, 0.13)',
+  },
+  {
+    name: 'MHP',
+    industry: { en: 'IT Consulting', de: 'IT-Beratung' },
+    note: {
+      en: 'Product engineering close to consulting for enterprise clients',
+      de: 'Consulting-nahes Produktengineering für Enterprise-Kunden',
+    },
+    href: { en: 'https://www.mhp.com', de: 'https://www.mhp.com' },
+    external: true,
+    logos: [
+      {
+        alt: 'MHP',
+        src: '/company/mhp.svg',
+        className: 'logo-mhp needs-dark-invert',
+      },
+    ],
+    accent: '#f5f243',
+    tint: 'rgba(245, 242, 67, 0.13)',
+  },
+  {
+    name: 'Finanzguru',
+    industry: { en: 'FinTech', de: 'FinTech' },
+    note: {
+      en: 'Consumer finance experiences with everyday utility',
+      de: 'Consumer-Finance-Erlebnisse mit hoher Alltagstauglichkeit',
+    },
+    href: { en: 'https://finanzguru.de', de: 'https://finanzguru.de' },
+    external: true,
+    logos: [
+      {
+        alt: 'Finanzguru',
+        src: '/company/finanzguru.svg',
+        className: 'logo-finanzguru',
+      },
+    ],
+    accent: '#38e7ff',
+    tint: 'rgba(56, 231, 255, 0.13)',
+  },
+]
+
+const labels = copy[lang]
+const workHref = lang === 'de' ? '/de/work' : '/work'
+---
+
+<section class="client-rails mt-16 animate-fade-in-up opacity-0 stagger-5">
+  <div class="client-rails-heading">
+    <div>
+      <h2>{labels.title}</h2>
+      <p>{labels.subtitle}</p>
+    </div>
+    <a href={workHref} class="client-rails-cta">
+      {labels.cta}
+      <span aria-hidden="true">→</span>
+    </a>
+  </div>
+
+  <div class="client-rails-grid">
+    {
+      clients.map((client) => (
+        <a
+          href={client.href[lang]}
+          target={client.external ? '_blank' : undefined}
+          rel={client.external ? 'noreferrer' : undefined}
+          class="client-rail-card"
+          style={`--client-accent: ${client.accent}; --client-tint: ${client.tint};`}
+        >
+          <span
+            class:list={[
+              'client-rail-logo',
+              client.logos.length > 1 && 'is-stack',
+            ]}
+          >
+            {client.logos.map((logo) => (
+              <img
+                alt={logo.alt}
+                src={logo.src}
+                class={`client-brand-logo ${logo.className}`}
+              />
+            ))}
+          </span>
+          <span class="client-rail-copy">
+            <strong>{client.name}</strong>
+            <small>{client.industry[lang]}</small>
+            <em>{client.note[lang]}</em>
+          </span>
+          <span class="client-rail-glyph" aria-hidden="true">
+            {client.external ? '↗' : '→'}
+          </span>
+        </a>
+      ))
+    }
+  </div>
+
+  <a href={workHref} class="client-rails-mobile-cta">
+    {labels.cta}
+    <span aria-hidden="true">→</span>
+  </a>
+</section>
+
+<style>
+  .client-rails {
+    --rails-card: rgba(255, 255, 255, 0.78);
+    --rails-card-strong: #ffffff;
+    --rails-border: rgba(16, 16, 16, 0.12);
+    --rails-border-strong: rgba(16, 16, 16, 0.2);
+    --rails-text: #101010;
+    --rails-muted: #606060;
+    --rails-glow: rgba(0, 0, 0, 0.08);
+  }
+
+  :global(.dark) .client-rails {
+    --rails-card: rgba(18, 18, 18, 0.72);
+    --rails-card-strong: #111111;
+    --rails-border: rgba(255, 255, 255, 0.12);
+    --rails-border-strong: rgba(255, 255, 255, 0.18);
+    --rails-text: #f7f7f4;
+    --rails-muted: #a5a5a5;
+    --rails-glow: rgba(0, 0, 0, 0.35);
+  }
+
+  .client-rails-heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .client-rails-heading h2 {
+    margin: 0;
+    color: var(--rails-text);
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -0.035em;
+    line-height: 1.05;
+  }
+
+  .client-rails-heading p {
+    margin: 0.35rem 0 0;
+    color: var(--rails-muted);
+    line-height: 1.55;
+  }
+
+  .client-rails-cta,
+  .client-rails-mobile-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #6366f1;
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition:
+      color 180ms ease,
+      transform 180ms ease;
+  }
+
+  :global(.dark) .client-rails-cta,
+  :global(.dark) .client-rails-mobile-cta {
+    color: #818cf8;
+  }
+
+  .client-rails-cta:hover,
+  .client-rails-mobile-cta:hover {
+    color: #4f46e5;
+    transform: translateX(0.15rem);
+  }
+
+  :global(.dark) .client-rails-cta:hover,
+  :global(.dark) .client-rails-mobile-cta:hover {
+    color: #a5b4fc;
+  }
+
+  .client-rails-grid {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .client-rail-card {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 1rem;
+    min-height: 6.45rem;
+    overflow: hidden;
+    border: 1px solid var(--rails-border);
+    border-radius: 1.35rem;
+    background: radial-gradient(
+        circle at 12% 18%,
+        var(--client-tint),
+        transparent 62%
+      ),
+      linear-gradient(135deg, var(--rails-card-strong), var(--rails-card));
+    padding: 1rem 1rem 1rem 1.25rem;
+    text-decoration: none;
+    box-shadow: 0 14px 38px -32px var(--rails-glow);
+    transition:
+      border-color 180ms ease,
+      box-shadow 180ms ease,
+      transform 180ms ease;
+  }
+
+  .client-rail-card::before,
+  .client-rail-card::after {
+    content: '';
+    position: absolute;
+    pointer-events: none;
+  }
+
+  .client-rail-card::before {
+    inset: 0 auto 0 0;
+    width: 0.35rem;
+    background: var(--client-accent);
+    box-shadow: 0 0 2rem var(--client-accent);
+  }
+
+  .client-rail-card::after {
+    inset: 0;
+    background: linear-gradient(
+      105deg,
+      transparent 0%,
+      color-mix(in srgb, var(--client-accent) 14%, transparent) 42%,
+      transparent 70%
+    );
+    opacity: 0;
+    transform: translateX(-38%);
+    transition:
+      opacity 220ms ease,
+      transform 320ms ease;
+  }
+
+  .client-rail-card > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .client-rail-card:hover,
+  .client-rail-card:focus-visible {
+    border-color: color-mix(
+      in srgb,
+      var(--client-accent) 62%,
+      var(--rails-border-strong)
+    );
+    box-shadow: 0 20px 50px -28px
+      color-mix(in srgb, var(--client-accent) 34%, transparent);
+    outline: none;
+    transform: translateX(0.18rem);
+  }
+
+  .client-rail-card:hover::after,
+  .client-rail-card:focus-visible::after {
+    opacity: 1;
+    transform: translateX(18%);
+  }
+
+  .client-rail-logo {
+    display: grid;
+    width: 4rem;
+    height: 4rem;
+    flex: 0 0 auto;
+    place-items: center;
+    border: 1px solid var(--rails-border);
+    border-radius: 1rem;
+    background: radial-gradient(
+        circle at 30% 20%,
+        var(--client-tint),
+        transparent 70%
+      ),
+      var(--rails-card-strong);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  }
+
+  .client-rail-logo.is-stack {
+    gap: 0.18rem;
+  }
+
+  .client-brand-logo {
+    display: block;
+    max-width: 100%;
+    object-fit: contain;
+  }
+
+  :global(.dark) .client-brand-logo.needs-dark-invert {
+    filter: invert(1);
+  }
+
+  .logo-sap {
+    width: 3rem;
+  }
+
+  .logo-porsche {
+    height: 2.35rem;
+    width: auto;
+  }
+
+  .logo-ibm {
+    width: 3.2rem;
+  }
+
+  .logo-stroeer {
+    width: 3.15rem;
+  }
+
+  .logo-tonline {
+    width: 3.15rem;
+  }
+
+  .logo-kicker {
+    width: 3.35rem;
+  }
+
+  .logo-abl {
+    width: 3.25rem;
+  }
+
+  .logo-barmer {
+    width: 3.35rem;
+  }
+
+  .logo-enerparc {
+    width: 3.35rem;
+  }
+
+  .logo-mhp {
+    width: 3.35rem;
+  }
+
+  .logo-finanzguru {
+    height: 2.25rem;
+    width: auto;
+    border-radius: 0.5rem;
+  }
+
+  .client-rail-copy {
+    min-width: 0;
+  }
+
+  .client-rail-copy strong {
+    display: block;
+    overflow: hidden;
+    color: var(--rails-text);
+    font-size: 1.02rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.2;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .client-rail-copy small {
+    display: block;
+    margin-top: 0.15rem;
+    overflow: hidden;
+    color: var(--rails-muted);
+    font-size: 0.86rem;
+    line-height: 1.35;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .client-rail-copy em {
+    display: none;
+    margin-top: 0.28rem;
+    color: var(--rails-muted);
+    font-size: 0.78rem;
+    font-style: normal;
+    line-height: 1.4;
+  }
+
+  .client-rail-glyph {
+    color: var(--rails-muted);
+    font-size: 1.35rem;
+    line-height: 1;
+    transition:
+      color 180ms ease,
+      transform 180ms ease;
+  }
+
+  .client-rail-card:hover .client-rail-glyph,
+  .client-rail-card:focus-visible .client-rail-glyph {
+    color: var(--client-accent);
+    transform: translateX(0.12rem);
+  }
+
+  .client-rails-mobile-cta {
+    justify-content: center;
+    width: 100%;
+    margin-top: 1rem;
+    border: 1px solid var(--rails-border);
+    border-radius: 1rem;
+    padding: 0.8rem 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .client-rails-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .client-rails-mobile-cta {
+      display: none;
+    }
+  }
+
+  @media (min-width: 900px) {
+    .client-rail-copy em {
+      display: block;
+    }
+  }
+
+  @media (max-width: 639px) {
+    .client-rails-heading {
+      display: block;
+    }
+
+    .client-rails-cta {
+      display: none;
+    }
+
+    .client-rail-card {
+      min-height: 5.8rem;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      gap: 0.85rem;
+      padding: 0.85rem 0.9rem 0.85rem 1.1rem;
+    }
+
+    .client-rail-logo {
+      width: 3.45rem;
+      height: 3.45rem;
+    }
+  }
+</style>
