@@ -8,8 +8,10 @@
   /* System font stacks for optimal performance */
   --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
     'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  --font-display: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
-  --font-article: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
+  --font-display: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-article: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 
   /* Pure black & white base */
   --color-warm-50: #ffffff;
