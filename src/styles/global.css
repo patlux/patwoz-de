@@ -324,6 +324,106 @@ body:has(#menu-toggle:checked) nav.mobile-menu {
   @apply -translate-y-1 shadow-lg;
 }
 
+/* Ledger-style hover: subtle light edge plus diagonal sweep */
+.ledger-hover-cell {
+  --ledger-hover-bg: rgb(16 16 16 / 0.025);
+  --ledger-hover-border: rgb(16 16 16 / 0.14);
+  --ledger-hover-highlight: rgb(255 255 255 / 0.72);
+  --ledger-hover-sweep: rgb(16 16 16 / 0.08);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  transition:
+    background-color 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.dark .ledger-hover-cell {
+  --ledger-hover-bg: rgb(255 255 255 / 0.035);
+  --ledger-hover-border: rgb(255 255 255 / 0.26);
+  --ledger-hover-highlight: rgb(255 255 255 / 0.2);
+  --ledger-hover-sweep: rgb(255 255 255 / 0.16);
+}
+
+.ledger-hover-cell > * {
+  position: relative;
+  z-index: 1;
+}
+
+.ledger-hover-cell::before,
+.ledger-hover-cell::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition:
+    opacity 260ms ease,
+    transform 360ms ease;
+}
+
+.ledger-hover-cell::before {
+  border: 1px solid var(--ledger-hover-border);
+  box-shadow: inset 0 1px 0 var(--ledger-hover-highlight);
+}
+
+.ledger-hover-cell::after {
+  right: auto;
+  width: 45%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--ledger-hover-sweep),
+    transparent
+  );
+  transform: translateX(-140%) skewX(-16deg);
+}
+
+.ledger-hover-cell:hover,
+.ledger-hover-cell:focus-visible {
+  background-color: var(--ledger-hover-bg);
+  outline: none;
+}
+
+.ledger-hover-cell:hover::before,
+.ledger-hover-cell:focus-visible::before,
+.ledger-hover-cell:hover::after,
+.ledger-hover-cell:focus-visible::after {
+  opacity: 1;
+}
+
+.ledger-hover-cell:hover::after,
+.ledger-hover-cell:focus-visible::after {
+  transform: translateX(260%) skewX(-16deg);
+}
+
+.ledger-hover-arrow {
+  transition:
+    transform 220ms ease,
+    opacity 220ms ease;
+}
+
+.ledger-hover-cell:hover .ledger-hover-arrow,
+.ledger-hover-cell:focus-visible .ledger-hover-arrow {
+  transform: translateX(0.28rem);
+}
+
+.ledger-hover-kicker {
+  transition: color 220ms ease;
+}
+
+.ledger-hover-cell:hover .ledger-hover-kicker,
+.ledger-hover-cell:focus-visible .ledger-hover-kicker {
+  color: var(--color-warm-700);
+}
+
+.dark .ledger-hover-cell:hover .ledger-hover-kicker,
+.dark .ledger-hover-cell:focus-visible .ledger-hover-kicker {
+  color: var(--color-warm-400);
+}
+
 /* Gradient backgrounds */
 .bg-warm-gradient {
   background: linear-gradient(

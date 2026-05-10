@@ -72,10 +72,10 @@ const skillRows = [
                   {row.map((skill) => (
                     <a
                       href={skill.href}
-                      class="flex items-center justify-between px-4 py-3 text-sm font-semibold text-warm-900 transition-colors hover:bg-warm-900 hover:text-white dark:text-warm-100 dark:hover:bg-white dark:hover:text-black"
+                      class="ledger-hover-cell flex items-center justify-between px-4 py-3 text-sm font-semibold text-warm-900 dark:text-warm-100"
                     >
                       {skill.label}
-                      <span>→</span>
+                      <span class="ledger-hover-arrow">→</span>
                     </a>
                   ))}
                 </div>
@@ -552,36 +552,36 @@ const skillRows = [
               href="https://nuernberg-maps-review-removals.patwoz.dev/"
               target="_blank"
               rel="noreferrer"
-              class="group flex min-h-28 flex-col justify-between border-r border-warm-200 p-4 transition-colors hover:bg-warm-900 hover:text-white dark:border-warm-800 dark:hover:bg-white dark:hover:text-black"
+              class="ledger-hover-cell flex min-h-28 flex-col justify-between border-r border-warm-200 p-4 dark:border-warm-800"
             >
               <span
-                class="text-[10px] font-semibold uppercase tracking-[0.2em] text-warm-500 group-hover:text-white/60 dark:text-warm-600 dark:group-hover:text-black/50"
+                class="ledger-hover-kicker text-[10px] font-semibold uppercase tracking-[0.2em] text-warm-500 dark:text-warm-600"
               >
                 Öffnen
               </span>
               <span
-                class="flex items-center justify-between text-sm font-bold text-warm-900 group-hover:text-white dark:text-white dark:group-hover:text-black"
+                class="flex items-center justify-between text-sm font-bold text-warm-900 dark:text-white"
               >
                 Website
-                <span>→</span>
+                <span class="ledger-hover-arrow">→</span>
               </span>
             </a>
             <a
               href="https://github.com/patlux/nuernberg-maps-review-removals"
               target="_blank"
               rel="noreferrer"
-              class="group flex min-h-28 flex-col justify-between p-4 transition-colors hover:bg-warm-900 hover:text-white dark:hover:bg-white dark:hover:text-black"
+              class="ledger-hover-cell flex min-h-28 flex-col justify-between p-4"
             >
               <span
-                class="text-[10px] font-semibold uppercase tracking-[0.2em] text-warm-500 group-hover:text-white/60 dark:text-warm-600 dark:group-hover:text-black/50"
+                class="ledger-hover-kicker text-[10px] font-semibold uppercase tracking-[0.2em] text-warm-500 dark:text-warm-600"
               >
                 Öffnen
               </span>
               <span
-                class="flex items-center justify-between text-sm font-bold text-warm-900 group-hover:text-white dark:text-white dark:group-hover:text-black"
+                class="flex items-center justify-between text-sm font-bold text-warm-900 dark:text-white"
               >
                 GitHub
-                <span>→</span>
+                <span class="ledger-hover-arrow">→</span>
               </span>
             </a>
           </div>

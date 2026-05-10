@@ -1,0 +1,474 @@
+---
+import '../../styles/global.css'
+
+type Skill = {
+  label: string
+  href: string
+}
+
+type Variant = {
+  key: string
+  title: string
+  tone: string
+  description: string
+  className: string
+}
+
+const skills: Skill[] = [
+  { label: 'TypeScript', href: '/de/skills/typescript' },
+  { label: 'React', href: '/de/skills/react' },
+  { label: 'React Native', href: '/de/skills/react-native' },
+  { label: 'Expo', href: '/de/skills/expo' },
+  { label: 'Node.js', href: '/de/skills/nodejs' },
+  { label: 'Rust / Go', href: '/de/skills/rust-go' },
+  { label: 'AWS', href: '/de/skills/aws' },
+  { label: 'DevOps', href: '/de/skills/devops' },
+  { label: 'Docker', href: '/de/skills/docker' },
+  { label: 'Kubernetes', href: '/de/skills/kubernetes' },
+  { label: 'CI/CD', href: '/de/skills/ci-cd' },
+  { label: 'Playwright', href: '/de/skills/e2e-testing' },
+]
+
+const links = [
+  {
+    label: 'Website',
+    href: 'https://nuernberg-maps-review-removals.patwoz.dev/',
+  },
+  {
+    label: 'GitHub',
+    href: 'https://github.com/patlux/nuernberg-maps-review-removals',
+  },
+]
+
+const variants: Variant[] = [
+  {
+    key: 'A',
+    title: 'Invertierter Ledger',
+    tone: 'präzise · kontraststark',
+    description:
+      'Ein harter Zustandswechsel wie bei einer Terminal-Auswahl: die Karte wird hell, Text schwarz, Pfeil rückt nach rechts.',
+    className: 'variant-invert',
+  },
+  {
+    key: 'B',
+    title: 'Accent Wash',
+    tone: 'ruhig · hochwertig',
+    description:
+      'Ein kühler Accent-Verlauf läuft sanft in die Zelle. Gut, wenn der Hover sichtbar, aber nicht laut sein soll.',
+    className: 'variant-wash',
+  },
+  {
+    key: 'C',
+    title: 'Lichtkante',
+    tone: 'subtil · technisch',
+    description:
+      'Eine dünne Lichtkante und ein diagonaler Sweep geben Feedback, ohne die tabellarische Struktur zu zerstören.',
+    className: 'variant-sweep',
+  },
+  {
+    key: 'D',
+    title: 'Raised Tile',
+    tone: 'taktil · app-like',
+    description:
+      'Die Zelle hebt sich leicht aus dem Raster, bekommt Tiefe und fühlt sich eher wie ein nativer Button an.',
+    className: 'variant-raised',
+  },
+  {
+    key: 'E',
+    title: 'Command Rail',
+    tone: 'minimal · fokussiert',
+    description:
+      'Eine animierte untere Linie reicht als Signal. Der Inhalt bleibt fast unverändert und dadurch sehr editorial.',
+    className: 'variant-rail',
+  },
+]
+---
+
+<!doctype html>
+<html lang="de" class="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Hover-Varianten</title>
+  </head>
+  <body class="font-sans antialiased bg-black text-warm-100">
+    <main class="min-h-screen px-5 py-10 sm:px-8 sm:py-14">
+      <div class="mx-auto w-full max-w-6xl">
+        <header
+          class="mb-10 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between"
+        >
+          <div>
+            <a
+              href="/de"
+              class="inline-flex items-center gap-2 text-sm font-medium text-warm-500 transition-colors hover:text-white"
+            >
+              ← Zur Startseite
+            </a>
+            <p
+              class="mt-8 text-xs font-semibold uppercase tracking-[0.28em] text-accent-300"
+            >
+              Interaction Design
+            </p>
+            <h1 class="mt-2 text-4xl font-bold tracking-tight text-white">
+              Hover-Varianten für die Ledger-Karten
+            </h1>
+            <p class="mt-3 max-w-2xl text-warm-400">
+              Varianten für die Skill-Zellen und die beiden Projekt-Links aus
+              den Screenshots. Fahre mit der Maus über die einzelnen Zellen.
+            </p>
+          </div>
+          <span
+            class="rounded-full border border-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-warm-500"
+          >
+            A–E
+          </span>
+        </header>
+
+        <div class="space-y-14">
+          {
+            variants.map((variant) => (
+              <section
+                aria-labelledby={`variant-${variant.key}`}
+                class:list={['hover-variant', variant.className]}
+              >
+                <div class="mb-4 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+                  <div>
+                    <p class="text-xs font-semibold uppercase tracking-[0.24em] text-accent-300">
+                      Variante {variant.key}
+                    </p>
+                    <h2
+                      id={`variant-${variant.key}`}
+                      class="mt-1 text-2xl font-bold tracking-tight text-white"
+                    >
+                      {variant.title}
+                    </h2>
+                    <p class="mt-2 max-w-2xl text-sm leading-relaxed text-warm-400">
+                      {variant.description}
+                    </p>
+                  </div>
+                  <span class="w-max rounded-full border border-white/10 px-3 py-1 text-xs text-warm-500">
+                    {variant.tone}
+                  </span>
+                </div>
+
+                <div class="preview-card overflow-hidden rounded-[1.7rem] border border-white/12 bg-[#070707] shadow-2xl shadow-black/30">
+                  <div class="flex items-center justify-between border-b border-white/10 px-5 py-3">
+                    <p class="text-xs font-semibold uppercase tracking-[0.24em] text-accent-300">
+                      Expertise
+                    </p>
+                    <p class="text-xs text-warm-600">12 Kompetenzen</p>
+                  </div>
+                  <div class="grid lg:grid-cols-[0.78fr_1.65fr]">
+                    <div class="border-b border-white/10 p-5 lg:border-b-0 lg:border-r">
+                      <h3 class="text-3xl font-bold tracking-tight text-white">
+                        Tech Ledger
+                      </h3>
+                      <p class="mt-3 max-w-xs text-warm-400">
+                        Ein sachlicher Index meiner Kerntechnologien.
+                      </p>
+                    </div>
+                    <div class="skill-grid grid grid-cols-1 sm:grid-cols-3">
+                      {skills.map((skill) => (
+                        <a href={skill.href} class="hover-cell skill-cell">
+                          <span class="cell-label">{skill.label}</span>
+                          <span class="cell-arrow">→</span>
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mt-5 grid overflow-hidden rounded-[1.7rem] border border-white/12 bg-[#070707] shadow-2xl shadow-black/30 lg:grid-cols-[1fr_18rem]">
+                  <div class="p-5 sm:p-6">
+                    <p class="text-xs font-semibold uppercase tracking-[0.22em] text-accent-300">
+                      Highlight: eigenes Projekt
+                    </p>
+                    <h3 class="mt-3 text-2xl font-bold tracking-tight text-white">
+                      Nürnberg Maps Review Removals
+                    </h3>
+                    <p class="mt-3 max-w-2xl text-warm-400">
+                      Lokales Datenprojekt zur Analyse von Löschhinweisen bei
+                      Google-Maps-Bewertungen in Nürnberg.
+                    </p>
+                  </div>
+                  <div class="link-grid grid grid-cols-2 border-t border-white/10 lg:border-l lg:border-t-0">
+                    {links.map((link, index) => (
+                      <a
+                        href={link.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        class:list={[
+                          'hover-cell action-cell',
+                          index === 0 && 'border-r border-white/10',
+                        ]}
+                      >
+                        <span class="cell-kicker">Öffnen</span>
+                        <span class="cell-label-row">
+                          <span>{link.label}</span>
+                          <span class="cell-arrow">→</span>
+                        </span>
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </section>
+            ))
+          }
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
+
+<style>
+  .hover-cell {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    min-height: 5.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.35rem 1.55rem;
+    color: #f5f5f4;
+    border-right: 1px solid rgb(255 255 255 / 0.1);
+    border-bottom: 1px solid rgb(255 255 255 / 0.1);
+    transition:
+      color 220ms ease,
+      background 220ms ease,
+      border-color 220ms ease,
+      box-shadow 220ms ease,
+      transform 220ms ease;
+  }
+
+  .skill-cell:nth-child(3n) {
+    border-right: 0;
+  }
+
+  .skill-cell:nth-last-child(-n + 3) {
+    border-bottom: 0;
+  }
+
+  .cell-label,
+  .cell-label-row {
+    position: relative;
+    z-index: 1;
+    font-size: 1rem;
+    font-weight: 750;
+    letter-spacing: -0.01em;
+  }
+
+  .cell-label-row {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .cell-kicker {
+    position: relative;
+    z-index: 1;
+    font-size: 0.62rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: rgb(168 162 158 / 0.72);
+    transition: color 220ms ease;
+  }
+
+  .cell-arrow {
+    position: relative;
+    z-index: 1;
+    font-size: 1.45rem;
+    line-height: 1;
+    transition:
+      transform 220ms ease,
+      opacity 220ms ease;
+  }
+
+  .action-cell {
+    min-height: 10.5rem;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 2rem 2.15rem;
+    border-bottom: 0;
+  }
+
+  .action-cell:last-child {
+    border-right: 0;
+  }
+
+  .variant-invert .hover-cell:hover,
+  .variant-invert .hover-cell:focus-visible {
+    background: #f5f5f4;
+    color: #050505;
+    border-color: rgb(245 245 244 / 0.55);
+    outline: none;
+  }
+
+  .variant-invert .hover-cell:hover .cell-kicker,
+  .variant-invert .hover-cell:focus-visible .cell-kicker {
+    color: rgb(5 5 5 / 0.52);
+  }
+
+  .variant-invert .hover-cell:hover .cell-arrow,
+  .variant-invert .hover-cell:focus-visible .cell-arrow {
+    transform: translateX(0.35rem);
+  }
+
+  .variant-wash .hover-cell::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: radial-gradient(
+        circle at 20% 20%,
+        rgb(129 140 248 / 0.32),
+        transparent 34%
+      ),
+      linear-gradient(135deg, rgb(99 102 241 / 0.28), rgb(14 165 233 / 0.08));
+    opacity: 0;
+    transition: opacity 260ms ease;
+  }
+
+  .variant-wash .hover-cell:hover,
+  .variant-wash .hover-cell:focus-visible {
+    border-color: rgb(129 140 248 / 0.45);
+    color: white;
+    outline: none;
+  }
+
+  .variant-wash .hover-cell:hover::before,
+  .variant-wash .hover-cell:focus-visible::before {
+    opacity: 1;
+  }
+
+  .variant-wash .hover-cell:hover .cell-arrow,
+  .variant-wash .hover-cell:focus-visible .cell-arrow {
+    transform: translateX(0.35rem) scale(1.08);
+  }
+
+  .variant-sweep .hover-cell::before,
+  .variant-sweep .hover-cell::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    opacity: 0;
+    transition:
+      opacity 260ms ease,
+      transform 360ms ease;
+  }
+
+  .variant-sweep .hover-cell::before {
+    border: 1px solid rgb(255 255 255 / 0.26);
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.2);
+  }
+
+  .variant-sweep .hover-cell::after {
+    width: 45%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgb(255 255 255 / 0.16),
+      transparent
+    );
+    transform: translateX(-140%) skewX(-16deg);
+  }
+
+  .variant-sweep .hover-cell:hover,
+  .variant-sweep .hover-cell:focus-visible {
+    background: rgb(255 255 255 / 0.035);
+    outline: none;
+  }
+
+  .variant-sweep .hover-cell:hover::before,
+  .variant-sweep .hover-cell:focus-visible::before,
+  .variant-sweep .hover-cell:hover::after,
+  .variant-sweep .hover-cell:focus-visible::after {
+    opacity: 1;
+  }
+
+  .variant-sweep .hover-cell:hover::after,
+  .variant-sweep .hover-cell:focus-visible::after {
+    transform: translateX(260%) skewX(-16deg);
+  }
+
+  .variant-sweep .hover-cell:hover .cell-arrow,
+  .variant-sweep .hover-cell:focus-visible .cell-arrow {
+    transform: translateX(0.28rem);
+  }
+
+  .variant-raised .hover-cell:hover,
+  .variant-raised .hover-cell:focus-visible {
+    z-index: 2;
+    background: #101010;
+    border-color: rgb(165 180 252 / 0.55);
+    box-shadow:
+      0 18px 45px rgb(0 0 0 / 0.45),
+      inset 0 1px 0 rgb(255 255 255 / 0.08);
+    transform: translateY(-0.22rem) scale(1.018);
+    outline: none;
+  }
+
+  .variant-raised .hover-cell:hover .cell-arrow,
+  .variant-raised .hover-cell:focus-visible .cell-arrow {
+    transform: translateX(0.32rem) rotate(-12deg);
+  }
+
+  .variant-rail .hover-cell::after {
+    content: '';
+    position: absolute;
+    right: 1.35rem;
+    bottom: 0.85rem;
+    left: 1.35rem;
+    z-index: -1;
+    height: 2px;
+    background: linear-gradient(90deg, #a5b4fc, #fff, #818cf8);
+    opacity: 0;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition:
+      opacity 220ms ease,
+      transform 260ms ease;
+  }
+
+  .variant-rail .hover-cell:hover,
+  .variant-rail .hover-cell:focus-visible {
+    background: rgb(255 255 255 / 0.025);
+    color: white;
+    outline: none;
+  }
+
+  .variant-rail .hover-cell:hover::after,
+  .variant-rail .hover-cell:focus-visible::after {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+
+  .variant-rail .hover-cell:hover .cell-arrow,
+  .variant-rail .hover-cell:focus-visible .cell-arrow {
+    opacity: 0.62;
+    transform: translateX(0.45rem);
+  }
+
+  @media (max-width: 639px) {
+    .skill-cell,
+    .skill-cell:nth-child(3n),
+    .skill-cell:nth-last-child(-n + 3) {
+      border-right: 0;
+      border-bottom: 1px solid rgb(255 255 255 / 0.1);
+    }
+
+    .skill-cell:last-child {
+      border-bottom: 0;
+    }
+
+    .action-cell {
+      min-height: 8.5rem;
+      padding: 1.35rem;
+    }
+  }
+</style>

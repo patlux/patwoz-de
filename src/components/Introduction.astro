@@ -16,6 +16,7 @@ const labels = isGerman
       ctaBody:
         'Ich bin aktuell für neue Projekte verfügbar und helfe gern dabei, Ihre Vision umzusetzen.',
       ctaButton: 'Kontakt aufnehmen',
+      ctaBadge: 'Verfügbar für Freelance-Projekte',
     }
   : {
       available: 'Available',
@@ -29,6 +30,7 @@ const labels = isGerman
       ctaBody:
         "I'm currently available for new projects and would love to help bring your vision to life.",
       ctaButton: 'Get in Touch',
+      ctaBadge: 'Available for freelance projects',
     }
 ---
 
@@ -138,28 +140,39 @@ const labels = isGerman
 
 <!-- CTA Section -->
 <div
-  class="mt-8 p-6 bg-gradient-to-br from-accent-50 to-warm-100 dark:from-accent-900/20 dark:to-warm-900/20 rounded-2xl border border-accent-200 dark:border-accent-800/30 animate-fade-in-up opacity-0 stagger-3"
+  class="relative mt-8 overflow-hidden rounded-2xl border border-accent-200 bg-gradient-to-br from-white via-accent-50/60 to-warm-100 p-5 shadow-sm animate-fade-in-up opacity-0 stagger-3 dark:border-accent-500/25 dark:from-dark-surface dark:via-black dark:to-dark-surface dark:shadow-2xl dark:shadow-accent-950/25 sm:p-6"
 >
-  <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-    <div class="flex-1">
+  <div
+    class="absolute -right-16 -top-20 h-48 w-48 rounded-full bg-accent-300/30 blur-3xl dark:bg-accent-500/20"
+  >
+  </div>
+  <div
+    class="relative flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between"
+  >
+    <div>
+      <div
+        class="inline-flex rounded-full border border-accent-300/50 bg-accent-100/80 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-accent-700 dark:border-accent-400/25 dark:bg-accent-400/10 dark:text-accent-200"
+      >
+        {labels.ctaBadge}
+      </div>
       <h4
-        class="font-display text-lg font-semibold text-warm-900 dark:text-warm-100"
+        class="mt-4 font-display text-xl font-semibold tracking-tight text-warm-900 dark:text-white"
       >
         {labels.ctaTitle}
       </h4>
-      <p class="text-warm-600 dark:text-warm-400 text-sm mt-1">
+      <p class="mt-3 max-w-2xl text-sm text-warm-600 dark:text-warm-400">
         {labels.ctaBody}
       </p>
     </div>
     <a
       href="mailto:hi@patwoz.de"
-      class="inline-flex items-center gap-2 bg-accent-500 hover:bg-accent-600 text-white font-semibold px-5 py-2.5 rounded-xl transition-all duration-300 glow-accent hover:-translate-y-0.5"
+      class="inline-flex shrink-0 items-center justify-center gap-2 rounded-2xl bg-accent-500 px-5 py-3 text-sm font-bold text-white shadow-xl shadow-accent-500/25 transition-all hover:-translate-y-0.5 hover:bg-accent-400 dark:shadow-accent-900/40"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 20 20"
         fill="currentColor"
-        class="w-5 h-5"
+        class="h-5 w-5"
       >
         <path
           d="M3 4a2 2 0 00-2 2v1.161l8.441 4.221a1.25 1.25 0 001.118 0L19 7.162V6a2 2 0 00-2-2H3z"
