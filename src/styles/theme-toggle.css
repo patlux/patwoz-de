@@ -652,13 +652,3 @@
     scale: 1;
   }
 }
-
-@media (prefers-reduced-motion: reduce) {
-  .theme-toggle__thumb::before,
-  .theme-toggle[data-theme-state='dark'] .theme-toggle__star--one,
-  .dark .theme-toggle:not([data-theme-state='light']) .theme-toggle__star--one,
-  .theme-toggle[data-theme-state='dark'] .theme-toggle__star--two,
-  .dark .theme-toggle:not([data-theme-state='light']) .theme-toggle__star--two {
-    animation: none;
-  }
-}

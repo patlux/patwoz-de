@@ -273,13 +273,6 @@ body:has(#menu-toggle:checked) nav.mobile-menu {
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  ::view-transition-new(root) {
-    clip-path: none;
-    animation: none;
-  }
-}
-
 /* Subtle fade-in animation for page elements - only on first visit */
 @keyframes fadeInUp {
   from {

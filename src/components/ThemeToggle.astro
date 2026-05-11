@@ -53,10 +53,6 @@ import '../styles/theme-toggle.css'
     return window.matchMedia('(prefers-color-scheme: dark)').matches
   }
 
-  function prefersReducedMotion(): boolean {
-    return window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  }
-
   function getEffectiveTheme(theme: ThemePreference): ThemeState {
     if (theme === 'light' || theme === 'dark') return theme
     return systemPrefersDark() ? 'dark' : 'light'
@@ -104,7 +100,7 @@ import '../styles/theme-toggle.css'
       applyTheme(next)
     }
 
-    if (document.startViewTransition && !prefersReducedMotion()) {
+    if (document.startViewTransition) {
       document.startViewTransition(changeTheme)
     } else {
       changeTheme()
