@@ -1,195 +1,186 @@
 ---
+import '../styles/theme-toggle.css'
+
 /**
- * ThemeToggle - Three-state theme toggle
- * - Default (system): shows sun/moon based on system preference
- * - User forced dark: shows moon with toggled state
- * - User forced light: shows sun with toggled state
+ * ThemeToggle - animated light/dark switch
+ * - Defaults to the active system preference
+ * - Click stores the opposite explicit theme
  */
 ---
 
-<button
-  type="button"
-  class="theme-toggle h-9 w-9 flex items-center justify-center rounded-lg transition-colors"
-  aria-label="Toggle theme"
->
-  <!-- Sun icon -->
-  <svg
-    data-theme-icon="light"
-    class="w-5 h-5 hidden"
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-    stroke-width="1.5"
-    stroke="currentColor"
-  >
-    <path
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"
-    ></path>
-  </svg>
-
-  <!-- Moon icon -->
-  <svg
-    data-theme-icon="dark"
-    class="w-5 h-5 hidden"
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-    stroke-width="1.5"
-    stroke="currentColor"
-  >
-    <path
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z"
-    ></path>
-  </svg>
+<button type="button" class="theme-toggle" aria-label="Toggle theme">
+  <span class="theme-toggle__track" aria-hidden="true">
+    <span class="theme-toggle__stars">
+      <span class="theme-toggle__star theme-toggle__star--one"></span>
+      <span class="theme-toggle__star theme-toggle__star--two"></span>
+      <span class="theme-toggle__star theme-toggle__star--three"></span>
+      <span class="theme-toggle__dot theme-toggle__dot--one"></span>
+      <span class="theme-toggle__dot theme-toggle__dot--two"></span>
+      <span class="theme-toggle__dot theme-toggle__dot--three"></span>
+    </span>
+    <span class="theme-toggle__cloud theme-toggle__cloud--one"></span>
+    <span class="theme-toggle__cloud theme-toggle__cloud--two"></span>
+    <span class="theme-toggle__thumb">
+      <span class="theme-toggle__sun"></span>
+      <span class="theme-toggle__moon"></span>
+      <span class="theme-toggle__crater theme-toggle__crater--one"></span>
+      <span class="theme-toggle__crater theme-toggle__crater--two"></span>
+      <span class="theme-toggle__crater theme-toggle__crater--three"></span>
+    </span>
+  </span>
+  <span class="sr-only" data-theme-label>Toggle theme</span>
 </button>
 
 <script>
-  function initThemeToggle() {
-    const toggles = Array.from(
+  type ThemePreference = 'light' | 'dark' | null
+  type ThemeState = 'light' | 'dark'
+
+  let themeMediaListenerAttached = false
+  let pendingThemeChange: number | null = null
+
+  function getThemeToggles(): HTMLButtonElement[] {
+    return Array.from(
       document.querySelectorAll<HTMLButtonElement>('.theme-toggle'),
     )
+  }
+
+  function getStoredTheme(): ThemePreference {
+    const stored = localStorage.getItem('theme')
+    return stored === 'light' || stored === 'dark' ? stored : null
+  }
+
+  function systemPrefersDark(): boolean {
+    return window.matchMedia('(prefers-color-scheme: dark)').matches
+  }
+
+  function prefersReducedMotion(): boolean {
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  }
+
+  function getEffectiveTheme(theme: ThemePreference): ThemeState {
+    if (theme === 'light' || theme === 'dark') return theme
+    return systemPrefersDark() ? 'dark' : 'light'
+  }
+
+  function applyTheme(theme: ThemePreference) {
+    const effectiveTheme = getEffectiveTheme(theme)
+
+    if (effectiveTheme === 'dark') {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
+  }
+
+  function updateState(toggle: HTMLButtonElement, theme: ThemePreference) {
+    const effectiveTheme = getEffectiveTheme(theme)
+    const isSystemTheme = theme === null
+    const nextTheme = effectiveTheme === 'dark' ? 'light' : 'dark'
+    const label = isSystemTheme
+      ? `Theme: System ${effectiveTheme} mode. Click for ${nextTheme} mode.`
+      : `Theme: ${effectiveTheme} mode. Click for ${nextTheme} mode.`
+    const hiddenLabel = toggle.querySelector('[data-theme-label]')
+
+    toggle.dataset.themeState = effectiveTheme
+    toggle.dataset.themePreference = isSystemTheme ? 'system' : effectiveTheme
+    toggle.setAttribute('aria-label', label)
+    toggle.setAttribute(
+      'aria-pressed',
+      effectiveTheme === 'dark' ? 'true' : 'false',
+    )
+
+    if (hiddenLabel) {
+      hiddenLabel.textContent = label
+    }
+  }
+
+  function syncThemeToggles(themeOverride?: ThemePreference) {
+    const theme = themeOverride ?? getStoredTheme()
+    getThemeToggles().forEach((toggle) => updateState(toggle, theme))
+  }
+
+  function revealTheme(next: ThemeState) {
+    const changeTheme = () => {
+      applyTheme(next)
+    }
+
+    if (document.startViewTransition && !prefersReducedMotion()) {
+      document.startViewTransition(changeTheme)
+    } else {
+      changeTheme()
+    }
+  }
+
+  function startToggleTransition(next: ThemeState) {
+    const duration = 900
+    const direction = next === 'dark' ? 'to-dark' : 'to-light'
+
+    getThemeToggles().forEach((toggle) => {
+      updateState(toggle, next)
+      toggle.dataset.themeDirection = direction
+      toggle.dataset.themeAnimating = 'true'
+
+      window.setTimeout(() => {
+        delete toggle.dataset.themeAnimating
+        delete toggle.dataset.themeDirection
+      }, duration)
+    })
+  }
+
+  function handleClick(event: MouseEvent) {
+    if (pendingThemeChange !== null) return
+
+    const current = getStoredTheme()
+    const next = getEffectiveTheme(current) === 'dark' ? 'light' : 'dark'
+    const x = event.clientX
+    const y = event.clientY
+    const delay = 700
+
+    localStorage.setItem('theme', next)
+    startToggleTransition(next)
+
+    document.documentElement.style.setProperty('--view-transition-x', `${x}px`)
+    document.documentElement.style.setProperty('--view-transition-y', `${y}px`)
+
+    const commitThemeChange = () => {
+      pendingThemeChange = null
+      revealTheme(next)
+    }
+
+    pendingThemeChange = window.setTimeout(commitThemeChange, delay)
+  }
+
+  function initThemeToggle() {
+    const toggles = getThemeToggles()
     if (!toggles.length) return
 
-    function getStoredTheme(): string | null {
-      return localStorage.getItem('theme')
-    }
+    const theme = getStoredTheme()
+    applyTheme(theme)
 
-    function systemPrefersDark(): boolean {
-      return window.matchMedia('(prefers-color-scheme: dark)').matches
-    }
-
-    function applyTheme(theme: string | null) {
-      const shouldBeDark =
-        theme === 'dark' || (theme === null && systemPrefersDark())
-
-      if (shouldBeDark) {
-        document.documentElement.classList.add('dark')
-      } else {
-        document.documentElement.classList.remove('dark')
-      }
-    }
-
-    function updateState(toggle: HTMLButtonElement, theme: string | null) {
-      const iconLight = toggle.querySelector('[data-theme-icon="light"]')
-      const iconDark = toggle.querySelector('[data-theme-icon="dark"]')
-      if (!iconLight || !iconDark) return
-
-      const isForced = theme !== null
-      const showMoon =
-        theme === 'dark' || (theme === null && systemPrefersDark())
-
-      const lightClasses = isForced
-        ? 'w-5 h-5 text-amber-500'
-        : 'w-5 h-5 text-gray-500 dark:text-gray-400'
-      const darkClasses = isForced
-        ? 'w-5 h-5 text-blue-400'
-        : 'w-5 h-5 text-gray-500 dark:text-gray-400'
-
-      iconLight.setAttribute(
-        'class',
-        showMoon ? `${lightClasses} hidden` : lightClasses,
-      )
-      iconDark.setAttribute(
-        'class',
-        showMoon ? darkClasses : `${darkClasses} hidden`,
-      )
-
-      toggle.className = isForced
-        ? 'theme-toggle h-9 w-9 flex items-center justify-center rounded-lg transition-colors bg-gray-200 dark:bg-zinc-700 hover:bg-gray-300 dark:hover:bg-zinc-600'
-        : 'theme-toggle h-9 w-9 flex items-center justify-center rounded-lg transition-colors hover:bg-gray-200 dark:hover:bg-zinc-700'
-    }
-
-    function updateAriaLabel(toggle: HTMLButtonElement, theme: string | null) {
-      if (theme === 'light') {
-        toggle.setAttribute(
-          'aria-label',
-          'Theme: Light mode. Click to use system preference.',
-        )
-      } else if (theme === 'dark') {
-        toggle.setAttribute(
-          'aria-label',
-          'Theme: Dark mode. Click to use system preference.',
-        )
-      } else {
-        toggle.setAttribute(
-          'aria-label',
-          'Theme: System preference. Click to toggle.',
-        )
-      }
-    }
-
-    function performThemeChange(next: string | null) {
-      if (next === null) {
-        localStorage.removeItem('theme')
-      } else {
-        localStorage.setItem('theme', next)
-      }
-
-      applyTheme(next)
-      toggles.forEach((toggle) => {
-        updateState(toggle, next)
-        updateAriaLabel(toggle, next)
-      })
-    }
-
-    function handleClick(event: MouseEvent) {
-      const current = getStoredTheme()
-      const prefersDark = systemPrefersDark()
-
-      let next: string | null
-
-      if (current === null) {
-        next = prefersDark ? 'light' : 'dark'
-      } else {
-        next = null
-      }
-
-      const x = event.clientX
-      const y = event.clientY
-
-      document.documentElement.style.setProperty(
-        '--view-transition-x',
-        `${x}px`,
-      )
-      document.documentElement.style.setProperty(
-        '--view-transition-y',
-        `${y}px`,
-      )
-
-      if (document.startViewTransition) {
-        document.startViewTransition(() => {
-          performThemeChange(next)
-        })
-      } else {
-        performThemeChange(next)
-      }
-    }
-
-    const initialTheme = getStoredTheme()
     toggles.forEach((toggle) => {
-      updateState(toggle, initialTheme)
-      updateAriaLabel(toggle, initialTheme)
+      updateState(toggle, theme)
+
+      if (toggle.dataset.themeReady === 'true') return
+
+      toggle.dataset.themeReady = 'true'
       toggle.addEventListener('click', handleClick)
     })
 
-    window
-      .matchMedia('(prefers-color-scheme: dark)')
-      .addEventListener('change', () => {
-        const theme = getStoredTheme()
-        if (theme === null) {
+    if (!themeMediaListenerAttached) {
+      window
+        .matchMedia('(prefers-color-scheme: dark)')
+        .addEventListener('change', () => {
+          if (getStoredTheme() !== null) return
+
           applyTheme(null)
-          toggles.forEach((toggle) => updateState(toggle, null))
-        }
-      })
+          syncThemeToggles()
+        })
+
+      themeMediaListenerAttached = true
+    }
   }
 
-  // Run on initial load
   initThemeToggle()
 
-  // Re-run after Astro page transitions (View Transitions)
   document.addEventListener('astro:after-swap', initThemeToggle)
 </script>
