@@ -96,14 +96,22 @@ import '../styles/theme-toggle.css'
   }
 
   function revealTheme(next: ThemeState) {
+    const revealDirection = next === 'dark' ? 'to-dark' : 'to-light'
     const changeTheme = () => {
       applyTheme(next)
     }
+    const clearRevealDirection = () => {
+      delete document.documentElement.dataset.themeReveal
+    }
+
+    document.documentElement.dataset.themeReveal = revealDirection
 
     if (document.startViewTransition) {
-      document.startViewTransition(changeTheme)
+      const transition = document.startViewTransition(changeTheme)
+      transition.finished.finally(clearRevealDirection)
     } else {
       changeTheme()
+      clearRevealDirection()
     }
   }
 
@@ -123,20 +131,48 @@ import '../styles/theme-toggle.css'
     })
   }
 
+  function getRevealOrigin(event: MouseEvent, next: ThemeState) {
+    const target = event.currentTarget
+
+    if (target instanceof HTMLButtonElement) {
+      const rect = target.getBoundingClientRect()
+      const thumbCenterOffset = rect.height / 2
+      const x =
+        next === 'dark'
+          ? rect.right - thumbCenterOffset
+          : rect.left + thumbCenterOffset
+
+      return {
+        x,
+        y: rect.top + thumbCenterOffset,
+      }
+    }
+
+    return {
+      x: event.clientX,
+      y: event.clientY,
+    }
+  }
+
   function handleClick(event: MouseEvent) {
     if (pendingThemeChange !== null) return
 
     const current = getStoredTheme()
     const next = getEffectiveTheme(current) === 'dark' ? 'light' : 'dark'
-    const x = event.clientX
-    const y = event.clientY
-    const delay = 700
+    const origin = getRevealOrigin(event, next)
+    const delay = 560
 
     localStorage.setItem('theme', next)
     startToggleTransition(next)
 
-    document.documentElement.style.setProperty('--view-transition-x', `${x}px`)
-    document.documentElement.style.setProperty('--view-transition-y', `${y}px`)
+    document.documentElement.style.setProperty(
+      '--view-transition-x',
+      `${origin.x}px`,
+    )
+    document.documentElement.style.setProperty(
+      '--view-transition-y',
+      `${origin.y}px`,
+    )
 
     const commitThemeChange = () => {
       pendingThemeChange = null

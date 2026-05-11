@@ -245,31 +245,82 @@ body:has(#menu-toggle:checked) nav.mobile-menu {
   animation-play-state: paused;
 }
 
-/* View Transitions API - Theme toggle circular reveal animation */
+/* View Transitions API - theme toggle soft reveal animation */
+@property --theme-reveal-radius {
+  syntax: '<length-percentage>';
+  inherits: false;
+  initial-value: 0vmax;
+}
+
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation: none;
   mix-blend-mode: normal;
 }
 
-/* New view always on top, expanding to reveal */
 ::view-transition-old(root) {
   z-index: 1;
 }
 
 ::view-transition-new(root) {
+  --theme-reveal-radius: 0vmax;
   z-index: 999;
   clip-path: circle(
-    0% at var(--view-transition-x, 50%) var(--view-transition-y, 50%)
+    var(--theme-reveal-radius) at var(--view-transition-x, 50%)
+      var(--view-transition-y, 50%)
   );
-  animation: theme-reveal 0.56s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  -webkit-mask-image: radial-gradient(
+    circle at var(--view-transition-x, 50%) var(--view-transition-y, 50%),
+    #000 0,
+    #000 calc(var(--theme-reveal-radius) - 6vmax),
+    rgb(0 0 0 / 0.84) calc(var(--theme-reveal-radius) - 2.4vmax),
+    transparent var(--theme-reveal-radius)
+  );
+  mask-image: radial-gradient(
+    circle at var(--view-transition-x, 50%) var(--view-transition-y, 50%),
+    #000 0,
+    #000 calc(var(--theme-reveal-radius) - 6vmax),
+    rgb(0 0 0 / 0.84) calc(var(--theme-reveal-radius) - 2.4vmax),
+    transparent var(--theme-reveal-radius)
+  );
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  transform-origin: var(--view-transition-x, 50%) var(--view-transition-y, 50%);
 }
 
-@keyframes theme-reveal {
-  to {
-    clip-path: circle(
-      150% at var(--view-transition-x, 50%) var(--view-transition-y, 50%)
-    );
+:root[data-theme-reveal]::view-transition-old(root) {
+  animation: theme-old-hold 0.84s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+:root[data-theme-reveal]::view-transition-new(root) {
+  animation: theme-soft-reveal 0.84s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+}
+
+@keyframes theme-old-hold {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: 0.72;
+    transform: scale(0.997);
+  }
+}
+
+@keyframes theme-soft-reveal {
+  0% {
+    --theme-reveal-radius: 0vmax;
+    transform: scale(1.006);
+  }
+
+  32% {
+    --theme-reveal-radius: 26vmax;
+  }
+
+  100% {
+    --theme-reveal-radius: 150vmax;
+    transform: scale(1);
   }
 }
 
