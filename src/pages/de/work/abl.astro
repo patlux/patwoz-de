@@ -111,105 +111,51 @@ const breadcrumbSchema = {
 
       <div class="prose lg:prose-lg max-w-none">
         <p>
-          ABL ist ein deutscher Hersteller von Ladeinfrastruktur für
-          Elektroautos und produziert Wallboxen sowie Ladestationen für Zuhause
-          und Unternehmen. Die Configuration App ermöglicht Installateuren und
-          Endnutzern das Einrichten, Konfigurieren und Verwalten von ABL
-          Ladestationen über WiFi und Bluetooth.
+          Mitgewirkt an der ABL Configuration App. ABL ist ein deutscher
+          Hersteller von EV-Ladeinfrastruktur; die App ermöglicht Installateuren
+          und Endnutzern das Einrichten, Konfigurieren und Verwalten von
+          Wallboxen über WiFi und Bluetooth.
         </p>
 
-        <h2>Projektüberblick</h2>
-        <p>
-          Als hauptverantwortlicher Entwickler habe ich die ABL Configuration
-          App seit den frühen Phasen aufgebaut und weiterentwickelt. Die App
-          kommuniziert direkt mit ABL Wallboxen über lokale WiFi-Netze und
-          Bluetooth, ermöglicht Device Setup, Firmware Updates,
-          Netzwerk-Konfiguration und System-Management. Über 1.300+ Commits über
-          mehrere Jahre hinweg, inklusive React Native Upgrades und
-          kontinuierlicher Feature-Erweiterungen.
-        </p>
-
-        <h2>Wichtige Beiträge</h2>
-
-        <h3>Device Communication</h3>
-        <p>
-          Die zentrale Kommunikationsschicht für die Verbindung zu ABL Wallboxen
-          via WiFi Access Point und lokale Netzwerke implementiert. Robuste
-          Verbindungslogik mit Auto-Reconnect, Timeout-Management und Error
-          Recovery gebaut. Die App betreibt einen lokalen HTTP Server für die
-          Kommunikation.
-        </p>
-
-        <h3>QR Code Scanning</h3>
-        <p>
-          Kamera-basiertes QR-Scanning mit Vision Camera für Device Discovery
-          und Onboarding integriert. Barcode Detection implementiert,
-          Device-spezifische Kamera-Issues auf Samsung Geräten behandelt und
-          Support für Ultrawide Linsen hinzugefügt. Manual Input als Fallback
-          für unmögliche Scans.
-        </p>
-
-        <h3>Firmware Updates</h3>
-        <p>
-          Firmware-Update-System gebaut, das Over-the-Air Updates ermöglicht.
-          Update Progress Tracking, Error Handling für hängende Updates und
-          korrektes Device State Management umgesetzt.
-        </p>
-
-        <h3>Netzwerk-Konfiguration</h3>
-        <p>
-          Umfassende Setup-Flows für WiFi-Konfiguration, LTE/Mobile Daten und
-          Ethernet (LAN) entwickelt. WiFi Password Management, Netzwerkwechsel
-          und saubere Handhabung verschiedener Szenarien (AP Mode, LAN,
-          Extender) implementiert.
-        </p>
-
-        <h3>Controller & Extender Management</h3>
-        <p>
-          System für Controller Devices und deren Extender (Satellite Charging
-          Points) gebaut. Device Grouping, Extender Discovery via mDNS und
-          Workflow für das Hinzufügen von Extendern zu Controller-Gruppen über
-          LAN umgesetzt.
-        </p>
-
-        <h3>Multi-language Support</h3>
-        <p>
-          Internationalisierung mit i18next umgesetzt, inklusive Deutsch,
-          Englisch, Französisch, Spanisch, Italienisch und Niederländisch.
-          Integration mit Lokalise inklusive Upload/Download Scripts für Sync
-          der Übersetzungen.
-        </p>
-
-        <h3>State Management</h3>
-        <p>
-          App State Architektur mit MobX für reaktives State Management gebaut.
-          Stores für Device State, Controller Config, Connection Status und User
-          Preferences implementiert. React Query für Server State und Caching
-          hinzugefügt.
-        </p>
-
-        <h3>UI Components</h3>
-        <p>
-          Komponentenbibliothek mit NativeWind (Tailwind CSS für React Native)
-          entwickelt. Reusable Components wie Custom Dropdowns, Loading
-          Overlays, Modal Dialogs und Form Inputs mit React Hook Form
-          Integration gebaut.
-        </p>
-
-        <h3>Error Tracking & Analytics</h3>
-        <p>
-          Sentry für Crash Reporting und Error Tracking mit Session Replay
-          integriert. Mixpanel für Analytics hinzugefügt, um User Behavior und
-          Connection Attempts zu tracken. Fehlerkontext und Tagging für
-          durchsuchbare Logs umgesetzt.
-        </p>
-
-        <h3>React Native Upgrades</h3>
-        <p>
-          Mehrere React Native Version Upgrades (bis RN 0.75) durchgeführt.
-          Breaking Changes behoben, native Dependencies aktualisiert, Xcode 15
-          Build Issues gelöst und Kompatibilität mit aktuellen iOS/Android
-          Anforderungen gewährleistet.
+        <h2>Schwerpunkte</h2>
+        <ul>
+          <li>
+            <strong>Gerätekommunikation:</strong> Robuste lokale Verbindungslogik
+            über WiFi-Access-Point und LAN mit Auto-Reconnect, Timeouts und Error-Recovery.
+          </li>
+          <li>
+            <strong>QR-Onboarding:</strong> Kamera-basiertes Device-Discovery mit
+            Manual-Input als Fallback.
+          </li>
+          <li>
+            <strong>Firmware-Updates:</strong> OTA-Update-Flow mit Fortschrittsanzeige
+            und robustem State-Handling.
+          </li>
+          <li>
+            <strong>Netzwerk-Setup:</strong> Konfigurations-Flows für WiFi, LTE/Mobile
+            Daten und Ethernet (LAN).
+          </li>
+          <li>
+            <strong>Mehrgeräte-Setup:</strong> Controller-/Extender- Verwaltung für
+            gruppierte Ladepunkte mit lokaler Discovery.
+          </li>
+          <li>
+            <strong>Internationalisierung:</strong> Mehrsprachigkeit für den EU-Markt
+            mit abgestimmtem Übersetzungs-Workflow.
+          </li>
+          <li>
+            <strong>UI-System:</strong> Wiederverwendbare Komponenten und Formulare.
+          </li>
+          <li>
+            <strong>Zuverlässigkeit:</strong> Crash- und Error-Monitoring, Analytics
+            und kontinuierliche React-Native-Upgrades über mehrere Jahre.
+          </li>
+        </ul>
+        <p class="text-sm text-gray-500 dark:text-gray-400">
+          Interne Implementierungsdetails und Drittanbieter-Entscheidungen des
+          Kunden bleiben vertraulich. Die nachfolgende Auflistung beschreibt
+          allgemeine Technologien, mit denen ich in diesem Projekt gearbeitet
+          habe.
         </p>
       </div>
 

@@ -109,110 +109,48 @@ const breadcrumbSchema = {
       <!-- Content -->
       <div class="prose lg:prose-lg max-w-none">
         <p>
-          Worked on a consumer-facing mobile application and its backend
-          infrastructure for Porsche Digital. The project involved building a
-          React Native app with real-time video streaming capabilities, in-app
-          subscriptions, and a serverless AWS backend - all within a monorepo
-          architecture.
+          Contributed as a fullstack engineer to a consumer-facing mobile
+          application for Porsche Digital with real-time video, in-app
+          subscriptions and a serverless AWS backend, delivered within a
+          monorepo setup.
         </p>
 
-        <h2>Project Overview</h2>
-        <p>
-          As a fullstack developer, I contributed to all layers of the
-          application: the React Native mobile app, the React web application,
-          and the AWS-based backend infrastructure. The project used a monorepo
-          setup with Turborepo for efficient builds and shared code between
-          applications. Over the course of the project, I made 850+ commits
-          implementing features, fixing bugs, and improving the overall
-          architecture.
-        </p>
-
-        <h2>Key Contributions</h2>
-
-        <h3>Mobile App Development</h3>
-        <p>
-          Built and maintained core features of the React Native mobile
-          application including onboarding flows, subscription paywalls,
-          favorites functionality, and course filtering. Implemented smooth
-          animations using React Native Reanimated and built bottom sheet
-          components for improved UX. Added tracking permission screens and
-          integrated analytics with Firebase and Singular.
-        </p>
-
-        <h3>Video Streaming Integration</h3>
-        <p>
-          Integrated real-time video streaming capabilities using OpenTok SDK.
-          Implemented session management, video playback with
-          react-native-video, and seamless transitions between training
-          sessions. Built features to keep the screen awake during sessions and
-          handle orientation changes.
-        </p>
-
-        <h3>In-App Subscriptions</h3>
-        <p>
-          Implemented subscription management using RevenueCat SDK. Built
-          paywall screens with FAQ integration, pricing comparisons, and
-          promotional offers. Created subscription modals displayed as bottom
-          sheets with proper handling for different device sizes.
-        </p>
-
-        <h3>Backend Development</h3>
-        <p>
-          Developed serverless backend infrastructure using AWS CDK with Lambda
-          functions, DynamoDB tables, and API Gateway. Implemented webhook
-          handlers for RevenueCat subscription events, user management
-          endpoints, and training session APIs. Added database indexes for
-          optimized queries and proper timestamp tracking.
-        </p>
-
-        <h3>Real-time Features</h3>
-        <p>
-          Built active feedback features with smart mirror integration,
-          including toggle settings, informational bottom sheets, and hint
-          displays for users. Implemented smooth transitions between training
-          sessions when started from the web application.
-        </p>
-
-        <h3>Onboarding Experience</h3>
-        <p>
-          Created multi-step onboarding flows with intro videos, active feedback
-          explanations, and personalization options. Implemented skip
-          functionality that moves to the next page instead of skipping the
-          entire process, with smooth animations and proper state management.
-        </p>
-
-        <h3>Performance Optimization</h3>
-        <p>
-          Refactored data fetching to use SWR with request deduplication,
-          removing the need for RxJS in favor of simpler patterns. Optimized API
-          calls by splitting endpoints and implementing proper caching
-          strategies. Improved animation performance and reduced unnecessary
-          re-renders.
-        </p>
-
-        <h3>Web Application</h3>
-        <p>
-          Contributed to the React web application with features like course
-          management, subscription handling, and shared components with the
-          mobile app. Fixed authentication token refresh issues and optimized
-          home section rendering.
-        </p>
-
-        <h3>Developer Experience</h3>
-        <p>
-          Migrated the monorepo from ultra-runner to Turborepo for faster
-          builds. Set up Playwright for end-to-end testing. Maintained ESLint
-          configuration, fixed TypeScript errors, and improved code quality
-          across the codebase. Added documentation for Bitrise CI/CD workflows
-          and development provisioning profiles.
-        </p>
-
-        <h3>Analytics & Monitoring</h3>
-        <p>
-          Integrated Firebase Analytics for user behavior tracking, Sentry for
-          error monitoring, and Fullstory for session replay. Implemented custom
-          tracking for onboarding completion and subscription events. Built
-          backend endpoints for collecting and analyzing user statistics.
+        <h2>Areas of contribution</h2>
+        <ul>
+          <li>
+            <strong>Mobile app:</strong> Core React Native features such as onboarding
+            flows, subscription paywalls, favourites and content filtering, with
+            animation and bottom-sheet components.
+          </li>
+          <li>
+            <strong>Real-time video:</strong> Integration of live video sessions
+            and the surrounding UX (screen-awake handling, orientation, transitions).
+          </li>
+          <li>
+            <strong>In-app subscriptions:</strong> Paywall flows, pricing, promotional
+            offers and webhook-based receipt handling.
+          </li>
+          <li>
+            <strong>Backend:</strong> Serverless backend with AWS CDK, Lambda, DynamoDB
+            and API Gateway; user, subscription and session endpoints.
+          </li>
+          <li>
+            <strong>Web application:</strong> Shared components and features between
+            the mobile app and a companion React web app.
+          </li>
+          <li>
+            <strong>Performance & DX:</strong> Data-fetching, caching and build-system
+            improvements; testing setup; type-safety and lint hygiene.
+          </li>
+          <li>
+            <strong>Analytics & monitoring:</strong> Product analytics, error monitoring
+            and event tracking around onboarding and subscription funnels.
+          </li>
+        </ul>
+        <p class="text-sm text-gray-500 dark:text-gray-400">
+          Internal implementation details, vendor choices and architectural
+          decisions of the client remain confidential. The list below covers
+          general technologies I worked with on this engagement.
         </p>
       </div>
 

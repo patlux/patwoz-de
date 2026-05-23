@@ -107,68 +107,42 @@ const breadcrumbSchema = {
       <!-- Content -->
       <div class="prose lg:prose-lg max-w-none">
         <p>
-          Barmer Puls is a cross-platform design system and component library
-          built to power Barmer's digital products. The system provides a
-          unified set of React and React Native components ensuring consistent
-          user experiences across web and mobile applications for one of
-          Germany's largest health insurance providers.
+          Contributed (via IBM iX) to Barmer Puls, the cross-platform design
+          system and component library underpinning Barmer's digital products on
+          web and mobile.
         </p>
 
-        <h2>Project Overview</h2>
-        <p>
-          As a contributor to the Barmer Puls design system, I worked on core UI
-          components used across multiple Barmer applications. The system is
-          structured as a monorepo with separate packages for components, hooks,
-          themes, icons, and utilities, enabling shared code between React web
-          and React Native mobile implementations.
-        </p>
-
-        <h2>Key Contributions</h2>
-
-        <h3>Core Components</h3>
-        <p>
-          Enhanced and maintained foundational components including TextInput,
-          Menu, ListItemButton, and PhoneInput. Implemented features like
-          scrollable menus with dynamic positioning, proper dark mode support,
-          and cross-platform layout fixes for Android-specific issues.
-        </p>
-
-        <h3>Dark Mode Support</h3>
-        <p>
-          Fixed on-the-fly switching between light and dark modes, ensuring
-          smooth theme transitions without requiring app restarts. This involved
-          updating style systems to respond dynamically to theme changes across
-          all components.
-        </p>
-
-        <h3>Input Components</h3>
-        <p>
-          Improved TextInput component with proper label width calculations,
-          border handling for different states, and support for placing inputs
-          on various background colors. Enhanced PhoneInput to gracefully handle
-          unknown dial codes.
-        </p>
-
-        <h3>Menu System</h3>
-        <p>
-          Implemented scrollable menus with automatic position recalculation
-          when windows are resized or zoomed. This ensures menus remain properly
-          positioned and usable across different viewport sizes and zoom levels.
-        </p>
-
-        <h3>Developer Experience</h3>
-        <p>
-          Set up Docker configuration to run the documentation website and
-          Storybook side by side for development. Added package version display
-          in the Storybook toolbar for easier version tracking during
-          development and QA.
-        </p>
-
-        <h3>Ref Management</h3>
-        <p>
-          Refactored internal ref handling across components using a new
-          mergeRefs utility function, improving code consistency and reducing
-          bugs related to ref forwarding.
+        <h2>Areas of contribution</h2>
+        <ul>
+          <li>
+            <strong>Core components:</strong> Foundational form, list and menu components
+            with cross-platform behaviour.
+          </li>
+          <li>
+            <strong>Theming:</strong> Reliable on-the-fly switching between light
+            and dark themes across all components.
+          </li>
+          <li>
+            <strong>Inputs:</strong> Label, border and background handling across
+            input states and resilient phone-input behaviour.
+          </li>
+          <li>
+            <strong>Menu system:</strong> Scrollable menus with automatic repositioning
+            across viewport sizes and zoom levels.
+          </li>
+          <li>
+            <strong>Developer experience:</strong> Documentation site and component
+            playground orchestration; package-version visibility for QA.
+          </li>
+          <li>
+            <strong>Ref forwarding:</strong> Internal refactor of ref handling for
+            consistency across components.
+          </li>
+        </ul>
+        <p class="text-sm text-gray-500 dark:text-gray-400">
+          Internal implementation details and vendor choices of the client
+          remain confidential. The list below covers general technologies I
+          worked with on this engagement.
         </p>
       </div>
 

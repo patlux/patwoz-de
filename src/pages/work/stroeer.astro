@@ -125,102 +125,51 @@ const breadcrumbSchema = {
       <!-- Content -->
       <div class="prose lg:prose-lg max-w-none">
         <p>
-          t-online is one of Germany's largest news portals with millions of
-          daily readers. The mobile app provides a native experience for
-          accessing news articles, live sports coverage, weather updates, and
-          more.
+          Contributed to the t-online news mobile app for Ströer Content Group.
+          t-online is one of Germany's largest news portals; the app provides a
+          native experience for articles, live sports, weather and more.
         </p>
 
-        <h2>Project Overview</h2>
-        <p>
-          Built the t-online news mobile application from the ground up using
-          React Native and Expo. The app delivers t-online.de content through a
-          hybrid WebView architecture with native navigation, push
-          notifications, and ad monetization. As the primary developer, I
-          implemented all core features and established the technical foundation
-          for the project.
-        </p>
-
-        <h2>Key Contributions</h2>
-
-        <h3>Configurable Tab Bar</h3>
-        <p>
-          Implemented a user-customizable bottom navigation system that allows
-          readers to personalize their experience. Users can select up to 3 tabs
-          from available sections (News, Sports, Weather, Live Ticker, Topics)
-          and reorder them via drag-and-drop. Preferences persist across app
-          sessions using local storage.
-        </p>
-
-        <h3>Search with Auto-Suggestions</h3>
-        <p>
-          Built a performant search experience with real-time suggestions as
-          users type. Implemented request debouncing and cancellation using
-          AbortController to prevent race conditions. Optimized list rendering
-          using @shopify/flash-list for smooth scrolling through thousands of
-          results.
-        </p>
-
-        <h3>Multi-WebView Navigation</h3>
-        <p>
-          Designed and implemented an architecture for managing multiple WebView
-          instances per tab with proper navigation stack management. Each tab
-          maintains its own browsing history, enabling natural back/forward
-          navigation while preserving scroll positions and page state.
-        </p>
-
-        <h3>Dark Mode Support</h3>
-        <p>
-          Implemented system-wide dark mode that synchronizes between the native
-          app shell and WebView content. Created a custom Expo module to bridge
-          iOS/Android theme detection to the WebView's color scheme, ensuring a
-          consistent visual experience.
-        </p>
-
-        <h3>Push Notifications</h3>
-        <p>
-          Integrated Airship SDK for push notification delivery with deep
-          linking support. Implemented notification channels for different
-          content categories (Breaking News, Sports, etc.) and handled
-          background/foreground notification routing to the appropriate content.
-        </p>
-
-        <h3>Ad Monetization</h3>
-        <p>
-          Integrated Google Mobile Ads SDK and Taboola native ads into the
-          WebView context. Implemented ad refresh logic that reloads ads when
-          users navigate between articles, maximizing revenue while maintaining
-          performance.
-        </p>
-
-        <h3>Onboarding Tutorial</h3>
-        <p>
-          Created a first-launch tutorial flow introducing key app features. The
-          onboarding guides users through notification permission requests and
-          personalization options before presenting the main content.
-        </p>
-
-        <h3>Deep Linking</h3>
-        <p>
-          Implemented Universal Links (iOS) and App Links (Android) to handle
-          t-online.de URLs. The app intercepts article links from external
-          sources and opens them in the native app experience rather than the
-          browser.
-        </p>
-
-        <h3>Analytics & Crash Reporting</h3>
-        <p>
-          Integrated Firebase Crashlytics for real-time crash reporting and
-          Firebase Analytics for user behavior tracking. Also implemented
-          INFOnline/IVW tracking required for German media measurement
-          standards.
-        </p>
-
-        <h3>CI/CD Pipeline</h3>
-        <p>
-          Set up EAS Build for automated iOS and Android builds with automatic
-          App Store/Play Store submission. Configured GitHub Actions workflows
-          for validation, testing, and deployment.
+        <h2>Areas of contribution</h2>
+        <ul>
+          <li>
+            <strong>App architecture:</strong> React Native / Expo foundation for
+            a content-driven news app with native navigation.
+          </li>
+          <li>
+            <strong>Customisable navigation:</strong> User-personalisable bottom
+            tab bar with drag-and-drop ordering and persistence.
+          </li>
+          <li>
+            <strong>Search:</strong> Real-time suggestions with debouncing, cancellation
+            and high-performance list rendering.
+          </li>
+          <li>
+            <strong>Content rendering:</strong> Multi-WebView navigation with independent
+            histories per tab and synchronised dark mode between native shell and
+            embedded content.
+          </li>
+          <li>
+            <strong>Push & deep linking:</strong> Notification delivery with content
+            channels; Universal Links / App Links handling.
+          </li>
+          <li>
+            <strong>Ad monetisation:</strong> Native ad integrations and in-WebView
+            ad rendering with refresh logic.
+          </li>
+          <li>
+            <strong>Analytics & compliance:</strong> Crash reporting, product analytics
+            and IVW media measurement required for German publishers.
+          </li>
+          <li>
+            <strong>CI/CD:</strong> Automated iOS and Android builds with store submission
+            and validation workflows.
+          </li>
+        </ul>
+        <p class="text-sm text-gray-500 dark:text-gray-400">
+          Internal implementation details and vendor choices of the client
+          remain confidential. The list below covers general technologies I
+          worked with on this engagement.
         </p>
       </div>
 
@@ -285,22 +234,13 @@ const breadcrumbSchema = {
       </div>
 
       <div class="prose lg:prose-lg max-w-none">
-        <h2>Additional Contributions</h2>
-
-        <h3>@stroeer/radio-custom-webview</h3>
+        <h2>Open-source side outputs</h2>
         <p>
-          Created a custom React Native WebView library tailored for the app's
-          needs. Features include native Taboola ad integration, pull-to-refresh
-          functionality, and Google Mobile Ads SDK bridging for in-WebView ad
-          rendering.
-        </p>
-
-        <h3>react-native-infoonline</h3>
-        <p>
-          Developed a React Native wrapper for the INFOnline/IVW measurement
-          SDK, enabling GDPR-compliant analytics tracking required for German
-          media publishers. Supports both iOS and Android with automatic session
-          management.
+          Beyond the app itself, the engagement produced reusable building
+          blocks published on npm, including a custom React Native WebView
+          library tailored to the app's content and ad-rendering needs, and a
+          GDPR-compliant wrapper around the INFOnline/IVW media measurement SDK
+          for iOS and Android.
         </p>
       </div>
     </article>

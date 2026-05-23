@@ -133,102 +133,52 @@ const breadcrumbSchema = {
 
       <div class="prose lg:prose-lg max-w-none">
         <p>
-          Olympia Verlag ist der Publisher von Kicker, Deutschlands führendem
-          Sportmagazin. FWMFL (Football Was My First Love) ist die Podcast- und
-          Audiobook-Streaming-Plattform für Fussballfans mit exklusivem Content
-          wie Podcasts, Hörbüchern, Fangesängen und kuratierten Playlists.
+          Mitgewirkt (über piparo.tech) an FWMFL – Football Was My First Love –
+          einer Podcast- und Audiobook- Streaming-Plattform für Fußballfans aus
+          dem Hause Olympia-Verlag (Kicker).
         </p>
 
-        <h2>Projektüberblick</h2>
-        <p>
-          Als Lead Fullstack Developer über piparo.tech habe ich 1.600+ Commits
-          über die gesamte Plattform geliefert - von der React Native Mobile-App
-          über Backend Services in Go und Rust, der Astro-Website bis zur
-          Kubernetes-Infrastruktur. Das Projekt umfasst eine komplette
-          Streaming- Plattform mit Subscription Management, Offline Playback und
-          Content Sync.
-        </p>
-
-        <h2>Legacy Migration</h2>
-        <p>
-          Beim Projektstart bestand die Infrastruktur aus mehreren PHP Backends
-          mit zwei getrennten Datenbanken und Legacy-Code über verschiedene
-          Hoster. Wir modernisierten den Stack durch eine Neuimplementierung der
-          Services in Go und Rust, konsolidierten die Datenbanken und migrierten
-          alles nach AWS auf EKS (Elastic Kubernetes Service). Das verbesserte
-          Zuverlässigkeit, reduzierte Betriebskosten und ermöglichte CI/CD mit
-          Infrastructure as Code.
-        </p>
-        <p>
-          Die vorherige Mobile-App war mit Cordova gebaut. Wir haben sie in 3
-          Monaten auf React Native portiert und eine native Experience mit
-          besserer Performance, Offline-Fähigkeit und Zugriff auf native APIs
-          für Background Audio und Push Notifications geliefert.
-        </p>
-
-        <h2>Wichtige Beiträge</h2>
-
-        <h3>Mobile Application</h3>
-        <p>
-          React Native + Expo App gebaut und gewartet (890+ Commits).
-          Audio-Streaming mit Background Playback, Offline Downloads,
-          Subscription Management via RevenueCat und Push Notifications
-          implementiert. NativeWind für Styling, neue Architektur für iOS und
-          Android aktiviert.
-        </p>
-
-        <h3>Audio Player & Streaming</h3>
-        <p>
-          Kernfunktionen des Audio Players entwickelt: Queue Management,
-          Progress Tracking und nahtlose Track Transitions. Offline Mode mit
-          SQLite für lokale Speicherung umgesetzt, sodass Inhalte ohne Internet
-          verfügbar sind.
-        </p>
-
-        <h3>Subscription & Monetization</h3>
-        <p>
-          RevenueCat für In-App-Käufe und Abo-Management integriert. Payment
-          Wall UI, Supporter Badge System und Premium Content Gating gebaut.
-          Piano SDK für Analytics Tracking von Engagement und Conversion
-          integriert.
-        </p>
-
-        <h3>Backend Services</h3>
-        <p>
-          Backend Services in Go und Rust für API Endpunkte, Content Management
-          und Datenverarbeitung entwickelt. RSS Importer (Node.js und Rust) für
-          automatische Podcast-Feeds gebaut. Das Backend verarbeitet Episode
-          Metadaten, Audio Files und User Sync.
-        </p>
-
-        <h3>Website</h3>
-        <p>
-          Marketing-Website mit Astro und Tailwind CSS gebaut. SEO
-          Optimierungen, Sitemap Generation, Podcast/Audiobook Detailseiten und
-          FAQ umgesetzt. Die Seite ist statisch generiert für optimale
-          Performance.
-        </p>
-
-        <h3>Infrastructure</h3>
-        <p>
-          Kubernetes-Infrastruktur mit Helm Charts und Terraform aufgebaut und
-          gewartet. Deployments, Services und Ingress für mehrere Umgebungen
-          konfiguriert. Lokales Dev-Tooling mit Tilt und Skaffold für schnelle
-          Iteration implementiert.
-        </p>
-
-        <h3>Accessibility</h3>
-        <p>
-          App Accessibility mit Labels, Hints und Screenreader-Support für
-          zentrale Flows (Auth, Playback Controls, Navigation) verbessert. WCAG
-          Compliance für die Web-Plattform sichergestellt.
-        </p>
-
-        <h3>Error Tracking & Debugging</h3>
-        <p>
-          Sentry mit Session Replay und Custom Error Boundaries integriert.
-          Debug Screens für Playback Troubleshooting, Log-Ansicht und Error
-          Reporting in Development Builds gebaut.
+        <h2>Schwerpunkte</h2>
+        <ul>
+          <li>
+            <strong>Mobile-App:</strong> React Native + Expo App für Audio-Streaming
+            mit Background-Playback, Offline-Downloads, Abos und Push.
+          </li>
+          <li>
+            <strong>Audio-Player:</strong> Queue-Management, Fortschritts- Tracking
+            und nahtlose Übergänge; Offline-Mode mit lokaler Speicherung.
+          </li>
+          <li>
+            <strong>Abos & Monetarisierung:</strong> In-App-Purchase-Flows, Paywall-UI,
+            Supporter-Kennzeichnung und Zugangsbeschränkung für Premium-Inhalte.
+          </li>
+          <li>
+            <strong>Backend-Services:</strong> Services in Go und Rust für API-Endpunkte,
+            Content-Management und RSS-Ingestion.
+          </li>
+          <li>
+            <strong>Marketing-Website:</strong> Statisch generierte Seite mit SEO,
+            Podcast-/Audiobook-Seiten und FAQ.
+          </li>
+          <li>
+            <strong>Infrastruktur:</strong> Kubernetes-Plattform mit Helm und Terraform;
+            Deployment- und Lokal-Entwicklungs-Tooling.
+          </li>
+          <li>
+            <strong>Qualität:</strong> Accessibility-Verbesserungen über zentrale
+            Flows und umfassendes Error-Monitoring.
+          </li>
+          <li>
+            <strong>Modernisierung:</strong> Migration eines Legacy-Stacks auf eine
+            konsolidierte, container-orchestrierte Plattform sowie Portierung der
+            Mobile-App von einem Hybrid-Framework auf React Native.
+          </li>
+        </ul>
+        <p class="text-sm text-gray-500 dark:text-gray-400">
+          Interne Implementierungsdetails und Drittanbieter-Entscheidungen des
+          Kunden bleiben vertraulich. Die nachfolgende Auflistung beschreibt
+          allgemeine Technologien, mit denen ich in diesem Projekt gearbeitet
+          habe.
         </p>
       </div>
 

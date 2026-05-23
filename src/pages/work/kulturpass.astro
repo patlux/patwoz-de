@@ -141,103 +141,49 @@ const breadcrumbSchema = {
       <!-- Content -->
       <div class="prose lg:prose-lg max-w-none">
         <p>
-          KulturPass was a German government initiative that provided all
-          18-year-olds in Germany with a digital budget of 200 EUR to spend on
-          cultural activities such as books, concert tickets, museum visits, and
-          more. The app enabled young adults to discover and redeem cultural
-          offers from participating providers across Germany.
+          Contributed to the KulturPass mobile app, a German government
+          initiative providing 18-year-olds with a digital cultural budget. The
+          app integrated with Germany's national ID card for identity
+          verification and with a commerce backend for offer discovery and
+          redemption.
         </p>
 
-        <h2>Project Overview</h2>
-        <p>
-          Contributed to the development of the KulturPass mobile application
-          built with React Native. As part of the SAP development team, I
-          implemented core features including the favorites system, form
-          validation, secure storage, and state management architecture. The app
-          integrates with Germany's national ID card (Personalausweis) for
-          identity verification and connects to a commerce backend for offer
-          discovery and redemption.
-        </p>
-
-        <h2>Key Contributions</h2>
-
-        <h3>Favorites System</h3>
-        <p>
-          Built the complete favorites functionality allowing users to save and
-          manage cultural offers they're interested in. Implemented the list
-          view with product images, pricing badges, and swipeable delete
-          actions. Added comprehensive accessibility labels for screen reader
-          support and thorough test coverage.
-        </p>
-
-        <h3>Form Validation</h3>
-        <p>
-          Implemented client-side and server-side form validation for login and
-          registration flows using React Hook Form and Zod. Created a robust
-          error handling system that displays translated validation messages for
-          each form field, with proper integration of CDC (Customer Data Cloud)
-          API error responses.
-        </p>
-
-        <h3>Secure Storage</h3>
-        <p>
-          Set up encrypted storage for sensitive user data using
-          react-native-encrypted-storage. Implemented a layered storage
-          architecture separating persistent data from secure credentials, with
-          proper Redux Persist integration for state hydration.
-        </p>
-
-        <h3>Redux State Management</h3>
-        <p>
-          Established the Redux architecture using Redux Toolkit with Redux Saga
-          for side effects and Redux Persist for state persistence. Configured
-          separate storage backends for regular and sensitive data, ensuring
-          proper serialization and type safety throughout.
-        </p>
-
-        <h3>React Native Upgrade</h3>
-        <p>
-          Led the upgrade of React Native from earlier versions to 0.70.x,
-          including Hermes engine updates and dependency migrations. Resolved
-          breaking changes, fixed build errors, and patched security
-          vulnerabilities in third-party packages.
-        </p>
-
-        <h3>Code Quality & Testing</h3>
-        <p>
-          Improved code quality by enabling stricter ESLint rules and fixing
-          TypeScript errors across the codebase. Set up React Native Testing
-          Library and wrote comprehensive unit tests for components and
-          services, establishing testing patterns for the team.
-        </p>
-
-        <h3>Environment Configuration</h3>
-        <p>
-          Built a dynamic environment configuration system that reads build
-          configurations from YAML files. Implemented a configuration picker UI
-          for development builds, allowing easy switching between different
-          backend environments.
-        </p>
-
-        <h3>API Error Handling</h3>
-        <p>
-          Created an error registry system for consistent error handling across
-          the app. Implemented error modals for API failures with proper error
-          code mapping and user-friendly error messages.
-        </p>
-
-        <h3>Registration & Authentication</h3>
-        <p>
-          Implemented the preferences screen for user registration including
-          location (ZIP code) input with validation. Built the forgot password
-          flow with proper error handling and user feedback.
-        </p>
-
-        <h3>CI/CD Pipeline</h3>
-        <p>
-          Set up continuous integration pipelines running TypeScript checks,
-          ESLint, and Jest tests. Configured the build wrapper repository for
-          automated app builds and distribution.
+        <h2>Areas of contribution</h2>
+        <ul>
+          <li>
+            <strong>Favourites:</strong> List with product imagery, pricing and swipeable
+            actions; full accessibility labels.
+          </li>
+          <li>
+            <strong>Forms & validation:</strong> Login and registration with client-
+            and server-side validation and translated error messaging.
+          </li>
+          <li>
+            <strong>Secure storage:</strong> Layered storage with encrypted handling
+            for sensitive credentials.
+          </li>
+          <li>
+            <strong>State management:</strong> Redux-based architecture for persistent
+            and ephemeral state.
+          </li>
+          <li>
+            <strong>Platform upgrades:</strong> React Native version upgrade with
+            engine and dependency migrations.
+          </li>
+          <li>
+            <strong>Code quality & testing:</strong> Stricter linting, type-safety
+            improvements and broader unit-test coverage.
+          </li>
+          <li>
+            <strong>Environments & CI:</strong> Configurable environments for development
+            builds and continuous integration pipelines.
+          </li>
+        </ul>
+        <p class="text-sm text-gray-500 dark:text-gray-400">
+          Parts of the KulturPass app are publicly available as open source.
+          Beyond what is published, internal implementation details and vendor
+          choices remain confidential. The list below covers general
+          technologies I worked with on this engagement.
         </p>
       </div>
 

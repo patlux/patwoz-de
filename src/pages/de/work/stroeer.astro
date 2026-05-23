@@ -126,96 +126,53 @@ const breadcrumbSchema = {
 
       <div class="prose lg:prose-lg max-w-none">
         <p>
-          t-online ist eines der größten Nachrichtenportale Deutschlands mit
-          Millionen täglicher Leser. Die Mobile-App bietet eine native
-          Experience für Nachrichten, Live-Sport, Wetter und mehr.
+          Mitgewirkt an der t-online News-App für die Ströer Content Group.
+          t-online zählt zu den größten Nachrichtenportalen Deutschlands; die
+          App bietet ein natives Nutzungserlebnis für Artikel, Live-Sport,
+          Wetter und mehr.
         </p>
 
-        <h2>Projektüberblick</h2>
-        <p>
-          Die t-online News-App von Grund auf mit React Native und Expo gebaut.
-          Die App liefert t-online.de Inhalte über eine hybride
-          WebView-Architektur mit nativer Navigation, Push Notifications und
-          Werbemonetarisierung. Als hauptverantwortlicher Entwickler habe ich
-          alle Kernfeatures umgesetzt und die technische Basis gelegt.
-        </p>
-
-        <h2>Wichtige Beiträge</h2>
-
-        <h3>Konfigurierbare Tab Bar</h3>
-        <p>
-          Eine benutzerkonfigurierbare Bottom Navigation umgesetzt, mit der
-          Leser ihr Erlebnis personalisieren können. Nutzer wählen bis zu 3 Tabs
-          aus (News, Sport, Wetter, Live Ticker, Themen) und ordnen sie via
-          Drag-and- Drop. Einstellungen werden lokal gespeichert und bleiben
-          erhalten.
-        </p>
-
-        <h3>Suche mit Auto-Suggestions</h3>
-        <p>
-          Performante Suche mit Echtzeit-Vorschlägen gebaut. Request Debouncing
-          und Cancellation via AbortController implementiert, um Race Conditions
-          zu vermeiden. Listen-Rendering mit @shopify/flash-list für smoothes
-          Scrollen durch tausende Ergebnisse optimiert.
-        </p>
-
-        <h3>Multi-WebView Navigation</h3>
-        <p>
-          Architektur für mehrere WebView-Instanzen pro Tab entworfen und
-          implementiert, inkl. sauberem Navigation Stack Management. Jeder Tab
-          behält seine eigene History, was natürliches Back/Forward und das
-          Beibehalten von Scroll-Positionen ermöglicht.
-        </p>
-
-        <h3>Dark Mode Support</h3>
-        <p>
-          Systemweiten Dark Mode umgesetzt und zwischen nativer App Shell und
-          WebView synchronisiert. Custom Expo Modul gebaut, das iOS/Android
-          Theme Detection an die WebView weiterreicht, um eine konsistente
-          Darstellung zu sichern.
-        </p>
-
-        <h3>Push Notifications</h3>
-        <p>
-          Airship SDK für Push-Benachrichtigungen mit Deep Linking integriert.
-          Notification Channels für Kategorien (Breaking News, Sport usw.)
-          implementiert und Background/Foreground Routing umgesetzt.
-        </p>
-
-        <h3>Werbemonetarisierung</h3>
-        <p>
-          Google Mobile Ads SDK und Taboola Native Ads in den WebView-Kontext
-          integriert. Ad Refresh Logik gebaut, die Ads beim Navigieren zwischen
-          Artikeln aktualisiert, um Umsatz zu maximieren und Performance zu
-          wahren.
-        </p>
-
-        <h3>Onboarding Tutorial</h3>
-        <p>
-          Erststart-Tutorial erstellt, das zentrale App-Features erklärt. Das
-          Onboarding führt durch Permission Requests und Personalisierung, bevor
-          Inhalte gezeigt werden.
-        </p>
-
-        <h3>Deep Linking</h3>
-        <p>
-          Universal Links (iOS) und App Links (Android) für t-online.de URLs
-          implementiert. Externe Artikel-Links werden in der App geöffnet statt
-          im Browser.
-        </p>
-
-        <h3>Analytics & Crash Reporting</h3>
-        <p>
-          Firebase Crashlytics für Crash Reporting und Firebase Analytics für
-          User-Tracking integriert. Zudem INFOnline/IVW Tracking für deutsche
-          Medienmessung implementiert.
-        </p>
-
-        <h3>CI/CD Pipeline</h3>
-        <p>
-          EAS Build für automatisierte iOS- und Android-Builds eingerichtet,
-          inklusive App Store/Play Store Submission. GitHub Actions Workflows
-          für Validierung, Tests und Deployments konfiguriert.
+        <h2>Schwerpunkte</h2>
+        <ul>
+          <li>
+            <strong>App-Architektur:</strong> React Native / Expo als Fundament für
+            eine inhaltsgetriebene News-App mit nativer Navigation.
+          </li>
+          <li>
+            <strong>Konfigurierbare Navigation:</strong> Personalisierbare Bottom-Tab-Bar
+            mit Drag-and-Drop-Sortierung und Persistierung.
+          </li>
+          <li>
+            <strong>Suche:</strong> Echtzeit-Vorschläge mit Debouncing, Cancellation
+            und performantem Listen-Rendering.
+          </li>
+          <li>
+            <strong>Content-Darstellung:</strong> Multi-WebView-Navigation mit eigener
+            History pro Tab und synchronisiertem Dark Mode zwischen nativer Shell
+            und Inhalten.
+          </li>
+          <li>
+            <strong>Push & Deep Linking:</strong> Notification-Auslieferung mit Inhaltskategorien;
+            Universal-Links- und App-Links-Behandlung.
+          </li>
+          <li>
+            <strong>Werbemonetarisierung:</strong> Native Ad-Integrationen und In-WebView-Ad-Rendering
+            inkl. Refresh-Logik.
+          </li>
+          <li>
+            <strong>Analytics & Compliance:</strong> Crash-Reporting, Produkt-Analytics
+            und IVW-Medienmessung für deutsche Publisher.
+          </li>
+          <li>
+            <strong>CI/CD:</strong> Automatisierte iOS- und Android-Builds mit Store-Submission
+            und Validierungs-Workflows.
+          </li>
+        </ul>
+        <p class="text-sm text-gray-500 dark:text-gray-400">
+          Interne Implementierungsdetails und Drittanbieter-Entscheidungen des
+          Kunden bleiben vertraulich. Die nachfolgende Auflistung beschreibt
+          allgemeine Technologien, mit denen ich in diesem Projekt gearbeitet
+          habe.
         </p>
       </div>
 
@@ -279,21 +236,13 @@ const breadcrumbSchema = {
       </div>
 
       <div class="prose lg:prose-lg max-w-none">
-        <h2>Weitere Beiträge</h2>
-
-        <h3>@stroeer/radio-custom-webview</h3>
+        <h2>Begleitende Open-Source-Pakete</h2>
         <p>
-          Eine Custom React Native WebView Library erstellt, die auf die App-
-          Anforderungen zugeschnitten ist. Features: native Taboola Integration,
-          Pull-to-Refresh und Google Mobile Ads SDK Bridging für In-WebView Ads.
-        </p>
-
-        <h3>react-native-infoonline</h3>
-        <p>
-          React Native Wrapper für das INFOnline/IVW Measurement SDK entwickelt,
-          um DSGVO-konformes Analytics Tracking für deutsche Medienpublisher zu
-          ermöglichen. Unterstützt iOS und Android mit automatischem Session
-          Management.
+          Aus dem Projekt sind zusätzlich wiederverwendbare Bausteine
+          entstanden, die auf npm veröffentlicht sind – u.a. eine Custom-
+          WebView-Bibliothek, die auf die Content- und Ad-Anforderungen der App
+          zugeschnitten ist, sowie ein DSGVO-konformer Wrapper für das
+          INFOnline/IVW-Measurement-SDK auf iOS und Android.
         </p>
       </div>
     </article>

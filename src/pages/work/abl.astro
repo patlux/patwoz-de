@@ -114,106 +114,51 @@ const breadcrumbSchema = {
       <!-- Content -->
       <div class="prose lg:prose-lg max-w-none">
         <p>
-          ABL is a German manufacturer of electric vehicle charging
-          infrastructure, producing wallboxes and charging stations for home and
-          commercial use. The Configuration App enables installers and end users
-          to set up, configure, and manage ABL charging stations via WiFi and
-          Bluetooth connectivity.
+          Contributed to the ABL Configuration App. ABL is a German manufacturer
+          of EV charging infrastructure; the app enables installers and end
+          users to set up, configure and manage wallboxes over WiFi and
+          Bluetooth.
         </p>
 
-        <h2>Project Overview</h2>
-        <p>
-          As the primary developer, I built and maintained the ABL Configuration
-          App from its early stages. The app communicates directly with ABL
-          wallboxes over local WiFi networks and Bluetooth, enabling device
-          setup, firmware updates, network configuration, and system management.
-          Over 1,300+ commits spanning multiple years of development, including
-          React Native upgrades and continuous feature additions.
-        </p>
-
-        <h2>Key Contributions</h2>
-
-        <h3>Device Communication</h3>
-        <p>
-          Implemented the core communication layer for connecting to ABL
-          wallboxes via WiFi Access Point mode and local network connections.
-          Built robust connection handling with automatic reconnection, timeout
-          management, and error recovery. The app runs a local HTTP server to
-          facilitate device communication.
-        </p>
-
-        <h3>QR Code Scanning</h3>
-        <p>
-          Integrated camera-based QR code scanning using Vision Camera for
-          device discovery and onboarding. Implemented barcode detection,
-          handled device-specific camera issues on Samsung devices, and added
-          support for ultrawide camera lenses. Built manual input fallback for
-          cases where scanning isn't possible.
-        </p>
-
-        <h3>Firmware Updates</h3>
-        <p>
-          Built the firmware update system allowing users to update their
-          wallbox firmware over-the-air. Implemented update progress tracking,
-          error handling for stuck updates, and proper device state management
-          during the update process.
-        </p>
-
-        <h3>Network Configuration</h3>
-        <p>
-          Developed comprehensive network setup flows including WiFi
-          configuration, LTE/mobile data setup, and Ethernet (LAN) connectivity.
-          Implemented WiFi password management, network switching operations,
-          and proper handling of different connection scenarios (AP mode, LAN,
-          extender).
-        </p>
-
-        <h3>Controller & Extender Management</h3>
-        <p>
-          Built the system for managing controller devices and their associated
-          extenders (satellite charging points). Implemented device grouping,
-          extender discovery via mDNS, and the workflow for adding extenders to
-          controller groups over LAN connections.
-        </p>
-
-        <h3>Multi-language Support</h3>
-        <p>
-          Implemented internationalization using i18next with support for
-          German, English, French, Spanish, Italian, and Dutch. Integrated with
-          Lokalise for translation management, including upload and download
-          scripts for keeping translations in sync.
-        </p>
-
-        <h3>State Management</h3>
-        <p>
-          Built the application state architecture using MobX for reactive state
-          management. Implemented stores for device state, controller
-          configuration, connection status, and user preferences. Added React
-          Query for server state management and caching.
-        </p>
-
-        <h3>UI Components</h3>
-        <p>
-          Developed the component library using NativeWind (Tailwind CSS for
-          React Native). Built reusable components including custom dropdown
-          menus, loading overlays, modal dialogs, and form inputs with React
-          Hook Form integration.
-        </p>
-
-        <h3>Error Tracking & Analytics</h3>
-        <p>
-          Integrated Sentry for crash reporting and error tracking with session
-          replay capabilities. Added Mixpanel for analytics to track user
-          behavior and connection attempts. Implemented proper error context and
-          tagging for searchable error logs.
-        </p>
-
-        <h3>React Native Upgrades</h3>
-        <p>
-          Performed multiple React Native version upgrades throughout the
-          project lifecycle (up to RN 0.75). Handled breaking changes, updated
-          native dependencies, fixed Xcode 15 build issues, and maintained
-          compatibility with the latest iOS and Android requirements.
+        <h2>Areas of contribution</h2>
+        <ul>
+          <li>
+            <strong>Device communication:</strong> Robust local connection handling
+            over WiFi access-point and LAN, with automatic reconnection, timeouts
+            and error recovery.
+          </li>
+          <li>
+            <strong>QR onboarding:</strong> Camera-based device discovery with manual
+            input fallback.
+          </li>
+          <li>
+            <strong>Firmware updates:</strong> OTA update flow with progress tracking
+            and resilient state handling.
+          </li>
+          <li>
+            <strong>Network setup:</strong> WiFi, LTE/mobile data and Ethernet (LAN)
+            configuration flows.
+          </li>
+          <li>
+            <strong>Multi-device topology:</strong> Controller / extender management
+            for grouped charging points using local discovery.
+          </li>
+          <li>
+            <strong>Internationalisation:</strong> Multilingual support for EU markets
+            with managed translation workflow.
+          </li>
+          <li>
+            <strong>UI system:</strong> Reusable component library and forms.
+          </li>
+          <li>
+            <strong>Reliability:</strong> Crash and error monitoring, analytics,
+            plus continuous React Native upgrades over multiple years.
+          </li>
+        </ul>
+        <p class="text-sm text-gray-500 dark:text-gray-400">
+          Internal implementation details and vendor choices of the client
+          remain confidential. The list below covers general technologies I
+          worked with on this engagement.
         </p>
       </div>
 

@@ -110,106 +110,46 @@ const breadcrumbSchema = {
 
       <div class="prose lg:prose-lg max-w-none">
         <p>
-          Ich arbeitete an einer Consumer-Mobile-App und deren
-          Backend-Infrastruktur für Porsche Digital. Das Projekt umfasste eine
-          React Native App mit Live-Video-Streaming, In-App-Abos und ein
-          serverloses AWS-Backend in einer Monorepo-Architektur.
+          Für Porsche Digital habe ich als freier Fullstack-Entwickler an einer
+          Consumer-Mobile-App gearbeitet, mit Live-Video, In-App-Abos und einem
+          serverlosen AWS-Backend in einem Monorepo.
         </p>
 
-        <h2>Projektüberblick</h2>
-        <p>
-          Als Fullstack-Entwickler war ich an allen Schichten beteiligt: der
-          React Native Mobile-App, der React Web-Anwendung und der AWS-basierten
-          Backend- Infrastruktur. Das Projekt nutzte ein Monorepo mit Turborepo
-          für effiziente Builds und geteilten Code. Über die Projektdauer hinweg
-          habe ich 850+ Commits geliefert, Features implementiert, Bugs behoben
-          und die Architektur verbessert.
-        </p>
-
-        <h2>Wichtige Beiträge</h2>
-
-        <h3>Mobile App Entwicklung</h3>
-        <p>
-          Kernfeatures der React Native App gebaut und gewartet, darunter
-          Onboarding- Flows, Abo-Paywalls, Favoriten und Kurs-Filter. Smooth
-          Animations mit React Native Reanimated umgesetzt und Bottom Sheet
-          Komponenten für bessere UX gebaut. Tracking-Permission-Screens
-          hinzugefügt und Analytics mit Firebase sowie Singular integriert.
-        </p>
-
-        <h3>Video-Streaming Integration</h3>
-        <p>
-          Live-Video-Streaming mit dem OpenTok SDK integriert. Session
-          Management, Video Playback mit react-native-video und nahtlose
-          Übergänge zwischen Trainingseinheiten umgesetzt. Features
-          implementiert, um den Bildschirm während Sessions wach zu halten und
-          Orientation Changes zu behandeln.
-        </p>
-
-        <h3>In-App-Abonnements</h3>
-        <p>
-          Abo-Management mit RevenueCat SDK implementiert. Paywall Screens mit
-          FAQ- Integration, Preisvergleichen und Promo-Offers gebaut.
-          Subscription-Modals als Bottom Sheets umgesetzt, inklusive korrekter
-          Handhabung für unterschiedliche Gerätegrößen.
-        </p>
-
-        <h3>Backend-Entwicklung</h3>
-        <p>
-          Serverlose Backend-Infrastruktur mit AWS CDK, Lambda Functions,
-          DynamoDB und API Gateway entwickelt. Webhook-Handler für RevenueCat
-          Events, User- Management Endpunkte und Training Session APIs
-          implementiert. Datenbank- Indizes für optimierte Queries und sauberes
-          Timestamp Tracking hinzugefügt.
-        </p>
-
-        <h3>Realtime Features</h3>
-        <p>
-          Active-Feedback-Features mit Smart-Mirror-Integration gebaut,
-          inklusive Toggle Settings, Info Bottom Sheets und Hint-Displays.
-          Nahtlose Übergänge zwischen Training Sessions umgesetzt, wenn sie aus
-          der Web-App gestartet wurden.
-        </p>
-
-        <h3>Onboarding Experience</h3>
-        <p>
-          Mehrstufige Onboarding-Flows mit Intro-Videos,
-          Active-Feedback-Erklärungen und Personalisierungsoptionen erstellt.
-          Skip-Logik implementiert, die zur nächsten Seite statt zum kompletten
-          Überspringen führt, inklusive smoother Animationen und sauberem State
-          Management.
-        </p>
-
-        <h3>Performance-Optimierung</h3>
-        <p>
-          Data Fetching auf SWR mit Request Deduplication umgestellt und RxJS
-          durch einfachere Patterns ersetzt. API Calls durch gesplittete
-          Endpunkte und Caching-Strategien optimiert. Animations-Performance
-          verbessert und unnötige Re-Renders reduziert.
-        </p>
-
-        <h3>Web-Anwendung</h3>
-        <p>
-          Features in der React Web-App umgesetzt, darunter Kursverwaltung, Abo-
-          Handling und geteilte Komponenten mit der Mobile-App. Auth Token
-          Refresh Probleme behoben und das Rendering der Home Section optimiert.
-        </p>
-
-        <h3>Developer Experience</h3>
-        <p>
-          Monorepo von ultra-runner auf Turborepo migriert, um schnellere Builds
-          zu erreichen. Playwright für End-to-End-Tests eingerichtet.
-          ESLint-Konfiguration gepflegt, TypeScript-Fehler behoben und die
-          Codequalität verbessert. Dokumentation für Bitrise CI/CD Workflows und
-          Development Provisioning Profiles hinzugefügt.
-        </p>
-
-        <h3>Analytics & Monitoring</h3>
-        <p>
-          Firebase Analytics für User-Tracking, Sentry für Error Monitoring und
-          Fullstory für Session Replay integriert. Custom Tracking für
-          Onboarding- Completion und Abo-Events umgesetzt. Backend-Endpunkte für
-          das Sammeln und Auswerten von User-Statistiken gebaut.
+        <h2>Schwerpunkte</h2>
+        <ul>
+          <li>
+            Kern-Features der React-Native-App: Onboarding, Abo-Paywalls,
+            Favoriten, Content-Filter, dazu Animationen und Bottom Sheets.
+          </li>
+          <li>
+            Echtzeit-Video-Sessions inklusive der UX-Details drumherum – Display
+            wachhalten, Orientierung, saubere Übergänge.
+          </li>
+          <li>
+            In-App-Abos mit Paywall-Screens, Preisdarstellung und
+            Promo-Angeboten; Beleg-Verarbeitung über Webhooks.
+          </li>
+          <li>
+            Serverloses Backend auf AWS CDK, Lambda, DynamoDB und API Gateway,
+            mit Endpunkten für User, Abos und Sessions.
+          </li>
+          <li>
+            Geteilte Komponenten und Features zwischen Mobile-App und
+            begleitender React-Web-App.
+          </li>
+          <li>
+            Performance- und DX-Arbeit: Data-Fetching beschleunigen, Caching,
+            Build-System aufräumen, Test-Setup, Typen sauber halten.
+          </li>
+          <li>
+            Produkt-Analytics, Error-Monitoring und Event-Tracking für
+            Onboarding und Abo-Funnel.
+          </li>
+        </ul>
+        <p class="text-sm text-gray-500 dark:text-gray-400">
+          Interne Details sowie Anbieter- und Architekturentscheidungen des
+          Kunden sind vertraulich. Die Liste unten zeigt allgemeine
+          Technologien, mit denen ich gearbeitet habe.
         </p>
       </div>
 

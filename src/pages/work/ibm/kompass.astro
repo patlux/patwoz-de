@@ -113,74 +113,49 @@ const breadcrumbSchema = {
       <!-- Content -->
       <div class="prose lg:prose-lg max-w-none">
         <p>
-          The Kompass module is part of the Barmer App and Meine Barmer web
-          experience. It helps members navigate healthcare benefit and
-          reimbursement topics such as care services, sickness benefits,
-          rehabilitation, medical aids, maternity benefits, dental orthodontics,
-          and ongoing cases.
+          Contributed (via IBM iX) to the Kompass module of the Barmer App and
+          Meine Barmer web. Kompass helps members navigate healthcare benefit
+          and reimbursement topics such as care services, sickness benefits,
+          rehabilitation, medical aids and ongoing cases.
         </p>
 
-        <h2>Project Overview</h2>
-        <p>
-          As a senior frontend developer on the Kompass team, I contributed over
-          310 commits to the frontend monorepo between December 2025 and April
-          2026. The work focused on the shared Kompass feature package used by
-          both the React Native app and React Native Web surface, with matching
-          behaviour across iOS, Android, and web.
-        </p>
-
-        <h2>Key Contributions</h2>
-
-        <h3>Rebranding & Feature Screens</h3>
-        <p>
-          Implemented rebranded screens and components across the module,
-          including overview tabs, information sections, error states, and
-          detail pages. The work touched care services, maternity benefits,
-          rehabilitation, medical aids, sickness benefits, child sickness
-          benefits, and orthodontic flows, all aligned with Barmer's Puls design
-          system.
-        </p>
-
-        <h3>Benefit & Reimbursement Workflows</h3>
-        <p>
-          Built and refined UI flows for benefit overviews, payout lists,
-          regular care services, cost summaries, status chips, and detail pages.
-          This included improving empty states, keeping financial rows visually
-          stable, and ensuring list summaries remain readable and consistent
-          across compact mobile layouts.
-        </p>
-
-        <h3>Accessibility</h3>
-        <p>
-          Fixed VoiceOver and TalkBack behaviour across headers, tabs, filters,
-          selects, links, and case detail screens. Added focused workarounds for
-          Android screen readers, improved reading order, avoided duplicate
-          announcements, and ensured web links expose the correct semantics.
-        </p>
-
-        <h3>Keyboard, Layout & Navigation Stability</h3>
-        <p>
-          Integrated keyboard-aware behaviour for forms and dialogs, including
-          feedback dialogs, rehabilitation co-payment screens, and fixed action
-          bars. I also resolved bottom-navigation spacing issues, landscape
-          dialog reachability problems, tab panel height crashes, and native
-          DatePicker/SectionList crashes.
-        </p>
-
-        <h3>Information & Tips Experience</h3>
-        <p>
-          Reworked information tabs, accordions, tip cards, and PDF-related
-          loading states. Improvements included CardSwipeView integration,
-          document size formatting, soft-hyphen handling for long German terms,
-          and better line breaks on both iOS and Android.
-        </p>
-
-        <h3>Testing & Regression Coverage</h3>
-        <p>
-          Kept a large snapshot suite aligned while changing production screens,
-          added targeted tests for new layout behaviour, and fixed lint and type
-          issues during the rebranding work. This helped make repeated
-          main/candidate branch backports safer for release preparation.
+        <h2>Areas of contribution</h2>
+        <ul>
+          <li>
+            <strong>Cross-platform feature work:</strong> Shared feature package
+            consumed by the mobile app and the web surface, with matching behaviour
+            across iOS, Android and web.
+          </li>
+          <li>
+            <strong>Rebranding & feature screens:</strong> Rebranded screens and
+            components across benefit-related flows, aligned with the in-house design
+            system.
+          </li>
+          <li>
+            <strong>Benefit & reimbursement UX:</strong> Overviews, payout lists,
+            status chips and detail pages with visually stable financial rows.
+          </li>
+          <li>
+            <strong>Accessibility:</strong> Improvements to screen-reader behaviour,
+            reading order and link semantics across mobile and web.
+          </li>
+          <li>
+            <strong>Layout & navigation stability:</strong> Keyboard-aware forms,
+            dialog handling and fixes around landscape and complex list views.
+          </li>
+          <li>
+            <strong>Information experience:</strong> Information tabs, accordions,
+            tip cards and PDF-related loading states.
+          </li>
+          <li>
+            <strong>Testing:</strong> Maintaining and extending a large snapshot
+            suite alongside production changes.
+          </li>
+        </ul>
+        <p class="text-sm text-gray-500 dark:text-gray-400">
+          Internal implementation details and vendor choices of the client
+          remain confidential. The list below covers general technologies I
+          worked with on this engagement.
         </p>
       </div>
 

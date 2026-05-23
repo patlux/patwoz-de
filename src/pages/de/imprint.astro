@@ -31,9 +31,7 @@ import ObfuscatedText from '~/components/ObfuscatedText.astro'
       >
         Impressum
       </h1>
-      <p class="text-warm-600 dark:text-warm-400 mt-2">
-        Rechtliche Angaben und Kontakt
-      </p>
+      <p class="text-warm-600 dark:text-warm-400 mt-2">Angaben gemäß § 5 DDG</p>
 
       <div class="mt-10 space-y-8">
         <div class="card-soft p-6">
@@ -62,13 +60,16 @@ import ObfuscatedText from '~/components/ObfuscatedText.astro'
               <div
                 class="mt-3 text-warm-700 dark:text-warm-300 leading-relaxed"
               >
-                <p class="font-medium">piparo.tech GmbH</p>
-                <p>Patrick Wozniak</p>
+                <p class="font-medium">Patrick Wozniak</p>
                 <div class="mt-2">
                   <ObfuscatedText
-                    text={'Frauentorgraben 61\n90443 Nürnberg\nDeutschland'}
+                    text={'c/o piparo.tech GmbH\nFrauentorgraben 61\n90443 Nürnberg\nDeutschland'}
                   />
                 </div>
+                <p class="mt-4 text-sm text-warm-600 dark:text-warm-400">
+                  Die piparo.tech GmbH ist nicht Betreiberin dieses Angebots.
+                  Sie dient ausschließlich als Zustellanschrift.
+                </p>
               </div>
             </div>
           </div>
@@ -106,7 +107,116 @@ import ObfuscatedText from '~/components/ObfuscatedText.astro'
                 >
                   hi@patwoz.de
                 </a>
+                <p
+                  class="text-sm text-warm-600 dark:text-warm-400 leading-relaxed"
+                >
+                  Anfragen werden in der Regel innerhalb weniger Werktage
+                  beantwortet.
+                </p>
               </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-soft p-6">
+          <div class="flex items-start gap-4">
+            <div
+              class="w-12 h-12 flex items-center justify-center bg-warm-100 dark:bg-dark-elevated rounded-xl flex-shrink-0"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                class="w-6 h-6 text-accent-600 dark:text-accent-400"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M9 4.5a.75.75 0 01.721.544l.813 2.846a3.75 3.75 0 002.576 2.576l2.846.813a.75.75 0 010 1.442l-2.846.813a3.75 3.75 0 00-2.576 2.576l-.813 2.846a.75.75 0 01-1.442 0l-.813-2.846a3.75 3.75 0 00-2.576-2.576l-2.846-.813a.75.75 0 010-1.442l2.846-.813A3.75 3.75 0 007.466 7.89l.813-2.846A.75.75 0 019 4.5z"
+                  clip-rule="evenodd"></path>
+              </svg>
+            </div>
+            <div class="flex-1">
+              <h2
+                class="text-lg font-semibold text-warm-900 dark:text-warm-100"
+              >
+                Umsatzsteuer
+              </h2>
+              <p
+                class="mt-3 text-warm-700 dark:text-warm-300 leading-relaxed text-sm"
+              >
+                Umsatzsteuer-Identifikationsnummer gemäß § 27a UStG:<br />
+                <span class="font-mono">DE347563380</span>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-soft p-6">
+          <div class="flex items-start gap-4">
+            <div
+              class="w-12 h-12 flex items-center justify-center bg-warm-100 dark:bg-dark-elevated rounded-xl flex-shrink-0"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                class="w-6 h-6 text-accent-600 dark:text-accent-400"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 01.67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 11-.671-1.34l.041-.022zM12 9a.75.75 0 100-1.5.75.75 0 000 1.5z"
+                  clip-rule="evenodd"></path>
+              </svg>
+            </div>
+            <div class="flex-1">
+              <h2
+                class="text-lg font-semibold text-warm-900 dark:text-warm-100"
+              >
+                Verantwortlich für journalistisch-redaktionelle Inhalte
+              </h2>
+              <p
+                class="mt-3 text-warm-700 dark:text-warm-300 leading-relaxed text-sm"
+              >
+                Verantwortlich im Sinne von § 18 Abs. 2 MStV: Patrick Wozniak,
+                c/o piparo.tech GmbH, Frauentorgraben 61, 90443 Nürnberg.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-soft p-6">
+          <div class="flex items-start gap-4">
+            <div
+              class="w-12 h-12 flex items-center justify-center bg-warm-100 dark:bg-dark-elevated rounded-xl flex-shrink-0"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                class="w-6 h-6 text-accent-600 dark:text-accent-400"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M12 1.5a5.25 5.25 0 00-5.25 5.25v3a3 3 0 00-3 3v6.75a3 3 0 003 3h10.5a3 3 0 003-3v-6.75a3 3 0 00-3-3v-3c0-2.9-2.35-5.25-5.25-5.25zm3.75 8.25v-3a3.75 3.75 0 10-7.5 0v3h7.5z"
+                  clip-rule="evenodd"></path>
+              </svg>
+            </div>
+            <div class="flex-1">
+              <h2
+                class="text-lg font-semibold text-warm-900 dark:text-warm-100"
+              >
+                Marken und Logos Dritter
+              </h2>
+              <p
+                class="mt-3 text-warm-700 dark:text-warm-300 leading-relaxed text-sm"
+              >
+                Alle auf dieser Website genannten Marken-, Produkt- und
+                Firmennamen sowie Logos sind Eigentum ihrer jeweiligen Inhaber.
+                Die Nennung erfolgt zur Beschreibung in der Vergangenheit
+                erbrachter Werkleistungen als freier Entwickler und impliziert
+                keine aktuelle Geschäftsbeziehung oder Empfehlung durch die
+                jeweiligen Rechteinhaber.
+              </p>
             </div>
           </div>
         </div>
@@ -119,9 +229,30 @@ import ObfuscatedText from '~/components/ObfuscatedText.astro'
               >Haftungsausschluss:</strong
             >
             Die Inhalte dieser Website wurden mit Sorgfalt erstellt. Für die Richtigkeit,
-            Vollständigkeit und Aktualität der Inhalte kann ich jedoch keine Gewähr
-            übernehmen. Als Diensteanbieter bin ich gemäß den allgemeinen Gesetzen
-            für eigene Inhalte auf diesen Seiten verantwortlich.
+            Vollständigkeit und Aktualität der Inhalte kann jedoch keine Gewähr übernommen
+            werden. Als Diensteanbieter ist der Betreiber gemäß § 7 Abs. 1 DDG für
+            eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich.
+            Für externe Links wird nach §§ 8 bis 10 DDG keine Haftung übernommen.
+          </p>
+        </div>
+
+        <div
+          class="p-5 bg-warm-100 dark:bg-dark-elevated rounded-2xl border border-warm-200 dark:border-warm-800/50"
+        >
+          <p class="text-sm text-warm-600 dark:text-warm-400 leading-relaxed">
+            <strong class="text-warm-700 dark:text-warm-300"
+              >Streitschlichtung:</strong
+            >
+            Der Betreiber ist nicht bereit oder verpflichtet, an Streitbeilegungsverfahren
+            vor einer Verbraucherschlichtungsstelle teilzunehmen (§ 36 VSBG). Die
+            EU-Kommission stellt eine Plattform zur Online-Streitbeilegung bereit:
+            <a
+              href="https://ec.europa.eu/consumers/odr"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-accent-600 dark:text-accent-400 hover:underline"
+              >ec.europa.eu/consumers/odr</a
+            >.
           </p>
         </div>
       </div>
