@@ -1,0 +1,415 @@
+---
+import AppStoreLinks from '~/components/AppStoreLinks.astro'
+import BaseLayout from '~/components/BaseLayout.astro'
+import Footer from '~/components/Footer.astro'
+import Layout from '~/layouts/Layout.astro'
+import {
+  piparoPartyWorkContent,
+  type PiparoPartyWorkLanguage,
+} from './piparoPartyWorkContent'
+
+type Props = {
+  lang: PiparoPartyWorkLanguage
+}
+
+const { lang } = Astro.props
+const content = piparoPartyWorkContent[lang]
+const workPath = lang === 'de' ? '/de/work' : '/work'
+const homePath = lang === 'de' ? '/de' : '/'
+const canonicalURL = new URL(Astro.url.pathname, Astro.site)
+const imageURL = new URL('/company/piparo-party.webp', Astro.site).toString()
+const appStoreURL = 'https://apps.apple.com/app/id6769931734'
+const playStoreURL =
+  'https://play.google.com/store/apps/details?id=tech.piparo.party'
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: content.home,
+      item: new URL(homePath, Astro.site).toString(),
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: content.work,
+      item: new URL(workPath, Astro.site).toString(),
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: 'piparo.party',
+      item: canonicalURL.toString(),
+    },
+  ],
+}
+
+const applicationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'piparo.party',
+  applicationCategory: 'GameApplication',
+  operatingSystem: 'iOS, Android, Web',
+  url: 'https://piparo.party',
+  image: imageURL,
+  author: {
+    '@type': 'Organization',
+    name: 'piparo.tech GmbH',
+    url: 'https://piparo.tech',
+  },
+  downloadUrl: [appStoreURL, playStoreURL],
+}
+---
+
+<Layout
+  title={content.pageTitle}
+  description={content.description}
+  image={imageURL}
+  lang={lang}
+>
+  <BaseLayout>
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify(breadcrumbSchema)}
+    />
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify(applicationSchema)}
+    />
+
+    <article class="mt-12">
+      <a
+        href={workPath}
+        class="mb-6 inline-flex items-center gap-1 text-sm text-warm-500 transition-colors hover:text-warm-800 dark:text-warm-400 dark:hover:text-warm-200"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="h-4 w-4"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M15.75 19.5 8.25 12l7.5-7.5"></path>
+        </svg>
+        {content.back}
+      </a>
+
+      <header class="party-hero">
+        <div class="party-hero-copy">
+          <div class="party-brand-row">
+            <img
+              src="/company/piparo-party.webp"
+              alt="piparo.party"
+              width="72"
+              height="72"
+              class="party-icon"
+            />
+            <span class="party-product-label">{content.productLabel}</span>
+          </div>
+
+          <h1>piparo.party</h1>
+          <p class="party-company">{content.company}</p>
+
+          <div class="party-meta">
+            <span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
+                ></path>
+              </svg>
+              {content.role}
+            </span>
+          </div>
+
+          <AppStoreLinks
+            appStoreUrl={appStoreURL}
+            playStoreUrl={playStoreURL}
+          />
+
+          <a
+            href="https://piparo.party"
+            target="_blank"
+            rel="noreferrer"
+            class="party-website-link"
+          >
+            {content.website}
+            <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+
+        <figure class="party-device">
+          <img
+            src="/work/piparo-party-home.webp"
+            alt={content.imageAlt}
+            width="642"
+            height="1389"
+            loading="eager"
+          />
+          <figcaption>{content.imageCaption}</figcaption>
+        </figure>
+      </header>
+
+      <div class="prose lg:prose-lg mt-12 max-w-none">
+        <p class="lead">{content.intro}</p>
+        <h2>{content.overviewTitle}</h2>
+        {content.overview.map((paragraph) => <p>{paragraph}</p>)}
+      </div>
+
+      <section class="mt-12" aria-labelledby="contributions-title">
+        <h2
+          id="contributions-title"
+          class="text-2xl font-bold text-warm-900 dark:text-white"
+        >
+          {content.contributionsTitle}
+        </h2>
+        <div class="contribution-list mt-6">
+          {
+            content.contributions.map((contribution) => (
+              <article>
+                <h3>{contribution.title}</h3>
+                <p>{contribution.text}</p>
+              </article>
+            ))
+          }
+        </div>
+      </section>
+
+      <section class="mt-12" aria-labelledby="stack-title">
+        <h2
+          id="stack-title"
+          class="text-2xl font-bold text-warm-900 dark:text-white"
+        >
+          {content.stackTitle}
+        </h2>
+        <div class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {
+            content.stack.map((group) => (
+              <div>
+                <h3 class="mb-3 text-sm font-semibold uppercase tracking-wide text-warm-500 dark:text-warm-400">
+                  {group.title}
+                </h3>
+                <ul class="space-y-2">
+                  {group.items.map((item) => (
+                    <li class="text-warm-700 dark:text-warm-300">{item}</li>
+                  ))}
+                </ul>
+              </div>
+            ))
+          }
+        </div>
+      </section>
+
+      <div class="prose lg:prose-lg mt-12 max-w-none">
+        <h2>{content.additionalTitle}</h2>
+        <p>{content.additional}</p>
+      </div>
+    </article>
+
+    <Footer />
+  </BaseLayout>
+</Layout>
+
+<style>
+  .party-hero {
+    display: grid;
+    gap: 2rem;
+    overflow: hidden;
+    border-radius: 1rem;
+    background: #15172a;
+    color: #f7f7fb;
+    padding: 1.5rem;
+  }
+
+  .party-hero-copy {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .party-brand-row {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .party-icon {
+    display: block;
+    width: 4.5rem;
+    height: 4.5rem;
+    border-radius: 0.9rem;
+  }
+
+  .party-product-label {
+    border: 1px solid rgb(255 255 255 / 0.22);
+    border-radius: 999px;
+    padding: 0.35rem 0.65rem;
+    color: #f29bc1;
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+
+  .party-hero h1 {
+    margin-top: 1.35rem;
+    color: #ffffff;
+    font-size: clamp(2.5rem, 8vw, 4.75rem);
+    line-height: 0.96;
+    letter-spacing: -0.04em;
+    text-wrap: balance;
+  }
+
+  .party-company {
+    margin-top: 0.65rem;
+    color: #b9bacb;
+    font-size: 1.05rem;
+  }
+
+  .party-meta {
+    margin-top: 1.1rem;
+    color: #d7d7e2;
+    font-size: 0.9rem;
+  }
+
+  .party-meta span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .party-meta svg {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .party-website-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin-top: 1rem;
+    color: #f29bc1;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: color 180ms ease;
+  }
+
+  .party-website-link:hover {
+    color: #ffffff;
+  }
+
+  .party-website-link:focus-visible {
+    border-radius: 0.35rem;
+    outline: 2px solid #f29bc1;
+    outline-offset: 4px;
+  }
+
+  .party-device {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    margin: 0;
+  }
+
+  .party-device img {
+    display: block;
+    width: min(100%, 18rem);
+    max-height: 35rem;
+    border-radius: 1rem;
+    object-fit: cover;
+    object-position: top;
+    box-shadow: 0 0 0 1px rgb(255 255 255 / 0.14);
+  }
+
+  .party-device figcaption {
+    max-width: 19rem;
+    margin-top: 0.8rem;
+    color: #aaaabd;
+    font-size: 0.75rem;
+    line-height: 1.45;
+    text-align: center;
+  }
+
+  .contribution-list {
+    display: grid;
+    border-top: 1px solid var(--color-warm-200);
+  }
+
+  :global(.dark) .contribution-list {
+    border-color: var(--color-warm-800);
+  }
+
+  .contribution-list article {
+    display: grid;
+    gap: 0.5rem;
+    border-bottom: 1px solid var(--color-warm-200);
+    padding: 1.35rem 0;
+  }
+
+  :global(.dark) .contribution-list article {
+    border-color: var(--color-warm-800);
+  }
+
+  .contribution-list h3 {
+    margin: 0;
+    color: var(--color-warm-900);
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  :global(.dark) .contribution-list h3 {
+    color: #ffffff;
+  }
+
+  .contribution-list p {
+    max-width: 68ch;
+    margin: 0;
+    color: var(--color-warm-600);
+    line-height: 1.7;
+  }
+
+  :global(.dark) .contribution-list p {
+    color: var(--color-warm-400);
+  }
+
+  @media (min-width: 700px) {
+    .party-hero {
+      grid-template-columns: minmax(0, 1.15fr) minmax(14rem, 0.85fr);
+      min-height: 34rem;
+      padding: 2.25rem;
+    }
+
+    .contribution-list article {
+      grid-template-columns: minmax(12rem, 0.7fr) minmax(0, 1.3fr);
+      gap: 2rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .party-website-link {
+      transition: none;
+    }
+  }
+</style>

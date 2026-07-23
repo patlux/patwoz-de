@@ -7,7 +7,7 @@ import ClientMarquee from '~/components/ClientMarquee.astro'
 
 <Layout
   title="Referenzen"
-  description="Kundenprojekte und Highlights aus Mobile, Web und Platform Engineering."
+  description="Kundenprojekte, eigene Produkte und Highlights aus Mobile, Web und Platform Engineering."
   lang="de"
 >
   <BaseLayout>
@@ -18,16 +18,86 @@ import ClientMarquee from '~/components/ClientMarquee.astro'
         Kundenprojekte
       </h1>
       <p class="text-lg text-warm-600 dark:text-warm-400 mt-3 leading-relaxed">
-        Eine Auswahl von Projekten, an denen ich als freier Entwickler
-        gearbeitet habe. Jedes Projekt zeigt meine Erfahrung in der Entwicklung
-        hochwertiger Mobile- und Web-Anwendungen.
+        Ausgewählte Kundenprojekte und eigene Produkte. Jedes Projekt zeigt
+        einen anderen Teil meiner Erfahrung in Mobile, Web und Platform
+        Engineering.
       </p>
     </section>
 
     <div class="grid gap-5 mt-10">
       <a
-        href="/de/work/porsche"
+        href="/de/work/piparo-party"
         class="card-soft p-6 group hover-lift animate-fade-in-up opacity-0 stagger-1"
+      >
+        <div class="flex flex-col sm:flex-row gap-6">
+          <div
+            class="flex-shrink-0 flex items-center justify-center w-full sm:w-32 h-24 bg-[#15172a] rounded-xl transition-colors"
+          >
+            <img
+              src="/company/piparo-party.webp"
+              alt="piparo.party App-Icon"
+              width="72"
+              height="72"
+              class="rounded-xl"
+            />
+          </div>
+          <div class="flex-1">
+            <h3
+              class="text-lg font-semibold text-warm-900 dark:text-warm-100 group-hover:text-accent-600 dark:group-hover:text-accent-400 transition-colors"
+            >
+              piparo.party
+            </h3>
+            <p class="text-warm-600 dark:text-warm-400 mt-2 leading-relaxed">
+              Eigenentwicklung einer offlinefähigen Partyspiel-App mit 25
+              Spielen, 22 Sprachen, nativen Abos, mehrsprachiger Website und
+              wachsender lokaler Multiplayer-Plattform.
+            </p>
+            <div class="flex flex-wrap gap-2 mt-4">
+              <span
+                class="px-2.5 py-1 text-xs font-medium bg-warm-200 dark:bg-warm-800/40 text-warm-700 dark:text-warm-300 rounded-lg"
+              >
+                React Native
+              </span>
+              <span
+                class="px-2.5 py-1 text-xs font-medium bg-warm-200 dark:bg-warm-800/40 text-warm-700 dark:text-warm-300 rounded-lg"
+              >
+                Expo
+              </span>
+              <span
+                class="px-2.5 py-1 text-xs font-medium bg-warm-200 dark:bg-warm-800/40 text-warm-700 dark:text-warm-300 rounded-lg"
+              >
+                TypeScript
+              </span>
+              <span
+                class="px-2.5 py-1 text-xs font-medium bg-warm-200 dark:bg-warm-800/40 text-warm-700 dark:text-warm-300 rounded-lg"
+              >
+                Produktentwicklung
+              </span>
+            </div>
+          </div>
+          <div
+            class="flex-shrink-0 flex items-center text-warm-400 group-hover:text-accent-500 transition-colors"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+              class="w-5 h-5"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="m8.25 4.5 7.5 7.5-7.5 7.5"></path>
+            </svg>
+          </div>
+        </div>
+      </a>
+
+      <a
+        href="/de/work/porsche"
+        class="card-soft p-6 group hover-lift animate-fade-in-up opacity-0 stagger-2"
       >
         <div class="flex flex-col sm:flex-row gap-6">
           <div
@@ -96,7 +166,7 @@ import ClientMarquee from '~/components/ClientMarquee.astro'
 
       <a
         href="/de/work/kulturpass"
-        class="card-soft p-6 group hover-lift animate-fade-in-up opacity-0 stagger-2"
+        class="card-soft p-6 group hover-lift animate-fade-in-up opacity-0 stagger-3"
       >
         <div class="flex flex-col sm:flex-row gap-6">
           <div
@@ -165,7 +235,7 @@ import ClientMarquee from '~/components/ClientMarquee.astro'
 
       <a
         href="/de/work/stroeer"
-        class="card-soft p-6 group hover-lift animate-fade-in-up opacity-0 stagger-3"
+        class="card-soft p-6 group hover-lift animate-fade-in-up opacity-0 stagger-4"
       >
         <div class="flex flex-col sm:flex-row gap-6">
           <div
@@ -243,7 +313,7 @@ import ClientMarquee from '~/components/ClientMarquee.astro'
 
       <a
         href="/de/work/abl"
-        class="card-soft p-6 group hover-lift animate-fade-in-up opacity-0 stagger-4"
+        class="card-soft p-6 group hover-lift animate-fade-in-up opacity-0 stagger-5"
       >
         <div class="flex flex-col sm:flex-row gap-6">
           <div
@@ -313,7 +383,7 @@ import ClientMarquee from '~/components/ClientMarquee.astro'
 
       <a
         href="/de/work/ibm"
-        class="card-soft p-6 group hover-lift animate-fade-in-up opacity-0 stagger-5"
+        class="card-soft p-6 group hover-lift animate-fade-in-up opacity-0 stagger-6"
       >
         <div class="flex flex-col sm:flex-row gap-6">
           <div

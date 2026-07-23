@@ -33,6 +33,20 @@ test('Should open /de/imprint', async () => {
   expect(res.status).toBe(200)
 })
 
+test('Should open piparo.party work pages', async () => {
+  for (const path of ['/work/piparo-party', '/de/work/piparo-party']) {
+    const res = await fetch(`${baseUrl}${path}`)
+    expect(res.status).toBe(200)
+
+    const html = await res.text()
+    expect(html).toContain('piparo.party')
+    expect(html).toContain('https://apps.apple.com/app/id6769931734')
+    expect(html).toContain(
+      'https://play.google.com/store/apps/details?id=tech.piparo.party',
+    )
+  }
+})
+
 test('Should throw 404 if page was not found', async () => {
   const req = new Request(`${baseUrl}/doesnt-exist`)
   const res = await fetch(req)
