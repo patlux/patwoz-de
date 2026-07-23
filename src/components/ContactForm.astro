@@ -342,19 +342,60 @@ const privacyHref = isGerman ? '/de/datenschutz' : '/privacy'
 
     <div
       id="form-status"
-      class="hidden rounded-xl border px-4 py-3"
+      class="contact-status hidden"
       role="status"
       aria-live="polite"
+      aria-atomic="true"
       tabindex="-1"
     >
+      <div class="contact-status__accent" aria-hidden="true"></div>
+      <div class="contact-status__layout">
+        <div class="contact-status__icon" aria-hidden="true">
+          <svg
+            class="contact-status__icon-success"
+            viewBox="0 0 24 24"
+            fill="none"
+          >
+            <circle cx="12" cy="12" r="9"></circle>
+            <path d="m8 12.25 2.45 2.45L16.5 8.8"></path>
+          </svg>
+          <svg
+            class="contact-status__icon-error"
+            viewBox="0 0 24 24"
+            fill="none"
+          >
+            <circle cx="12" cy="12" r="9"></circle>
+            <path d="M12 7.75v5.5"></path>
+            <circle cx="12" cy="16.5" r="0.75" fill="currentColor"></circle>
+          </svg>
+        </div>
+        <div class="contact-status__content">
+          <strong data-status-title></strong>
+          <p>
+            <span data-status-body></span>
+            <a
+              data-status-link
+              class="font-semibold underline underline-offset-4"
+              href="mailto:hi@patwoz.de"
+              hidden>hi@patwoz.de</a
+            ><span data-status-period hidden>.</span>
+          </p>
+        </div>
+      </div>
     </div>
 
     <button
       id="contact-submit"
       type="submit"
-      class="inline-flex min-h-12 items-center justify-center rounded-xl bg-accent-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-accent-700 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-accent-300 disabled:cursor-not-allowed disabled:opacity-60 dark:focus-visible:ring-accent-800"
+      class="contact-submit inline-flex min-h-12 items-center justify-center rounded-xl bg-accent-600 px-6 py-3 font-semibold text-white hover:bg-accent-700 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-accent-300 disabled:cursor-not-allowed dark:focus-visible:ring-accent-800"
+      data-state="idle"
     >
-      <span data-submit-label>{content.submit}</span>
+      <span class="contact-submit__label" data-submit-label>
+        {content.submit}
+      </span>
+      <span class="contact-submit__track" aria-hidden="true">
+        <span class="contact-submit__impulse"></span>
+      </span>
     </button>
   </form>
 </section>
@@ -369,40 +410,53 @@ const privacyHref = isGerman ? '/de/datenschutz' : '/privacy'
   const submitButton = document.querySelector('#contact-submit')
   const submitLabel = document.querySelector('[data-submit-label]')
   const status = document.querySelector('#form-status')
+  const statusTitle = document.querySelector('[data-status-title]')
+  const statusBody = document.querySelector('[data-status-body]')
+  const statusLink = document.querySelector('[data-status-link]')
+  const statusPeriod = document.querySelector('[data-status-period]')
   const turnstileRegion = document.querySelector('#turnstile-region')
   let turnstileToken = ''
   let widgetId
   let submitting = false
 
   const showStatus = (kind, title, body) => {
-    if (!(status instanceof HTMLElement)) return
-    status.className =
-      kind === 'success'
-        ? 'rounded-xl border border-green-300 bg-green-50 px-4 py-3 text-green-900 dark:border-green-800 dark:bg-green-950/30 dark:text-green-200'
-        : 'rounded-xl border border-red-300 bg-red-50 px-4 py-3 text-red-900 dark:border-red-800 dark:bg-red-950/30 dark:text-red-200'
-    status.innerHTML = ''
-    const strong = document.createElement('strong')
-    strong.textContent = title
-    const text = document.createElement('span')
-    text.textContent = ` ${body} `
-    status.append(strong, text)
-    if (kind === 'error') {
-      const link = document.createElement('a')
-      link.href = 'mailto:hi@patwoz.de'
-      link.textContent = 'hi@patwoz.de'
-      link.className = 'font-semibold underline underline-offset-4'
-      status.append(link, document.createTextNode('.'))
-    }
+    if (
+      !(status instanceof HTMLElement) ||
+      !(statusTitle instanceof HTMLElement) ||
+      !(statusBody instanceof HTMLElement) ||
+      !(statusLink instanceof HTMLAnchorElement) ||
+      !(statusPeriod instanceof HTMLElement)
+    )
+      return
+
+    status.dataset.kind = kind
+    statusTitle.textContent = title
+    statusBody.textContent = `${body}${kind === 'error' ? ' ' : ''}`
+    statusLink.hidden = kind !== 'error'
+    statusPeriod.hidden = kind !== 'error'
+    status.classList.remove('hidden')
     status.focus()
+  }
+
+  const clearStatus = () => {
+    if (!(status instanceof HTMLElement)) return
+    status.classList.add('hidden')
+    delete status.dataset.kind
   }
 
   const setPending = (pending) => {
     submitting = pending
-    if (submitButton instanceof HTMLButtonElement)
+    if (form instanceof HTMLFormElement) {
+      form.setAttribute('aria-busy', String(pending))
+    }
+    if (submitButton instanceof HTMLButtonElement) {
       submitButton.disabled = pending
+      submitButton.dataset.state = pending ? 'pending' : 'idle'
+    }
     if (submitLabel instanceof HTMLElement) {
       submitLabel.textContent = pending ? content.pending : content.submit
     }
+    if (pending) clearStatus()
   }
 
   const resetTurnstile = () => {
@@ -494,56 +548,5 @@ const privacyHref = isGerman ? '/de/datenschutz' : '/privacy'
 </script>
 
 <style>
-  .field-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-  .field-group label {
-    font-weight: 600;
-    color: var(--color-warm-800);
-  }
-  :global(.dark) .field-group label {
-    color: var(--color-warm-200);
-  }
-  .field-hint {
-    margin: -0.125rem 0 0;
-    font-size: 0.875rem;
-    line-height: 1.5;
-    color: var(--color-warm-500);
-  }
-  .field-group :is(input, select, textarea) {
-    width: 100%;
-    border: 1px solid var(--color-warm-300);
-    border-radius: 0.75rem;
-    background: white;
-    padding: 0.75rem 0.875rem;
-    color: var(--color-warm-900);
-    transition:
-      border-color 150ms ease,
-      box-shadow 150ms ease;
-  }
-  :global(.dark) .field-group :is(input, select, textarea) {
-    border-color: var(--color-warm-700);
-    background: var(--color-dark-surface);
-    color: white;
-  }
-  .field-group :is(input, select, textarea):focus-visible {
-    border-color: var(--color-accent-500);
-    outline: none;
-    box-shadow: 0 0 0 3px
-      color-mix(in srgb, var(--color-accent-500) 25%, transparent);
-  }
-  .field-group :is(input, select, textarea):user-invalid {
-    border-color: #dc2626;
-  }
-  .contact-details summary::marker {
-    color: var(--color-accent-600);
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .field-group :is(input, select, textarea),
-    #contact-submit {
-      transition: none;
-    }
-  }
+  @import './ContactForm.css';
 </style>
