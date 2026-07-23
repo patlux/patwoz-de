@@ -1,0 +1,552 @@
+---
+interface Props {
+  lang: 'en' | 'de'
+}
+
+const { lang } = Astro.props
+const isGerman = lang === 'de'
+const siteKey =
+  import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ||
+  (import.meta.env.DEV
+    ? '1x00000000000000000000AA'
+    : '0x4AAAAAAD7_oC3tQblDw8A_')
+const content = isGerman
+  ? {
+      title: 'Projekt anfragen',
+      intro:
+        'Ein kurzer Überblick über das Projekt genügt für eine erste Einschätzung. Weitere Eckdaten können optional ergänzt werden.',
+      requiredHint: 'Pflichtfelder sind mit * gekennzeichnet.',
+      name: 'Name',
+      email: 'E-Mail-Adresse',
+      company: 'Unternehmen (optional)',
+      category: 'Art der Anfrage',
+      categoryPlaceholder: 'Bitte auswählen',
+      categories: [
+        ['new-project', 'Neues Projekt'],
+        ['existing-project', 'Unterstützung für ein bestehendes Projekt'],
+        ['consulting', 'Beratung oder technisches Sparring'],
+        ['other', 'Sonstiges'],
+      ],
+      description: 'Projektbeschreibung',
+      descriptionHint:
+        'Ziele, aktueller Stand und die benötigte Unterstützung.',
+      details: 'Optionale Projektdetails',
+      detailsHint: 'Kann später ergänzt werden.',
+      desiredStart: 'Gewünschter Start',
+      startPlaceholder: 'Bitte auswählen',
+      starts: [
+        ['asap', 'So bald wie möglich'],
+        ['one-three-months', 'In 1–3 Monaten'],
+        ['later', 'Später'],
+        ['flexible', 'Flexibel / noch offen'],
+      ],
+      collaboration: 'Art der Zusammenarbeit',
+      collaborationPlaceholder: 'Bitte auswählen',
+      collaborations: [
+        ['project', 'Projektbasiert'],
+        ['fractional', 'Teilzeit / Fractional'],
+        ['consulting', 'Beratung'],
+        ['open', 'Offen für Vorschläge'],
+      ],
+      budget: 'Budgetrahmen',
+      budgetPlaceholder: 'Bitte auswählen',
+      budgets: [
+        ['under-10k', 'Unter 10.000 €'],
+        ['10k-25k', '10.000–25.000 €'],
+        ['25k-50k', '25.000–50.000 €'],
+        ['over-50k', 'Über 50.000 €'],
+        ['open', 'Offen / noch nicht festgelegt'],
+      ],
+      projectLink: 'Projektlink',
+      projectLinkHint:
+        'Eine HTTP(S)-URL, z. B. Website, Briefing oder Repository.',
+      honeypot: 'Dieses Feld bitte leer lassen',
+      privacy:
+        'Mit dem Absenden werden die Angaben zur Bearbeitung der Anfrage verarbeitet. Details stehen in der',
+      privacyLink: 'Datenschutzerklärung',
+      submit: 'Anfrage senden',
+      pending: 'Wird gesendet …',
+      successTitle: 'Vielen Dank.',
+      successBody:
+        'Die Anfrage wurde gesendet. Ich melde mich so bald wie möglich.',
+      errorTitle: 'Das hat nicht funktioniert.',
+      errorBody: 'Bitte erneut versuchen oder direkt per E-Mail an',
+      validation: 'Bitte prüf die markierten Felder.',
+      unavailable:
+        'Das Formular ist gerade nicht verfügbar. Schreib mir bitte direkt an',
+      fallback: 'Alternativ jederzeit per E-Mail:',
+      turnstile: 'Sicherheitsprüfung',
+    }
+  : {
+      title: 'Start a project conversation',
+      intro:
+        'Tell me briefly what you are working on. The required fields are enough for an initial assessment; further details are optional.',
+      requiredHint: 'Required fields are marked with *.',
+      name: 'Name',
+      email: 'Email address',
+      company: 'Company (optional)',
+      category: 'Inquiry category',
+      categoryPlaceholder: 'Please select',
+      categories: [
+        ['new-project', 'New project'],
+        ['existing-project', 'Support for an existing project'],
+        ['consulting', 'Consulting or technical sparring'],
+        ['other', 'Other'],
+      ],
+      description: 'Project description',
+      descriptionHint: 'Goals, current state, and where you need support.',
+      details: 'Optional project details',
+      detailsHint: 'You can also share these later.',
+      desiredStart: 'Desired start',
+      startPlaceholder: 'Please select',
+      starts: [
+        ['asap', 'As soon as possible'],
+        ['one-three-months', 'In 1–3 months'],
+        ['later', 'Later'],
+        ['flexible', 'Flexible / not decided'],
+      ],
+      collaboration: 'Collaboration type',
+      collaborationPlaceholder: 'Please select',
+      collaborations: [
+        ['project', 'Project-based'],
+        ['fractional', 'Fractional / part-time'],
+        ['consulting', 'Consulting'],
+        ['open', 'Open to suggestions'],
+      ],
+      budget: 'Budget range',
+      budgetPlaceholder: 'Please select',
+      budgets: [
+        ['under-10k', 'Under €10,000'],
+        ['10k-25k', '€10,000–€25,000'],
+        ['25k-50k', '€25,000–€50,000'],
+        ['over-50k', 'Over €50,000'],
+        ['open', 'Open / not decided'],
+      ],
+      projectLink: 'Project link',
+      projectLinkHint: 'One HTTP(S) URL, e.g. a website, brief, or repository.',
+      honeypot: 'Please leave this field empty',
+      privacy:
+        'By submitting, your details are processed to handle your inquiry. See the',
+      privacyLink: 'privacy policy',
+      submit: 'Send inquiry',
+      pending: 'Sending …',
+      successTitle: 'Thank you.',
+      successBody:
+        'Your inquiry has been sent. I will get back to you as soon as possible.',
+      errorTitle: 'That did not work.',
+      errorBody: 'Please try again or email me directly at',
+      validation: 'Please check the highlighted fields.',
+      unavailable:
+        'The form is currently unavailable. Please email me directly at',
+      fallback: 'Prefer email? You can always reach me at',
+      turnstile: 'Security check',
+    }
+const privacyHref = isGerman ? '/de/datenschutz' : '/privacy'
+---
+
+<section aria-labelledby="contact-title" class="animate-fade-in-up opacity-0">
+  <div class="max-w-2xl">
+    <h1 id="contact-title" class="text-3xl sm:text-4xl font-bold font-display">
+      {content.title}
+    </h1>
+    <p class="mt-4 text-lg leading-relaxed text-warm-600 dark:text-warm-400">
+      {content.intro}
+    </p>
+    <p class="mt-3 text-sm text-warm-600 dark:text-warm-400">
+      {content.fallback}
+      <a
+        class="font-semibold text-accent-600 dark:text-accent-400 underline underline-offset-4"
+        href="mailto:hi@patwoz.de">hi@patwoz.de</a
+      >.
+    </p>
+  </div>
+
+  <form
+    id="contact-form"
+    action="/api/contact"
+    method="post"
+    class="mt-10 max-w-2xl space-y-7"
+    data-lang={lang}
+    data-sitekey={siteKey}
+    novalidate
+  >
+    <p id="required-hint" class="text-sm text-warm-500 dark:text-warm-400">
+      {content.requiredHint}
+    </p>
+
+    <div class="grid gap-6 sm:grid-cols-2">
+      <div class="field-group">
+        <label for="contact-name"
+          >{content.name} <span aria-hidden="true">*</span></label
+        >
+        <input
+          id="contact-name"
+          name="name"
+          type="text"
+          autocomplete="name"
+          required
+          maxlength="100"
+          aria-describedby="required-hint"
+        />
+      </div>
+      <div class="field-group">
+        <label for="contact-email"
+          >{content.email} <span aria-hidden="true">*</span></label
+        >
+        <input
+          id="contact-email"
+          name="email"
+          type="email"
+          autocomplete="email"
+          inputmode="email"
+          required
+          maxlength="254"
+          aria-describedby="required-hint"
+        />
+      </div>
+    </div>
+
+    <div class="field-group">
+      <label for="contact-company">{content.company}</label>
+      <input
+        id="contact-company"
+        name="company"
+        type="text"
+        autocomplete="organization"
+        maxlength="120"
+      />
+    </div>
+
+    <div class="field-group">
+      <label for="contact-category"
+        >{content.category} <span aria-hidden="true">*</span></label
+      >
+      <select
+        id="contact-category"
+        name="category"
+        required
+        aria-describedby="required-hint"
+      >
+        <option value="">{content.categoryPlaceholder}</option>
+        {
+          content.categories.map(([value, label]) => (
+            <option value={value}>{label}</option>
+          ))
+        }
+      </select>
+    </div>
+
+    <div class="field-group">
+      <label for="contact-description"
+        >{content.description} <span aria-hidden="true">*</span></label
+      >
+      <p id="description-hint" class="field-hint">{content.descriptionHint}</p>
+      <textarea
+        id="contact-description"
+        name="description"
+        rows="8"
+        required
+        minlength="20"
+        maxlength="4000"
+        aria-describedby="required-hint description-hint"></textarea>
+    </div>
+
+    <details
+      class="contact-details rounded-xl border border-warm-200 dark:border-warm-800"
+    >
+      <summary
+        class="cursor-pointer px-5 py-4 font-semibold text-warm-800 dark:text-warm-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent-500 rounded-xl"
+      >
+        <span>{content.details}</span>
+        <span
+          class="block mt-1 text-sm font-normal text-warm-500 dark:text-warm-400"
+          >{content.detailsHint}</span
+        >
+      </summary>
+      <div
+        class="grid gap-6 border-t border-warm-200 dark:border-warm-800 p-5 sm:grid-cols-2"
+      >
+        <div class="field-group">
+          <label for="contact-start">{content.desiredStart}</label>
+          <select id="contact-start" name="desiredStart">
+            <option value="">{content.startPlaceholder}</option>
+            {
+              content.starts.map(([value, label]) => (
+                <option value={value}>{label}</option>
+              ))
+            }
+          </select>
+        </div>
+        <div class="field-group">
+          <label for="contact-collaboration">{content.collaboration}</label>
+          <select id="contact-collaboration" name="collaborationType">
+            <option value="">{content.collaborationPlaceholder}</option>
+            {
+              content.collaborations.map(([value, label]) => (
+                <option value={value}>{label}</option>
+              ))
+            }
+          </select>
+        </div>
+        <div class="field-group">
+          <label for="contact-budget">{content.budget}</label>
+          <select id="contact-budget" name="budget">
+            <option value="">{content.budgetPlaceholder}</option>
+            {
+              content.budgets.map(([value, label]) => (
+                <option value={value}>{label}</option>
+              ))
+            }
+          </select>
+        </div>
+        <div class="field-group">
+          <label for="contact-link">{content.projectLink}</label>
+          <p id="link-hint" class="field-hint">{content.projectLinkHint}</p>
+          <input
+            id="contact-link"
+            name="projectLink"
+            type="url"
+            inputmode="url"
+            maxlength="2048"
+            placeholder="https://"
+            aria-describedby="link-hint"
+          />
+        </div>
+      </div>
+    </details>
+
+    <div
+      class="absolute -left-[10000px] top-auto h-px w-px overflow-hidden"
+      aria-hidden="true"
+    >
+      <label for="contact-website">{content.honeypot}</label>
+      <input
+        id="contact-website"
+        name="website"
+        type="text"
+        tabindex="-1"
+        autocomplete="off"
+      />
+    </div>
+
+    <div id="turnstile-region" class="min-h-16" aria-label={content.turnstile}>
+    </div>
+
+    <p class="text-sm leading-relaxed text-warm-500 dark:text-warm-400">
+      {content.privacy}
+      <a
+        class="text-accent-600 dark:text-accent-400 underline underline-offset-4"
+        href={privacyHref}>{content.privacyLink}</a
+      >.
+    </p>
+
+    <div
+      id="form-status"
+      class="contact-status hidden"
+      role="status"
+      aria-live="polite"
+      aria-atomic="true"
+      tabindex="-1"
+    >
+      <div class="contact-status__accent" aria-hidden="true"></div>
+      <div class="contact-status__layout">
+        <div class="contact-status__icon" aria-hidden="true">
+          <svg
+            class="contact-status__icon-success"
+            viewBox="0 0 24 24"
+            fill="none"
+          >
+            <circle cx="12" cy="12" r="9"></circle>
+            <path d="m8 12.25 2.45 2.45L16.5 8.8"></path>
+          </svg>
+          <svg
+            class="contact-status__icon-error"
+            viewBox="0 0 24 24"
+            fill="none"
+          >
+            <circle cx="12" cy="12" r="9"></circle>
+            <path d="M12 7.75v5.5"></path>
+            <circle cx="12" cy="16.5" r="0.75" fill="currentColor"></circle>
+          </svg>
+        </div>
+        <div class="contact-status__content">
+          <strong data-status-title></strong>
+          <p>
+            <span data-status-body></span>
+            <a
+              data-status-link
+              class="font-semibold underline underline-offset-4"
+              href="mailto:hi@patwoz.de"
+              hidden>hi@patwoz.de</a
+            ><span data-status-period hidden>.</span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <button
+      id="contact-submit"
+      type="submit"
+      class="contact-submit inline-flex min-h-12 items-center justify-center rounded-xl bg-accent-600 px-6 py-3 font-semibold text-white hover:bg-accent-700 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-accent-300 disabled:cursor-not-allowed dark:focus-visible:ring-accent-800"
+      data-state="idle"
+    >
+      <span class="contact-submit__label" data-submit-label>
+        {content.submit}
+      </span>
+      <span class="contact-submit__track" aria-hidden="true">
+        <span class="contact-submit__impulse"></span>
+      </span>
+    </button>
+  </form>
+</section>
+
+<script
+  is:inline
+  src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
+  async
+  defer></script>
+<script is:inline define:vars={{ content }}>
+  const form = document.querySelector('#contact-form')
+  const submitButton = document.querySelector('#contact-submit')
+  const submitLabel = document.querySelector('[data-submit-label]')
+  const status = document.querySelector('#form-status')
+  const statusTitle = document.querySelector('[data-status-title]')
+  const statusBody = document.querySelector('[data-status-body]')
+  const statusLink = document.querySelector('[data-status-link]')
+  const statusPeriod = document.querySelector('[data-status-period]')
+  const turnstileRegion = document.querySelector('#turnstile-region')
+  let turnstileToken = ''
+  let widgetId
+  let submitting = false
+
+  const showStatus = (kind, title, body) => {
+    if (
+      !(status instanceof HTMLElement) ||
+      !(statusTitle instanceof HTMLElement) ||
+      !(statusBody instanceof HTMLElement) ||
+      !(statusLink instanceof HTMLAnchorElement) ||
+      !(statusPeriod instanceof HTMLElement)
+    )
+      return
+
+    status.dataset.kind = kind
+    statusTitle.textContent = title
+    statusBody.textContent = `${body}${kind === 'error' ? ' ' : ''}`
+    statusLink.hidden = kind !== 'error'
+    statusPeriod.hidden = kind !== 'error'
+    status.classList.remove('hidden')
+    status.focus()
+  }
+
+  const clearStatus = () => {
+    if (!(status instanceof HTMLElement)) return
+    status.classList.add('hidden')
+    delete status.dataset.kind
+  }
+
+  const setPending = (pending) => {
+    submitting = pending
+    if (form instanceof HTMLFormElement) {
+      form.setAttribute('aria-busy', String(pending))
+    }
+    if (submitButton instanceof HTMLButtonElement) {
+      submitButton.disabled = pending
+      submitButton.dataset.state = pending ? 'pending' : 'idle'
+    }
+    if (submitLabel instanceof HTMLElement) {
+      submitLabel.textContent = pending ? content.pending : content.submit
+    }
+    if (pending) clearStatus()
+  }
+
+  const resetTurnstile = () => {
+    turnstileToken = ''
+    if (typeof window.turnstile !== 'undefined' && widgetId !== undefined) {
+      window.turnstile.reset(widgetId)
+    }
+  }
+
+  const renderTurnstile = () => {
+    if (
+      !(form instanceof HTMLFormElement) ||
+      !(turnstileRegion instanceof HTMLElement)
+    )
+      return
+    const sitekey = form.dataset.sitekey
+    if (!sitekey) {
+      if (submitButton instanceof HTMLButtonElement)
+        submitButton.disabled = true
+      showStatus('error', content.errorTitle, content.unavailable)
+      return
+    }
+    if (typeof window.turnstile === 'undefined') {
+      window.setTimeout(renderTurnstile, 100)
+      return
+    }
+    widgetId = window.turnstile.render(turnstileRegion, {
+      sitekey,
+      action: 'contact',
+      callback: (token) => {
+        turnstileToken = token
+      },
+      'expired-callback': () => {
+        turnstileToken = ''
+      },
+      'error-callback': () => {
+        turnstileToken = ''
+      },
+    })
+  }
+
+  renderTurnstile()
+
+  form?.addEventListener('submit', async (event) => {
+    event.preventDefault()
+    if (!(form instanceof HTMLFormElement) || submitting) return
+    if (!form.reportValidity()) {
+      showStatus('error', content.errorTitle, content.validation)
+      const firstInvalid = form.querySelector(':invalid')
+      if (firstInvalid instanceof HTMLElement) firstInvalid.focus()
+      return
+    }
+    if (!turnstileToken) {
+      showStatus('error', content.errorTitle, content.validation)
+      return
+    }
+
+    const formData = new FormData(form)
+    const values = {
+      name: formData.get('name'),
+      email: formData.get('email'),
+      company: formData.get('company'),
+      category: formData.get('category'),
+      description: formData.get('description'),
+      desiredStart: formData.get('desiredStart'),
+      collaborationType: formData.get('collaborationType'),
+      budget: formData.get('budget'),
+      projectLink: formData.get('projectLink'),
+      website: formData.get('website'),
+      turnstileToken,
+    }
+    setPending(true)
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(values),
+      })
+      if (!response.ok) throw new Error('request-failed')
+      form.reset()
+      showStatus('success', content.successTitle, content.successBody)
+    } catch {
+      showStatus('error', content.errorTitle, content.errorBody)
+    } finally {
+      resetTurnstile()
+      setPending(false)
+    }
+  })
+</script>
+
+<style>
+  @import './ContactForm.css';
+</style>

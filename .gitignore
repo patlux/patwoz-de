@@ -29,6 +29,9 @@ yarn-error.log*
 
 *.db
 
+# Cloudflare Worker local state
+contact-worker/.wrangler/
+
 # playwright
 /test-results/
 /playwright-report/

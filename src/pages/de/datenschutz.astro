@@ -138,17 +138,45 @@ import Footer from '~/components/Footer.astro'
         jederzeit über die Browser-Einstellungen gelöscht werden.
       </p>
 
-      <h2>Kontaktaufnahme per E-Mail</h2>
+      <h2>Kontaktformular und Kontaktaufnahme per E-Mail</h2>
       <p>
-        Wenn du Kontakt per E-Mail an <a href="mailto:hi@patwoz.de"
-          >hi@patwoz.de</a
-        > aufnimmst, werden die übermittelten Angaben (insbesondere E-Mail-Adresse,
-        Inhalt der Nachricht, Zeitpunkt) zur Bearbeitung der Anfrage verarbeitet.
-        Rechtsgrundlage ist bei vertraglich veranlassten Anfragen Art. 6 Abs. 1 lit.
-        b DSGVO, im Übrigen Art. 6 Abs. 1 lit. f DSGVO (Interesse an der Beantwortung
-        der Anfrage). Korrespondenz wird so lange aufbewahrt, wie es zur Bearbeitung
-        und Dokumentation der Anfrage erforderlich ist, und danach gelöscht, sofern
-        keine gesetzlichen Aufbewahrungspflichten entgegenstehen.
+        Du kannst eine Projektanfrage über das Kontaktformular senden oder mich
+        direkt unter <a href="mailto:hi@patwoz.de">hi@patwoz.de</a>
+        kontaktieren. Das Formular verarbeitet die eingegebenen Angaben, insbesondere
+        Name, E-Mail-Adresse, Anfragekategorie und Projektbeschreibung sowie freiwillige
+        Angaben zu Unternehmen, Startzeitpunkt, Zusammenarbeit, Budget und Projektlink.
+        Cloudflare Turnstile verarbeitet außerdem technische Anfrage- und Prüfdaten,
+        um das Formular vor automatisiertem Missbrauch zu schützen.
+      </p>
+      <p>
+        Formularanfragen werden durch einen eng begrenzten Cloudflare Worker
+        verarbeitet. Der Worker prüft Anfrage und Turnstile-Token, wendet eine
+        praktische Ratenbegrenzung mit einem kurzlebigen, gehashten und von der
+        Anwendung weder protokollierten noch gespeicherten IP-basierten
+        Schlüssel an und versendet über den Cloudflare Email Service eine reine
+        Text-E-Mail an <code>hi@patwoz.de</code>. Die E-Mail-Adresse der
+        anfragenden Person wird ausschließlich als Reply-To-Adresse verwendet.
+        Der Worker speichert Anfragen nicht in einer Datenbank; die
+        Anwendungsprotokolle sind so ausgelegt, dass sie keine Formularinhalte,
+        Rohdaten, Turnstile-Tokens oder vollständigen IP-Adressen enthalten.
+        Cloudflare und die empfangenden Mailsysteme können dennoch betriebliche
+        Metadaten nach ihren jeweiligen Aufbewahrungsregeln verarbeiten.
+      </p>
+      <p>
+        Rechtsgrundlage ist bei vertraglich veranlassten Anfragen Art. 6 Abs. 1
+        lit. b DSGVO, im Übrigen Art. 6 Abs. 1 lit. f DSGVO (Interesse an der
+        Beantwortung von Anfragen und Missbrauchsabwehr). Empfangene
+        Korrespondenz wird so lange aufbewahrt, wie es zur Bearbeitung und
+        Dokumentation der Anfrage erforderlich ist, und danach gelöscht, sofern
+        keine gesetzlichen Aufbewahrungspflichten entgegenstehen. Die Anwendung
+        selbst fügt keine dauerhafte Speicherung der Formularanfrage hinzu.
+      </p>
+      <p class="text-warm-500 dark:text-warm-500 text-sm">
+        Diese Beschreibung dokumentiert die beabsichtigte technische
+        Verarbeitung und ist keine Rechtsberatung. Wortlaut, Rechtsgrundlagen,
+        Auftragsverarbeitungsverträge, Drittlandgarantien und tatsächliche
+        Aufbewahrungsfristen der Anbieter sollten vor der Produktivschaltung
+        rechtlich geprüft werden.
       </p>
 
       <h2>Eingebundene Schriften und Logos</h2>

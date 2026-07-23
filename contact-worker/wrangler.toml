@@ -1,0 +1,41 @@
+#:schema ../node_modules/wrangler/config-schema.json
+name = "patwoz-contact"
+main = "src/index.ts"
+compatibility_date = "2025-01-09"
+workers_dev = false
+
+[[routes]]
+pattern = "patwoz.dev/api/contact"
+zone_name = "patwoz.dev"
+
+[[send_email]]
+name = "EMAIL"
+destination_address = "hi@patwoz.de"
+allowed_sender_addresses = ["contact-form@contact.patwoz.dev"]
+
+[[ratelimits]]
+name = "CONTACT_RATE_LIMITER"
+namespace_id = "1001"
+
+[ratelimits.simple]
+limit = 5
+period = 60
+
+[env.local.vars]
+TURNSTILE_SECRET_KEY = "1x0000000000000000000000000000000AA"
+EXPECTED_ORIGIN = "http://127.0.0.1:5174"
+EXPECTED_HOSTNAME = "localhost"
+LOCAL_DEVELOPMENT = "true"
+
+[[env.local.send_email]]
+name = "EMAIL"
+destination_address = "hi@patwoz.de"
+allowed_sender_addresses = ["contact-form@contact.patwoz.dev"]
+
+[[env.local.ratelimits]]
+name = "CONTACT_RATE_LIMITER"
+namespace_id = "1001"
+
+[env.local.ratelimits.simple]
+limit = 5
+period = 60
