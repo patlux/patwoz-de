@@ -47,6 +47,27 @@ test('Should open piparo.party work pages', async () => {
   }
 })
 
+test('Should open bilingual app case studies', async () => {
+  const projects = [
+    ['glowing-blox', 'Glowing Blox'],
+    ['goory', 'Goory'],
+    ['yuuyoga', 'Yuu Yoga'],
+    ['greensp', 'GreenSP'],
+    ['me-sense', 'ME SENSE'],
+  ]
+
+  for (const [slug, title] of projects) {
+    for (const prefix of ['', '/de']) {
+      const res = await fetch(`${baseUrl}${prefix}/work/${slug}`)
+      expect(res.status).toBe(200)
+
+      const html = await res.text()
+      expect(html).toContain(title)
+      expect(html).toContain('application/ld+json')
+    }
+  }
+})
+
 test('Should throw 404 if page was not found', async () => {
   const req = new Request(`${baseUrl}/doesnt-exist`)
   const res = await fetch(req)
