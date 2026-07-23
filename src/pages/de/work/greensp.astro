@@ -1,0 +1,169 @@
+---
+import Layout from '~/layouts/Layout.astro'
+import BaseLayout from '~/components/BaseLayout.astro'
+import Footer from '~/components/Footer.astro'
+import AppStoreLinks from '~/components/AppStoreLinks.astro'
+
+const pageTitle = 'GreenSP'
+const description =
+  'Arbeit an der GreenSP Mobile-App für Ranger Sales Partner mit Informationen zu Performance und monatlichen Abrechnungen.'
+const canonicalURL = new URL(Astro.url.pathname, Astro.site)
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Startseite',
+      item: new URL('/de', Astro.site).toString(),
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Referenzen',
+      item: new URL('/de/work', Astro.site).toString(),
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: pageTitle,
+      item: canonicalURL.toString(),
+    },
+  ],
+}
+---
+
+<Layout
+  title="Ranger / GreenSP - Referenzen"
+  description={description}
+  image="https://patwoz.dev/apps/greensp.png"
+  lang="de"
+>
+  <BaseLayout>
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify(breadcrumbSchema)}
+    />
+    <article class="mt-12">
+      <a
+        href="/de/work"
+        class="inline-flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 mb-6"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-4 h-4"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M15.75 19.5 8.25 12l7.5-7.5"></path>
+        </svg>
+        Zurück zu Referenzen
+      </a>
+
+      <header class="mb-12">
+        <div class="flex flex-col sm:flex-row gap-6 items-start">
+          <div
+            class="flex-shrink-0 flex items-center justify-center w-24 h-24 bg-gray-50 dark:bg-zinc-800 rounded-xl border border-gray-200 dark:border-zinc-700"
+          >
+            <img
+              src="/apps/greensp.png"
+              alt="GreenSP App-Icon"
+              width="80"
+              height="80"
+              class="rounded-xl"
+            />
+          </div>
+          <div class="flex-1">
+            <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100">
+              GreenSP Mobile-App
+            </h1>
+            <p class="text-gray-600 dark:text-gray-400 mt-1">
+              Sales-Partner-App von Ranger
+            </p>
+            <div
+              class="flex flex-wrap gap-4 mt-3 text-sm text-gray-500 dark:text-gray-400"
+            >
+              <span class="flex items-center gap-1">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-4 h-4"
+                  aria-hidden="true"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
+                  ></path>
+                </svg>
+                Mobile-App-Entwickler
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <AppStoreLinks
+          playStoreUrl="https://play.google.com/store/apps/details?id=com.ranger.greensp"
+        />
+      </header>
+
+      <div class="prose lg:prose-lg max-w-none">
+        <p>
+          Mitgewirkt an GreenSP, einer Mobile-App für Ranger Sales Partner.
+          Ranger ist ein europäisches Direktvertriebsunternehmen mit Fokus auf
+          persönliche Kundenberatung, unter anderem für Telekommunikations- und
+          Energieprodukte.
+        </p>
+
+        <h2>Projektüberblick</h2>
+        <p>
+          GreenSP dient Sales Partnern als zentrale mobile Anlaufstelle für
+          Informationen zu Mitarbeiter-Performance, Deal-Performance und
+          monatlichen Abrechnungen mit dem Business Power Team. Meine Arbeit
+          unterstützte die öffentlich sichtbare App und ihr Produkterlebnis.
+        </p>
+
+        <h2>Schwerpunkte</h2>
+        <ul>
+          <li>
+            <strong>Mobiles Produkterlebnis:</strong> Mitwirkung an einer fokussierten
+            Anwendung für den täglichen Informationsbedarf von Ranger Sales Partnern.
+          </li>
+          <li>
+            <strong>Performance-Informationen:</strong> Unterstützung eines klaren
+            Zugangs zu Mitarbeiter- und Deal-Performance innerhalb der App.
+          </li>
+          <li>
+            <strong>Abrechnungsübersicht:</strong> Arbeit am Produkterlebnis rund
+            um monatliche Abrechnungsinformationen.
+          </li>
+          <li>
+            <strong>Bedienbarkeit und Stabilität:</strong> Weiterentwicklung des
+            App-Erlebnisses, einschließlich beständigerer Anmeldungen und allgemeiner
+            Stabilität.
+          </li>
+        </ul>
+        <p class="text-sm text-gray-500 dark:text-gray-400">
+          Diese Zusammenfassung beschränkt sich bewusst auf Informationen von
+          Rangers öffentlicher Website und aus dem öffentlichen Google-Play-
+          Eintrag. Ranger und GreenSP werden ausschließlich zur Projektzuordnung
+          genannt; eine Empfehlung oder Unterstützung wird damit nicht
+          ausgedrückt.
+        </p>
+      </div>
+    </article>
+
+    <Footer />
+  </BaseLayout>
+</Layout>

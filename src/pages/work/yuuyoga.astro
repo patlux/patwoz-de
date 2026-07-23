@@ -1,0 +1,172 @@
+---
+import Layout from '~/layouts/Layout.astro'
+import BaseLayout from '~/components/BaseLayout.astro'
+import Footer from '~/components/Footer.astro'
+import AppStoreLinks from '~/components/AppStoreLinks.astro'
+
+const pageTitle = 'Yuu Yoga'
+const description =
+  'Mobile product development and maintenance for the Yuu Yoga app in a client engagement for Porsche Digital.'
+const canonicalURL = new URL(Astro.url.pathname, Astro.site)
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: Astro.site?.toString() || 'https://patwoz.dev',
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Work',
+      item: new URL('/work', Astro.site).toString(),
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: pageTitle,
+      item: canonicalURL.toString(),
+    },
+  ],
+}
+---
+
+<Layout
+  title="Yuu Yoga - Work"
+  description={description}
+  image="https://patwoz.dev/apps/yuu-yoga.jpg"
+>
+  <BaseLayout>
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify(breadcrumbSchema)}
+    />
+    <article class="mt-12">
+      <a
+        href="/work"
+        class="inline-flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 mb-6"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-4 h-4"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M15.75 19.5 8.25 12l7.5-7.5"></path>
+        </svg>
+        Back to Work
+      </a>
+
+      <header class="mb-12">
+        <div class="flex flex-col sm:flex-row gap-6 items-start">
+          <div
+            class="flex-shrink-0 w-24 h-24 overflow-hidden rounded-xl border border-gray-200 dark:border-zinc-700"
+          >
+            <img
+              src="/apps/yuu-yoga.jpg"
+              alt="Yuu Yoga app icon"
+              width="96"
+              height="96"
+              class="w-full h-full object-cover"
+            />
+          </div>
+          <div class="flex-1">
+            <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100">
+              Yuu Yoga
+            </h1>
+            <p class="text-gray-600 dark:text-gray-400 mt-1">
+              Client project for Porsche Digital GmbH
+            </p>
+            <div
+              class="flex flex-wrap gap-4 mt-3 text-sm text-gray-500 dark:text-gray-400"
+            >
+              <span class="flex items-center gap-1">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-4 h-4"
+                  aria-hidden="true"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
+                  ></path>
+                </svg>
+                Mobile Software Developer
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <AppStoreLinks
+          appStoreUrl="https://apps.apple.com/de/app/yuu-yoga-yoga-neu-erleben/id1540962781"
+        />
+      </header>
+
+      <div class="prose lg:prose-lg max-w-none">
+        <p>
+          Yuu Yoga was a mobile yoga product built around guided practice and
+          visual feedback at home. The public App Store listing described a
+          smart-mirror experience that let users compare their posture with an
+          instructor during a session and review poses afterwards.
+        </p>
+        <p>
+          In a client engagement for Porsche Digital, I contributed to the
+          development and maintenance of the app's publicly visible mobile
+          product experiences. Porsche Digital is named here only as the client;
+          this independent portfolio page does not imply endorsement.
+        </p>
+
+        <h2>Areas of contribution</h2>
+        <ul>
+          <li>
+            <strong>Mobile product experience:</strong> Development and ongoing maintenance
+            across the customer-facing app experience.
+          </li>
+          <li>
+            <strong>Guided yoga:</strong> Work on the mobile journeys around yoga
+            sessions and instructor-led course content.
+          </li>
+          <li>
+            <strong>Visual feedback:</strong> Support for the user experience around
+            the publicly described smart-mirror and screen-in-screen practice mode.
+          </li>
+          <li>
+            <strong>Pose review:</strong> Product work related to reviewing and comparing
+            poses after a session, including supporting guidance for individual asanas.
+          </li>
+          <li>
+            <strong>Progress experience:</strong> Maintenance of user-facing journeys
+            that helped people follow their yoga practice and personal goals.
+          </li>
+          <li>
+            <strong>Membership journeys:</strong> Contribution to the app experience
+            around trial access and continued use of the yoga offering.
+          </li>
+        </ul>
+        <p class="text-sm text-gray-500 dark:text-gray-400">
+          This case study is limited to information published in first-party
+          product sources. Internal implementation details, technologies,
+          architecture, vendors and business information are intentionally not
+          disclosed.
+        </p>
+      </div>
+    </article>
+
+    <Footer />
+  </BaseLayout>
+</Layout>
