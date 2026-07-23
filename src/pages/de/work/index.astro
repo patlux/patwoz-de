@@ -3,6 +3,42 @@ import Layout from '~/layouts/Layout.astro'
 import BaseLayout from '~/components/BaseLayout.astro'
 import Footer from '~/components/Footer.astro'
 import ClientMarquee from '~/components/ClientMarquee.astro'
+
+const appCaseStudies = [
+  {
+    name: 'Glowing Blox',
+    href: '/de/work/glowing-blox',
+    icon: '/apps/glowing-blox.png',
+    description:
+      'Ein lokales und online spielbares Strategiespiel mit Mobile-App, Multiplayer, Backend und Web.',
+  },
+  {
+    name: 'Goory',
+    href: '/de/work/goory',
+    icon: '/apps/goory.jpg',
+    description:
+      'Eine Plattform für lokale Produkte mit Mobile-App, CMS, Backend und Delivery.',
+  },
+  {
+    name: 'Yuu Yoga',
+    href: '/de/work/yuuyoga',
+    icon: '/apps/yuu-yoga.jpg',
+    description:
+      'Mobile Produktarbeit an der geführten Yoga-App von Porsche Digital.',
+  },
+  {
+    name: 'GreenSP',
+    href: '/de/work/greensp',
+    icon: '/apps/greensp.png',
+    description: 'Eine fokussierte Mobile-App für Vertriebspartner von Ranger.',
+  },
+  {
+    name: 'ME SENSE',
+    href: '/de/work/me-sense',
+    icon: '/apps/me-sense.jpg',
+    description: 'Die Weatherdock Mobile-App zur Fernüberwachung von Booten.',
+  },
+]
 ---
 
 <Layout
@@ -530,6 +566,55 @@ import ClientMarquee from '~/components/ClientMarquee.astro'
         </div>
       </a>
     </div>
+
+    <section class="mt-16 animate-fade-in-up opacity-0 stagger-6">
+      <div class="max-w-2xl">
+        <h2
+          class="text-2xl font-display font-bold text-warm-900 dark:text-warm-100"
+        >
+          Weitere App-Referenzen
+        </h2>
+        <p class="mt-2 text-warm-600 dark:text-warm-400 leading-relaxed">
+          Weitere Mobile-Produkte – von piparo.tech Projekten bis zu
+          fokussierten Kundenaufträgen.
+        </p>
+      </div>
+
+      <div
+        class="mt-6 overflow-hidden rounded-lg border border-warm-200 bg-white dark:border-warm-800 dark:bg-dark-surface"
+      >
+        {
+          appCaseStudies.map((project) => (
+            <a
+              href={project.href}
+              class="ledger-hover-cell flex min-h-28 items-center gap-4 border-b border-warm-200 p-5 last:border-b-0 dark:border-warm-800"
+            >
+              <img
+                src={project.icon}
+                alt={`${project.name} App-Icon`}
+                width="64"
+                height="64"
+                class="h-16 w-16 flex-shrink-0 rounded-xl object-cover ring-1 ring-black/10 dark:ring-white/10"
+              />
+              <span class="min-w-0 flex-1">
+                <span class="block font-semibold text-warm-900 dark:text-warm-100">
+                  {project.name}
+                </span>
+                <span class="mt-1 block text-sm leading-relaxed text-warm-600 dark:text-warm-400">
+                  {project.description}
+                </span>
+              </span>
+              <span
+                aria-hidden="true"
+                class="ledger-hover-arrow text-warm-400 dark:text-warm-500"
+              >
+                →
+              </span>
+            </a>
+          ))
+        }
+      </div>
+    </section>
 
     <ClientMarquee />
 
