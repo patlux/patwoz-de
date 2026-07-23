@@ -137,17 +137,41 @@ import Footer from '~/components/Footer.astro'
         at any time via your browser settings.
       </p>
 
-      <h2>Email contact</h2>
+      <h2>Contact form and email contact</h2>
       <p>
-        If you contact me by email at <a href="mailto:hi@patwoz.de"
-          >hi@patwoz.de</a
-        >, the information you submit (in particular email address, content of
-        the message, timestamp) is processed in order to answer your request.
+        You can send a project inquiry through the contact form or contact me
+        directly at <a href="mailto:hi@patwoz.de">hi@patwoz.de</a>. The form
+        processes the information you enter, including name, email address,
+        inquiry category and project description, plus any optional company,
+        timing, collaboration, budget and project-link details. Cloudflare
+        Turnstile also processes technical request and verification data to
+        protect the form against automated misuse.
+      </p>
+      <p>
+        Form submissions are handled by a narrowly scoped Cloudflare Worker. The
+        Worker validates the request and Turnstile token, applies a practical
+        rate limit using a short-lived, hashed IP-derived key that is not logged
+        or stored by the application, and uses Cloudflare Email Service to send
+        a plain-text message to <code>hi@patwoz.de</code>. The visitor email is
+        used only as the message's Reply-To address. The Worker does not store
+        submissions in a database and application logs are designed not to
+        contain submitted form values, raw bodies, Turnstile tokens or full IP
+        addresses. Cloudflare and the receiving mail systems may nevertheless
+        process operational metadata under their respective retention rules.
+      </p>
+      <p>
         Legal basis is Art. 6 (1) (b) GDPR for contract-related requests and
-        Art. 6 (1) (f) GDPR otherwise (interest in answering inquiries).
-        Correspondence is kept for as long as is necessary to handle and
-        document the request and is then deleted, unless statutory retention
-        obligations apply.
+        Art. 6 (1) (f) GDPR otherwise (interest in answering inquiries and
+        preventing misuse). Correspondence received by email is kept for as long
+        as necessary to handle and document the request and is then deleted,
+        unless statutory retention obligations apply. The application itself
+        adds no persistent submission storage.
+      </p>
+      <p class="text-warm-500 dark:text-warm-500 text-sm">
+        This description documents the intended technical processing and is not
+        legal advice. The wording, legal bases, processor agreements,
+        international-transfer safeguards and actual provider retention periods
+        should be reviewed before production activation.
       </p>
 
       <h2>Embedded fonts and logos</h2>

@@ -33,6 +33,42 @@ test('Should open /de/imprint', async () => {
   expect(res.status).toBe(200)
 })
 
+test('Should open equivalent contact pages with static form markup', async () => {
+  for (const [path, heading, privacyPath] of [
+    ['/contact', 'Start a project conversation', '/privacy'],
+    ['/de/contact', 'Projekt anfragen', '/de/datenschutz'],
+  ]) {
+    const res = await fetch(`${baseUrl}${path}`)
+    expect(res.status).toBe(200)
+
+    const html = await res.text()
+    expect(html).toContain(heading)
+    expect(html).toContain('action="/api/contact"')
+    expect(html).toContain('name="name"')
+    expect(html).toContain('name="email"')
+    expect(html).toContain('name="category"')
+    expect(html).toContain('name="description"')
+    expect(html).toContain('name="company"')
+    expect(html).toContain('name="desiredStart"')
+    expect(html).toContain('name="collaborationType"')
+    expect(html).toContain('name="budget"')
+    expect(html).toContain('name="projectLink"')
+    expect(html).toContain(`href="${privacyPath}"`)
+    expect(html).toContain('href="mailto:hi@patwoz.de"')
+  }
+})
+
+test('Should link project inquiry CTAs to localized contact pages', async () => {
+  for (const [path, contactPath] of [
+    ['/', '/contact'],
+    ['/de', '/de/contact'],
+  ]) {
+    const res = await fetch(`${baseUrl}${path}`)
+    const html = await res.text()
+    expect(html).toContain(`href="${contactPath}"`)
+  }
+})
+
 test('Should open piparo.party work pages', async () => {
   for (const path of ['/work/piparo-party', '/de/work/piparo-party']) {
     const res = await fetch(`${baseUrl}${path}`)

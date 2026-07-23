@@ -20,6 +20,14 @@ export default defineConfig({
   },
   vite: {
     plugins: [tailwindcss()],
+    server: {
+      proxy: {
+        '/api/contact': {
+          target: 'http://127.0.0.1:8787',
+          changeOrigin: false,
+        },
+      },
+    },
   },
   integrations: [
     expressiveCode({

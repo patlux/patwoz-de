@@ -28,7 +28,7 @@ const config: PlaywrightTestConfig = {
     process.env.NO_BUILD != null
       ? undefined
       : {
-          command: `bun run dev -- --port ${process.env.PORT}`,
+          command: 'bun run dev:site',
           url: process.env.BASE_URL,
           reuseExistingServer: !process.env.CI,
         },

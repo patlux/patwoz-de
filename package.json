@@ -5,7 +5,9 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "dev": "astro dev",
+    "dev": "run-p --race dev:site dev:contact-worker",
+    "dev:site": "astro dev --host 127.0.0.1 --port 5174",
+    "dev:contact-worker": "wrangler dev --config contact-worker/wrangler.toml --env local --local --port 8787",
     "build": "astro build",
     "preview": "astro preview",
     "start": "wrangler pages dev ./dist",
@@ -18,12 +20,14 @@
     "test": "bun test",
     "check-build": "bun run build",
     "check-types": "astro check",
-    "validate": "bun run check-format && bun run check-lint && bun run check-types && bun run check-build && bun run check-tests",
+    "validate": "bun run check-format && bun run check-lint && bun run check-types && bun run check:contact-worker && bun run check-build && bun run check-tests",
     "docker:build": "docker build -t patwoz-de:latest .",
     "docker:run": " docker run --rm -p 3000:3000 --name patwoz-de patwoz-de:latest",
     "docker:kill": "docker kill patwoz-de",
     "dive": "dive build -t patwoz-de:latest .",
     "test:e2e": "playwright test",
+    "test:contact-worker": "bun test contact-worker/src/index.test.ts",
+    "check:contact-worker": "tsc --noEmit --strict --skipLibCheck --lib ES2022,WebWorker contact-worker/src/index.ts",
     "build:deps": "bun run --filter '*' build",
     "clear:cdn": "sh -c \"curl -v -X POST 'https://api.bunny.net/purge?url=https://patwoz.dev/*' -H 'AccessKey: $BUNNY_CDN_API_KEY'\""
   },
@@ -57,7 +61,7 @@
     "svgo": "^4.0.0",
     "tailwindcss": "4",
     "typescript": "^5.1.6",
-    "wrangler": "^3.102.0"
+    "wrangler": "^4.36.0"
   },
   "prettier": {
     "semi": false,
