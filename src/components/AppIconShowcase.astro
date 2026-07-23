@@ -16,6 +16,12 @@ const isGerman = lang === 'de'
 const basePath = isGerman ? '/de' : ''
 const apps: App[] = [
   {
+    name: 'piparo.party',
+    href: `${basePath}/work/piparo-party`,
+    icon: '/company/piparo-party.webp',
+    description: isGerman ? '25 Partyspiele' : '25 party games',
+  },
+  {
     name: 'KulturPass DE',
     href: `${basePath}/work/kulturpass`,
     icon: '/apps/kulturpass.png',
@@ -64,6 +70,20 @@ const apps: App[] = [
     href: 'https://apps.apple.com/de/app/yuu-yoga-yoga-neu-erleben/id1540962781',
     icon: '/apps/yuu-yoga.jpg',
     description: 'Yoga',
+    external: true,
+  },
+  {
+    name: 'PropRate',
+    href: 'https://play.google.com/store/apps/details?id=de.proprate.mobile&hl=en',
+    icon: '/apps/proprate.png',
+    description: isGerman ? 'Immobilienbewertung' : 'Property valuation',
+    external: true,
+  },
+  {
+    name: 'SWK',
+    href: 'https://apps.apple.com/de/app/swk/id1558861525',
+    icon: '/apps/swk.jpg',
+    description: isGerman ? 'Energie & Mobilität' : 'Energy & mobility',
     external: true,
   },
   {
