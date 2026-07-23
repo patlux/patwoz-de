@@ -103,12 +103,32 @@ test.describe('contact pages', () => {
     const requestPromise = page.waitForRequest('**/api/contact')
     await submit.dispatchEvent('click')
     await expect(submit).toBeDisabled()
+    await expect(submit).toHaveAttribute('data-state', 'pending')
+    await expect(page.locator('#contact-form')).toHaveAttribute(
+      'aria-busy',
+      'true',
+    )
     await expect(submit).toContainText('Sending')
+    await expect(page.locator('.contact-submit__impulse')).toHaveCSS(
+      'animation-name',
+      'contact-send-impulse',
+    )
     await submit.dispatchEvent('click')
     expect(calls).toBe(1)
     releaseResponse()
-    await expect(page.getByRole('status')).toContainText('Thank you.')
-    await expect(page.getByRole('status')).toBeFocused()
+    const status = page.getByRole('status')
+    await expect(status).toContainText('Thank you.')
+    await expect(status).toHaveAttribute('data-kind', 'success')
+    await expect(status).toHaveAttribute('aria-atomic', 'true')
+    await expect(status).toBeFocused()
+    await expect(status.locator('.contact-status__icon-success')).toBeVisible()
+    await expect(status.locator('.contact-status__icon-error')).toBeHidden()
+    await expect(status).toHaveCSS('animation-name', 'contact-result-in')
+    await expect(page.locator('#contact-form')).toHaveAttribute(
+      'aria-busy',
+      'false',
+    )
+    await expect(submit).toHaveAttribute('data-state', 'idle')
     await expect(page.locator('#contact-name')).toHaveValue('')
     expect(calls).toBe(1)
     const request = await requestPromise
@@ -133,11 +153,72 @@ test.describe('contact pages', () => {
 
     const status = page.getByRole('status')
     await expect(status).toContainText('That did not work.')
+    await expect(status).toContainText('hi@patwoz.de')
+    await expect(status).toHaveAttribute('data-kind', 'error')
     await expect(status).toBeFocused()
+    await expect(status.locator('.contact-status__icon-error')).toBeVisible()
+    await expect(status.locator('.contact-status__icon-success')).toBeHidden()
+    await expect(status).toHaveCSS('animation-name', 'contact-result-in')
     await expect(page.locator('#contact-name')).toHaveValue('Ada Lovelace')
+    await expect(page.locator('#contact-form')).toHaveAttribute(
+      'aria-busy',
+      'false',
+    )
     await expect(
       page.getByRole('button', { name: 'Send inquiry' }),
     ).toBeEnabled()
+  })
+
+  test('fast success does not wait for the send impulse', async ({ page }) => {
+    await page.route('**/api/contact', async (route) => {
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: '{"ok":true}',
+      })
+    })
+    await page.goto('/contact')
+    await fillRequired(page)
+
+    await page.getByRole('button', { name: 'Send inquiry' }).click()
+
+    const status = page.getByRole('status')
+    await expect(status).toHaveAttribute('data-kind', 'success')
+    await expect(status).toBeFocused()
+    await expect(page.locator('#contact-name')).toHaveValue('')
+  })
+
+  test('reduced motion keeps pending and success immediate', async ({
+    page,
+  }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' })
+    let releaseResponse = () => {}
+    const responseGate = new Promise<void>((resolve) => {
+      releaseResponse = resolve
+    })
+    await page.route('**/api/contact', async (route) => {
+      await responseGate
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: '{"ok":true}',
+      })
+    })
+    await page.goto('/contact')
+    await fillRequired(page)
+
+    const submit = page.getByRole('button', { name: 'Send inquiry' })
+    await submit.click()
+    await expect(page.locator('.contact-submit__impulse')).toHaveCSS(
+      'animation-name',
+      'none',
+    )
+
+    releaseResponse()
+    const status = page.getByRole('status')
+    await expect(status).toHaveAttribute('data-kind', 'success')
+    await expect(status).toHaveCSS('animation-name', 'none')
+    await expect(status).toBeFocused()
   })
 
   test('keyboard validation focuses the first invalid field', async ({
