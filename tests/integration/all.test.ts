@@ -10,7 +10,7 @@ beforeAll(async () => {
   pid = server.pid
   port = server.port
   baseUrl = `http://localhost:${port}`
-})
+}, 15_000)
 
 afterAll(() => {
   console.log(`KILL SERVER "${pid}".`)

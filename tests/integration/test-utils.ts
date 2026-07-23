@@ -1,4 +1,5 @@
 import { spawn, spawnSync } from 'bun'
+import { join } from 'node:path'
 
 const SERVER_START_TIMEOUT_MS = 10_000
 const SERVER_POLL_INTERVAL_MS = 100
@@ -34,10 +35,9 @@ const waitUntilServerStarted = async (baseUrl: string) => {
 export const startServer = async () => {
   const port = getRandomFreePort()
 
-  // Do not run "bun run dev" otherwise the server will not be killed
-  // because we get the pid of the parent process and not from the sub process
+  const astroExecutable = join(process.cwd(), 'node_modules', '.bin', 'astro')
   const proc = spawn(
-    ['bun', 'run', 'astro', 'dev', '--host', '127.0.0.1', '--port', `${port}`],
+    [astroExecutable, 'dev', '--host', '127.0.0.1', '--port', `${port}`],
     {
       env: {
         PATH: process.env.PATH,
