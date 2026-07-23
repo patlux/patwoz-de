@@ -5,7 +5,7 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "dev": "astro dev",
+    "dev": "astro dev --host 127.0.0.1",
     "build": "astro build",
     "preview": "astro preview",
     "start": "wrangler pages dev ./dist",
