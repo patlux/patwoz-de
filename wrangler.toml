@@ -1,5 +1,4 @@
 #:schema node_modules/wrangler/config-schema.json
 name = "patwoz-dev"
-account_id = "7bdba1aca3b17ad758a3a03a5ae7f823"
 compatibility_date = "2025-01-09"
 pages_build_output_dir = "./dist"

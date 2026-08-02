@@ -123,8 +123,10 @@ or changing resources blindly:
 ### Project-isolated Cloudflare authentication
 
 Wrangler authentication for this repository is isolated from the global Wrangler
-login. The target account is pinned in `wrangler.toml`, and deployments run a
-preflight that verifies both the account and the `patwoz-dev` Pages project.
+login. The Cloudflare wrapper pins the target account through
+`CLOUDFLARE_ACCOUNT_ID`, and deployments run a preflight that verifies both the
+account and the `patwoz-dev` Pages project. Pages configuration files do not
+support an `account_id` field directly.
 
 Authenticate once with the personal Cloudflare account:
 

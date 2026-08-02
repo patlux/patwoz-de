@@ -8,6 +8,7 @@ ACCOUNT_ID="7bdba1aca3b17ad758a3a03a5ae7f823"
 PROJECT_NAME="patwoz-dev"
 
 export XDG_CONFIG_HOME="$ROOT_DIR/.wrangler-auth"
+export CLOUDFLARE_ACCOUNT_ID="$ACCOUNT_ID"
 
 if [[ ! -x "$WRANGLER" ]]; then
   printf 'Wrangler is unavailable. Run bun install first.\n' >&2
