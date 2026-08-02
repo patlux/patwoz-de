@@ -29,8 +29,9 @@ yarn-error.log*
 
 *.db
 
-# Cloudflare Worker local state
+# Cloudflare local state and project-isolated authentication
 contact-worker/.wrangler/
+/.wrangler-auth/
 
 # playwright
 /test-results/

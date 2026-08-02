@@ -120,6 +120,23 @@ or changing resources blindly:
 5. The `CONTACT_RATE_LIMITER` namespace ID is unique within the account. Wrangler
    4.36.0 or newer is required for this binding.
 
+### Project-isolated Cloudflare authentication
+
+Wrangler authentication for this repository is isolated from the global Wrangler
+login. The target account is pinned in `wrangler.toml`, and deployments run a
+preflight that verifies both the account and the `patwoz-dev` Pages project.
+
+Authenticate once with the personal Cloudflare account:
+
+```sh
+bun run cloudflare:login
+bun run cloudflare:preflight
+```
+
+The OAuth credentials stay in the ignored `.wrangler-auth/` directory. Other
+projects can use different Wrangler accounts without affecting this deployment.
+Use `bun run cloudflare:logout` to remove only this repository's login.
+
 ### Deployment order and smoke test
 
 1. Deploy the Worker and secret/bindings first. Do not deploy from this repository

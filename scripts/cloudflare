@@ -1,0 +1,76 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+ROOT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
+WRANGLER="$ROOT_DIR/node_modules/.bin/wrangler"
+ACCOUNT_ID="7bdba1aca3b17ad758a3a03a5ae7f823"
+PROJECT_NAME="patwoz-dev"
+
+export XDG_CONFIG_HOME="$ROOT_DIR/.wrangler-auth"
+
+if [[ ! -x "$WRANGLER" ]]; then
+  printf 'Wrangler is unavailable. Run bun install first.\n' >&2
+  exit 1
+fi
+
+run_wrangler() {
+  (
+    cd "$ROOT_DIR"
+    "$WRANGLER" "$@"
+  )
+}
+
+preflight() {
+  local identity projects
+
+  if ! identity=$(CI=1 run_wrangler whoami --account "$ACCOUNT_ID" 2>&1); then
+    printf 'Cloudflare authentication for patwoz.dev is unavailable or invalid.\n' >&2
+    printf 'Run: bun run cloudflare:login\n\n' >&2
+    printf '%s\n' "$identity" >&2
+    exit 1
+  fi
+
+  if ! projects=$(CI=1 run_wrangler pages project list 2>&1); then
+    printf 'Could not list Cloudflare Pages projects in account %s.\n' "$ACCOUNT_ID" >&2
+    printf 'Run: bun run cloudflare:login\n\n' >&2
+    printf '%s\n' "$projects" >&2
+    exit 1
+  fi
+
+  if ! grep -Fq "$PROJECT_NAME" <<<"$projects"; then
+    printf 'Cloudflare Pages project %s was not found in account %s.\n' \
+      "$PROJECT_NAME" "$ACCOUNT_ID" >&2
+    exit 1
+  fi
+
+  printf 'Cloudflare preflight passed: %s in account %s.\n' \
+    "$PROJECT_NAME" "$ACCOUNT_ID"
+}
+
+case "${1:-}" in
+  login)
+    shift
+    run_wrangler login "$@"
+    ;;
+  logout)
+    shift
+    run_wrangler logout "$@"
+    ;;
+  preflight)
+    preflight
+    ;;
+  deploy)
+    shift
+    preflight
+    run_wrangler pages deploy "$@"
+    ;;
+  whoami)
+    shift
+    run_wrangler whoami --account "$ACCOUNT_ID" "$@"
+    ;;
+  *)
+    printf 'Usage: %s {login|logout|preflight|deploy|whoami} [arguments]\n' "$0" >&2
+    exit 2
+    ;;
+esac
