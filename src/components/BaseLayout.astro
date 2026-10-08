@@ -1,9 +1,10 @@
 ---
+import GlassTabBar from './GlassTabBar.astro'
 import SiteHeader from './SiteHeader.astro'
 import { isGermanPath, switchLocalePath } from '~/data/i18n'
 
 interface Props {
-  /** Hide the tab navigation in the header. */
+  /** Hide the floating tab bar below the top bar. */
   tabs?: boolean
 }
 
@@ -20,7 +21,8 @@ const enPath = isGerman ? otherPath : currentPath
     class="mx-auto flex w-full max-w-[calc(var(--container-content)+2.5rem)] flex-col gap-10 px-5 pt-6 sm:pt-10"
     data-site-column
   >
-    <SiteHeader tabs={tabs} />
+    <SiteHeader />
+    {tabs && <GlassTabBar />}
     <div
       id="lang-hint"
       class="ui-card hidden px-4 py-3 text-sm text-foreground"

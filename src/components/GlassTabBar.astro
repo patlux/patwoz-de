@@ -1,0 +1,484 @@
+---
+/**
+ * GlassTabBar — floating "liquid glass" capsule with the main navigation.
+ *
+ * - At scroll 0 it sits below the top bar, wider than the content column,
+ *   with icon + label for every tab.
+ * - Between 0 and 80 px of scrolling it morphs: labels collapse (the active
+ *   one stays), the signature mark fades in as a home button and the capsule
+ *   shrinks. From there it sticks 12 px below the viewport edge.
+ * - Hovering the compact capsule expands the labels again; a single hover
+ *   pill follows the pointer between tabs.
+ *
+ * The morph is driven by one custom property (`--tabbar-t`, 0 → 1) that a
+ * scroll-driven animation updates; browsers without `animation-timeline`
+ * get the same value from a small scroll listener.
+ */
+import Icon from './ui/Icon.astro'
+import LogoSvg from '~/assets/images/patwoz-logo.svg?raw'
+import { languageFromPath, withLocale } from '~/data/i18n'
+import { isActiveNavItem, navigation } from '~/data/navigation'
+
+const currentPath = Astro.url.pathname
+const lang = languageFromPath(currentPath)
+const labels =
+  lang === 'de'
+    ? { nav: 'Hauptnavigation', home: 'Startseite' }
+    : { nav: 'Main navigation', home: 'Home' }
+---
+
+<div class="tabbar-slot" data-tabbar-slot>
+  <nav class="tabbar" data-tabbar aria-label={labels.nav}>
+    <a
+      href={withLocale(lang, '/')}
+      class="tabbar__home"
+      aria-label={labels.home}
+      tabindex="-1"
+    >
+      <span class="tabbar__mark" set:html={LogoSvg} />
+      <span class="tabbar__divider" aria-hidden="true"></span>
+    </a>
+    <ul class="tabbar__list" data-tabbar-list>
+      {
+        navigation.map((item) => {
+          const active = isActiveNavItem(item, lang, currentPath)
+          return (
+            <li class="tabbar__item">
+              <a
+                href={withLocale(lang, item.path)}
+                class="tabbar__tab"
+                aria-current={active ? 'page' : undefined}
+                title={item.label[lang]}
+                data-tabbar-tab
+              >
+                <Icon name={item.icon} size={16} class="tabbar__icon" />
+                <span class="tabbar__label">{item.label[lang]}</span>
+              </a>
+            </li>
+          )
+        })
+      }
+    </ul>
+    <span class="tabbar__pill" data-tabbar-pill aria-hidden="true"></span>
+  </nav>
+</div>
+
+<style>
+  @property --tabbar-t {
+    syntax: '<number>';
+    inherits: true;
+    initial-value: 0;
+  }
+
+  @keyframes tabbar-progress {
+    from {
+      --tabbar-t: 0;
+    }
+    to {
+      --tabbar-t: 1;
+    }
+  }
+
+  /*
+    The slot keeps a constant 56 px in the document flow and is the sticky
+    element, so the capsule can change size without moving the content.
+  */
+  .tabbar-slot {
+    --tabbar-t: 0;
+    position: sticky;
+    top: 12px;
+    z-index: 40;
+    height: 56px;
+    width: 100%;
+    pointer-events: none;
+  }
+
+  @supports (animation-timeline: scroll()) {
+    .tabbar-slot {
+      animation: tabbar-progress linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 80px;
+    }
+  }
+
+  .tabbar {
+    /* 0 = expanded (scroll 0), 1 = compact (≥ 80 px) */
+    --t: var(--tabbar-t);
+    --expand: calc(1 - var(--t));
+    --ease-spring: cubic-bezier(0.34, 1.15, 0.64, 1);
+    --ease-out: cubic-bezier(0.2, 0, 0, 1);
+
+    pointer-events: auto;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    height: calc(56px - 8px * var(--t));
+    max-width: calc(100vw - 24px);
+    padding: 0 calc(9px + 3px * var(--t));
+    border-radius: 999px;
+    border: 1px solid var(--ui-glass-border);
+    background: var(--ui-glass-bg-opaque);
+    box-shadow:
+      inset 0 1px 0 var(--ui-glass-highlight),
+      0 12px 40px var(--ui-glass-shadow);
+    transform: translateX(-50%);
+    white-space: nowrap;
+    view-transition-name: tab-bar;
+    transition:
+      transform 180ms ease-out,
+      opacity 180ms ease-out;
+  }
+
+  @supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+    .tabbar {
+      background: var(--ui-glass-bg);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      backdrop-filter: blur(24px) saturate(180%);
+    }
+  }
+
+  /* Fast downward scroll: lift slightly out of the way. */
+  .tabbar.is-lifted {
+    transform: translate(-50%, -8px);
+    opacity: 0.9;
+  }
+
+  /* Signature mark as home button, only present in the compact state. */
+  .tabbar__home {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    height: 36px;
+    width: calc(var(--t) * 56px);
+    opacity: var(--t);
+    overflow: hidden;
+    color: var(--color-foreground);
+    border-radius: 999px;
+  }
+
+  .tabbar__mark {
+    display: block;
+    flex-shrink: 0;
+    width: 36px;
+    height: 18px;
+    margin-left: 2px;
+  }
+
+  .tabbar__mark :global(svg) {
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+  }
+
+  .tabbar__divider {
+    flex-shrink: 0;
+    width: 1px;
+    height: 20px;
+    margin: 0 6px 0 8px;
+    background: var(--ui-glass-border);
+  }
+
+  .tabbar__list {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .tabbar__tab {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: calc(var(--expand) * 7px);
+    height: calc(38px - 2px * var(--t));
+    padding: 0 calc(10px + 4px * var(--expand));
+    border-radius: 999px;
+    font-size: 13px;
+    line-height: 16px;
+    color: var(--color-muted);
+    text-decoration: none;
+    transition:
+      color 150ms ease,
+      transform 90ms ease-out;
+  }
+
+  .tabbar__tab:hover {
+    color: var(--color-foreground);
+  }
+
+  .tabbar__tab:active {
+    transform: scale(0.96);
+  }
+
+  .tabbar__tab:focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 2px;
+  }
+
+  /* Active "lens" */
+  .tabbar__tab[aria-current='page'] {
+    gap: 7px;
+    padding: 0 14px 0 12px;
+    font-weight: 500;
+    color: var(--color-foreground);
+    background: var(--ui-lens);
+    box-shadow:
+      inset 0 1px 0 var(--ui-lens-highlight),
+      0 2px 10px var(--ui-lens-shadow);
+    view-transition-name: tab-lens;
+  }
+
+  .tabbar__icon {
+    flex-shrink: 0;
+  }
+
+  .tabbar__tab[aria-current='page'] .tabbar__icon {
+    color: var(--color-brand);
+  }
+
+  /* Labels collapse with the scroll progress; the active one stays. */
+  .tabbar__label {
+    display: block;
+    max-width: calc(var(--expand) * 160px);
+    opacity: var(--expand);
+    overflow: hidden;
+    transition:
+      max-width 260ms var(--ease-spring),
+      opacity 200ms ease;
+  }
+
+  .tabbar__tab[aria-current='page'] .tabbar__label {
+    max-width: 160px;
+    opacity: 1;
+  }
+
+  /* Hovering the compact capsule expands every label again. */
+  .tabbar[data-hover] .tabbar__tab {
+    gap: 7px;
+    padding: 0 14px;
+  }
+
+  .tabbar[data-hover] .tabbar__label {
+    max-width: 160px;
+    opacity: 1;
+  }
+
+  /* One hover pill that glides between tabs (positioned by script). */
+  .tabbar__pill {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 0;
+    height: calc(38px - 2px * var(--t));
+    border-radius: 999px;
+    background: var(--ui-hover-pill);
+    opacity: 0;
+    transform: translate(var(--pill-x, 0px), -50%);
+    transition:
+      transform 120ms ease-out,
+      width 120ms ease-out,
+      opacity 120ms ease;
+  }
+
+  .tabbar__pill.is-visible {
+    opacity: 1;
+  }
+
+  @media (max-width: 639px) {
+    .tabbar-slot {
+      animation: none;
+    }
+
+    .tabbar {
+      --t: 1;
+      width: calc(100vw - 24px);
+      height: 50px;
+      padding: 0 6px;
+    }
+
+    .tabbar__home {
+      display: none;
+    }
+
+    .tabbar__list {
+      width: 100%;
+      gap: 0;
+    }
+
+    .tabbar__item {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+
+    .tabbar__tab,
+    .tabbar[data-hover] .tabbar__tab {
+      height: 38px;
+      padding: 0 10px;
+    }
+
+    .tabbar__tab[aria-current='page'] {
+      padding: 0 12px 0 10px;
+    }
+
+    .tabbar__label,
+    .tabbar[data-hover] .tabbar__label {
+      max-width: 0;
+      opacity: 0;
+    }
+
+    .tabbar__tab[aria-current='page'] .tabbar__label {
+      max-width: 160px;
+      opacity: 1;
+    }
+
+    .tabbar__pill {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tabbar-slot {
+      animation-timing-function: step-end;
+    }
+
+    .tabbar,
+    .tabbar__tab,
+    .tabbar__label,
+    .tabbar__pill {
+      transition: none;
+    }
+
+    .tabbar__pill {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  const COLLAPSE_DISTANCE = 80
+  const LEAVE_DELAY = 300
+  const LIFT_VELOCITY = 1.2 // px per ms
+
+  function initTabBar() {
+    const slot = document.querySelector<HTMLElement>('[data-tabbar-slot]')
+    const bar = slot?.querySelector<HTMLElement>('[data-tabbar]')
+    const list = bar?.querySelector<HTMLElement>('[data-tabbar-list]')
+    const pill = bar?.querySelector<HTMLElement>('[data-tabbar-pill]')
+    if (!slot || !bar || !list || !pill) return
+    if (bar.dataset.tabbarReady === 'true') return
+    bar.dataset.tabbarReady = 'true'
+
+    const reduceMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)',
+    ).matches
+    const scrollDriven = CSS.supports('animation-timeline: scroll()')
+
+    // --- Scroll progress fallback + lift on fast downward scrolling -------
+    let lastY = window.scrollY
+    let lastTime = performance.now()
+    let frame = 0
+
+    const update = () => {
+      frame = 0
+      const y = window.scrollY
+      const now = performance.now()
+      const dy = y - lastY
+      const dt = Math.max(now - lastTime, 1)
+
+      if (!scrollDriven) {
+        const progress = Math.min(Math.max(y / COLLAPSE_DISTANCE, 0), 1)
+        slot.style.setProperty(
+          '--tabbar-t',
+          String(reduceMotion ? Math.round(progress) : progress),
+        )
+      }
+
+      if (dy > 0 && dy / dt > LIFT_VELOCITY && y > COLLAPSE_DISTANCE * 2) {
+        bar.classList.add('is-lifted')
+      } else if (dy < 0) {
+        bar.classList.remove('is-lifted')
+      }
+
+      lastY = y
+      lastTime = now
+    }
+
+    const onScroll = () => {
+      if (frame) return
+      frame = window.requestAnimationFrame(update)
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true })
+    update()
+
+    // --- Hover: expand the compact capsule, collapse after a short delay ---
+    let leaveTimer = 0
+
+    if (!reduceMotion) {
+      bar.addEventListener('pointerenter', (event) => {
+        if (event.pointerType === 'touch') return
+        window.clearTimeout(leaveTimer)
+        bar.dataset.hover = 'true'
+      })
+      bar.addEventListener('pointerleave', () => {
+        window.clearTimeout(leaveTimer)
+        leaveTimer = window.setTimeout(() => {
+          delete bar.dataset.hover
+        }, LEAVE_DELAY)
+      })
+    }
+
+    // --- Hover pill following the pointer between tabs --------------------
+    const tabs = Array.from(
+      list.querySelectorAll<HTMLAnchorElement>('[data-tabbar-tab]'),
+    )
+
+    const movePill = (tab: HTMLElement) => {
+      if (tab.getAttribute('aria-current') === 'page') {
+        pill.classList.remove('is-visible')
+        return
+      }
+      const barRect = bar.getBoundingClientRect()
+      const rect = tab.getBoundingClientRect()
+      pill.style.setProperty('--pill-x', `${rect.left - barRect.left - 1}px`)
+      pill.style.width = `${rect.width}px`
+      pill.classList.add('is-visible')
+    }
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('pointerenter', () => movePill(tab))
+      tab.addEventListener('focus', () => movePill(tab))
+    })
+    list.addEventListener('pointerleave', () => {
+      pill.classList.remove('is-visible')
+    })
+    list.addEventListener('focusout', (event) => {
+      const next = event.relatedTarget
+      if (!(next instanceof Node) || !list.contains(next)) {
+        pill.classList.remove('is-visible')
+      }
+    })
+
+    // --- Arrow keys move focus between tabs ------------------------------
+    list.addEventListener('keydown', (event) => {
+      if (event.key !== 'ArrowRight' && event.key !== 'ArrowLeft') return
+      const index = tabs.findIndex((tab) => tab === document.activeElement)
+      if (index === -1) return
+      event.preventDefault()
+      const step = event.key === 'ArrowRight' ? 1 : -1
+      const next = tabs[(index + step + tabs.length) % tabs.length]
+      next?.focus()
+    })
+  }
+
+  initTabBar()
+  document.addEventListener('astro:after-swap', initTabBar)
+</script>

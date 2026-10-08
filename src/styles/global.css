@@ -33,6 +33,17 @@
   --ui-warning: #d97706;
   --ui-danger: #dc2626;
 
+  /* Liquid glass (floating tab bar): capsule, active lens and hover pill. */
+  --ui-glass-bg: rgb(255 255 255 / 0.55);
+  --ui-glass-bg-opaque: rgb(255 255 255 / 0.92);
+  --ui-glass-border: rgb(0 0 0 / 0.06);
+  --ui-glass-highlight: rgb(255 255 255 / 0.8);
+  --ui-glass-shadow: rgb(0 0 0 / 0.12);
+  --ui-lens: rgb(0 0 0 / 0.06);
+  --ui-lens-highlight: rgb(255 255 255 / 0.8);
+  --ui-lens-shadow: rgb(0 0 0 / 0.08);
+  --ui-hover-pill: rgb(0 0 0 / 0.04);
+
   /* Legacy warm-* ramp (light → dark). Values follow the mode so text pairs like
      `text-warm-600 dark:text-warm-400` stay readable in both modes. */
   --ui-warm-50: var(--ui-canvas);
@@ -68,6 +79,16 @@
   --ui-success-bg: #052e16;
   --ui-warning: #f59e0b;
   --ui-danger: #f87171;
+
+  --ui-glass-bg: rgb(28 28 30 / 0.62);
+  --ui-glass-bg-opaque: rgb(28 28 30 / 0.92);
+  --ui-glass-border: rgb(255 255 255 / 0.08);
+  --ui-glass-highlight: rgb(255 255 255 / 0.1);
+  --ui-glass-shadow: rgb(0 0 0 / 0.45);
+  --ui-lens: rgb(255 255 255 / 0.12);
+  --ui-lens-highlight: rgb(255 255 255 / 0.22);
+  --ui-lens-shadow: rgb(0 0 0 / 0.35);
+  --ui-hover-pill: rgb(255 255 255 / 0.06);
 
   --ui-warm-50: var(--ui-canvas);
   --ui-warm-100: var(--ui-foreground);
@@ -385,6 +406,33 @@ body:has(#menu-toggle:checked) nav.mobile-menu {
 
 .animate-marquee:hover {
   animation-play-state: paused;
+}
+
+/*
+  Cross-document view transitions: the page cross-fades briefly and named
+  elements (tab bar capsule, active lens) glide to their new position.
+*/
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 150ms;
+}
+
+::view-transition-group(tab-bar),
+::view-transition-group(tab-lens) {
+  animation-duration: 260ms;
+  animation-timing-function: cubic-bezier(0.2, 0, 0, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
 }
 
 /*

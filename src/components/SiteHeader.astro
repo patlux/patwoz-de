@@ -3,14 +3,7 @@ import ThemeToggle from './ThemeToggle.astro'
 import Icon from './ui/Icon.astro'
 import LogoSvg from '~/assets/images/patwoz-logo.svg?raw'
 import { languageFromPath, switchLocalePath, withLocale } from '~/data/i18n'
-import { isActiveNavItem, navigation } from '~/data/navigation'
 
-interface Props {
-  /** Hide the tab navigation (e.g. on the contact page). */
-  tabs?: boolean
-}
-
-const { tabs = true } = Astro.props
 const currentPath = Astro.url.pathname
 const lang = languageFromPath(currentPath)
 const switchHref = switchLocalePath(currentPath)
@@ -20,17 +13,15 @@ const labels =
         home: 'Startseite',
         switch: 'Switch to English',
         github: 'GitHub-Profil öffnen',
-        nav: 'Hauptnavigation',
       }
     : {
         home: 'Home',
         switch: 'Zur deutschen Version wechseln',
         github: 'Open GitHub profile',
-        nav: 'Main navigation',
       }
 ---
 
-<header class="flex flex-col gap-7">
+<header>
   <div class="flex items-center justify-between" data-site-topbar>
     <a
       href={withLocale(lang, '/')}
@@ -65,35 +56,4 @@ const labels =
       </a>
     </div>
   </div>
-
-  {
-    tabs && (
-      <nav
-        aria-label={labels.nav}
-        class="-mx-5 overflow-x-auto px-5 sm:mx-0 sm:px-0"
-      >
-        <ul class="flex min-w-max items-end gap-5 border-b border-border sm:gap-[22px]">
-          {navigation.map((item) => {
-            const active = isActiveNavItem(item, lang, currentPath)
-            return (
-              <li>
-                <a
-                  href={withLocale(lang, item.path)}
-                  aria-current={active ? 'page' : undefined}
-                  class:list={[
-                    'block whitespace-nowrap text-base transition-colors',
-                    active
-                      ? 'border-b-2 border-brand pb-2.5 text-foreground'
-                      : 'pb-3 text-muted hover:text-foreground',
-                  ]}
-                >
-                  {item.label[lang]}
-                </a>
-              </li>
-            )
-          })}
-        </ul>
-      </nav>
-    )
-  }
 </header>

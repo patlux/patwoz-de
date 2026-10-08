@@ -1,23 +1,53 @@
 import type { Language, Localized } from './i18n'
 import { withLocale } from './i18n'
 
+export type NavIcon =
+  | 'user'
+  | 'briefcase'
+  | 'sparkles'
+  | 'pen'
+  | 'hammer'
+  | 'wrench'
+
 export type NavItem = {
   label: Localized
   path: string
+  /** Icon shown in the tab bar (the only thing left of a tab when it is collapsed). */
+  icon: NavIcon
   /** Match the current pathname as a prefix instead of exactly. */
   prefix?: boolean
 }
 
 export const navigation: NavItem[] = [
-  { label: { en: 'Introduction', de: 'Über mich' }, path: '/' },
-  { label: { en: 'Work', de: 'Referenzen' }, path: '/work', prefix: true },
-  { label: { en: 'Skills', de: 'Kompetenzen' }, path: '/skills', prefix: true },
-  { label: { en: 'Blog', de: 'Blog' }, path: '/blog', prefix: true },
+  { label: { en: 'Introduction', de: 'Über mich' }, path: '/', icon: 'user' },
+  {
+    label: { en: 'Work', de: 'Referenzen' },
+    path: '/work',
+    icon: 'briefcase',
+    prefix: true,
+  },
+  {
+    label: { en: 'Skills', de: 'Kompetenzen' },
+    path: '/skills',
+    icon: 'sparkles',
+    prefix: true,
+  },
+  {
+    label: { en: 'Blog', de: 'Blog' },
+    path: '/blog',
+    icon: 'pen',
+    prefix: true,
+  },
   {
     label: { en: 'What I Built', de: 'Was ich gebaut habe' },
     path: '/what-i-built',
+    icon: 'hammer',
   },
-  { label: { en: 'What I Use', de: 'Was ich nutze' }, path: '/what-i-use' },
+  {
+    label: { en: 'What I Use', de: 'Was ich nutze' },
+    path: '/what-i-use',
+    icon: 'wrench',
+  },
 ]
 
 export function isActiveNavItem(
