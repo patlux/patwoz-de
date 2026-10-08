@@ -1,0 +1,61 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content'
+import SectionHeader from '~/components/ui/SectionHeader.astro'
+import type { Language } from '~/data/i18n'
+import { withLocale } from '~/data/i18n'
+import { homeCopy } from '~/data/home'
+
+interface Props {
+  lang: Language
+  limit?: number
+}
+
+const { lang, limit = 4 } = Astro.props
+const copy = homeCopy[lang]
+type Post = CollectionEntry<'blog'> | CollectionEntry<'blog-de'>
+const entries: Post[] =
+  lang === 'de' ? await getCollection('blog-de') : await getCollection('blog')
+const posts = entries
+  .sort((a, b) => b.data.published.getTime() - a.data.published.getTime())
+  .slice(0, limit)
+const dateFormatter = new Intl.DateTimeFormat(
+  lang === 'de' ? 'de-DE' : 'en-GB',
+  {
+    dateStyle: 'medium',
+  },
+)
+---
+
+<section class="flex flex-col gap-2.5" id="blog">
+  <SectionHeader
+    label={copy.blogLabel}
+    linkLabel={copy.blogLink}
+    linkHref={withLocale(lang, '/blog')}
+  />
+  <ul class="ui-card">
+    {
+      posts.map((post, index) => (
+        <li
+          class:list={[
+            index < posts.length - 1 && 'border-b border-surface-elevated',
+          ]}
+        >
+          <a
+            href={withLocale(lang, `/blog/${post.slug}`)}
+            class="flex flex-col gap-0.5 px-3 py-3 transition-colors hover:bg-surface-elevated/60 sm:min-h-[46px] sm:flex-row sm:items-center sm:gap-3 sm:py-0"
+          >
+            <span class="flex-1 text-base text-foreground">
+              {post.data.title}
+            </span>
+            <time
+              datetime={post.data.published.toISOString()}
+              class="shrink-0 text-xs text-muted"
+            >
+              {dateFormatter.format(post.data.published)}
+            </time>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</section>

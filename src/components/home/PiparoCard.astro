@@ -1,0 +1,46 @@
+---
+import FieldRow from '~/components/ui/FieldRow.astro'
+import Icon from '~/components/ui/Icon.astro'
+import type { Language } from '~/data/i18n'
+import { homeCopy } from '~/data/home'
+
+interface Props {
+  lang: Language
+}
+
+const { lang } = Astro.props
+const copy = homeCopy[lang]
+const copiedLabel = lang === 'de' ? 'Kopiert' : 'Copied'
+---
+
+<section class="flex flex-col gap-2.5" id="piparo">
+  <h2 class="ui-label">{copy.piparoLabel}</h2>
+  <div class="ui-card">
+    <div
+      class="flex items-start gap-3 border-b border-surface-elevated px-3 py-3.5"
+    >
+      <span class="ui-icon-button text-brand" aria-hidden="true">
+        <Icon name="people" size={16} />
+      </span>
+      <div class="flex min-w-0 flex-col gap-1">
+        <h3 class="text-md font-semibold text-foreground">
+          <a
+            href="https://piparo.tech"
+            target="_blank"
+            rel="noreferrer"
+            class="hover:text-brand">piparo.tech</a
+          >
+        </h3>
+        <p class="text-sm leading-[18px] text-muted">{copy.piparoBody}</p>
+      </div>
+    </div>
+    <FieldRow
+      label={lang === 'de' ? 'E-Mail' : 'Email'}
+      value="info@piparo.tech"
+      href="mailto:info@piparo.tech"
+      kind="copy"
+      copiedLabel={copiedLabel}
+      last
+    />
+  </div>
+</section>

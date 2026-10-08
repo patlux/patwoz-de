@@ -1,0 +1,33 @@
+---
+import type { Language } from '~/data/i18n'
+import { withLocale } from '~/data/i18n'
+import { homeCopy } from '~/data/home'
+
+interface Props {
+  lang: Language
+}
+
+const { lang } = Astro.props
+const copy = homeCopy[lang]
+---
+
+<section
+  class="ui-card flex flex-col gap-3.5 p-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6"
+>
+  <div class="flex flex-col gap-1.5">
+    <p class="ui-label flex items-center gap-2">
+      <span class="h-2 w-2 rounded-full bg-success" aria-hidden="true"></span>
+      {copy.availabilityLabel}
+    </p>
+    <h2 class="text-md font-semibold text-foreground">
+      {copy.availabilityTitle}
+    </h2>
+    <p class="text-sm leading-[18px] text-muted">{copy.availabilityBody}</p>
+  </div>
+  <a
+    href={withLocale(lang, '/contact')}
+    class="inline-flex h-9 shrink-0 items-center justify-center rounded-sm bg-brand px-3.5 text-base font-medium text-brand-foreground transition-colors hover:bg-accent-600"
+  >
+    {copy.availabilityCta}
+  </a>
+</section>

@@ -1,0 +1,44 @@
+---
+import { Image } from 'astro:assets'
+import meImage from '~/assets/images/me.jpg'
+import type { Language } from '~/data/i18n'
+import { homeCopy } from '~/data/home'
+
+interface Props {
+  lang: Language
+}
+
+const { lang } = Astro.props
+const copy = homeCopy[lang]
+---
+
+<section class="flex flex-col gap-4" id="about">
+  <div class="flex flex-col gap-3.5 sm:flex-row sm:items-center sm:gap-4">
+    <Image
+      src={meImage}
+      width={128}
+      height={128}
+      format="webp"
+      alt="Patrick Wozniak"
+      class="h-16 w-16 rounded-lg border border-border object-cover sm:h-14 sm:w-14"
+      loading="eager"
+    />
+    <div class="flex flex-col gap-1">
+      <h1
+        class="text-[22px] font-semibold leading-7 tracking-tight text-foreground sm:text-2xl"
+      >
+        {copy.hello}
+      </h1>
+      <p class="flex items-center gap-2 text-sm text-muted">
+        <span
+          class="h-2 w-2 shrink-0 rounded-full bg-success"
+          aria-hidden="true"></span>
+        {copy.status}
+      </p>
+      <p class="text-sm text-muted">
+        {copy.location} · {copy.experience}
+      </p>
+    </div>
+  </div>
+  <p class="text-md leading-6 text-foreground">{copy.bio}</p>
+</section>

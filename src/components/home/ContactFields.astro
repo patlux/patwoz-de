@@ -1,0 +1,48 @@
+---
+import FieldRow from '~/components/ui/FieldRow.astro'
+import type { Language } from '~/data/i18n'
+import { homeCopy } from '~/data/home'
+import { contactLinks, moreLinks } from '~/data/navigation'
+
+interface Props {
+  lang: Language
+}
+
+const { lang } = Astro.props
+const copy = homeCopy[lang]
+const links = contactLinks(lang)
+const copiedLabel = lang === 'de' ? 'Kopiert' : 'Copied'
+---
+
+<section class="flex flex-col gap-2" id="contact">
+  <h2 class="ui-label">{copy.contactLabel}</h2>
+  <div class="ui-card">
+    {
+      links.map((link, index) => (
+        <FieldRow
+          label={link.label[lang]}
+          value={link.value}
+          href={link.href}
+          kind={link.kind}
+          copiedLabel={copiedLabel}
+          last={index === links.length - 1}
+        />
+      ))
+    }
+  </div>
+  <p class="flex flex-wrap gap-x-3 gap-y-1 pt-0.5 text-xs text-muted">
+    <span>{copy.more}</span>
+    {
+      moreLinks.map((link) => (
+        <a
+          href={link.href}
+          target="_blank"
+          rel="noreferrer"
+          class="text-foreground transition-colors hover:text-brand"
+        >
+          {link.label}
+        </a>
+      ))
+    }
+  </p>
+</section>

@@ -1,0 +1,42 @@
+---
+import ListRow from '~/components/ui/ListRow.astro'
+import LogoChip from '~/components/ui/LogoChip.astro'
+import SectionHeader from '~/components/ui/SectionHeader.astro'
+import type { Language } from '~/data/i18n'
+import { withLocale } from '~/data/i18n'
+import { clients, homeCopy } from '~/data/home'
+
+interface Props {
+  lang: Language
+}
+
+const { lang } = Astro.props
+const copy = homeCopy[lang]
+const items = clients(lang)
+---
+
+<section class="flex flex-col gap-2.5" id="work">
+  <SectionHeader
+    label={copy.clientsLabel}
+    title={copy.clientsTitle}
+    subtitle={copy.clientsSubtitle}
+    linkLabel={copy.clientsLink}
+    linkHref={withLocale(lang, '/work')}
+  />
+  <div class="ui-card">
+    {
+      items.map((client, index) => (
+        <ListRow
+          href={client.href}
+          title={client.name}
+          subtitle={client.note[lang]}
+          meta={client.industry[lang]}
+          external={client.external}
+          last={index === items.length - 1}
+        >
+          <LogoChip slot="lead" {...client.logo} />
+        </ListRow>
+      ))
+    }
+  </div>
+</section>

@@ -1,0 +1,38 @@
+---
+import Layout from '~/layouts/Layout.astro'
+import BaseLayout from '~/components/BaseLayout.astro'
+import Footer from '~/components/Footer.astro'
+import type { Language } from '~/data/i18n'
+import { homeCopy } from '~/data/home'
+import HomeHero from './HomeHero.astro'
+import ContactFields from './ContactFields.astro'
+import AvailabilityCard from './AvailabilityCard.astro'
+import SkillsGrid from './SkillsGrid.astro'
+import ClientList from './ClientList.astro'
+import AppGrid from './AppGrid.astro'
+import ProjectHighlight from './ProjectHighlight.astro'
+import PiparoCard from './PiparoCard.astro'
+import BlogList from './BlogList.astro'
+
+interface Props {
+  lang: Language
+}
+
+const { lang } = Astro.props
+const copy = homeCopy[lang]
+---
+
+<Layout title={copy.title} description={copy.description} lang={lang} intro>
+  <BaseLayout>
+    <HomeHero lang={lang} />
+    <ContactFields lang={lang} />
+    <AvailabilityCard lang={lang} />
+    <SkillsGrid lang={lang} />
+    <ClientList lang={lang} />
+    <AppGrid lang={lang} />
+    <ProjectHighlight lang={lang} />
+    <PiparoCard lang={lang} />
+    <BlogList lang={lang} />
+    <Footer />
+  </BaseLayout>
+</Layout>
