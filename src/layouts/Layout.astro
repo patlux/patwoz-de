@@ -1,8 +1,9 @@
 ---
 import { getImage } from 'astro:assets'
+import '@fontsource-variable/inter'
 import '../styles/global.css'
 import meImage from '~/assets/images/me.jpg'
-import logoImage from '~/assets/images/patwoz-logo-transparent-800px.png'
+import SplashIntro from '~/components/SplashIntro.astro'
 
 interface Props {
   title?: string
@@ -10,6 +11,8 @@ interface Props {
   image?: string
   ogType?: string
   lang?: 'en' | 'de'
+  /** Play the signature intro on the first visit of the session. */
+  intro?: boolean
 }
 
 const {
@@ -18,6 +21,7 @@ const {
   image = 'https://patwoz.dev/me.jpg',
   ogType = 'profile',
   lang,
+  intro = false,
 } = Astro.props
 
 const currentPath = Astro.url.pathname
@@ -73,12 +77,6 @@ const optimizedMe = await getImage({
   height: 128,
   format: 'webp',
 })
-const optimizedLogo = await getImage({
-  src: logoImage,
-  width: 60,
-  height: 60,
-  format: 'webp',
-})
 ---
 
 <!doctype html>
@@ -103,13 +101,17 @@ const optimizedLogo = await getImage({
         } else {
           sessionStorage.setItem('visited', 'true')
         }
+
+        // Reduced motion: the intro only cross-fades
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          document.documentElement.classList.add('reduce-motion')
+        }
       })()
     </script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
 
     <!-- Preload critical images -->
-    <link rel="preload" as="image" type="image/webp" href={optimizedLogo.src} />
     <link rel="preload" as="image" type="image/webp" href={optimizedMe.src} />
 
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -157,8 +159,12 @@ const optimizedLogo = await getImage({
     <meta name="view-transition" content="same-document" />
   </head>
   <body
-    class="font-sans antialiased bg-warm-50 dark:bg-dark-bg text-warm-900 dark:text-warm-100"
+    class:list={[
+      'font-sans antialiased bg-canvas text-foreground',
+      intro && 'has-intro',
+    ]}
   >
+    {intro && <SplashIntro />}
     <slot />
 
     {

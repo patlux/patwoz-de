@@ -1,0 +1,264 @@
+---
+/**
+ * SplashIntro — the signature draws itself on the empty canvas, the status dot
+ * pops, then the signature shrinks into the header mark while the page rises
+ * underneath. Timing in design seconds from the first frame (see the Paper
+ * storyboard "Splash · Signatur"):
+ *
+ *   0.15–0.85 s  signature draws left → right
+ *   0.85–1.00 s  status dot pops
+ *   1.00–1.35 s  signature → header mark (FLIP, JS) · page rises (CSS)
+ *   1.40 s       done, overlay removed
+ *
+ * Every phase is CSS-timed so the page always appears, even without JS. JS adds
+ * the hand-over to the header mark and the skip (tap, key, wheel, touch).
+ * Reduced motion only cross-fades. Plays once per session (sessionStorage).
+ */
+import LogoSvg from '~/assets/images/patwoz-logo.svg?raw'
+---
+
+<div class="splash" id="splash" aria-hidden="true">
+  <div class="splash__stage">
+    <span class="splash__mark" id="splash-mark" set:html={LogoSvg} />
+    <span class="splash__dot"></span>
+  </div>
+</div>
+
+<script>
+  const HANDOVER_AT = 1000
+  const HANDOVER_DURATION = 350
+  const SKIP_DURATION = 180
+
+  function finish() {
+    document.documentElement.classList.add('intro-done')
+  }
+
+  function handOver(mark: HTMLElement, target: HTMLElement) {
+    const from = mark.getBoundingClientRect()
+    const to = target.getBoundingClientRect()
+    if (from.width === 0 || to.width === 0) {
+      finish()
+      return
+    }
+    const scale = to.width / from.width
+    const animation = mark.animate(
+      [
+        { transform: 'translate(0px, 0px) scale(1)' },
+        {
+          transform: `translate(${to.left - from.left}px, ${to.top - from.top}px) scale(${scale})`,
+        },
+      ],
+      {
+        duration: HANDOVER_DURATION,
+        easing: 'cubic-bezier(0.45, 0, 0.2, 1)',
+        fill: 'forwards',
+      },
+    )
+    animation.finished.then(finish, finish)
+  }
+
+  function initSplash() {
+    const root = document.documentElement
+    const splash = document.getElementById('splash')
+    const mark = document.getElementById('splash-mark')
+    const target = document.getElementById('site-mark')
+    if (!splash || !mark || !target) return
+
+    if (
+      root.classList.contains('animation-done') ||
+      root.classList.contains('reduce-motion')
+    ) {
+      finish()
+      return
+    }
+
+    let handed = false
+    const handoverTimer = window.setTimeout(() => {
+      handed = true
+      handOver(mark, target)
+    }, HANDOVER_AT)
+
+    const skip = () => {
+      if (handed) return
+      handed = true
+      window.clearTimeout(handoverTimer)
+      root.classList.add('intro-skip')
+      window.setTimeout(finish, SKIP_DURATION)
+    }
+    const options: AddEventListenerOptions = { once: true, passive: true }
+    window.addEventListener('pointerdown', skip, options)
+    window.addEventListener('keydown', skip, options)
+    window.addEventListener('wheel', skip, options)
+    window.addEventListener('touchstart', skip, options)
+  }
+
+  initSplash()
+</script>
+
+<style is:global>
+  :root {
+    --splash-draw-delay: 0.15s;
+    --splash-draw: 0.7s;
+    --splash-dot-delay: 0.85s;
+    --splash-hand-delay: 1s;
+    --splash-hand: 0.35s;
+    --splash-page: 0.4s;
+  }
+
+  .splash {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: grid;
+    place-items: center;
+    background: var(--ui-canvas);
+    pointer-events: none;
+    animation: splash-bg var(--splash-page) ease-in var(--splash-hand-delay)
+      forwards;
+  }
+
+  .splash__stage {
+    position: relative;
+    width: min(260px, 70vw);
+    aspect-ratio: 2 / 1;
+  }
+
+  .splash__mark {
+    position: absolute;
+    inset: 0;
+    display: block;
+    color: var(--ui-foreground);
+    transform-origin: top left;
+    clip-path: inset(0 100% 0 0);
+    animation:
+      splash-draw var(--splash-draw) cubic-bezier(0.22, 1, 0.36, 1)
+        var(--splash-draw-delay) forwards,
+      splash-mark-out 0.08s linear
+        calc(var(--splash-hand-delay) + var(--splash-hand)) forwards;
+  }
+
+  .splash__mark > svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .splash__dot {
+    position: absolute;
+    right: -3%;
+    bottom: 36%;
+    width: 14px;
+    height: 14px;
+    border-radius: 999px;
+    background: var(--ui-success);
+    box-shadow: 0 0 0 6px color-mix(in srgb, var(--ui-success) 18%, transparent);
+    transform: scale(0);
+    animation:
+      splash-dot 0.15s cubic-bezier(0.22, 1, 0.36, 1) var(--splash-dot-delay)
+        forwards,
+      splash-dot-out 0.12s ease-in var(--splash-hand-delay) forwards;
+  }
+
+  /* The page waits under the overlay and rises during the hand-over. */
+  html:not(.animation-done):not(.reduce-motion):not(.intro-skip)
+    body.has-intro
+    [data-site-column] {
+    opacity: 0;
+    animation: splash-page var(--splash-page) cubic-bezier(0.22, 1, 0.36, 1)
+      var(--splash-hand-delay) forwards;
+  }
+
+  /* The header mark stays hidden until the signature has arrived. */
+  html:not(.animation-done):not(.reduce-motion):not(.intro-skip):not(
+      .intro-done
+    )
+    body.has-intro
+    #site-mark {
+    opacity: 0;
+    animation: splash-mark-in 0s linear
+      calc(var(--splash-hand-delay) + var(--splash-hand)) forwards;
+  }
+
+  /* Returning visitors and finished intros: no overlay at all. */
+  html.animation-done .splash,
+  html.intro-done .splash {
+    display: none;
+  }
+
+  /* Reduced motion: a short cross-fade only. */
+  html.reduce-motion .splash {
+    animation: splash-bg 0.3s ease-out forwards;
+  }
+
+  html.reduce-motion .splash__mark,
+  html.reduce-motion .splash__dot {
+    display: none;
+  }
+
+  /* Skip: fade the overlay out and show the page immediately. */
+  html.intro-skip .splash {
+    animation: splash-bg 0.18s ease-out forwards;
+  }
+
+  html.intro-skip .splash__mark,
+  html.intro-skip .splash__dot {
+    animation: none;
+    opacity: 0;
+  }
+
+  @keyframes splash-draw {
+    from {
+      clip-path: inset(0 100% 0 0);
+    }
+    to {
+      clip-path: inset(0 0 0 0);
+    }
+  }
+
+  @keyframes splash-dot {
+    0% {
+      transform: scale(0);
+    }
+    60% {
+      transform: scale(1.3);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  @keyframes splash-dot-out {
+    to {
+      opacity: 0;
+    }
+  }
+
+  @keyframes splash-page {
+    from {
+      opacity: 0;
+      transform: translateY(32px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes splash-bg {
+    to {
+      background: transparent;
+    }
+  }
+
+  @keyframes splash-mark-in {
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes splash-mark-out {
+    to {
+      opacity: 0;
+    }
+  }
+</style>
