@@ -1,0 +1,24 @@
+---
+interface Props {
+  src: string
+  alt: string
+  width: number
+  height: number
+}
+
+const { src, alt, width, height } = Astro.props
+---
+
+<span
+  class="flex h-9 w-9 shrink-0 items-center justify-center rounded-sm border border-chip-border bg-chip"
+>
+  <img
+    src={src}
+    alt={alt}
+    width={width}
+    height={height}
+    loading="lazy"
+    class="object-contain"
+    style={`width:${width}px;height:${height}px`}
+  />
+</span>

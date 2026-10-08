@@ -1,0 +1,59 @@
+---
+import Icon from './Icon.astro'
+
+interface Props {
+  label: string
+  value: string
+  href: string
+  kind: 'copy' | 'external' | 'primary'
+  copiedLabel?: string
+  last?: boolean
+}
+
+const { label, value, href, kind, copiedLabel = 'Copied', last } = Astro.props
+const external = kind === 'external' || href.startsWith('http')
+---
+
+<div
+  class:list={[
+    'flex h-[54px] items-center gap-2 px-3',
+    !last && 'border-b border-surface-elevated',
+  ]}
+>
+  <span class="w-16 shrink-0 text-xs text-muted sm:w-24">{label}</span>
+  <a
+    href={href}
+    target={external ? '_blank' : undefined}
+    rel={external ? 'noreferrer' : undefined}
+    class="min-w-0 flex-1 truncate text-sm text-foreground hover:text-brand"
+  >
+    {value}
+  </a>
+  {
+    kind === 'copy' ? (
+      <button
+        type="button"
+        class="ui-icon-button"
+        data-copy={value}
+        data-copied-label={copiedLabel}
+        aria-label={`${label}: ${value}`}
+      >
+        <Icon name="copy" />
+      </button>
+    ) : (
+      <a
+        href={href}
+        target={external ? '_blank' : undefined}
+        rel={external ? 'noreferrer' : undefined}
+        class:list={[
+          'ui-icon-button',
+          kind === 'primary' &&
+            'bg-brand text-brand-foreground hover:bg-accent-600',
+        ]}
+        aria-label={`${label}: ${value}`}
+      >
+        <Icon name={kind === 'primary' ? 'arrow-right' : 'external'} />
+      </a>
+    )
+  }
+</div>

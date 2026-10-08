@@ -1,0 +1,99 @@
+---
+import ThemeToggle from './ThemeToggle.astro'
+import Icon from './ui/Icon.astro'
+import LogoSvg from '~/assets/images/patwoz-logo.svg?raw'
+import { languageFromPath, switchLocalePath, withLocale } from '~/data/i18n'
+import { isActiveNavItem, navigation } from '~/data/navigation'
+
+interface Props {
+  /** Hide the tab navigation (e.g. on the contact page). */
+  tabs?: boolean
+}
+
+const { tabs = true } = Astro.props
+const currentPath = Astro.url.pathname
+const lang = languageFromPath(currentPath)
+const switchHref = switchLocalePath(currentPath)
+const labels =
+  lang === 'de'
+    ? {
+        home: 'Startseite',
+        switch: 'Switch to English',
+        github: 'GitHub-Profil öffnen',
+        nav: 'Hauptnavigation',
+      }
+    : {
+        home: 'Home',
+        switch: 'Zur deutschen Version wechseln',
+        github: 'Open GitHub profile',
+        nav: 'Main navigation',
+      }
+---
+
+<header class="flex flex-col gap-7">
+  <div class="flex items-center justify-between" data-site-topbar>
+    <a
+      href={withLocale(lang, '/')}
+      class="flex items-center gap-2 text-foreground"
+      aria-label={labels.home}
+    >
+      <span
+        id="site-mark"
+        class="block h-[18px] w-9 shrink-0 [&>svg]:h-full [&>svg]:w-full"
+        set:html={LogoSvg}
+      />
+      <span class="text-sm font-semibold">patwoz.dev</span>
+    </a>
+    <div class="flex items-center gap-2">
+      <a
+        href="https://github.com/patlux"
+        target="_blank"
+        rel="noreferrer"
+        class="ui-icon-button"
+        aria-label={labels.github}
+      >
+        <Icon name="github" size={16} />
+      </a>
+      <ThemeToggle />
+      <a
+        href={switchHref}
+        class="inline-flex h-8 items-center rounded-sm bg-secondary px-2.5 text-sm font-medium text-muted transition-colors hover:bg-border hover:text-foreground"
+        aria-label={labels.switch}
+        hreflang={lang === 'de' ? 'en' : 'de'}
+      >
+        {lang === 'de' ? 'EN' : 'DE'}
+      </a>
+    </div>
+  </div>
+
+  {
+    tabs && (
+      <nav
+        aria-label={labels.nav}
+        class="-mx-5 overflow-x-auto px-5 sm:mx-0 sm:px-0"
+      >
+        <ul class="flex min-w-max items-end gap-5 border-b border-border sm:gap-[22px]">
+          {navigation.map((item) => {
+            const active = isActiveNavItem(item, lang, currentPath)
+            return (
+              <li>
+                <a
+                  href={withLocale(lang, item.path)}
+                  aria-current={active ? 'page' : undefined}
+                  class:list={[
+                    'block whitespace-nowrap text-base transition-colors',
+                    active
+                      ? 'border-b-2 border-brand pb-2.5 text-foreground'
+                      : 'pb-3 text-muted hover:text-foreground',
+                  ]}
+                >
+                  {item.label[lang]}
+                </a>
+              </li>
+            )
+          })}
+        </ul>
+      </nav>
+    )
+  }
+</header>

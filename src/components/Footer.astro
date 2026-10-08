@@ -1,50 +1,48 @@
 ---
+import { languageFromPath, withLocale } from '~/data/i18n'
+
 const currentYear = new Date().getFullYear()
-const currentPath = Astro.url.pathname
-const isGerman = currentPath.startsWith('/de')
-const imprintLabel = isGerman ? 'Impressum' : 'Imprint'
-const imprintHref = isGerman ? '/de/imprint' : '/imprint'
-const privacyLabel = isGerman ? 'Datenschutz' : 'Privacy'
-const privacyHref = isGerman ? '/de/datenschutz' : '/privacy'
-const trademarkNote = isGerman
-  ? 'Alle genannten Marken und Logos sind Eigentum ihrer jeweiligen Inhaber. Die Nennung beschreibt vergangene freie Werkleistungen und impliziert keine aktuelle Geschäftsbeziehung.'
-  : 'All trademarks and logos shown are the property of their respective owners. Mentions describe past freelance work and do not imply any ongoing business relationship.'
+const lang = languageFromPath(Astro.url.pathname)
+const labels =
+  lang === 'de'
+    ? {
+        imprint: 'Impressum',
+        privacy: 'Datenschutz',
+        privacyPath: '/datenschutz',
+        note: 'Alle genannten Marken und Logos sind Eigentum ihrer jeweiligen Inhaber. Die Nennung beschreibt vergangene freie Werkleistungen und impliziert keine aktuelle Geschäftsbeziehung.',
+      }
+    : {
+        imprint: 'Imprint',
+        privacy: 'Privacy',
+        privacyPath: '/privacy',
+        note: 'All trademarks and logos shown are the property of their respective owners. Mentions describe past freelance work and do not imply any ongoing business relationship.',
+      }
 ---
 
-<div class="mt-16 mb-8 animate-fade-in-up opacity-0 stagger-6">
-  <div
-    role="separator"
-    class="w-full h-px bg-gradient-to-r from-transparent via-warm-300 dark:via-warm-700 to-transparent"
-  >
-  </div>
-</div>
 <footer
-  class="flex flex-col gap-4 text-sm text-warm-500 dark:text-warm-500 pb-24 xl:pb-0 animate-fade-in-up opacity-0 stagger-6"
+  class="mt-10 flex flex-col gap-3 border-t border-border pt-5 text-xs text-muted"
 >
-  <div class="flex flex-col sm:flex-row gap-4 sm:items-center justify-between">
+  <div
+    class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between"
+  >
     <span>&copy; {currentYear} Patrick Wozniak</span>
     <slot />
-    <div class="flex items-center gap-4 flex-wrap">
+    <div class="flex items-center gap-2.5">
       <a
-        href={imprintHref}
-        class="hover:text-warm-700 dark:hover:text-warm-300 transition-colors"
-        >{imprintLabel}</a
+        href={withLocale(lang, '/imprint')}
+        class="transition-colors hover:text-foreground">{labels.imprint}</a
       >
-      <span class="text-warm-300 dark:text-warm-700">|</span>
+      <span class="text-border" aria-hidden="true">|</span>
       <a
-        href={privacyHref}
-        class="hover:text-warm-700 dark:hover:text-warm-300 transition-colors"
-        >{privacyLabel}</a
+        href={withLocale(lang, labels.privacyPath)}
+        class="transition-colors hover:text-foreground">{labels.privacy}</a
       >
-      <span class="text-warm-300 dark:text-warm-700">|</span>
+      <span class="text-border" aria-hidden="true">|</span>
       <a
         href="mailto:hi@patwoz.de"
-        class="hover:text-warm-700 dark:hover:text-warm-300 transition-colors"
-        >hi@patwoz.de</a
+        class="transition-colors hover:text-foreground">hi@patwoz.de</a
       >
     </div>
   </div>
-  <p class="text-xs text-warm-400 dark:text-warm-600 leading-relaxed max-w-3xl">
-    {trademarkNote}
-  </p>
+  <p class="text-2xs leading-4 text-faint">{labels.note}</p>
 </footer>

@@ -1,29 +1,29 @@
 ---
-import Menu from './Menu.astro'
+import SiteHeader from './SiteHeader.astro'
+import { isGermanPath, switchLocalePath } from '~/data/i18n'
 
+interface Props {
+  /** Hide the tab navigation in the header. */
+  tabs?: boolean
+}
+
+const { tabs = true } = Astro.props
 const currentPath = Astro.url.pathname
-const isGerman = currentPath.startsWith('/de')
-const dePath = isGerman
-  ? currentPath
-  : currentPath === '/'
-    ? '/de'
-    : `/de${currentPath}`
-const enPath = isGerman
-  ? currentPath === '/de'
-    ? '/'
-    : currentPath.replace(/^\/de\//, '/')
-  : currentPath
+const isGerman = isGermanPath(currentPath)
+const otherPath = switchLocalePath(currentPath)
+const dePath = isGerman ? currentPath : otherPath
+const enPath = isGerman ? otherPath : currentPath
 ---
 
-<Menu />
-
-<main
-  class="xl:pl-72 bg-warm-50 dark:bg-dark-bg pt-8 pb-20 xl:py-20 min-h-screen"
->
-  <div class="px-6 w-full sm:max-w-2xl md:max-w-4xl mx-auto">
+<main class="min-h-screen bg-canvas pb-16 text-foreground">
+  <div
+    class="mx-auto flex w-full max-w-[calc(var(--container-content)+2.5rem)] flex-col gap-10 px-5 pt-6 sm:pt-10"
+    data-site-column
+  >
+    <SiteHeader tabs={tabs} />
     <div
       id="lang-hint"
-      class="hidden mb-6 rounded-xl border border-warm-200 dark:border-warm-800 bg-warm-100/80 dark:bg-dark-surface px-4 py-3 text-sm text-warm-700 dark:text-warm-200 shadow-sm"
+      class="ui-card hidden px-4 py-3 text-sm text-foreground"
       data-current-lang={isGerman ? 'de' : 'en'}
       data-href-de={dePath}
       data-href-en={enPath}
@@ -34,19 +34,19 @@ const enPath = isGerman
       data-close-de="Hinweis schließen"
       data-close-en="Dismiss language hint"
     >
-      <div class="flex flex-col sm:flex-row sm:items-center gap-3">
+      <div class="flex flex-col gap-3 sm:flex-row sm:items-center">
         <div class="flex-1">
           <span id="lang-hint-text"></span>
         </div>
         <div class="flex items-center gap-2">
           <a
             id="lang-hint-link"
-            class="inline-flex items-center gap-2 rounded-lg bg-warm-900 dark:bg-warm-100 text-white dark:text-warm-900 px-3 py-1.5 text-xs font-semibold uppercase tracking-wide hover:opacity-90 transition-opacity"
+            class="inline-flex h-8 items-center rounded-sm bg-brand px-3 text-xs font-medium text-brand-foreground transition-opacity hover:opacity-90"
             href={dePath}></a>
           <button
             id="lang-hint-close"
             type="button"
-            class="inline-flex items-center justify-center rounded-lg border border-warm-200 dark:border-warm-800 px-2.5 py-1.5 text-xs font-semibold text-warm-600 dark:text-warm-300 hover:text-warm-900 dark:hover:text-warm-100 transition-colors"
+            class="ui-icon-button text-xs"
             aria-label="Dismiss language hint"
           >
             ✕
@@ -54,7 +54,9 @@ const enPath = isGerman
         </div>
       </div>
     </div>
-    <slot />
+    <div class="flex flex-col gap-10" data-site-content>
+      <slot />
+    </div>
   </div>
 </main>
 
@@ -104,3 +106,37 @@ const enPath = isGerman
     })
   })()
 </script>
+
+<script>
+  function initCopyButtons() {
+    const buttons = document.querySelectorAll<HTMLButtonElement>('[data-copy]')
+    buttons.forEach((button) => {
+      if (button.dataset.copyReady === 'true') return
+      button.dataset.copyReady = 'true'
+      button.addEventListener('click', async () => {
+        const value = button.dataset.copy
+        if (!value) return
+        try {
+          await navigator.clipboard.writeText(value)
+          const label = button.dataset.copiedLabel ?? 'Copied'
+          button.dataset.copied = 'true'
+          button.setAttribute('aria-label', `${label}: ${value}`)
+          window.setTimeout(() => {
+            delete button.dataset.copied
+          }, 1600)
+        } catch {
+          window.location.href = `mailto:${value}`
+        }
+      })
+    })
+  }
+
+  initCopyButtons()
+  document.addEventListener('astro:after-swap', initCopyButtons)
+</script>
+
+<style>
+  [data-copy][data-copied='true'] {
+    color: var(--ui-success);
+  }
+</style>

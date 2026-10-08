@@ -1,32 +1,23 @@
 ---
-import '../styles/theme-toggle.css'
+import Icon from './ui/Icon.astro'
 
 /**
- * ThemeToggle - animated light/dark switch
+ * ThemeToggle - icon button (sun in dark mode, moon in light mode)
  * - Defaults to the active system preference
  * - Click stores the opposite explicit theme
  */
 ---
 
-<button type="button" class="theme-toggle" aria-label="Toggle theme">
-  <span class="theme-toggle__track" aria-hidden="true">
-    <span class="theme-toggle__stars">
-      <span class="theme-toggle__star theme-toggle__star--one"></span>
-      <span class="theme-toggle__star theme-toggle__star--two"></span>
-      <span class="theme-toggle__star theme-toggle__star--three"></span>
-      <span class="theme-toggle__dot theme-toggle__dot--one"></span>
-      <span class="theme-toggle__dot theme-toggle__dot--two"></span>
-      <span class="theme-toggle__dot theme-toggle__dot--three"></span>
-    </span>
-    <span class="theme-toggle__cloud theme-toggle__cloud--one"></span>
-    <span class="theme-toggle__cloud theme-toggle__cloud--two"></span>
-    <span class="theme-toggle__thumb">
-      <span class="theme-toggle__sun"></span>
-      <span class="theme-toggle__moon"></span>
-      <span class="theme-toggle__crater theme-toggle__crater--one"></span>
-      <span class="theme-toggle__crater theme-toggle__crater--two"></span>
-      <span class="theme-toggle__crater theme-toggle__crater--three"></span>
-    </span>
+<button
+  type="button"
+  class="theme-toggle ui-icon-button"
+  aria-label="Toggle theme"
+>
+  <span class="hidden dark:inline-flex" aria-hidden="true">
+    <Icon name="sun" size={16} />
+  </span>
+  <span class="inline-flex dark:hidden" aria-hidden="true">
+    <Icon name="moon" size={16} />
   </span>
   <span class="sr-only" data-theme-label>Toggle theme</span>
 </button>

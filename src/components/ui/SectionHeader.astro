@@ -1,0 +1,27 @@
+---
+interface Props {
+  label: string
+  title?: string
+  subtitle?: string
+  linkLabel?: string
+  linkHref?: string
+  id?: string
+}
+
+const { label, title, subtitle, linkLabel, linkHref, id } = Astro.props
+---
+
+<div class="flex items-end justify-between gap-4" id={id}>
+  <div class="flex min-w-0 flex-col gap-0.5">
+    <span class="ui-label">{label}</span>
+    {title && <h2 class="text-md font-semibold text-foreground">{title}</h2>}
+    {subtitle && <p class="text-xs text-muted">{subtitle}</p>}
+  </div>
+  {
+    linkLabel && linkHref && (
+      <a href={linkHref} class="ui-link shrink-0 whitespace-nowrap">
+        {linkLabel}
+      </a>
+    )
+  }
+</div>
