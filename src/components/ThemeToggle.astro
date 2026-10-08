@@ -27,7 +27,7 @@ import Icon from './ui/Icon.astro'
   type ThemeState = 'light' | 'dark'
 
   let themeMediaListenerAttached = false
-  let pendingThemeChange: number | null = null
+  let revealRunning = false
 
   function getThemeToggles(): HTMLButtonElement[] {
     return Array.from(
@@ -86,91 +86,62 @@ import Icon from './ui/Icon.astro'
     getThemeToggles().forEach((toggle) => updateState(toggle, theme))
   }
 
+  function prefersReducedMotion(): boolean {
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  }
+
+  /**
+   * Switch the theme with a short circular reveal from the button.
+   * The class is applied synchronously inside the view transition callback,
+   * so the switch itself is never delayed by the animation.
+   */
   function revealTheme(next: ThemeState) {
-    const revealDirection = next === 'dark' ? 'to-dark' : 'to-light'
+    const root = document.documentElement
     const changeTheme = () => {
       applyTheme(next)
     }
-    const clearRevealDirection = () => {
-      delete document.documentElement.dataset.themeReveal
-    }
 
-    document.documentElement.dataset.themeReveal = revealDirection
-
-    if (document.startViewTransition) {
-      const transition = document.startViewTransition(changeTheme)
-      transition.finished.finally(clearRevealDirection)
-    } else {
+    if (
+      !document.startViewTransition ||
+      prefersReducedMotion() ||
+      revealRunning
+    ) {
       changeTheme()
-      clearRevealDirection()
+      return
     }
-  }
 
-  function startToggleTransition(next: ThemeState) {
-    const duration = 900
-    const direction = next === 'dark' ? 'to-dark' : 'to-light'
-
-    getThemeToggles().forEach((toggle) => {
-      updateState(toggle, next)
-      toggle.dataset.themeDirection = direction
-      toggle.dataset.themeAnimating = 'true'
-
-      window.setTimeout(() => {
-        delete toggle.dataset.themeAnimating
-        delete toggle.dataset.themeDirection
-      }, duration)
+    revealRunning = true
+    root.dataset.themeReveal = 'true'
+    const transition = document.startViewTransition(changeTheme)
+    transition.finished.finally(() => {
+      delete root.dataset.themeReveal
+      revealRunning = false
     })
   }
 
-  function getRevealOrigin(event: MouseEvent, next: ThemeState) {
+  function getRevealOrigin(event: MouseEvent) {
     const target = event.currentTarget
 
     if (target instanceof HTMLButtonElement) {
       const rect = target.getBoundingClientRect()
-      const thumbCenterOffset = rect.height / 2
-      const x =
-        next === 'dark'
-          ? rect.right - thumbCenterOffset
-          : rect.left + thumbCenterOffset
-
-      return {
-        x,
-        y: rect.top + thumbCenterOffset,
-      }
+      return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 }
     }
 
-    return {
-      x: event.clientX,
-      y: event.clientY,
-    }
+    return { x: event.clientX, y: event.clientY }
   }
 
   function handleClick(event: MouseEvent) {
-    if (pendingThemeChange !== null) return
-
     const current = getStoredTheme()
     const next = getEffectiveTheme(current) === 'dark' ? 'light' : 'dark'
-    const origin = getRevealOrigin(event, next)
-    const delay = 560
+    const origin = getRevealOrigin(event)
+    const root = document.documentElement
 
     localStorage.setItem('theme', next)
-    startToggleTransition(next)
+    getThemeToggles().forEach((toggle) => updateState(toggle, next))
+    root.style.setProperty('--view-transition-x', `${origin.x}px`)
+    root.style.setProperty('--view-transition-y', `${origin.y}px`)
 
-    document.documentElement.style.setProperty(
-      '--view-transition-x',
-      `${origin.x}px`,
-    )
-    document.documentElement.style.setProperty(
-      '--view-transition-y',
-      `${origin.y}px`,
-    )
-
-    const commitThemeChange = () => {
-      pendingThemeChange = null
-      revealTheme(next)
-    }
-
-    pendingThemeChange = window.setTimeout(commitThemeChange, delay)
+    revealTheme(next)
   }
 
   function initThemeToggle() {

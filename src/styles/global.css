@@ -387,82 +387,38 @@ body:has(#menu-toggle:checked) nav.mobile-menu {
   animation-play-state: paused;
 }
 
-/* View Transitions API - theme toggle soft reveal animation */
-@property --theme-reveal-radius {
-  syntax: '<length-percentage>';
-  inherits: false;
-  initial-value: 0vmax;
-}
-
-::view-transition-old(root),
-::view-transition-new(root) {
+/*
+  Theme toggle: short circular reveal via the View Transitions API.
+  Only the new snapshot animates a single clip-path circle from the button;
+  the old one just stays underneath (no masks, scaling or custom-property
+  interpolation, which made the switch feel sluggish).
+*/
+:root[data-theme-reveal]::view-transition-old(root),
+:root[data-theme-reveal]::view-transition-new(root) {
   animation: none;
   mix-blend-mode: normal;
 }
 
-::view-transition-old(root) {
+:root[data-theme-reveal]::view-transition-old(root) {
   z-index: 1;
 }
 
-::view-transition-new(root) {
-  --theme-reveal-radius: 0vmax;
-  z-index: 999;
-  clip-path: circle(
-    var(--theme-reveal-radius) at var(--view-transition-x, 50%)
-      var(--view-transition-y, 50%)
-  );
-  -webkit-mask-image: radial-gradient(
-    circle at var(--view-transition-x, 50%) var(--view-transition-y, 50%),
-    #000 0,
-    #000 calc(var(--theme-reveal-radius) - 6vmax),
-    rgb(0 0 0 / 0.84) calc(var(--theme-reveal-radius) - 2.4vmax),
-    transparent var(--theme-reveal-radius)
-  );
-  mask-image: radial-gradient(
-    circle at var(--view-transition-x, 50%) var(--view-transition-y, 50%),
-    #000 0,
-    #000 calc(var(--theme-reveal-radius) - 6vmax),
-    rgb(0 0 0 / 0.84) calc(var(--theme-reveal-radius) - 2.4vmax),
-    transparent var(--theme-reveal-radius)
-  );
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  transform-origin: var(--view-transition-x, 50%) var(--view-transition-y, 50%);
-}
-
-:root[data-theme-reveal]::view-transition-old(root) {
-  animation: theme-old-hold 0.84s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-
 :root[data-theme-reveal]::view-transition-new(root) {
-  animation: theme-soft-reveal 0.84s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+  z-index: 2;
+  animation: theme-reveal 0.32s ease-out forwards;
 }
 
-@keyframes theme-old-hold {
-  0% {
-    opacity: 1;
-    transform: scale(1);
+@keyframes theme-reveal {
+  from {
+    clip-path: circle(
+      0 at var(--view-transition-x, 50%) var(--view-transition-y, 50%)
+    );
   }
 
-  100% {
-    opacity: 0.72;
-    transform: scale(0.997);
-  }
-}
-
-@keyframes theme-soft-reveal {
-  0% {
-    --theme-reveal-radius: 0vmax;
-    transform: scale(1.006);
-  }
-
-  32% {
-    --theme-reveal-radius: 26vmax;
-  }
-
-  100% {
-    --theme-reveal-radius: 150vmax;
-    transform: scale(1);
+  to {
+    clip-path: circle(
+      150vmax at var(--view-transition-x, 50%) var(--view-transition-y, 50%)
+    );
   }
 }
 
