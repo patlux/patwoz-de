@@ -4,47 +4,153 @@
 /* Use class-based dark mode instead of media query */
 @custom-variant dark (&:where(.dark, .dark *));
 
+/*
+  Design tokens — "Zugriff" style.
+  Semantic colors switch with the .dark class (see :root / .dark below);
+  the @theme inline block exposes them as Tailwind utilities (bg-canvas, text-muted, …).
+*/
+:root {
+  --ui-canvas: #f5f5f7;
+  --ui-surface: #ffffff;
+  --ui-surface-elevated: #ececee;
+  --ui-secondary: #e8e8ed;
+  --ui-border: #d2d2d7;
+  --ui-foreground: #1d1d1f;
+  --ui-muted: #6e6e73;
+  --ui-faint: #8e8e93;
+  --ui-chip: #ffffff;
+  --ui-chip-border: #d2d2d7;
+  --ui-brand: #007aff;
+  --ui-brand-foreground: #ffffff;
+  --ui-success: #15803d;
+  --ui-success-bg: #dcfce7;
+  --ui-warning: #d97706;
+  --ui-danger: #dc2626;
+  color-scheme: light;
+}
+
+.dark {
+  --ui-canvas: #111111;
+  --ui-surface: #1c1c1e;
+  --ui-surface-elevated: #2c2c2e;
+  --ui-secondary: #27272a;
+  --ui-border: #3f3f46;
+  --ui-foreground: #f8f8f8;
+  --ui-muted: #a1a1aa;
+  --ui-faint: #71717a;
+  --ui-chip: #f8f8f8;
+  --ui-chip-border: #f8f8f8;
+  --ui-brand: #0a84ff;
+  --ui-brand-foreground: #ffffff;
+  --ui-success: #22c55e;
+  --ui-success-bg: #052e16;
+  --ui-warning: #f59e0b;
+  --ui-danger: #f87171;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-canvas: var(--ui-canvas);
+  --color-surface: var(--ui-surface);
+  --color-surface-elevated: var(--ui-surface-elevated);
+  --color-secondary: var(--ui-secondary);
+  --color-border: var(--ui-border);
+  --color-foreground: var(--ui-foreground);
+  --color-muted: var(--ui-muted);
+  --color-faint: var(--ui-faint);
+  --color-chip: var(--ui-chip);
+  --color-chip-border: var(--ui-chip-border);
+  --color-brand: var(--ui-brand);
+  --color-brand-foreground: var(--ui-brand-foreground);
+  --color-success: var(--ui-success);
+  --color-success-bg: var(--ui-success-bg);
+  --color-warning: var(--ui-warning);
+  --color-danger: var(--ui-danger);
+}
+
 @theme {
-  /* System font stacks for optimal performance */
-  --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  --font-display: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  --font-article: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-display: 'Inter', ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-article: 'Inter', ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 
-  /* Pure black & white base */
-  --color-warm-50: #ffffff;
-  --color-warm-100: #fafafa;
-  --color-warm-200: #f0f0f0;
-  --color-warm-300: #e0e0e0;
-  --color-warm-400: #b0b0b0;
-  --color-warm-500: #808080;
-  --color-warm-600: #606060;
-  --color-warm-700: #404040;
-  --color-warm-800: #202020;
-  --color-warm-900: #101010;
+  /* Type scale (px) */
+  --text-2xs: 11px;
+  --text-2xs--line-height: 16px;
+  --text-xs: 12px;
+  --text-xs--line-height: 16px;
+  --text-sm: 13px;
+  --text-sm--line-height: 18px;
+  --text-base: 14px;
+  --text-base--line-height: 20px;
+  --text-md: 15px;
+  --text-md--line-height: 20px;
+  --text-lg: 18px;
+  --text-lg--line-height: 24px;
+  --text-2xl: 24px;
+  --text-2xl--line-height: 28px;
 
-  /* Accent - electric indigo */
-  --color-accent-50: #eef2ff;
-  --color-accent-100: #e0e7ff;
-  --color-accent-200: #c7d2fe;
-  --color-accent-300: #a5b4fc;
-  --color-accent-400: #818cf8;
-  --color-accent-500: #6366f1;
-  --color-accent-600: #4f46e5;
-  --color-accent-700: #4338ca;
-  --color-accent-800: #3730a3;
-  --color-accent-900: #312e81;
+  --tracking-label: 0.04em;
 
-  /* Dark mode - true black */
-  --color-dark-bg: #000000;
-  --color-dark-surface: #0a0a0a;
-  --color-dark-elevated: #141414;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  --container-content: 680px;
+
+  /* Legacy palettes, mapped onto the new tokens so untouched pages follow the redesign. */
+  --color-warm-50: var(--ui-canvas);
+  --color-warm-100: var(--ui-surface);
+  --color-warm-200: var(--ui-border);
+  --color-warm-300: var(--ui-border);
+  --color-warm-400: var(--ui-faint);
+  --color-warm-500: var(--ui-muted);
+  --color-warm-600: var(--ui-muted);
+  --color-warm-700: var(--ui-foreground);
+  --color-warm-800: var(--ui-border);
+  --color-warm-900: var(--ui-foreground);
+
+  --color-accent-50: #eff6ff;
+  --color-accent-100: #dbeafe;
+  --color-accent-200: #bfdbfe;
+  --color-accent-300: #93c5fd;
+  --color-accent-400: #5aa7ff;
+  --color-accent-500: var(--ui-brand);
+  --color-accent-600: #0066cc;
+  --color-accent-700: #0057b8;
+  --color-accent-800: #004a9e;
+  --color-accent-900: #003d82;
+
+  --color-dark-bg: var(--ui-canvas);
+  --color-dark-surface: var(--ui-surface);
+  --color-dark-elevated: var(--ui-surface-elevated);
+}
+
+/* Zugriff-style surfaces */
+.ui-card {
+  @apply overflow-hidden rounded-md border border-border bg-surface;
+}
+
+.ui-label {
+  @apply text-2xs font-semibold uppercase tracking-label text-muted;
+}
+
+.ui-divider {
+  @apply border-surface-elevated;
+}
+
+.ui-icon-button {
+  @apply inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-sm bg-secondary text-foreground transition-colors hover:bg-border;
+}
+
+.ui-link {
+  @apply text-xs text-brand transition-opacity hover:opacity-80;
 }
 
 a.button {
-  @apply inline-block rounded-lg border border-warm-200 bg-white px-6 py-2.5 shadow-sm transition-all duration-300 hover:shadow-md hover:border-accent-400 hover:-translate-y-0.5 dark:bg-dark-surface dark:border-warm-800 dark:text-warm-100 dark:hover:border-accent-500;
+  @apply inline-block rounded-md border border-border bg-surface px-6 py-2.5 transition-colors hover:border-brand;
 }
 
 h1 {
@@ -71,7 +177,7 @@ h6 {
 }
 
 .expressive-code .frame {
-  border-color: #6366f1 !important;
+  border-color: var(--ui-border) !important;
 }
 
 @media (min-width: 640px) {
@@ -102,16 +208,16 @@ pre code {
   color: #d4d4d4;
 }
 .c-kw {
-  color: #818cf8;
+  color: #5aa7ff;
 }
 .c-cn {
-  color: #a5b4fc;
+  color: #8fc1ff;
 }
 .c-pm {
   color: #e5e5e5;
 }
 .c-fn {
-  color: #c7d2fe;
+  color: #bcdcff;
 }
 .c-st {
   color: #a3a3a3;
@@ -494,11 +600,11 @@ body:has(#menu-toggle:checked) nav.mobile-menu {
 
 /* Accent glow for CTA buttons */
 .glow-accent {
-  box-shadow: 0 4px 20px -4px rgba(99, 102, 241, 0.4);
+  box-shadow: 0 4px 20px -4px rgba(10, 132, 255, 0.4);
 }
 
 .glow-accent:hover {
-  box-shadow: 0 8px 30px -4px rgba(99, 102, 241, 0.55);
+  box-shadow: 0 8px 30px -4px rgba(10, 132, 255, 0.55);
 }
 
 /* Soft card styling */

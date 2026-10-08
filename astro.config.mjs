@@ -37,8 +37,8 @@ export default defineConfig({
         showLineNumbers: true,
       },
       styleOverrides: {
-        // Border with indigo accent
-        borderColor: '#6366f1',
+        // Border in Zugriff border tone
+        borderColor: '#3f3f46',
         borderWidth: '1px',
         borderRadius: '0.5rem',
         // Code styling
@@ -49,17 +49,17 @@ export default defineConfig({
         codePaddingBlock: '1rem',
         codePaddingInline: '1.25rem',
         // Background
-        codeBackground: '#0a0a0a',
+        codeBackground: '#111111',
         // Frames
         frames: {
           frameBoxShadowCssValue: 'none',
-          editorActiveTabBackground: '#0a0a0a',
-          editorActiveTabBorderColor: '#6366f1',
-          editorTabBarBackground: '#111',
-          editorTabBarBorderBottomColor: '#222',
-          terminalBackground: '#0a0a0a',
-          terminalTitlebarBackground: '#111',
-          terminalTitlebarBorderBottomColor: '#222',
+          editorActiveTabBackground: '#111111',
+          editorActiveTabBorderColor: '#0a84ff',
+          editorTabBarBackground: '#1c1c1e',
+          editorTabBarBorderBottomColor: '#2c2c2e',
+          terminalBackground: '#111111',
+          terminalTitlebarBackground: '#1c1c1e',
+          terminalTitlebarBorderBottomColor: '#2c2c2e',
         },
         // Line numbers
         lineNumbers: {
