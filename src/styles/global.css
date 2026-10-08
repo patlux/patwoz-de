@@ -15,17 +15,36 @@
   --ui-surface-elevated: #ececee;
   --ui-secondary: #e8e8ed;
   --ui-border: #d2d2d7;
+  /* Boundaries of form controls need >= 3:1 (WCAG 1.4.11) against surface and canvas. */
+  --ui-border-strong: #86868b;
   --ui-foreground: #1d1d1f;
-  --ui-muted: #6e6e73;
-  --ui-faint: #8e8e93;
+  /* Text colors keep >= 4.5:1 (WCAG AA) on canvas, surface, elevated and secondary. */
+  --ui-muted: #66666c;
+  --ui-faint: #6e6e73;
   --ui-chip: #ffffff;
   --ui-chip-border: #d2d2d7;
+  /* brand: non-text accents (underline, dots) · link: text · brand-fill: button background with white label */
   --ui-brand: #007aff;
+  --ui-link: #0066cc;
+  --ui-brand-fill: #0066cc;
   --ui-brand-foreground: #ffffff;
   --ui-success: #15803d;
   --ui-success-bg: #dcfce7;
   --ui-warning: #d97706;
   --ui-danger: #dc2626;
+
+  /* Legacy warm-* ramp (light → dark). Values follow the mode so text pairs like
+     `text-warm-600 dark:text-warm-400` stay readable in both modes. */
+  --ui-warm-50: var(--ui-canvas);
+  --ui-warm-100: var(--ui-surface);
+  --ui-warm-200: var(--ui-secondary);
+  --ui-warm-300: var(--ui-border);
+  --ui-warm-400: var(--ui-faint);
+  --ui-warm-500: var(--ui-muted);
+  --ui-warm-600: var(--ui-muted);
+  --ui-warm-700: #3a3a3c;
+  --ui-warm-800: var(--ui-foreground);
+  --ui-warm-900: var(--ui-foreground);
   color-scheme: light;
 }
 
@@ -35,17 +54,31 @@
   --ui-surface-elevated: #2c2c2e;
   --ui-secondary: #27272a;
   --ui-border: #3f3f46;
+  --ui-border-strong: #6b6b75;
   --ui-foreground: #f8f8f8;
   --ui-muted: #a1a1aa;
-  --ui-faint: #71717a;
+  --ui-faint: #8e8e96;
   --ui-chip: #f8f8f8;
   --ui-chip-border: #f8f8f8;
   --ui-brand: #0a84ff;
+  --ui-link: #3b9eff;
+  --ui-brand-fill: #0b6fd6;
   --ui-brand-foreground: #ffffff;
   --ui-success: #22c55e;
   --ui-success-bg: #052e16;
   --ui-warning: #f59e0b;
   --ui-danger: #f87171;
+
+  --ui-warm-50: var(--ui-canvas);
+  --ui-warm-100: var(--ui-foreground);
+  --ui-warm-200: #e4e4e7;
+  --ui-warm-300: #d4d4d8;
+  --ui-warm-400: var(--ui-muted);
+  --ui-warm-500: var(--ui-muted);
+  --ui-warm-600: var(--ui-faint);
+  --ui-warm-700: #d4d4d8;
+  --ui-warm-800: var(--ui-border);
+  --ui-warm-900: var(--ui-foreground);
   color-scheme: dark;
 }
 
@@ -55,12 +88,15 @@
   --color-surface-elevated: var(--ui-surface-elevated);
   --color-secondary: var(--ui-secondary);
   --color-border: var(--ui-border);
+  --color-border-strong: var(--ui-border-strong);
   --color-foreground: var(--ui-foreground);
   --color-muted: var(--ui-muted);
   --color-faint: var(--ui-faint);
   --color-chip: var(--ui-chip);
   --color-chip-border: var(--ui-chip-border);
   --color-brand: var(--ui-brand);
+  --color-link: var(--ui-link);
+  --color-brand-fill: var(--ui-brand-fill);
   --color-brand-foreground: var(--ui-brand-foreground);
   --color-success: var(--ui-success);
   --color-success-bg: var(--ui-success-bg);
@@ -101,23 +137,23 @@
   --container-content: 680px;
 
   /* Legacy palettes, mapped onto the new tokens so untouched pages follow the redesign. */
-  --color-warm-50: var(--ui-canvas);
-  --color-warm-100: var(--ui-surface);
-  --color-warm-200: var(--ui-border);
-  --color-warm-300: var(--ui-border);
-  --color-warm-400: var(--ui-faint);
-  --color-warm-500: var(--ui-muted);
-  --color-warm-600: var(--ui-muted);
-  --color-warm-700: var(--ui-foreground);
-  --color-warm-800: var(--ui-border);
-  --color-warm-900: var(--ui-foreground);
+  --color-warm-50: var(--ui-warm-50);
+  --color-warm-100: var(--ui-warm-100);
+  --color-warm-200: var(--ui-warm-200);
+  --color-warm-300: var(--ui-warm-300);
+  --color-warm-400: var(--ui-warm-400);
+  --color-warm-500: var(--ui-warm-500);
+  --color-warm-600: var(--ui-warm-600);
+  --color-warm-700: var(--ui-warm-700);
+  --color-warm-800: var(--ui-warm-800);
+  --color-warm-900: var(--ui-warm-900);
 
   --color-accent-50: #eff6ff;
   --color-accent-100: #dbeafe;
   --color-accent-200: #bfdbfe;
   --color-accent-300: #93c5fd;
   --color-accent-400: #5aa7ff;
-  --color-accent-500: var(--ui-brand);
+  --color-accent-500: var(--ui-link);
   --color-accent-600: #0066cc;
   --color-accent-700: #0057b8;
   --color-accent-800: #004a9e;
@@ -146,7 +182,7 @@
 }
 
 .ui-link {
-  @apply text-xs text-brand transition-opacity hover:opacity-80;
+  @apply text-xs text-link transition-opacity hover:opacity-80;
 }
 
 a.button {

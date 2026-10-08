@@ -229,19 +229,19 @@
 }
 .field-group :is(input, select, textarea) {
   width: 100%;
-  border: 1px solid var(--color-warm-300);
+  border: 1px solid var(--color-border-strong);
   border-radius: 0.75rem;
-  background: white;
+  background: var(--color-surface);
   padding: 0.75rem 0.875rem;
-  color: var(--color-warm-900);
+  color: var(--color-foreground);
   transition:
     border-color 150ms ease,
     box-shadow 150ms ease;
 }
 :global(.dark) .field-group :is(input, select, textarea) {
-  border-color: var(--color-warm-700);
-  background: var(--color-dark-surface);
-  color: white;
+  border-color: var(--color-border-strong);
+  background: var(--color-surface);
+  color: var(--color-foreground);
 }
 .field-group :is(input, select, textarea):focus-visible {
   border-color: var(--color-accent-500);

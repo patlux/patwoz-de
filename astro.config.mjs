@@ -63,7 +63,8 @@ export default defineConfig({
         },
         // Line numbers
         lineNumbers: {
-          foreground: '#404040',
+          // 5.8:1 on the #111111 code background (WCAG AA)
+          foreground: '#8e8e96',
         },
       },
       frames: {
