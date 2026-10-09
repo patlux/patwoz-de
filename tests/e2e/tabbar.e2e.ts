@@ -4,8 +4,12 @@ async function openPage(page: Page, path: string) {
   await page.goto(path)
   // The development-only toolbar overlaps the bottom navigation. It is absent
   // from production and must not intercept the navigation under test.
-  await page.locator('astro-dev-toolbar').evaluateAll((toolbars) => {
-    for (const toolbar of toolbars) toolbar.remove()
+  // Insert synchronously in Playwright's utility world: addStyleTag waits for
+  // a main-world load event that never arrives with JavaScript disabled.
+  await page.locator('head').evaluate((head) => {
+    const style = document.createElement('style')
+    style.textContent = 'astro-dev-toolbar { display: none !important; }'
+    head.append(style)
   })
 }
 
@@ -134,7 +138,7 @@ test('reduced motion disables mobile press scaling', async ({ page }) => {
     await expect(link).toHaveCSS('transform', 'none')
     await expect(link).toHaveCSS('transition-duration', '0s')
   } finally {
-    await page.mouse.move(0, 0)
+    // Release in place so cleanup cannot start a native link drag.
     await page.mouse.up()
   }
 })
