@@ -363,10 +363,10 @@ const rays = Array.from({ length: 8 }, (_, index) => index)
 
   /**
    * Light -> dark: the old light view stays on top of the toggle until the
-   * very end (240 ms), so the icon keeps the old (dark) ink and fades to the
-   * new color around that moment: 180 ms + 120 ms fade, midpoint at 240 ms.
+   * very end (320 ms, ease-out), so the icon keeps the old (dark) ink and
+   * fades to the new color around that moment: 260 ms + 120 ms fade.
    */
-  const INK_RELEASE_MS = 180
+  const INK_RELEASE_MS = 260
   let inkTimer = 0
 
   function holdInk(toggles: HTMLButtonElement[]) {

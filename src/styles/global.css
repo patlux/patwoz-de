@@ -446,9 +446,13 @@ body:has(#menu-toggle:checked) nav.mobile-menu {
   The script sets center and radius (to the farthest viewport corner) in
   percentages of the snapshot; px would land at half the position on Retina
   screens, where Chrome lays out the root snapshot in device pixels.
-  Dark -> light: the new light view grows out of the toggle.
-  Light -> dark: the old light view shrinks back into the toggle.
+  Dark -> light: the new light view grows out of the toggle (ease-in, so the
+  first frames stay small and visibly start at the button).
+  Light -> dark: the old light view shrinks back into the toggle (ease-out,
+  the exact time reverse, so the last frames visibly end at the button).
   The toggle has its own layer above both, so its icon morph stays visible.
+  Other named layers (tab bar, language thumb) drop their names during the
+  reveal so the circle clips them like the rest of the page.
 */
 :root[data-theme-reveal]::view-transition-old(root),
 :root[data-theme-reveal]::view-transition-new(root) {
@@ -462,7 +466,7 @@ body:has(#menu-toggle:checked) nav.mobile-menu {
 
 :root[data-theme-reveal='to-light']::view-transition-new(root) {
   z-index: 2;
-  animation: theme-reveal-grow 280ms cubic-bezier(0.2, 0, 0, 1) both;
+  animation: theme-reveal-grow 320ms cubic-bezier(0.42, 0, 1, 1) both;
 }
 
 :root[data-theme-reveal='to-dark']::view-transition-new(root) {
@@ -471,7 +475,7 @@ body:has(#menu-toggle:checked) nav.mobile-menu {
 
 :root[data-theme-reveal='to-dark']::view-transition-old(root) {
   z-index: 2;
-  animation: theme-reveal-shrink 240ms cubic-bezier(0.3, 0, 0.8, 0.15) both;
+  animation: theme-reveal-shrink 320ms cubic-bezier(0, 0, 0.58, 1) both;
 }
 
 /* Colors switch at once under the reveal; only the toggle animates. */
