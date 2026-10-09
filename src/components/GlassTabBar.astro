@@ -2,7 +2,9 @@
 /**
  * GlassTabBar — floating "liquid glass" capsule with the main navigation.
  *
- * - At scroll 0 it sits below the top bar, wider than the content column,
+ * - On mobile it stays fixed above the bottom safe area, without scroll or
+ *   hover effects. All six destinations have at least 44 × 44 px targets.
+ * - On desktop at scroll 0 it sits below the top bar, wider than the content column,
  *   with icon + label for every tab.
  * - Between 0 and 80 px of scrolling it morphs: labels collapse (the active
  *   one stays), the signature mark fades in as a home button and the capsule
@@ -48,6 +50,7 @@ const labels =
                 href={withLocale(lang, item.path)}
                 class="tabbar__tab"
                 aria-current={active ? 'page' : undefined}
+                aria-label={item.label[lang]}
                 title={item.label[lang]}
                 data-tabbar-tab
               >
@@ -302,15 +305,36 @@ const labels =
   }
 
   @media (max-width: 639px) {
+    /* Outside the content flow: anchored to the viewport, not the page end. */
     .tabbar-slot {
+      position: fixed;
+      top: auto;
+      bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+      left: max(12px, env(safe-area-inset-left, 0px));
+      right: max(12px, env(safe-area-inset-right, 0px));
+      width: auto;
       animation: none;
     }
 
-    .tabbar {
+    .tabbar,
+    .tabbar.is-lifted {
       --t: 1;
-      width: calc(100vw - 24px);
-      height: 50px;
+      left: 0;
+      width: 100%;
+      max-width: none;
+      height: 56px;
       padding: 0 6px;
+      border-color: color-mix(in srgb, var(--ui-foreground) 16%, transparent);
+      transform: none;
+      opacity: 1;
+      transition: none;
+    }
+
+    @supports (backdrop-filter: blur(1px)) or
+      (-webkit-backdrop-filter: blur(1px)) {
+      .tabbar {
+        background: color-mix(in srgb, var(--ui-surface) 72%, transparent);
+      }
     }
 
     .tabbar__home {
@@ -324,33 +348,73 @@ const labels =
 
     .tabbar__item {
       flex: 1;
+      min-width: 44px;
       display: flex;
       justify-content: center;
     }
 
+    .tabbar__item:has([aria-current='page']) {
+      flex: 0 1 120px;
+    }
+
     .tabbar__tab,
     .tabbar[data-hover] .tabbar__tab {
-      height: 38px;
-      padding: 0 10px;
+      justify-content: center;
+      width: 100%;
+      min-width: 44px;
+      height: 44px;
+      gap: 0;
+      padding: 0;
     }
 
     .tabbar__tab[aria-current='page'] {
-      padding: 0 12px 0 10px;
+      gap: 6px;
+      padding: 0 12px;
+    }
+
+    .tabbar :global(.tabbar__icon) {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+    }
+
+    .tabbar__tab[aria-current='page'] :global(.tabbar__icon) {
+      color: var(--color-brand);
     }
 
     .tabbar__label,
     .tabbar[data-hover] .tabbar__label {
+      min-width: 0;
       max-width: 0;
       opacity: 0;
+      text-overflow: ellipsis;
+      transition: none;
     }
 
     .tabbar__tab[aria-current='page'] .tabbar__label {
-      max-width: 160px;
+      max-width: 72px;
       opacity: 1;
     }
 
     .tabbar__pill {
       display: none;
+    }
+  }
+
+  /* Keep touch targets intact when there is no room for a useful label. */
+  @media (max-width: 359px) {
+    .tabbar__item:has([aria-current='page']) {
+      flex: 1;
+    }
+
+    .tabbar__tab[aria-current='page'] {
+      gap: 0;
+      padding: 0;
+    }
+
+    .tabbar__tab[aria-current='page'] .tabbar__label {
+      max-width: 0;
+      opacity: 0;
     }
   }
 
@@ -368,6 +432,10 @@ const labels =
 
     .tabbar__pill {
       display: none;
+    }
+
+    .tabbar__tab:active {
+      transform: none;
     }
   }
 </style>
@@ -390,6 +458,7 @@ const labels =
       '(prefers-reduced-motion: reduce)',
     ).matches
     const scrollDriven = CSS.supports('animation-timeline: scroll()')
+    const desktop = window.matchMedia('(min-width: 640px)')
 
     // --- Scroll progress fallback + lift on fast downward scrolling -------
     let lastY = window.scrollY
@@ -402,6 +471,15 @@ const labels =
       const now = performance.now()
       const dy = y - lastY
       const dt = Math.max(now - lastTime, 1)
+
+      if (!desktop.matches) {
+        bar.classList.remove('is-lifted')
+        delete bar.dataset.hover
+        pill.classList.remove('is-visible')
+        lastY = y
+        lastTime = now
+        return
+      }
 
       if (!scrollDriven) {
         const progress = Math.min(Math.max(y / COLLAPSE_DISTANCE, 0), 1)
@@ -422,11 +500,12 @@ const labels =
     }
 
     const onScroll = () => {
-      if (frame) return
+      if (!desktop.matches || frame) return
       frame = window.requestAnimationFrame(update)
     }
 
     window.addEventListener('scroll', onScroll, { passive: true })
+    desktop.addEventListener('change', update)
     update()
 
     // --- Hover: expand the compact capsule, collapse after a short delay ---
@@ -434,7 +513,7 @@ const labels =
 
     if (!reduceMotion) {
       bar.addEventListener('pointerenter', (event) => {
-        if (event.pointerType === 'touch') return
+        if (!desktop.matches || event.pointerType === 'touch') return
         window.clearTimeout(leaveTimer)
         bar.dataset.hover = 'true'
       })
@@ -452,7 +531,7 @@ const labels =
     )
 
     const movePill = (tab: HTMLElement) => {
-      if (tab.getAttribute('aria-current') === 'page') {
+      if (!desktop.matches || tab.getAttribute('aria-current') === 'page') {
         pill.classList.remove('is-visible')
         return
       }
@@ -487,6 +566,17 @@ const labels =
       const next = tabs[(index + step + tabs.length) % tabs.length]
       next?.focus()
     })
+
+    document.addEventListener(
+      'astro:before-swap',
+      () => {
+        window.removeEventListener('scroll', onScroll)
+        desktop.removeEventListener('change', update)
+        window.cancelAnimationFrame(frame)
+        window.clearTimeout(leaveTimer)
+      },
+      { once: true },
+    )
   }
 
   initTabBar()

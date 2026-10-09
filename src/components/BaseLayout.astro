@@ -4,7 +4,7 @@ import SiteHeader from './SiteHeader.astro'
 import { isGermanPath, switchLocalePath } from '~/data/i18n'
 
 interface Props {
-  /** Hide the floating tab bar below the top bar. */
+  /** Show navigation below the header on desktop and at the bottom on mobile. */
   tabs?: boolean
 }
 
@@ -16,7 +16,10 @@ const dePath = isGerman ? currentPath : otherPath
 const enPath = isGerman ? otherPath : currentPath
 ---
 
-<main class="min-h-screen bg-canvas pb-16 text-foreground">
+<main
+  class="min-h-screen bg-canvas pb-16 text-foreground"
+  data-bottom-navigation={tabs ? '' : undefined}
+>
   <div
     class="mx-auto flex w-full max-w-[calc(var(--container-content)+2.5rem)] flex-col gap-10 px-5 pt-6 sm:pt-10"
     data-site-column
@@ -138,6 +141,17 @@ const enPath = isGerman ? otherPath : currentPath
 </script>
 
 <style>
+  @media (max-width: 639px) {
+    [data-bottom-navigation] {
+      /* 56 px capsule + 12 px bottom gap + 12 px content clearance. */
+      padding-bottom: calc(80px + env(safe-area-inset-bottom, 0px));
+    }
+
+    :global(html:has([data-bottom-navigation])) {
+      scroll-padding-bottom: calc(80px + env(safe-area-inset-bottom, 0px));
+    }
+  }
+
   [data-copy][data-copied='true'] {
     color: var(--ui-success);
   }
