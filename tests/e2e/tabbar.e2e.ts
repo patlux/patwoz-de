@@ -4,8 +4,8 @@ async function openPage(page: Page, path: string) {
   await page.goto(path)
   // The development-only toolbar overlaps the bottom navigation. It is absent
   // from production and must not intercept the navigation under test.
-  await page.addStyleTag({
-    content: 'astro-dev-toolbar { display: none !important; }',
+  await page.locator('astro-dev-toolbar').evaluateAll((toolbars) => {
+    for (const toolbar of toolbars) toolbar.remove()
   })
 }
 
