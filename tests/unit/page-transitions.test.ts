@@ -2,12 +2,20 @@ import { readFileSync } from 'node:fs'
 import { describe, expect, test } from 'bun:test'
 
 type Tab = { path: string; prefix: boolean }
+type Block = {
+  index: number
+  kind: 'text' | 'chip' | 'frame'
+  tag: string
+  top: number
+}
 type Note = {
   from: string
   to: string | null
   morph: 'in' | 'out' | null
   kinds: Array<'logo' | 'title'>
   at: number
+  blocks?: Block[]
+  scrollY?: number
 }
 
 type PageTransitionHelpers = {
@@ -20,6 +28,13 @@ type PageTransitionHelpers = {
     tabs: readonly Tab[],
     historyDelta: number,
   ) => 'forward' | 'back' | 'lang'
+  isLangSwitch: (from: string, to: string) => boolean
+  pairBlocks: (
+    before: readonly Block[],
+    after: readonly Block[],
+    maxShift: number,
+  ) => Block[]
+  refocusDelay: (rank: number) => number
   parentPath: (path: string) => string
   readNote: (raw: string | null, here: string, now: number) => Note | null
   parseTabs: (raw: string | undefined) => Tab[]
@@ -30,6 +45,9 @@ const helperNames = [
   'stripLocale',
   'tabIndex',
   'slideType',
+  'isLangSwitch',
+  'pairBlocks',
+  'refocusDelay',
   'parentPath',
   'readNote',
   'parseTabs',
@@ -110,13 +128,64 @@ describe('slideType', () => {
     expect(helpers.slideType('/imprint', '/privacy', tabs, 0)).toBe('forward')
   })
 
-  test('the same page in the other language only cross-fades', () => {
+  test('the same page in the other language is a language switch', () => {
     expect(helpers.slideType('/work/abl', '/de/work/abl', tabs, 0)).toBe('lang')
     expect(helpers.slideType('/de', '/', tabs, 0)).toBe('lang')
   })
 
   test('ignores trailing slashes', () => {
     expect(helpers.slideType('/work/', '/work', tabs, 0)).toBe('lang')
+  })
+})
+
+describe('isLangSwitch', () => {
+  test('pairs a page with its counterpart in the other language', () => {
+    expect(helpers.isLangSwitch('/de', '/')).toBe(true)
+    expect(helpers.isLangSwitch('/work/abl', '/de/work/abl/')).toBe(true)
+  })
+
+  test('ignores reloads and other pages', () => {
+    expect(helpers.isLangSwitch('/work/', '/work')).toBe(false)
+    expect(helpers.isLangSwitch('/de/work', '/work/abl')).toBe(false)
+    expect(helpers.isLangSwitch('/de/blog', '/de')).toBe(false)
+  })
+})
+
+describe('pairBlocks', () => {
+  const block = (
+    index: number,
+    top: number,
+    kind: Block['kind'] = 'text',
+    tag = 'p',
+  ): Block => ({ index, kind, tag, top })
+
+  test('keeps the new position of blocks with a partner', () => {
+    expect(
+      helpers.pairBlocks(
+        [block(0, 100), block(3, 300, 'frame', 'div')],
+        [block(0, 100), block(3, 282, 'frame', 'div')],
+        240,
+      ),
+    ).toEqual([block(0, 100), block(3, 282, 'frame', 'div')])
+  })
+
+  test('drops blocks whose partner differs or moved too far', () => {
+    expect(
+      helpers.pairBlocks(
+        [block(0, 100), block(1, 140), block(2, 180), block(4, 400)],
+        [block(0, 100, 'chip'), block(1, 140, 'text', 'h2'), block(2, 500)],
+        240,
+      ),
+    ).toEqual([])
+  })
+})
+
+describe('refocusDelay', () => {
+  test('staggers 12 ms per block after 30 ms, at most seven steps', () => {
+    expect(helpers.refocusDelay(0)).toBe(30)
+    expect(helpers.refocusDelay(1)).toBe(42)
+    expect(helpers.refocusDelay(7)).toBe(114)
+    expect(helpers.refocusDelay(20)).toBe(114)
   })
 })
 
@@ -148,6 +217,26 @@ describe('readNote', () => {
     expect(helpers.readNote(JSON.stringify(open), '/skills', 1500)).toEqual(
       open,
     )
+  })
+
+  test('accepts the blocks and scroll position of a language switch', () => {
+    const lang: Note = {
+      from: '/de',
+      to: '/',
+      morph: null,
+      kinds: [],
+      at: 1000,
+      blocks: [{ index: 2, kind: 'chip', tag: 'a', top: 480 }],
+      scrollY: 120,
+    }
+    expect(helpers.readNote(JSON.stringify(lang), '/', 1500)).toEqual(lang)
+    expect(
+      helpers.readNote(
+        JSON.stringify({ ...lang, blocks: [{ index: -1, kind: 'text' }] }),
+        '/',
+        1500,
+      ),
+    ).toBeNull()
   })
 
   test('rejects notes for another page, stale notes and invalid data', () => {
