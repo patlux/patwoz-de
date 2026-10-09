@@ -4,6 +4,8 @@ import '@fontsource-variable/inter'
 import '../styles/global.css'
 import meImage from '~/assets/images/me.jpg'
 import SplashIntro from '~/components/SplashIntro.astro'
+import { navigation } from '~/data/navigation'
+import pageTransitionsScript from '~/scripts/page-transitions.js?raw'
 
 interface Props {
   title?: string
@@ -69,6 +71,11 @@ const schema = [
     },
   },
 ]
+
+// Tab order for the slide direction of page transitions.
+const transitionTabs = JSON.stringify(
+  navigation.map(({ path, prefix }) => ({ path, prefix: prefix === true })),
+)
 
 // Get optimized image URLs for preloading
 const optimizedMe = await getImage({
@@ -160,6 +167,13 @@ const optimizedMe = await getImage({
 
     <!-- Enable View Transitions API for same-document transitions (theme toggle) -->
     <meta name="view-transition" content="same-document" />
+
+    <!-- Page transitions: must run before the first render (pagereveal). -->
+    <script
+      is:inline
+      data-tabs={transitionTabs}
+      set:html={pageTransitionsScript}
+    />
   </head>
   <body
     class:list={[
@@ -169,6 +183,8 @@ const optimizedMe = await getImage({
   >
     {intro && <SplashIntro />}
     <slot />
+    <!-- End of the content; page transitions wait for it (rel=expect). -->
+    <span id="page-end" hidden></span>
 
     {
       import.meta.env.PROD && (

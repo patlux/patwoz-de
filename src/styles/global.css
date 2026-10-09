@@ -409,11 +409,48 @@ body:has(#menu-toggle:checked) nav.mobile-menu {
 }
 
 /*
-  Cross-document view transitions: the page cross-fades briefly and named
-  elements (tab bar capsule, active lens) glide to their new position.
+  Page transitions (cross-document view transitions).
+  Header, tab bar and active lens keep their own layers and glide; the rest
+  of the page is the root snapshot and moves. The inline script
+  src/scripts/page-transitions.js sets data-page-transition on <html>:
+  - morph-in / morph-out: list item and detail page share their logo or
+    title (vt-logo, vt-title), the rest fades and the detail rises.
+  - forward / back: slide in the order of the tab bar.
+  - lang: the same page in the other language, cross-fade only.
+  A shared element without a partner on the other page (:only-child)
+  leaves together with the old page.
 */
 @view-transition {
   navigation: auto;
+}
+
+:root {
+  --vt-ease-emph: cubic-bezier(0.2, 0, 0, 1);
+  --vt-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --vt-ease-in: cubic-bezier(0.3, 0, 0.8, 0.15);
+  --vt-dir: 1;
+  --vt-shift-out: 32px;
+  --vt-shift-in: 64px;
+}
+
+@media (max-width: 639px) {
+  :root {
+    --vt-shift-out: 24px;
+    --vt-shift-in: 48px;
+  }
+}
+
+:root[data-page-transition='back'] {
+  --vt-dir: -1;
+}
+
+:root:not([data-theme-reveal]) [data-site-topbar] {
+  view-transition-name: site-header;
+}
+
+/* Shows behind the sliding snapshots instead of an empty edge. */
+::view-transition {
+  background-color: var(--ui-canvas);
 }
 
 ::view-transition-old(root),
@@ -421,23 +458,155 @@ body:has(#menu-toggle:checked) nav.mobile-menu {
   animation-duration: 150ms;
 }
 
+::view-transition-group(site-header),
+::view-transition-group(theme-toggle),
+::view-transition-group(lang-thumb),
 ::view-transition-group(tab-bar),
 ::view-transition-group(tab-lens) {
-  animation-duration: 260ms;
-  animation-timing-function: cubic-bezier(0.2, 0, 0, 1);
+  animation-duration: 360ms;
+  animation-timing-function: var(--vt-ease-emph);
 }
 
-/* Language thumb in the header capsule glides to the new language. */
-::view-transition-group(lang-thumb) {
-  animation-duration: 260ms;
-  animation-timing-function: cubic-bezier(0.34, 1.25, 0.64, 1);
+::view-transition-group(vt-logo),
+::view-transition-group(vt-title) {
+  animation-duration: 400ms;
+  animation-timing-function: var(--vt-ease-emph);
 }
 
+/*
+  Nested with short lines on purpose: Prettier wraps long selectors inside
+  ::view-transition-old(...), and Lightning CSS then drops the whole rule.
+*/
+:root[data-page-transition='lang'] {
+  &::view-transition-old(root),
+  &::view-transition-new(root) {
+    animation-duration: 200ms;
+  }
+
+  /* Language thumb in the header capsule glides to the new language. */
+  &::view-transition-group(lang-thumb) {
+    animation-duration: 260ms;
+    animation-timing-function: cubic-bezier(0.34, 1.25, 0.64, 1);
+  }
+}
+
+/* forward / back: old page leaves against the direction, new one glides in. */
+:root[data-page-transition='forward'],
+:root[data-page-transition='back'] {
+  &::view-transition-old(root),
+  &::view-transition-old(vt-logo):only-child,
+  &::view-transition-old(vt-title):only-child {
+    animation:
+      vt-fade-out 140ms var(--vt-ease-in) both,
+      vt-slide-out 140ms var(--vt-ease-emph) both;
+  }
+
+  &::view-transition-new(root) {
+    animation:
+      vt-fade-in 180ms var(--vt-ease-emph) 60ms both,
+      vt-slide-in 340ms var(--vt-ease-out) 60ms both;
+  }
+}
+
+/* morph-in: logo or title flies into the detail header, the rest rises. */
+:root[data-page-transition='morph-in'] {
+  &::view-transition-old(root),
+  &::view-transition-old(vt-logo):only-child,
+  &::view-transition-old(vt-title):only-child {
+    animation: vt-fade-out 150ms var(--vt-ease-in) both;
+  }
+
+  &::view-transition-new(root) {
+    animation:
+      vt-fade-in 220ms var(--vt-ease-emph) 100ms both,
+      vt-rise 380ms var(--vt-ease-out) 100ms both;
+  }
+}
+
+/* morph-out: the same flight back into the list, a little faster. */
+:root[data-page-transition='morph-out'] {
+  &::view-transition-group(vt-logo),
+  &::view-transition-group(vt-title) {
+    animation-duration: 340ms;
+  }
+
+  &::view-transition-old(root),
+  &::view-transition-old(vt-logo):only-child,
+  &::view-transition-old(vt-title):only-child {
+    animation: vt-fade-out 90ms var(--vt-ease-in) both;
+  }
+
+  &::view-transition-new(root) {
+    animation: vt-fade-in 220ms var(--vt-ease-emph) 100ms both;
+  }
+}
+
+/*
+  Logo boxes scale with their height and stay centred, so a wide list box
+  narrows into the square detail box instead of being squeezed.
+*/
+::view-transition-image-pair(vt-logo) {
+  overflow: clip;
+  border-radius: 12px;
+}
+
+::view-transition-old(vt-logo),
+::view-transition-new(vt-logo) {
+  inset-inline-start: 50%;
+  width: auto;
+  height: 100%;
+  translate: -50% 0;
+}
+
+/* Titles only move and cross-fade; scaling would blur the text. */
+::view-transition-old(vt-title),
+::view-transition-new(vt-title) {
+  width: auto;
+  height: auto;
+}
+
+@keyframes vt-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes vt-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes vt-slide-out {
+  to {
+    transform: translateX(calc(var(--vt-dir) * var(--vt-shift-out) * -1));
+  }
+}
+
+@keyframes vt-slide-in {
+  from {
+    transform: translateX(calc(var(--vt-dir) * var(--vt-shift-in)));
+  }
+}
+
+@keyframes vt-rise {
+  from {
+    transform: translateY(16px);
+  }
+}
+
+/* Reduced motion: nothing moves, pages only cross-fade. */
 @media (prefers-reduced-motion: reduce) {
-  ::view-transition-group(*),
-  ::view-transition-old(*),
-  ::view-transition-new(*) {
+  ::view-transition-group(*) {
     animation: none !important;
+  }
+
+  ::view-transition-old(*) {
+    animation: vt-fade-out 150ms ease both !important;
+  }
+
+  ::view-transition-new(*) {
+    animation: vt-fade-in 150ms ease both !important;
   }
 }
 
