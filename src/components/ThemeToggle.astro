@@ -299,7 +299,7 @@ const rays = Array.from({ length: 8 }, (_, index) => index)
     THEME_STORAGE_KEY,
     parseThemePreference,
     resolveTheme,
-    revealRadius,
+    revealCircle,
     toggleThemePreference,
     type ThemePreference,
     type ThemeState,
@@ -410,10 +410,10 @@ const rays = Array.from({ length: 8 }, (_, index) => index)
       inkTimer = window.setTimeout(() => releaseInk(toggles), INK_RELEASE_MS)
     }
 
-    const radius = revealRadius(x, y, window.innerWidth, window.innerHeight)
-    root.style.setProperty('--theme-reveal-x', `${x}px`)
-    root.style.setProperty('--theme-reveal-y', `${y}px`)
-    root.style.setProperty('--theme-reveal-r', `${Math.ceil(radius)}px`)
+    const circle = revealCircle(x, y, window.innerWidth, window.innerHeight)
+    root.style.setProperty('--theme-reveal-x', circle.x)
+    root.style.setProperty('--theme-reveal-y', circle.y)
+    root.style.setProperty('--theme-reveal-r', circle.radius)
     root.dataset.themeReveal = theme === 'light' ? 'to-light' : 'to-dark'
 
     const transition = document.startViewTransition(() => applyTheme(theme))

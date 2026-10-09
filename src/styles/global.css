@@ -443,8 +443,9 @@ body:has(#menu-toggle:checked) nav.mobile-menu {
 
 /*
   Theme switch: circular reveal from the toggle via the View Transitions API.
-  The script sets the radius to the farthest viewport corner, so the whole
-  curve is visible on every screen.
+  The script sets center and radius (to the farthest viewport corner) in
+  percentages of the snapshot; px would land at half the position on Retina
+  screens, where Chrome lays out the root snapshot in device pixels.
   Dark -> light: the new light view grows out of the toggle.
   Light -> dark: the old light view shrinks back into the toggle.
   The toggle has its own layer above both, so its icon morph stays visible.
