@@ -427,6 +427,12 @@ body:has(#menu-toggle:checked) nav.mobile-menu {
   animation-timing-function: cubic-bezier(0.2, 0, 0, 1);
 }
 
+/* Language thumb in the header capsule glides to the new language. */
+::view-transition-group(lang-thumb) {
+  animation-duration: 260ms;
+  animation-timing-function: cubic-bezier(0.34, 1.25, 0.64, 1);
+}
+
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-group(*),
   ::view-transition-old(*),
@@ -436,10 +442,12 @@ body:has(#menu-toggle:checked) nav.mobile-menu {
 }
 
 /*
-  Theme toggle: short circular reveal via the View Transitions API.
-  Only the new snapshot animates a single clip-path circle from the button;
-  the old one just stays underneath (no masks, scaling or custom-property
-  interpolation, which made the switch feel sluggish).
+  Theme switch: circular reveal from the toggle via the View Transitions API.
+  The script sets the radius to the farthest viewport corner, so the whole
+  curve is visible on every screen.
+  Dark -> light: the new light view grows out of the toggle.
+  Light -> dark: the old light view shrinks back into the toggle.
+  The toggle has its own layer above both, so its icon morph stays visible.
 */
 :root[data-theme-reveal]::view-transition-old(root),
 :root[data-theme-reveal]::view-transition-new(root) {
@@ -447,25 +455,67 @@ body:has(#menu-toggle:checked) nav.mobile-menu {
   mix-blend-mode: normal;
 }
 
-:root[data-theme-reveal]::view-transition-old(root) {
+:root[data-theme-reveal='to-light']::view-transition-old(root) {
   z-index: 1;
 }
 
-:root[data-theme-reveal]::view-transition-new(root) {
+:root[data-theme-reveal='to-light']::view-transition-new(root) {
   z-index: 2;
-  animation: theme-reveal 0.32s ease-out forwards;
+  animation: theme-reveal-grow 280ms cubic-bezier(0.2, 0, 0, 1) both;
 }
 
-@keyframes theme-reveal {
+:root[data-theme-reveal='to-dark']::view-transition-new(root) {
+  z-index: 1;
+}
+
+:root[data-theme-reveal='to-dark']::view-transition-old(root) {
+  z-index: 2;
+  animation: theme-reveal-shrink 240ms cubic-bezier(0.3, 0, 0.8, 0.15) both;
+}
+
+/* Colors switch at once under the reveal; only the toggle animates. */
+:root[data-theme-reveal] :not(.theme-toggle, .theme-toggle *) {
+  transition: none !important;
+}
+
+:root[data-theme-reveal]::view-transition-group(theme-toggle) {
+  animation: none;
+}
+
+:root[data-theme-reveal]::view-transition-old(theme-toggle) {
+  display: none;
+}
+
+:root[data-theme-reveal]::view-transition-new(theme-toggle) {
+  animation: none;
+}
+
+@keyframes theme-reveal-grow {
   from {
     clip-path: circle(
-      0 at var(--view-transition-x, 50%) var(--view-transition-y, 50%)
+      0 at var(--theme-reveal-x, 50%) var(--theme-reveal-y, 50%)
     );
   }
 
   to {
     clip-path: circle(
-      150vmax at var(--view-transition-x, 50%) var(--view-transition-y, 50%)
+      var(--theme-reveal-r, 150vmax) at var(--theme-reveal-x, 50%)
+        var(--theme-reveal-y, 50%)
+    );
+  }
+}
+
+@keyframes theme-reveal-shrink {
+  from {
+    clip-path: circle(
+      var(--theme-reveal-r, 150vmax) at var(--theme-reveal-x, 50%)
+        var(--theme-reveal-y, 50%)
+    );
+  }
+
+  to {
+    clip-path: circle(
+      0 at var(--theme-reveal-x, 50%) var(--theme-reveal-y, 50%)
     );
   }
 }

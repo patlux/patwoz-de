@@ -1,180 +1,478 @@
 ---
-import Icon from './ui/Icon.astro'
-
 /**
- * ThemeToggle - icon button (sun in dark mode, moon in light mode)
- * - Defaults to the active system preference
- * - Click stores the opposite explicit theme
+ * ThemeToggle — one icon that morphs between sun (dark mode, "switch to
+ * light") and moon (light mode, "switch to dark").
+ *
+ * - Without a stored choice the page follows the system preference.
+ * - Choosing the theme the system already prefers clears the stored choice.
+ * - The page switches with a circular reveal from the button; the button sits
+ *   on its own view-transition layer so the icon morph stays visible.
  */
+import { languageFromPath } from '~/data/i18n'
+
+const lang = languageFromPath(Astro.url.pathname)
+const text =
+  lang === 'de'
+    ? {
+        toLight: 'Zu hellem Design wechseln',
+        toDark: 'Zu dunklem Design wechseln',
+        light: 'Helles Design',
+        dark: 'Dunkles Design',
+        stateSystem: 'jetzt: System',
+        stateLight: 'jetzt: Hell',
+        stateDark: 'jetzt: Dunkel',
+      }
+    : {
+        toLight: 'Switch to light theme',
+        toDark: 'Switch to dark theme',
+        light: 'Light theme',
+        dark: 'Dark theme',
+        stateSystem: 'now: system',
+        stateLight: 'now: light',
+        stateDark: 'now: dark',
+      }
+
+const uid = `theme-icon-${Math.random().toString(36).slice(2, 8)}`
+const rays = Array.from({ length: 8 }, (_, index) => index)
 ---
 
 <button
   type="button"
-  class="theme-toggle ui-icon-button"
-  aria-label="Toggle theme"
+  class="theme-toggle"
+  aria-label={text.toDark}
+  data-theme-toggle
+  data-label-to-light={text.toLight}
+  data-label-to-dark={text.toDark}
+  data-name-light={text.light}
+  data-name-dark={text.dark}
+  data-state-system={text.stateSystem}
+  data-state-light={text.stateLight}
+  data-state-dark={text.stateDark}
 >
-  <span class="hidden dark:inline-flex" aria-hidden="true">
-    <Icon name="sun" size={16} />
+  <svg
+    class="theme-icon"
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.75"
+    stroke-linecap="round"
+    aria-hidden="true"
+  >
+    <defs>
+      <mask
+        id={`${uid}-cut`}
+        maskUnits="userSpaceOnUse"
+        x="-6"
+        y="-6"
+        width="36"
+        height="36"
+      >
+        <rect x="-6" y="-6" width="36" height="36" fill="#fff" stroke="none"
+        ></rect>
+        <circle
+          class="theme-icon__cut"
+          cx="16.9"
+          cy="7.1"
+          r="6.75"
+          fill="#000"
+          stroke="none"></circle>
+      </mask>
+      <clipPath id={`${uid}-disc`}>
+        <circle class="theme-icon__core" cx="12" cy="12" r="8.75"></circle>
+      </clipPath>
+    </defs>
+    <g class="theme-icon__moon">
+      <circle
+        class="theme-icon__core"
+        cx="12"
+        cy="12"
+        r="8.75"
+        mask={`url(#${uid}-cut)`}></circle>
+      <circle
+        class="theme-icon__cut"
+        cx="16.9"
+        cy="7.1"
+        r="6.75"
+        clip-path={`url(#${uid}-disc)`}></circle>
+    </g>
+    <g class="theme-icon__rays">
+      {
+        rays.map((index) => (
+          <g transform={`rotate(${index * 45} 12 12)`}>
+            <line
+              class="theme-icon__ray"
+              x1="12"
+              y1="4"
+              x2="12"
+              y2="2"
+              style={`--i: ${index}`}
+            />
+          </g>
+        ))
+      }
+    </g>
+  </svg>
+  <span class="theme-toggle__tip" aria-hidden="true">
+    <span data-theme-tip-target>{text.dark}</span>
+    <span class="theme-toggle__tip-state" data-theme-tip-state
+      >{text.stateSystem}</span
+    >
   </span>
-  <span class="inline-flex dark:hidden" aria-hidden="true">
-    <Icon name="moon" size={16} />
-  </span>
-  <span class="sr-only" data-theme-label>Toggle theme</span>
 </button>
 
+<style>
+  .theme-toggle {
+    --ease-emph: cubic-bezier(0.2, 0, 0, 1);
+    --ease-spring: cubic-bezier(0.34, 1.25, 0.64, 1);
+    --ease-std: cubic-bezier(0.4, 0, 0.2, 1);
+
+    position: relative;
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 999px;
+    color: var(--color-foreground);
+    view-transition-name: theme-toggle;
+    transition:
+      background-color 150ms ease,
+      transform 200ms var(--ease-spring);
+  }
+
+  .theme-toggle:hover {
+    background-color: var(--ui-hover-pill);
+  }
+
+  .theme-toggle:active {
+    transform: scale(0.94);
+    transition-duration: 150ms, 90ms;
+    transition-timing-function: ease, ease-out;
+  }
+
+  .theme-toggle:focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 2px;
+  }
+
+  /*
+    Light mode shows the moon. These transitions run when the page switches
+    to light: rays retract one after another, the core grows into a disc and
+    the cut circle slides in from the top right.
+  */
+  .theme-icon__core {
+    r: 8.75px;
+    transition: r 260ms var(--ease-spring) 40ms;
+  }
+
+  .theme-icon__cut {
+    cx: 16.9px;
+    cy: 7.1px;
+    transition:
+      cx 260ms var(--ease-spring) 40ms,
+      cy 260ms var(--ease-spring) 40ms;
+  }
+
+  .theme-icon__moon {
+    transform-origin: 12px 12px;
+    transform: rotate(0deg);
+    transition: transform 260ms var(--ease-spring) 40ms;
+  }
+
+  .theme-icon__rays {
+    transform-origin: 12px 12px;
+    transform: rotate(-25deg);
+    transition: transform 180ms var(--ease-emph);
+  }
+
+  .theme-icon__ray {
+    opacity: 0;
+    transform-origin: 12px 4px;
+    transform: scale(0);
+    transition:
+      transform 110ms var(--ease-emph) calc(var(--i) * 10ms),
+      opacity 110ms var(--ease-emph) calc(var(--i) * 10ms);
+  }
+
+  /*
+    Dark mode shows the sun. Moon -> sun: the cut slides out, the core
+    shrinks, then the rays spring out clockwise.
+  */
+  :global(.dark) .theme-icon__core {
+    r: 4.5px;
+    transition: r 220ms var(--ease-spring);
+  }
+
+  :global(.dark) .theme-icon__cut {
+    cx: 26px;
+    cy: -2px;
+    transition:
+      cx 160ms var(--ease-std),
+      cy 160ms var(--ease-std);
+  }
+
+  :global(.dark) .theme-icon__moon {
+    transform: rotate(30deg);
+    transition: transform 0s 200ms;
+  }
+
+  :global(.dark) .theme-icon__rays {
+    transform: rotate(0deg);
+    transition: transform 240ms var(--ease-emph) 100ms;
+  }
+
+  :global(.dark) .theme-icon__ray {
+    opacity: 1;
+    transform: scale(1);
+    transition:
+      transform 140ms var(--ease-spring) calc(100ms + var(--i) * 15ms),
+      opacity 140ms ease calc(100ms + var(--i) * 15ms);
+  }
+
+  .theme-toggle__tip {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 50%;
+    z-index: 50;
+    display: flex;
+    gap: 6px;
+    padding: 5px 8px;
+    border-radius: var(--radius-sm);
+    background: var(--color-surface-elevated);
+    box-shadow: 0 4px 12px var(--ui-lens-shadow);
+    color: var(--color-foreground);
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 500;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, -2px);
+    transition:
+      opacity 120ms ease,
+      transform 120ms ease;
+  }
+
+  .theme-toggle__tip-state {
+    font-weight: 400;
+    color: var(--color-muted);
+  }
+
+  @media (hover: hover) {
+    .theme-toggle:hover .theme-toggle__tip {
+      opacity: 1;
+      transform: translate(-50%, 0);
+      transition-delay: 400ms;
+    }
+  }
+
+  .theme-toggle:focus-visible .theme-toggle__tip {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+
+  @media (max-width: 639px) {
+    .theme-toggle {
+      width: 38px;
+      height: 38px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .theme-toggle,
+    .theme-toggle__tip,
+    .theme-icon__core,
+    .theme-icon__cut,
+    .theme-icon__moon,
+    .theme-icon__rays,
+    .theme-icon__ray {
+      transition: none !important;
+    }
+  }
+</style>
+
 <script>
-  type ThemePreference = 'light' | 'dark' | null
-  type ThemeState = 'light' | 'dark'
+  import {
+    THEME_STORAGE_KEY,
+    parseThemePreference,
+    resolveTheme,
+    revealRadius,
+    toggleThemePreference,
+    type ThemePreference,
+    type ThemeState,
+  } from '~/utils/theme'
 
-  let themeMediaListenerAttached = false
-  let revealRunning = false
+  const darkQuery = window.matchMedia('(prefers-color-scheme: dark)')
+  const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+  let activeTransition: ViewTransition | null = null
+  let systemListenerAttached = false
 
-  function getThemeToggles(): HTMLButtonElement[] {
+  function getToggles(): HTMLButtonElement[] {
     return Array.from(
-      document.querySelectorAll<HTMLButtonElement>('.theme-toggle'),
+      document.querySelectorAll<HTMLButtonElement>('[data-theme-toggle]'),
     )
   }
 
-  function getStoredTheme(): ThemePreference {
-    const stored = localStorage.getItem('theme')
-    return stored === 'light' || stored === 'dark' ? stored : null
+  function readPreference(): ThemePreference {
+    return parseThemePreference(localStorage.getItem(THEME_STORAGE_KEY))
   }
 
-  function systemPrefersDark(): boolean {
-    return window.matchMedia('(prefers-color-scheme: dark)').matches
-  }
-
-  function getEffectiveTheme(theme: ThemePreference): ThemeState {
-    if (theme === 'light' || theme === 'dark') return theme
-    return systemPrefersDark() ? 'dark' : 'light'
-  }
-
-  function applyTheme(theme: ThemePreference) {
-    const effectiveTheme = getEffectiveTheme(theme)
-
-    if (effectiveTheme === 'dark') {
-      document.documentElement.classList.add('dark')
+  function writePreference(preference: ThemePreference) {
+    if (preference === null) {
+      localStorage.removeItem(THEME_STORAGE_KEY)
     } else {
-      document.documentElement.classList.remove('dark')
+      localStorage.setItem(THEME_STORAGE_KEY, preference)
     }
   }
 
-  function updateState(toggle: HTMLButtonElement, theme: ThemePreference) {
-    const effectiveTheme = getEffectiveTheme(theme)
-    const isSystemTheme = theme === null
-    const nextTheme = effectiveTheme === 'dark' ? 'light' : 'dark'
-    const label = isSystemTheme
-      ? `Theme: System ${effectiveTheme} mode. Click for ${nextTheme} mode.`
-      : `Theme: ${effectiveTheme} mode. Click for ${nextTheme} mode.`
-    const hiddenLabel = toggle.querySelector('[data-theme-label]')
-
-    toggle.dataset.themeState = effectiveTheme
-    toggle.dataset.themePreference = isSystemTheme ? 'system' : effectiveTheme
-    toggle.setAttribute('aria-label', label)
-    toggle.setAttribute(
-      'aria-pressed',
-      effectiveTheme === 'dark' ? 'true' : 'false',
-    )
-
-    if (hiddenLabel) {
-      hiddenLabel.textContent = label
-    }
+  function applyTheme(theme: ThemeState) {
+    document.documentElement.classList.toggle('dark', theme === 'dark')
   }
 
-  function syncThemeToggles(themeOverride?: ThemePreference) {
-    const theme = themeOverride ?? getStoredTheme()
-    getThemeToggles().forEach((toggle) => updateState(toggle, theme))
+  function setText(toggle: HTMLElement, selector: string, value?: string) {
+    const element = toggle.querySelector(selector)
+    if (element && value) element.textContent = value
   }
 
-  function prefersReducedMotion(): boolean {
-    return window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  function updateToggle(
+    toggle: HTMLButtonElement,
+    preference: ThemePreference,
+  ) {
+    const theme = resolveTheme(preference, darkQuery.matches)
+    const { dataset } = toggle
+    const label = theme === 'dark' ? dataset.labelToLight : dataset.labelToDark
+    const target = theme === 'dark' ? dataset.nameLight : dataset.nameDark
+    const state =
+      preference === null
+        ? dataset.stateSystem
+        : theme === 'dark'
+          ? dataset.stateDark
+          : dataset.stateLight
+
+    if (label) toggle.setAttribute('aria-label', label)
+    setText(toggle, '[data-theme-tip-target]', target)
+    setText(toggle, '[data-theme-tip-state]', state)
+  }
+
+  function syncToggles(preference: ThemePreference) {
+    getToggles().forEach((toggle) => updateToggle(toggle, preference))
   }
 
   /**
-   * Switch the theme with a short circular reveal from the button.
-   * The class is applied synchronously inside the view transition callback,
-   * so the switch itself is never delayed by the animation.
+   * Light -> dark: the old light view stays on top of the toggle until the
+   * very end (240 ms), so the icon keeps the old (dark) ink and fades to the
+   * new color around that moment: 180 ms + 120 ms fade, midpoint at 240 ms.
    */
-  function revealTheme(next: ThemeState) {
-    const root = document.documentElement
-    const changeTheme = () => {
-      applyTheme(next)
-    }
+  const INK_RELEASE_MS = 180
+  let inkTimer = 0
 
-    if (
-      !document.startViewTransition ||
-      prefersReducedMotion() ||
-      revealRunning
-    ) {
-      changeTheme()
-      return
-    }
-
-    revealRunning = true
-    root.dataset.themeReveal = 'true'
-    const transition = document.startViewTransition(changeTheme)
-    transition.finished.finally(() => {
-      delete root.dataset.themeReveal
-      revealRunning = false
+  function holdInk(toggles: HTMLButtonElement[]) {
+    toggles.forEach((toggle) => {
+      toggle.style.color = getComputedStyle(toggle).color
     })
   }
 
-  function getRevealOrigin(event: MouseEvent) {
-    const target = event.currentTarget
+  function releaseInk(toggles: HTMLButtonElement[]) {
+    toggles.forEach((toggle) => {
+      const ink = toggle.style.color
+      if (!ink) return
+      toggle.style.removeProperty('color')
+      toggle.animate(
+        [{ color: ink }, { color: getComputedStyle(toggle).color }],
+        { duration: 120, easing: 'ease' },
+      )
+    })
+  }
 
-    if (target instanceof HTMLButtonElement) {
-      const rect = target.getBoundingClientRect()
-      return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 }
+  /**
+   * Circular reveal from the toggle. The radius reaches exactly the farthest
+   * viewport corner, so the whole curve is visible on every screen size.
+   */
+  function switchTheme(theme: ThemeState, x: number, y: number) {
+    const root = document.documentElement
+
+    if (!document.startViewTransition || motionQuery.matches) {
+      applyTheme(theme)
+      return
     }
 
-    return { x: event.clientX, y: event.clientY }
+    // A second click finishes the running switch instead of skipping the new one.
+    activeTransition?.skipTransition()
+
+    const toggles = getToggles()
+    window.clearTimeout(inkTimer)
+    releaseInk(toggles)
+    if (theme === 'dark') {
+      holdInk(toggles)
+      inkTimer = window.setTimeout(() => releaseInk(toggles), INK_RELEASE_MS)
+    }
+
+    const radius = revealRadius(x, y, window.innerWidth, window.innerHeight)
+    root.style.setProperty('--theme-reveal-x', `${x}px`)
+    root.style.setProperty('--theme-reveal-y', `${y}px`)
+    root.style.setProperty('--theme-reveal-r', `${Math.ceil(radius)}px`)
+    root.dataset.themeReveal = theme === 'light' ? 'to-light' : 'to-dark'
+
+    const transition = document.startViewTransition(() => applyTheme(theme))
+    activeTransition = transition
+    transition.finished.finally(() => {
+      if (activeTransition !== transition) return
+      releaseInk(toggles)
+      activeTransition = null
+      delete root.dataset.themeReveal
+    })
   }
 
   function handleClick(event: MouseEvent) {
-    const current = getStoredTheme()
-    const next = getEffectiveTheme(current) === 'dark' ? 'light' : 'dark'
-    const origin = getRevealOrigin(event)
-    const root = document.documentElement
+    const toggle = event.currentTarget
+    if (!(toggle instanceof HTMLButtonElement)) return
 
-    localStorage.setItem('theme', next)
-    getThemeToggles().forEach((toggle) => updateState(toggle, next))
-    root.style.setProperty('--view-transition-x', `${origin.x}px`)
-    root.style.setProperty('--view-transition-y', `${origin.y}px`)
+    const { theme, preference } = toggleThemePreference(
+      readPreference(),
+      darkQuery.matches,
+    )
+    writePreference(preference)
+    syncToggles(preference)
 
-    revealTheme(next)
+    const rect = toggle.getBoundingClientRect()
+    switchTheme(theme, rect.left + rect.width / 2, rect.top + rect.height / 2)
+  }
+
+  function syncWithStorage() {
+    const preference = readPreference()
+    applyTheme(resolveTheme(preference, darkQuery.matches))
+    syncToggles(preference)
   }
 
   function initThemeToggle() {
-    const toggles = getThemeToggles()
+    const toggles = getToggles()
     if (!toggles.length) return
 
-    const theme = getStoredTheme()
-    applyTheme(theme)
+    syncWithStorage()
 
     toggles.forEach((toggle) => {
-      updateState(toggle, theme)
-
       if (toggle.dataset.themeReady === 'true') return
-
       toggle.dataset.themeReady = 'true'
       toggle.addEventListener('click', handleClick)
     })
 
-    if (!themeMediaListenerAttached) {
-      window
-        .matchMedia('(prefers-color-scheme: dark)')
-        .addEventListener('change', () => {
-          if (getStoredTheme() !== null) return
-
-          applyTheme(null)
-          syncThemeToggles()
-        })
-
-      themeMediaListenerAttached = true
+    if (!systemListenerAttached) {
+      systemListenerAttached = true
+      darkQuery.addEventListener('change', () => {
+        if (readPreference() !== null) return
+        applyTheme(resolveTheme(null, darkQuery.matches))
+        syncToggles(null)
+      })
+      // Back/forward cache: another page may have changed the theme meanwhile.
+      window.addEventListener('pageshow', (event) => {
+        if (event.persisted) syncWithStorage()
+      })
     }
   }
 
   initThemeToggle()
-
   document.addEventListener('astro:after-swap', initThemeToggle)
 </script>

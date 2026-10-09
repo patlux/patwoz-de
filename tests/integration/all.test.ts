@@ -69,6 +69,30 @@ test('Should link project inquiry CTAs to localized contact pages', async () => 
   }
 })
 
+test('Should render the header capsule with theme toggle and language segment', async () => {
+  for (const [path, current, other, otherHref, toggleLabel] of [
+    ['/', 'en', 'de', '/de', 'Switch to dark theme'],
+    ['/de', 'de', 'en', '/', 'Zu dunklem Design wechseln'],
+  ]) {
+    const res = await fetch(`${baseUrl}${path}`)
+    expect(res.status).toBe(200)
+
+    const html = await res.text()
+    expect(html).toContain('data-header-capsule')
+    expect(html).toContain('data-theme-toggle')
+    expect(html).toContain(`aria-label="${toggleLabel}"`)
+    expect(html).toMatch(
+      new RegExp(`href="${otherHref}"[^>]*hreflang="${other}"`),
+    )
+    expect(html).toMatch(
+      new RegExp(`hreflang="${current}"[^>]*aria-current="true"`),
+    )
+    expect(html).not.toMatch(
+      new RegExp(`hreflang="${other}"[^>]*aria-current="true"`),
+    )
+  }
+})
+
 test('Should open piparo.party work pages', async () => {
   for (const path of ['/work/piparo-party', '/de/work/piparo-party']) {
     const res = await fetch(`${baseUrl}${path}`)

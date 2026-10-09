@@ -1,23 +1,23 @@
 ---
+import LanguageSwitch from './LanguageSwitch.astro'
 import ThemeToggle from './ThemeToggle.astro'
 import Icon from './ui/Icon.astro'
 import LogoSvg from '~/assets/images/patwoz-logo.svg?raw'
-import { languageFromPath, switchLocalePath, withLocale } from '~/data/i18n'
+import { languageFromPath, withLocale } from '~/data/i18n'
 
 const currentPath = Astro.url.pathname
 const lang = languageFromPath(currentPath)
-const switchHref = switchLocalePath(currentPath)
 const labels =
   lang === 'de'
     ? {
         home: 'Startseite',
-        switch: 'Switch to English',
         github: 'GitHub-Profil öffnen',
+        settings: 'Darstellung und Sprache',
       }
     : {
         home: 'Home',
-        switch: 'Zur deutschen Version wechseln',
         github: 'Open GitHub profile',
+        settings: 'Appearance and language',
       }
 ---
 
@@ -40,20 +40,93 @@ const labels =
         href="https://github.com/patlux"
         target="_blank"
         rel="noreferrer"
-        class="ui-icon-button"
+        class="header-glass header-github"
         aria-label={labels.github}
       >
         <Icon name="github" size={16} />
       </a>
-      <ThemeToggle />
-      <a
-        href={switchHref}
-        class="inline-flex h-8 items-center rounded-sm bg-secondary px-2.5 text-sm font-medium text-muted transition-colors hover:bg-border hover:text-foreground"
-        aria-label={labels.switch}
-        hreflang={lang === 'de' ? 'en' : 'de'}
+      <div
+        class="header-glass header-capsule"
+        role="group"
+        aria-label={labels.settings}
+        data-header-capsule
       >
-        {lang === 'de' ? 'EN' : 'DE'}
-      </a>
+        <ThemeToggle />
+        <span class="header-capsule__divider" aria-hidden="true"></span>
+        <LanguageSwitch />
+      </div>
     </div>
   </div>
 </header>
+
+<style>
+  /* Same material as the floating glass tab bar, without the float shadow. */
+  .header-glass {
+    height: 36px;
+    border-radius: 999px;
+    border: 1px solid var(--ui-glass-border);
+    background-color: var(--ui-glass-bg);
+    box-shadow:
+      inset 0 1px 0 var(--ui-glass-highlight),
+      0 1px 3px var(--ui-lens-shadow);
+  }
+
+  .header-github {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    color: var(--color-foreground);
+    transition:
+      background-image 150ms ease,
+      transform 90ms ease-out;
+  }
+
+  .header-github:hover {
+    background-image: linear-gradient(
+      var(--ui-hover-pill),
+      var(--ui-hover-pill)
+    );
+  }
+
+  .header-github:active {
+    transform: scale(0.96);
+  }
+
+  .header-github:focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 2px;
+  }
+
+  .header-capsule {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    padding: 0 2px;
+  }
+
+  .header-capsule__divider {
+    flex-shrink: 0;
+    width: 1px;
+    height: 16px;
+    margin: 0 3px;
+    background: var(--ui-glass-border);
+  }
+
+  /* 44 px touch targets: the visible surface is the hit area. */
+  @media (max-width: 639px) {
+    .header-glass {
+      height: 44px;
+    }
+
+    .header-github {
+      width: 44px;
+    }
+
+    .header-capsule__divider {
+      height: 18px;
+      margin: 0 2px;
+    }
+  }
+</style>

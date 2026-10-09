@@ -1,0 +1,172 @@
+---
+/**
+ * LanguageSwitch — DE | EN segment that shows the current language.
+ * The thumb slides to the target on click and keeps gliding across the
+ * page load through its own view-transition name.
+ */
+import { languageFromPath, switchLocalePath } from '~/data/i18n'
+
+const currentPath = Astro.url.pathname
+const lang = languageFromPath(currentPath)
+const otherPath = switchLocalePath(currentPath)
+const options = [
+  {
+    code: 'de',
+    text: 'DE',
+    name: 'Deutsch',
+    href: lang === 'de' ? currentPath : otherPath,
+  },
+  {
+    code: 'en',
+    text: 'EN',
+    name: 'English',
+    href: lang === 'en' ? currentPath : otherPath,
+  },
+] as const
+---
+
+<div
+  class="lang-switch"
+  role="group"
+  aria-label={lang === 'de' ? 'Sprache' : 'Language'}
+  data-lang-switch
+  data-active={lang}
+>
+  <span class="lang-switch__thumb" aria-hidden="true"></span>
+  {
+    options.map((option) => (
+      <a
+        href={option.href}
+        hreflang={option.code}
+        lang={option.code}
+        class="lang-switch__option"
+        aria-label={option.name}
+        aria-current={option.code === lang ? 'true' : undefined}
+        data-lang-option={option.code}
+      >
+        {option.text}
+      </a>
+    ))
+  }
+</div>
+
+<style>
+  .lang-switch {
+    --option-size: 30px;
+    --option-width: 32px;
+    --option-gap: 2px;
+
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: var(--option-gap);
+  }
+
+  .lang-switch__option {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--option-width);
+    height: var(--option-size);
+    border-radius: 999px;
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 500;
+    color: var(--color-muted);
+    text-decoration: none;
+    transition:
+      color 150ms ease,
+      transform 90ms ease-out;
+  }
+
+  .lang-switch__option:hover {
+    color: var(--color-foreground);
+  }
+
+  .lang-switch__option:active {
+    transform: scale(0.96);
+  }
+
+  .lang-switch__option:focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 2px;
+  }
+
+  .lang-switch[data-active='de'] [data-lang-option='de'],
+  .lang-switch[data-active='en'] [data-lang-option='en'] {
+    font-weight: 600;
+    color: var(--color-foreground);
+  }
+
+  /* Same lens material as the active tab in the glass tab bar. */
+  .lang-switch__thumb {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: var(--option-width);
+    height: var(--option-size);
+    border-radius: 999px;
+    background: var(--ui-lens);
+    box-shadow:
+      inset 0 1px 0 var(--ui-lens-highlight),
+      0 2px 10px var(--ui-lens-shadow);
+    transition: transform 260ms cubic-bezier(0.34, 1.25, 0.64, 1);
+  }
+
+  :global(:root:not([data-theme-reveal])) .lang-switch__thumb {
+    view-transition-name: lang-thumb;
+  }
+
+  .lang-switch[data-active='en'] .lang-switch__thumb {
+    transform: translateX(calc(var(--option-width) + var(--option-gap)));
+  }
+
+  @media (max-width: 639px) {
+    .lang-switch {
+      --option-size: 38px;
+      --option-width: 38px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lang-switch__thumb,
+    .lang-switch__option {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  function initLanguageSwitch() {
+    document
+      .querySelectorAll<HTMLElement>('[data-lang-switch]')
+      .forEach((group) => {
+        if (group.dataset.langReady === 'true') return
+        group.dataset.langReady = 'true'
+
+        group.addEventListener('click', (event) => {
+          if (
+            event.defaultPrevented ||
+            event.button !== 0 ||
+            event.metaKey ||
+            event.ctrlKey ||
+            event.shiftKey ||
+            event.altKey
+          ) {
+            return
+          }
+          const target = event.target
+          if (!(target instanceof Element)) return
+          const option = target.closest<HTMLElement>('[data-lang-option]')
+          const code = option?.dataset.langOption
+          // Move the thumb right away; the page load follows.
+          if (code) group.dataset.active = code
+        })
+      })
+  }
+
+  initLanguageSwitch()
+  document.addEventListener('astro:after-swap', initLanguageSwitch)
+</script>
