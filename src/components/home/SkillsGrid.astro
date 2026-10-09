@@ -41,7 +41,7 @@ const copy = homeCopy[lang]
               href={withLocale(lang, skill.path)}
               class="group flex h-11 items-center justify-between px-3 text-base text-foreground transition-colors hover:bg-surface-elevated/60"
             >
-              {skill.label}
+              <span data-vt="title">{skill.label}</span>
               <span
                 class="text-sm text-muted transition-colors group-hover:text-foreground"
                 aria-hidden="true"
