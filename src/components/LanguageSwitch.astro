@@ -1,8 +1,17 @@
 ---
 /**
  * LanguageSwitch — DE | EN segment that shows the current language.
- * The thumb slides to the target on click and keeps gliding across the
- * page load through its own view-transition name.
+ *
+ * The lens behaves like a drop of the glass tab bar:
+ * - hover leans it towards the other language, a press reaches further,
+ * - on click the leading edge runs ahead and the trailing edge follows with
+ *   a spring, so the lens stretches and settles at the target,
+ * - across the page load it keeps gliding through its own
+ *   view-transition name.
+ *
+ * Both edges are registered custom properties (--lens-l, --lens-r) with
+ * their own transitions; the absolutely positioned lens reads them as
+ * left and width, so the labels never re-flow.
  */
 import { languageFromPath, switchLocalePath } from '~/data/i18n'
 
@@ -14,12 +23,14 @@ const options = [
     code: 'de',
     text: 'DE',
     name: 'Deutsch',
+    tip: 'Auf Deutsch lesen',
     href: lang === 'de' ? currentPath : otherPath,
   },
   {
     code: 'en',
     text: 'EN',
     name: 'English',
+    tip: 'Read in English',
     href: lang === 'en' ? currentPath : otherPath,
   },
 ] as const
@@ -31,6 +42,7 @@ const options = [
   aria-label={lang === 'de' ? 'Sprache' : 'Language'}
   data-lang-switch
   data-active={lang}
+  data-current={lang}
 >
   <span class="lang-switch__thumb" aria-hidden="true"></span>
   {
@@ -40,21 +52,48 @@ const options = [
         hreflang={option.code}
         lang={option.code}
         class="lang-switch__option"
-        aria-label={option.name}
+        aria-label={option.code === lang ? option.name : option.tip}
         aria-current={option.code === lang ? 'true' : undefined}
         data-lang-option={option.code}
       >
         {option.text}
+        <span class="lang-switch__tip" aria-hidden="true">
+          {option.tip}
+        </span>
       </a>
     ))
   }
 </div>
 
 <style>
+  @property --lens-l {
+    syntax: '<length>';
+    inherits: false;
+    initial-value: 0px;
+  }
+
+  @property --lens-r {
+    syntax: '<length>';
+    inherits: false;
+    initial-value: 32px;
+  }
+
+  @property --lens-sy {
+    syntax: '<number>';
+    inherits: false;
+    initial-value: 1;
+  }
+
   .lang-switch {
     --option-size: 30px;
     --option-width: 32px;
     --option-gap: 2px;
+    --lens-de-l: 0px;
+    --lens-de-r: var(--option-width);
+    --lens-en-l: calc(var(--option-width) + var(--option-gap));
+    --lens-en-r: calc(2 * var(--option-width) + var(--option-gap));
+    --ease-emph: cubic-bezier(0.2, 0, 0, 1);
+    --ease-spring: cubic-bezier(0.34, 1.25, 0.64, 1);
 
     position: relative;
     display: flex;
@@ -76,17 +115,11 @@ const options = [
     font-weight: 500;
     color: var(--color-muted);
     text-decoration: none;
-    transition:
-      color 150ms ease,
-      transform 90ms ease-out;
+    transition: color 150ms ease;
   }
 
   .lang-switch__option:hover {
     color: var(--color-foreground);
-  }
-
-  .lang-switch__option:active {
-    transform: scale(0.96);
   }
 
   .lang-switch__option:focus-visible {
@@ -100,27 +133,197 @@ const options = [
     color: var(--color-foreground);
   }
 
-  /* Same lens material as the active tab in the glass tab bar. */
+  /*
+    Same lens material as the active tab in the glass tab bar.
+    Moving to DE: the left edge leads, the right edge follows with a spring.
+  */
   .lang-switch__thumb {
+    --lens-l: var(--lens-de-l);
+    --lens-r: var(--lens-de-r);
+
     position: absolute;
     top: 0;
-    left: 0;
-    width: var(--option-width);
+    left: var(--lens-l);
+    width: calc(var(--lens-r) - var(--lens-l));
     height: var(--option-size);
     border-radius: 999px;
     background: var(--ui-lens);
     box-shadow:
       inset 0 1px 0 var(--ui-lens-highlight),
       0 2px 10px var(--ui-lens-shadow);
-    transition: transform 260ms cubic-bezier(0.34, 1.25, 0.64, 1);
+    transform: scaleY(var(--lens-sy));
+    transition:
+      --lens-l 200ms var(--ease-emph),
+      --lens-r 300ms var(--ease-spring) 70ms,
+      --lens-sy 240ms var(--ease-spring);
   }
 
   :global(:root:not([data-theme-reveal])) .lang-switch__thumb {
     view-transition-name: lang-thumb;
   }
 
+  /* Moving to EN: the right edge leads. */
   .lang-switch[data-active='en'] .lang-switch__thumb {
-    transform: translateX(calc(var(--option-width) + var(--option-gap)));
+    --lens-l: var(--lens-en-l);
+    --lens-r: var(--lens-en-r);
+
+    transition:
+      --lens-r 200ms var(--ease-emph),
+      --lens-l 300ms var(--ease-spring) 70ms,
+      --lens-sy 240ms var(--ease-spring);
+  }
+
+  /* Stretched between the two languages the lens gets up to 10 % flatter. */
+  .lang-switch[data-flow='de'] .lang-switch__thumb {
+    animation: lang-lens-flow-de 370ms var(--ease-emph);
+  }
+
+  .lang-switch[data-flow='en'] .lang-switch__thumb {
+    animation: lang-lens-flow-en 370ms var(--ease-emph);
+  }
+
+  @keyframes lang-lens-flow-de {
+    30% {
+      transform: scaleY(0.9);
+    }
+  }
+
+  @keyframes lang-lens-flow-en {
+    30% {
+      transform: scaleY(0.9);
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    /* Hover leans the lens towards the other language. */
+    @media (hover: hover) {
+      .lang-switch[data-active='de']:has([data-lang-option='en']:hover)
+        .lang-switch__thumb {
+        --lens-l: calc(var(--lens-de-l) + 1px);
+        --lens-r: calc(var(--lens-de-r) + 3px);
+
+        transition:
+          --lens-l 150ms var(--ease-emph),
+          --lens-r 150ms var(--ease-emph),
+          --lens-sy 90ms var(--ease-emph);
+      }
+
+      .lang-switch[data-active='en']:has([data-lang-option='de']:hover)
+        .lang-switch__thumb {
+        --lens-l: calc(var(--lens-en-l) - 3px);
+        --lens-r: calc(var(--lens-en-r) - 1px);
+
+        transition:
+          --lens-l 150ms var(--ease-emph),
+          --lens-r 150ms var(--ease-emph),
+          --lens-sy 90ms var(--ease-emph);
+      }
+    }
+
+    /* A press reaches further, before the page starts to change. */
+    .lang-switch[data-active='de']:has([data-lang-option='en']:active)
+      .lang-switch__thumb {
+      --lens-l: calc(var(--lens-de-l) + 1px);
+      --lens-r: calc(var(--lens-de-r) + 7px);
+      --lens-sy: 0.92;
+
+      transition:
+        --lens-l 90ms var(--ease-emph),
+        --lens-r 90ms var(--ease-emph),
+        --lens-sy 90ms var(--ease-emph);
+    }
+
+    .lang-switch[data-active='en']:has([data-lang-option='de']:active)
+      .lang-switch__thumb {
+      --lens-l: calc(var(--lens-en-l) - 7px);
+      --lens-r: calc(var(--lens-en-r) - 1px);
+      --lens-sy: 0.92;
+
+      transition:
+        --lens-l 90ms var(--ease-emph),
+        --lens-r 90ms var(--ease-emph),
+        --lens-sy 90ms var(--ease-emph);
+    }
+  }
+
+  /*
+    Tooltip in the target language, same material as the theme tooltip.
+    The last option sits at the right edge of the header, so its tooltip
+    aligns to the right instead of centring.
+  */
+  .lang-switch__tip {
+    --tip-x: -50%;
+
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 50%;
+    z-index: 50;
+    padding: 5px 8px;
+    border-radius: var(--radius-sm);
+    background: var(--color-surface-elevated);
+    box-shadow: 0 4px 12px var(--ui-lens-shadow);
+    color: var(--color-foreground);
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 500;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(var(--tip-x), -2px);
+    transition:
+      opacity 80ms ease,
+      transform 80ms ease;
+  }
+
+  .lang-switch__option:last-of-type .lang-switch__tip {
+    --tip-x: 0%;
+
+    left: auto;
+    right: 0;
+  }
+
+  @media (hover: hover) {
+    .lang-switch[data-active='de']
+      [data-lang-option='en']:hover
+      .lang-switch__tip,
+    .lang-switch[data-active='en']
+      [data-lang-option='de']:hover
+      .lang-switch__tip {
+      opacity: 1;
+      transform: translate(var(--tip-x), 0);
+      transition:
+        opacity 120ms ease 400ms,
+        transform 120ms ease 400ms;
+    }
+  }
+
+  .lang-switch[data-active='de']
+    [data-lang-option='en']:focus-visible
+    .lang-switch__tip,
+  .lang-switch[data-active='en']
+    [data-lang-option='de']:focus-visible
+    .lang-switch__tip {
+    opacity: 1;
+    transform: translate(var(--tip-x), 0);
+  }
+
+  /* Gone as soon as the press starts. */
+  .lang-switch[data-active='de']
+    [data-lang-option='en']:active
+    .lang-switch__tip,
+  .lang-switch[data-active='en']
+    [data-lang-option='de']:active
+    .lang-switch__tip {
+    opacity: 0;
+    transition:
+      opacity 80ms ease,
+      transform 80ms ease;
+  }
+
+  /* Restored from the back/forward cache: jump back without motion. */
+  .lang-switch[data-instant] .lang-switch__thumb {
+    transition: none !important;
+    animation: none !important;
   }
 
   @media (max-width: 639px) {
@@ -132,13 +335,26 @@ const options = [
 
   @media (prefers-reduced-motion: reduce) {
     .lang-switch__thumb,
-    .lang-switch__option {
-      transition: none;
+    .lang-switch__option,
+    .lang-switch__tip {
+      transition: none !important;
+      animation: none !important;
     }
   }
 </style>
 
 <script>
+  function resetToCurrent(group: HTMLElement) {
+    const current = group.dataset.current
+    if (!current || group.dataset.active === current) return
+    group.dataset.instant = ''
+    group.dataset.active = current
+    delete group.dataset.flow
+    // Apply the jump before the transitions come back.
+    group.getBoundingClientRect()
+    delete group.dataset.instant
+  }
+
   function initLanguageSwitch() {
     document
       .querySelectorAll<HTMLElement>('[data-lang-switch]')
@@ -161,12 +377,22 @@ const options = [
           if (!(target instanceof Element)) return
           const option = target.closest<HTMLElement>('[data-lang-option]')
           const code = option?.dataset.langOption
-          // Move the thumb right away; the page load follows.
-          if (code) group.dataset.active = code
+          if (!code || code === group.dataset.active) return
+          // Move the lens right away; the page load follows.
+          group.dataset.active = code
+          group.dataset.flow = code
         })
       })
   }
 
   initLanguageSwitch()
   document.addEventListener('astro:after-swap', initLanguageSwitch)
+
+  // Back to a page that stayed in the back/forward cache after a switch.
+  window.addEventListener('pageshow', (event) => {
+    if (!event.persisted) return
+    document
+      .querySelectorAll<HTMLElement>('[data-lang-switch]')
+      .forEach(resetToCurrent)
+  })
 </script>
